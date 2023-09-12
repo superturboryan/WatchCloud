@@ -13,6 +13,7 @@
 		946F38A02AB079CA008CE9D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946F389F2AB079CA008CE9D1 /* Assets.xcassets */; };
 		946F38A32AB079CA008CE9D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946F38A22AB079CA008CE9D1 /* Preview Assets.xcassets */; };
 		946F38B12AB07A2E008CE9D1 /* SoundCloud in Frameworks */ = {isa = PBXBuildFile; productRef = 946F38B02AB07A2E008CE9D1 /* SoundCloud */; };
+		946F38B52AB07D74008CE9D1 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 946F38B42AB07D74008CE9D1 /* Config.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +48,8 @@
 		946F389F2AB079CA008CE9D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		946F38A22AB079CA008CE9D1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		946F38AE2AB079FE008CE9D1 /* SoundCloud */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SoundCloud; path = ../SoundCloud; sourceTree = "<group>"; };
-		946F38B22AB07A78008CE9D1 /* WatchCloud-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WatchCloud-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		946F38B22AB07A78008CE9D1 /* WatchCloud-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "WatchCloud-Watch-App-Info.plist"; path = "WatchCloud Watch App/Config/WatchCloud-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		946F38B42AB07D74008CE9D1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,8 +67,8 @@
 		946F38892AB079C9008CE9D1 = {
 			isa = PBXGroup;
 			children = (
-				946F38AD2AB079FE008CE9D1 /* Packages */,
 				946F389A2AB079C9008CE9D1 /* WatchCloud Watch App */,
+				946F38AD2AB079FE008CE9D1 /* Packages */,
 				946F38912AB079C9008CE9D1 /* Products */,
 				946F38AF2AB07A2E008CE9D1 /* Frameworks */,
 			);
@@ -84,11 +86,9 @@
 		946F389A2AB079C9008CE9D1 /* WatchCloud Watch App */ = {
 			isa = PBXGroup;
 			children = (
-				946F38B22AB07A78008CE9D1 /* WatchCloud-Watch-App-Info.plist */,
+				946F38B32AB07CB1008CE9D1 /* Config */,
 				946F389B2AB079C9008CE9D1 /* WatchCloudApp.swift */,
 				946F389D2AB079C9008CE9D1 /* ContentView.swift */,
-				946F389F2AB079CA008CE9D1 /* Assets.xcassets */,
-				946F38A12AB079CA008CE9D1 /* Preview Content */,
 			);
 			path = "WatchCloud Watch App";
 			sourceTree = "<group>";
@@ -114,6 +114,17 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		946F38B32AB07CB1008CE9D1 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				946F38B42AB07D74008CE9D1 /* Config.xcconfig */,
+				946F38B22AB07A78008CE9D1 /* WatchCloud-Watch-App-Info.plist */,
+				946F389F2AB079CA008CE9D1 /* Assets.xcassets */,
+				946F38A12AB079CA008CE9D1 /* Preview Content */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				946F38A32AB079CA008CE9D1 /* Preview Assets.xcassets in Resources */,
+				946F38B52AB07D74008CE9D1 /* Config.xcconfig in Resources */,
 				946F38A02AB079CA008CE9D1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,6 +247,7 @@
 /* Begin XCBuildConfiguration section */
 		946F38A42AB079CA008CE9D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 946F38B42AB07D74008CE9D1 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -293,6 +306,7 @@
 		};
 		946F38A52AB079CA008CE9D1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 946F38B42AB07D74008CE9D1 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -349,11 +363,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Watch App/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Watch App/Config/Preview Content\"";
 				DEVELOPMENT_TEAM = T6MXF72738;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "WatchCloud-Watch-App-Info.plist";
+				INFOPLIST_FILE = "WatchCloud Watch App/Config/WatchCloud-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = WatchCloud;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
@@ -380,11 +394,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Watch App/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Watch App/Config/Preview Content\"";
 				DEVELOPMENT_TEAM = T6MXF72738;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "WatchCloud-Watch-App-Info.plist";
+				INFOPLIST_FILE = "WatchCloud Watch App/Config/WatchCloud-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = WatchCloud;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;

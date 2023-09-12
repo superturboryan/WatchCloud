@@ -1,0 +1,3 @@
+*.xcworkspacedata
+*package.resolved
+*.xcconfig
