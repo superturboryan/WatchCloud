@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LibraryView: View {
 
-    @EnvironmentObject var sc: SC
+    @EnvironmentObject var sc: SoundCloud
 
     @Binding var rootSelectedTab: RootTab
     
@@ -218,8 +218,8 @@ struct LibraryView: View {
 struct LibraryView_Previews: PreviewProvider {
     static var previews: some View {
         LibraryView(rootSelectedTab: Binding(get: { RootTab.library }, set: { _ in }))
-            .environmentObject({() -> SC in
-                let sc = SC(clientId: "", clientSecret: "", redirectURI: "")
+            .environmentObject({() -> SoundCloud in
+                let sc = SoundCloud(clientId: "", clientSecret: "", redirectURI: "")
                 sc.loadedPlaylists = testDefaultLoadedPlaylists
                 let testPlaylist = testPlaylist(empty: true)
                 let testPlaylistId = testPlaylist.id

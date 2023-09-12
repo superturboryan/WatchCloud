@@ -10,7 +10,7 @@ import SwiftUI
 
 struct DownloadsView: View {
     
-    @EnvironmentObject var sc: SC
+    @EnvironmentObject var sc: SoundCloud
     @EnvironmentObject var player: SCAudioPlayer //TODO: Remove dependency
     
     @State var isEmpty = false
@@ -148,7 +148,7 @@ struct DownloadsView: View {
 }
 
 struct DownloadsView_Previews: PreviewProvider {
-    static let sc: SC = { () -> SC in
+    static let sc: SoundCloud = { () -> SoundCloud in
         var sc = testSC
         sc.myUser = testUser
         sc.loadedPlaylists = testDefaultLoadedPlaylists

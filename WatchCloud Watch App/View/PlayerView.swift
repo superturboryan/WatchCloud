@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PlayerView: View {
     
-    @EnvironmentObject var sc: SC
+    @EnvironmentObject var sc: SoundCloud
     @EnvironmentObject var player: SCAudioPlayer
     @Environment(\.isLuminanceReduced) var isLuminanceReduced
     
@@ -176,7 +176,7 @@ struct ContentView_Previews: PreviewProvider {
     static var sc = testSC
     static var previews: some View {
         PlayerView()
-        .environmentObject({ () -> SC in
+        .environmentObject({ () -> SoundCloud in
             sc.loadedPlaylists = testDefaultLoadedPlaylists
             var track = testTrack()
             track.userFavorite = true

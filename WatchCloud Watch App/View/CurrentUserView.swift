@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CurrentUserView: View {
     
-    @EnvironmentObject var sc: SC
+    @EnvironmentObject var sc: SoundCloud
     @Environment(\.dismiss) var dismiss
     
     @State var showLogoutAlert = false
@@ -83,7 +83,7 @@ struct CurrentUserView: View {
 struct CurrentUserView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            CurrentUserView().environmentObject({ () -> SC in
+            CurrentUserView().environmentObject({ () -> SoundCloud in
                 testSC.myUser = testUser
                 return testSC
             }())

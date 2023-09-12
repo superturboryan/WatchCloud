@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PlayerOptionsView: View {
     
-    @EnvironmentObject var sc: SC
+    @EnvironmentObject var sc: SoundCloud
     @Environment(\.dismiss) var dismiss
     
     @Binding var track: Track
@@ -143,7 +143,7 @@ struct PlayerOptionsView_Previews: PreviewProvider {
     
     static var previews: some View {
         PlayerOptionsView(track: trackBinding)
-            .environmentObject({ () -> SC in
+            .environmentObject({ () -> SoundCloud in
                 testSC.myUser = testUser
                 testSC.downloadsInProgress = [track : Progress.with(0.69)]
                 return testSC

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PlaylistView: View {
     
-    @EnvironmentObject var sc: SC
+    @EnvironmentObject var sc: SoundCloud
     @EnvironmentObject var player: SCAudioPlayer
     
     @State private var isFirstLoad = true

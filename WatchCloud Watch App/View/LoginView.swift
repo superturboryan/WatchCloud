@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LoginView: View {
 
-    @EnvironmentObject var sc: SC
+    @EnvironmentObject var sc: SoundCloud
 
     var body: some View {
         VStack {

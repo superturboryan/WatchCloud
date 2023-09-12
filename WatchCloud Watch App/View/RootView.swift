@@ -12,7 +12,7 @@ enum RootTab { case library, player }
 
 struct RootView: View {
     
-    @EnvironmentObject var sc: SC
+    @EnvironmentObject var sc: SoundCloud
     
     @State var loaded = false
     @State private var selectedTab: RootTab = .library
@@ -36,6 +36,7 @@ struct RootView: View {
         let playlistIsLoaded = !(sc.nowPlayingQueue?.isEmpty ?? true)
         TabView(selection: $selectedTab) {
             LibraryView(rootSelectedTab: $selectedTab).tag(RootTab.library)
+            // 👇 Loading PlayerView is the culprit for "Attribute graph cycle detected"... 
             if playlistIsLoaded { PlayerView().tag(RootTab.player) }
         }
         .tabViewStyle(PageTabViewStyle())
