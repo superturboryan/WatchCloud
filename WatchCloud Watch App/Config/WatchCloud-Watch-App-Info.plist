@@ -24,5 +24,11 @@
 	<array>
 		<string>audio</string>
 	</array>
+	<key>SC_CLIENT_ID</key>
+	<string>$(SC_CLIENT_ID)</string>
+	<key>SC_CLIENT_SECRET</key>
+	<string>$(SC_CLIENT_SECRET)</string>
+	<key>SC_REDIRECT_URI</key>
+	<string>$(SC_REDIRECT_URI)</string>
 </dict>
 </plist>

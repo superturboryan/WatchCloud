@@ -1,0 +1,43 @@
+//
+//  View.swift
+//  SC Demo
+//
+//  Created by Ryan Forsyth on 2023-08-13.
+//
+
+import SwiftUI
+
+// MARK: - Frame helpers
+extension View {
+    func fullWidth(_ alignment: Alignment = .center) -> some View {
+        self.frame(minWidth: 0, maxWidth: .infinity, alignment: alignment)
+    }
+    
+    func fullWidthAndHeight() -> some View {
+        self.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+    }
+    
+    func size(_ size: CGSize) -> some View {
+        self.frame(width: size.width, height: size.height)
+    }
+}
+
+// MARK: - LazyVStack header + footer
+func sectionHeaderView(_ title: String) -> some View {
+    Text(title.uppercased())
+        .font(.system(size: 12))
+        .foregroundColor(.secondary)
+        .padding(.leading)
+        .padding(.top, 6)
+        .fullWidth(.leading)
+}
+
+func sectionFooterView(_ text: String) -> some View {
+    Text(text)
+        .font(.footnote)
+        .fontWeight(.medium)
+        .foregroundColor(.secondary)
+        .multilineTextAlignment(.center)
+        .padding(.top, 6)
+        .padding(.bottom, 12)
+}

@@ -1,0 +1,92 @@
+//
+//  CurrentUserView.swift
+//  SC Watch Watch App
+//
+//  Created by Ryan Forsyth on 2023-08-29.
+//
+
+import SoundCloud
+import SwiftUI
+
+struct CurrentUserView: View {
+    
+    @EnvironmentObject var sc: SC
+    @Environment(\.dismiss) var dismiss
+    
+    @State var showLogoutAlert = false
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 10) {
+                userView
+                Button("Logout") { showLogoutAlert = true }
+                    .foregroundColor(.red)
+                    .fontWeight(.medium)
+            }
+        }
+        .alert("Are you sure you want to logout?", isPresented: $showLogoutAlert) {
+            Button("Logout", role: .destructive) {
+                Haptics.click()
+                sc.logout()
+                dismiss()
+            }
+            Button("Cancel", role: .cancel) {}
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Current User")
+    }
+    
+    var userView: some View {
+        VStack(spacing: 10) {
+            HStack(spacing: 10) {
+                userAvatarImage
+                    .frame(width: 80)
+                    .clipShape(Circle())
+                    .overlay(alignment: .bottom) {
+                        Text(sc.myUser!.subscription)
+                            .font(.system(size: 13, weight: .semibold))
+                            .padding(.horizontal, 2)
+                            .background(LinearGradient.scOrange())
+                            .cornerRadius(2)
+                            .offset(y: 6)
+                }
+                ShareLink(item: URL(string: sc.myUser!.permalinkUrl)!, label: {
+                    Image(systemName: "square.and.arrow.up")
+                })
+                .foregroundColor(.blue)
+                .frame(width: 40)
+            }
+            Text(sc.myUser!.username)
+                .lineLimit(2)
+                .font(.headline)
+        }
+        .padding(4)
+    }
+    
+    var userAvatarImage: some View {
+        AsyncImage(
+            url: URL(string: sc.myUser!.avatarUrl),
+            content: {
+                $0
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+            },
+            placeholder: {
+                Image(systemName: "person")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            })
+        .cornerRadius(4)
+    }
+}
+
+struct CurrentUserView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            CurrentUserView().environmentObject({ () -> SC in
+                testSC.myUser = testUser
+                return testSC
+            }())
+        }
+    }
+}

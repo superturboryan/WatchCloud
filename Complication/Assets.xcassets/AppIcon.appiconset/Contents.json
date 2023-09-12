@@ -1,7 +1,6 @@
 {
   "images" : [
     {
-      "filename" : "watch_cloud_app_icon.png",
       "idiom" : "universal",
       "platform" : "watchos",
       "size" : "1024x1024"

@@ -4,10 +4,33 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>WatchCloud Watch App.xcscheme_^#shared#^_</key>
+		<key>ComplicationExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
+		</dict>
+		<key>WatchCloud Watch App.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>946F388F2AB079C9008CE9D1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>946F38952AB079C9008CE9D1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>946F38E52AB08470008CE9D1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
