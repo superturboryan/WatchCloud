@@ -30,13 +30,14 @@ struct PlayerView: View {
             }
             .toolbar { optionsButton }
             .focusable(true)
-            .digitalCrownRotation(
-                $player.volume,
-                from: 0,
-                through: 0.4,
-                by: 0.0001,
-                sensitivity: .low
-            )
+//            .digitalCrownRotation(
+//                $player.volume,
+//                from: 0,
+//                through: 0.4,
+//                by: 0.0001,
+//                sensitivity: .low
+//            )
+            .background(VolumeView().opacity(0))
             .fontDesign(.rounded)
             .fullWidthAndHeight()
             .ignoresSafeArea()
