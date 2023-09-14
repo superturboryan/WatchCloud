@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9448FF4B2AB31308003D63F1 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */; };
 		946F38972AB079C9008CE9D1 /* WatchCloud Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		946F38A02AB079CA008CE9D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946F389F2AB079CA008CE9D1 /* Assets.xcassets */; };
 		946F38A32AB079CA008CE9D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946F38A22AB079CA008CE9D1 /* Preview Assets.xcassets */; };
@@ -83,6 +84,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		946F38902AB079C9008CE9D1 /* WatchCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchCloud Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		946F389F2AB079CA008CE9D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				946F38CC2AB07F81008CE9D1 /* App.swift */,
+				9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */,
 				946F38CB2AB07F81008CE9D1 /* SCAudioPlayer.swift */,
 				946F38B32AB07CB1008CE9D1 /* Config */,
 				946F38B62AB07F81008CE9D1 /* Extension */,
@@ -202,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				946F389F2AB079CA008CE9D1 /* Assets.xcassets */,
+				946F38BA2AB07F81008CE9D1 /* Config.swift */,
 				946F38B42AB07D74008CE9D1 /* Config.xcconfig */,
 				946F38A12AB079CA008CE9D1 /* Preview Content */,
 				946F38B22AB07A78008CE9D1 /* WatchCloud-Watch-App-Info.plist */,
@@ -215,7 +219,6 @@
 				946F38B72AB07F81008CE9D1 /* View.swift */,
 				946F38B82AB07F81008CE9D1 /* Progress.swift */,
 				946F38B92AB07F81008CE9D1 /* Delete.swift */,
-				946F38BA2AB07F81008CE9D1 /* Config.swift */,
 				946F38BB2AB07F81008CE9D1 /* Image.swift */,
 				946F38BC2AB07F81008CE9D1 /* Haptics.swift */,
 				946F38BD2AB07F81008CE9D1 /* SpinAnimation.swift */,
@@ -403,6 +406,7 @@
 				946F38D92AB07F81008CE9D1 /* PlaylistView.swift in Sources */,
 				946F38D32AB07F81008CE9D1 /* SpinAnimation.swift in Sources */,
 				946F38CE2AB07F81008CE9D1 /* Progress.swift in Sources */,
+				9448FF4B2AB31308003D63F1 /* CompositionRoot.swift in Sources */,
 				946F38D42AB07F81008CE9D1 /* MarqueeText.swift in Sources */,
 				946F38CD2AB07F81008CE9D1 /* View.swift in Sources */,
 				946F38D02AB07F81008CE9D1 /* Config.swift in Sources */,

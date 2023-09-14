@@ -11,21 +11,14 @@ import SwiftUI
 @main
 struct WatchCloud_Watch_AppApp: App {
     
-    @StateObject var sc = SoundCloud(
-        clientId: Config.clientId,
-        clientSecret: Config.clientSecret,
-        redirectURI: Config.redirectURI
-    )
-    @StateObject var player = SCAudioPlayer()
+    @StateObject var sc = CompositionRoot.sc
+    @StateObject var player = CompositionRoot.scAudioPlayer
     
     var body: some Scene {
         WindowGroup {
-            RootView()
+            CompositionRoot.rootView
                 .environmentObject(sc)
-                .environmentObject({() -> SCAudioPlayer in
-                    player.setSC(sc)
-                    return player
-                }())
+                .environmentObject(player)
         }
     }
 }

@@ -161,11 +161,7 @@ struct DownloadsView_Previews: PreviewProvider {
         NavigationStack {
             DownloadsView(didSelectTrack: { _ in })
                 .environmentObject(sc)
-                .environmentObject({ () -> SCAudioPlayer in
-                    let player = SCAudioPlayer()
-                    player.setSC(sc)
-                    return player
-                }())
+                .environmentObject(SCAudioPlayer(sc))
         }
             
     }

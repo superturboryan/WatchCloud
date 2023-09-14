@@ -185,8 +185,7 @@ struct ContentView_Previews: PreviewProvider {
             return sc
         }())
         .environmentObject({ () -> SCAudioPlayer in
-            let player = SCAudioPlayer()
-            player.setSC(sc)
+            let player = SCAudioPlayer(sc)
             player.progress = 3015
             player.isPlaying = true
             return player

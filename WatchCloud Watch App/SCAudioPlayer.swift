@@ -14,7 +14,7 @@ import SwiftUI
 @MainActor
 final class SCAudioPlayer: ObservableObject {
     
-    private weak var sc: SoundCloud! // Inject after initializing using public setter!
+    private weak var sc: SoundCloud!
     
     @Published var isPlaying = false // Should be private(set)
     @Published private(set) var isLoading = false
@@ -48,18 +48,15 @@ final class SCAudioPlayer: ObservableObject {
     private let decoder = JSONDecoder()
     private var subscriptions = Set<AnyCancellable>()
     
-    init() {
-        addRemoteCommandTargets()
+    init(_ sc: SoundCloud) {
+        self.sc = sc
+        setupDeviceMediaControls()
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
-    func setSC(_ sc: SoundCloud) {
-        self.sc = sc
-    }
-    
+
     func setupPlayer() {
         // TODO: Handle errors
         try? audioSession.setCategory(
@@ -119,9 +116,9 @@ extension SCAudioPlayer {
     func loadAndPlayTrack(_ track: Track) {
         showBluetoothOptionsIfBluetoothAudioOutputNotDetected()
         print("🎧 Load and play new track: \(track.title)")
-        Task {
-            try await loadTrack(track)
-            player.play()
+        Task { [weak self] in
+            try await self?.loadTrack(track)
+            self?.player.play()
         }
     }
     
@@ -187,7 +184,7 @@ extension SCAudioPlayer {
 // MARK: - MPNowPlayingInfoCenter
 extension SCAudioPlayer {
     
-    private func addRemoteCommandTargets() {
+    private func setupDeviceMediaControls() {
         let center = MPRemoteCommandCenter.shared()
         
         center.togglePlayPauseCommand.addTarget { [weak self] _ in

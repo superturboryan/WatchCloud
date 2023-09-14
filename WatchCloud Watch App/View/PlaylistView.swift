@@ -223,7 +223,7 @@ struct PlaylistView_Previews: PreviewProvider {
                 showHeader: true
             )
             .environmentObject(sc)
-            .environmentObject(SCAudioPlayer())
+            .environmentObject(SCAudioPlayer(sc))
         }
     }
 }
