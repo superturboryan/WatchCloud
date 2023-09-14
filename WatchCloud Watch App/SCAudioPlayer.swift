@@ -150,7 +150,7 @@ extension SCAudioPlayer {
             loadAndPlayTrack(nextTrack)
         } else {
             // Only load next track, don't start playing
-            Task { try await loadTrack(nextTrack) }
+            Task { [weak self] in try await self?.loadTrack(nextTrack) }
         }
     }
     
@@ -165,7 +165,7 @@ extension SCAudioPlayer {
                 loadAndPlayTrack(previousTrack)
             } else {
                 // Only load previous track, don't start playing
-                Task { try await loadTrack(previousTrack) }
+                Task { [weak self] in try await self?.loadTrack(previousTrack) }
             }
         } else { // Just go to beginning
             progress = 0
@@ -252,8 +252,8 @@ extension SCAudioPlayer {
             ]
             
             let url = loadedTrack.artworkUrl ?? loadedTrack.user.avatarUrl 
-            Task {
-                let artwork = await fetchArtwork(url)
+            Task { [weak self] in
+                let artwork = await self?.fetchArtwork(url)
                 info![MPMediaItemPropertyArtwork] = artwork
                 center.nowPlayingInfo = info
             }
