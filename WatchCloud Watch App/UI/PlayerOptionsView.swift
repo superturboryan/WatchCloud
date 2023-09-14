@@ -21,7 +21,7 @@ struct PlayerOptionsView: View {
         VStack(spacing: 36) {
             HStack(spacing: hSpacing) {
                 likeButton.disabled(false)
-                downloadButton.disabled(false) // TODO: Check if user has subscription
+                downloadButton.disabled(!Config.isDownloadingEnabled(for: sc.myUser?.id))
             }
             HStack(spacing: hSpacing) {
                 addToPlaylistButton.disabled(true)

@@ -25,9 +25,13 @@ struct LibraryView: View {
                         if let nowPlayingBinding = Binding($sc.loadedPlaylists[PlaylistType.nowPlaying.rawValue]),
                            !(nowPlayingBinding.wrappedValue.tracks?.isEmpty ?? true) {
                             nowPlayingCell(nowPlayingBinding).id(👆)
-                            downloadsCell
+                            if Config.isDownloadingEnabled(for: sc.myUser?.id) {
+                                downloadsCell
+                            }
                         } else {
-                            downloadsCell.id(👆)
+                            if Config.isDownloadingEnabled(for: sc.myUser?.id) {
+                                downloadsCell.id(👆)
+                            }
                         }
 
                         playlistCell(Binding($sc.loadedPlaylists[PlaylistType.likes.rawValue])!)

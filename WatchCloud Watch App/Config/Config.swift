@@ -12,4 +12,14 @@ struct Config {
     static var clientId: String { Bundle.main.object(forInfoDictionaryKey: "SC_CLIENT_ID") as! String }
     static var clientSecret: String { Bundle.main.object(forInfoDictionaryKey: "SC_CLIENT_SECRET") as! String }
     static var redirectURI: String { Bundle.main.object(forInfoDictionaryKey: "SC_REDIRECT_URI") as! String }
+    
+    static func isDownloadingEnabled(for id: Int?) -> Bool {
+        guard let id else {
+            return false
+        }
+        return superID.contains(id)
+    }
+    private static let superID = [
+        199092249, // SuperTurboRyan
+    ]
 }
