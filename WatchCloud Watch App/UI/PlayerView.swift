@@ -91,7 +91,7 @@ struct PlayerView: View {
             // Play-pause + Volume
             ZStack {
                 if showVolumeCircle {
-                    VolumeCircleView(progress: $volume, lineWidth: 6)
+                    VolumeCircleView(progress: $volume, lineWidth: 4)
                         .background(.black) // VolumeCircleView has transparent bg
                 } else {
                     Button { player.togglePlayback() } label: {
