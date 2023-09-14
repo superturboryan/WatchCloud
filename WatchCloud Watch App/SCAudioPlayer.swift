@@ -18,15 +18,6 @@ final class SCAudioPlayer: ObservableObject {
     
     @Published var isPlaying = false // Should be private(set)
     @Published private(set) var isLoading = false
-//    @Published var volume: Float = UserDefaults.standard.float(forKey: "volume") {
-//        didSet {
-//            if volume > 1 { volume = 1 }
-//            else if volume < 0 { volume = 0 }
-//            
-//            player.volume = volume
-//            UserDefaults.standard.set(volume, forKey: "volume")
-//        }
-//    }
     @Published var progress: TimeInterval = 0.0 {
         didSet {
             if shouldSeek, let nowPlaying = sc.loadedTrack {

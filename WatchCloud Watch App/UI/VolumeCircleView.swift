@@ -22,23 +22,27 @@ struct VolumeCircleView: View {
                 .trim(from: 0, to: CGFloat(progress))
                 .stroke(style: StrokeStyle(lineWidth: lineWidth, lineCap: .round, lineJoin: .round))
                 .foregroundStyle(LinearGradient.scOrange(.vertical, reversed: true))
-                .rotationEffect(.degrees(-90))
                 .animation(.default, value: progress)
-            VStack {
-                Image(systemName: "speaker.wave.3.fill", variableValue: Double(progress))
-                    .resizable()
-                    .scaledToFit()
-                    .padding(10)
-                    .foregroundStyle(LinearGradient.scOrange(.horizontal))
-            }
+                .rotationEffect(.degrees(-90))
+            Image(systemName: "speaker.wave.3.fill", variableValue: Double(progress))
+                .resizable()
+                .scaledToFit()
+                .padding(10)
+                .foregroundStyle(LinearGradient.scOrange(.horizontal))
         }
     }
 }
 
 struct VolumeCircleView_Previews: PreviewProvider {
-    @State static var progress: Float = 0.7
     static var previews: some View {
-        VolumeCircleView(progress: $progress, lineWidth: 4)
-            .frame(width: 50.0, height: 50.0)
+        
+        StatefulPreviewWrapper(Float(1)) { progress in
+            VStack(spacing: 20) {
+                VolumeCircleView(progress: progress, lineWidth: 4)
+                    .frame(width: 50, height: 50)
+                
+                Slider(value: progress, in: 0 ... 1.0, step: 0.33333)
+            }
+        }
     }
 }
