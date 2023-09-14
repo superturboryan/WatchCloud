@@ -40,6 +40,8 @@ final class SCAudioPlayer: ObservableObject {
         }
     }
     
+    let systemVolumePublisher = AVAudioSession.sharedInstance().publisher(for: \.outputVolume).eraseToAnyPublisher()
+    
     private var shouldSeek = true
     private var isPlayerLoaded = false
     

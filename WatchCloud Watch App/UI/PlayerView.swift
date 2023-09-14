@@ -7,6 +7,7 @@
 
 import SoundCloud
 import SwiftUI
+import WatchKit
 
 struct PlayerView: View {
     
@@ -15,7 +16,12 @@ struct PlayerView: View {
     @Environment(\.isLuminanceReduced) var isLuminanceReduced
     
     @State var showOptions = false
-        
+    
+    @State var volume: Float = 0
+    @State var showVolumeCircle = false
+    @State var volumeCircleVisibleTime = 0
+    let volumeTimer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -29,15 +35,6 @@ struct PlayerView: View {
                 .padding(.horizontal, 5)
             }
             .toolbar { optionsButton }
-            .focusable(true)
-//            .digitalCrownRotation(
-//                $player.volume,
-//                from: 0,
-//                through: 0.4,
-//                by: 0.0001,
-//                sensitivity: .low
-//            )
-            .background(VolumeView().opacity(0))
             .fontDesign(.rounded)
             .fullWidthAndHeight()
             .ignoresSafeArea()
@@ -83,35 +80,42 @@ struct PlayerView: View {
     
     var playbackButtons: some View {
         HStack(spacing: 28) {
-            Button {
-                player.skipToPreviousTrack()
-            } label: {
+            // Previous
+            Button { player.skipToPreviousTrack() } label: {
                 Image(systemName: "backward.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 15, height: 15)
             }
             
-            Button {
-                player.togglePlayback()
-            } label: {
-                if player.isLoading {
-                    ProgressView().tint(.scOrange)
+            // Play-pause + Volume
+            ZStack {
+                if showVolumeCircle {
+                    VolumeCircleView(progress: $volume, lineWidth: 6)
+                        .background(.black) // VolumeCircleView has transparent bg
                 } else {
-                    Image(systemName: player.isPlaying ? "pause.circle" : "play.circle.fill" )
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
+                    Button { player.togglePlayback() } label: {
+                        if player.isLoading {
+                            ProgressView().tint(.scOrange)
+                        } else {
+                            Image(systemName: player.isPlaying ? "pause.circle" : "play.circle.fill" )
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        }
+                    }
+                    .contentShape(.focusEffect, Circle())
+                    .accessibilityQuickAction(style: .outline) {
+                        Button(player.isPlaying ? "Pause" : "Play") {
+                            player.togglePlayback()
+                        }
+                    }
+                    .disabled(player.isLoading)
                 }
             }
+            .animation(.default, value: showVolumeCircle)
             .frame(width: 50, height: 50)
-            .contentShape(.focusEffect, Circle())
-            .accessibilityQuickAction(style: .outline) {
-                Button(player.isPlaying ? "Pause" : "Play") {
-                    player.togglePlayback()
-                }
-            }
-            .disabled(player.isLoading)
             
+            // Next
             Button {
                 player.skipToNextTrack()
             } label: {
@@ -122,6 +126,19 @@ struct PlayerView: View {
             }
         }
         .buttonStyle(.plain)
+        .background { VolumeControlView().opacity(0) } // Hack to control volume with crown
+        .onReceive(player.systemVolumePublisher) {
+            handleVolumeUpdate($0)
+        }
+        .onReceive(volumeTimer) { _ in
+            volumeCircleVisibleTime += 1
+        }
+        .onChange(of: volumeCircleVisibleTime) { visibleTime in
+            if visibleTime > 1 {
+                showVolumeCircle = false
+                volumeCircleVisibleTime = 0
+            }
+        }
     }
     
     @ViewBuilder
@@ -170,6 +187,12 @@ struct PlayerView: View {
                     .foregroundStyle(LinearGradient.scOrange(.horizontal))
             }
         }
+    }
+    
+    func handleVolumeUpdate(_ newVolume: Float) {
+        showVolumeCircle = true
+        volumeCircleVisibleTime = 0
+        volume = newVolume
     }
 }
 

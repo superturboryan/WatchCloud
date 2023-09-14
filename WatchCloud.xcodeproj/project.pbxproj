@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9448FF4B2AB31308003D63F1 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */; };
 		9448FF4D2AB343D7003D63F1 /* WatchKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4C2AB343D7003D63F1 /* WatchKit.swift */; };
+		9448FF4F2AB34F0A003D63F1 /* VolumeCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */; };
 		946F38972AB079C9008CE9D1 /* WatchCloud Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		946F38A02AB079CA008CE9D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946F389F2AB079CA008CE9D1 /* Assets.xcassets */; };
 		946F38A32AB079CA008CE9D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946F38A22AB079CA008CE9D1 /* Preview Assets.xcassets */; };
@@ -87,6 +88,7 @@
 /* Begin PBXFileReference section */
 		9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		9448FF4C2AB343D7003D63F1 /* WatchKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchKit.swift; sourceTree = "<group>"; };
+		9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeCircleView.swift; sourceTree = "<group>"; };
 		946F38902AB079C9008CE9D1 /* WatchCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchCloud Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		946F389F2AB079CA008CE9D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				946F38C82AB07F81008CE9D1 /* RootView.swift */,
 				946F38C52AB07F81008CE9D1 /* SettingsView.swift */,
 				946F38C72AB07F81008CE9D1 /* TrackCellView.swift */,
+				9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				946F38D12AB07F81008CE9D1 /* Image.swift in Sources */,
 				946F38CF2AB07F81008CE9D1 /* Delete.swift in Sources */,
 				946F38DD2AB07F81008CE9D1 /* RootView.swift in Sources */,
+				9448FF4F2AB34F0A003D63F1 /* VolumeCircleView.swift in Sources */,
 				946F38D62AB07F81008CE9D1 /* DownloadsView.swift in Sources */,
 				946F38DE2AB07F81008CE9D1 /* LibraryView.swift in Sources */,
 				946F38E02AB07F81008CE9D1 /* SCAudioPlayer.swift in Sources */,

@@ -4,6 +4,7 @@
 //
 //  Created by Ryan Forsyth on 2023-09-14.
 //
+// https://stackoverflow.com/questions/58539883/controlling-volume-of-apple-watch
 
 #if os(watchOS)
 
@@ -19,7 +20,7 @@ import SwiftUI
 ///     print("System volume: \(session.outputVolume)")
 /// }
 /// ```
-struct VolumeView: WKInterfaceObjectRepresentable {
+struct VolumeControlView: WKInterfaceObjectRepresentable {
     typealias WKInterfaceObjectType = WKInterfaceVolumeControl
 
     func makeWKInterfaceObject(context: Self.Context) -> WKInterfaceVolumeControl {
@@ -36,7 +37,7 @@ struct VolumeView: WKInterfaceObjectRepresentable {
         }
         return view
     }
-    func updateWKInterfaceObject(_ wkInterfaceObject: WKInterfaceVolumeControl, context: WKInterfaceObjectRepresentableContext<VolumeView>) { }
+    func updateWKInterfaceObject(_ wkInterfaceObject: WKInterfaceVolumeControl, context: WKInterfaceObjectRepresentableContext<VolumeControlView>) { }
 }
 
 #endif
