@@ -20,8 +20,7 @@ enum CompositionRoot {
     static let sc = SoundCloud(
         clientId: clientId,
         clientSecret: clientSecret,
-        redirectURI: redirectURI,
-        tokenPersistenceService: keychainService
+        redirectURI: redirectURI
     )
     
     @MainActor
@@ -30,5 +29,4 @@ enum CompositionRoot {
     private static let clientId = Config.clientId
     private static let clientSecret = Config.clientSecret
     private static let redirectURI = Config.redirectURI
-    private static let keychainService = KeychainService()
 }
