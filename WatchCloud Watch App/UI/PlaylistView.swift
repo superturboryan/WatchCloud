@@ -91,7 +91,6 @@ struct PlaylistView: View {
                             ProgressView()
                         }
                     }
-                    .animation(.default, value: state.image)
                 }
                 .size(size)
                 .cornerRadius(4)

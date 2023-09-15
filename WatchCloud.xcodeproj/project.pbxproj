@@ -42,6 +42,7 @@
 		946F38ED2AB08470008CE9D1 /* Complication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38EC2AB08470008CE9D1 /* Complication.swift */; };
 		946F38EF2AB08471008CE9D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946F38EE2AB08471008CE9D1 /* Assets.xcassets */; };
 		946F38F32AB08471008CE9D1 /* ComplicationExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 946F38E62AB08470008CE9D1 /* ComplicationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		94A31B352AB517410052A922 /* CaseIterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A31B342AB517410052A922 /* CaseIterable.swift */; };
 		94C169A02AB474EE00570B4F /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 94C1699F2AB474EE00570B4F /* Nuke */; };
 		94C169A22AB474EE00570B4F /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 94C169A12AB474EE00570B4F /* NukeUI */; };
 /* End PBXBuildFile section */
@@ -127,6 +128,7 @@
 		946F38EC2AB08470008CE9D1 /* Complication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Complication.swift; sourceTree = "<group>"; };
 		946F38EE2AB08471008CE9D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		946F38F02AB08471008CE9D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94A31B342AB517410052A922 /* CaseIterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseIterable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +228,7 @@
 		946F38B62AB07F81008CE9D1 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				94A31B342AB517410052A922 /* CaseIterable.swift */,
 				946F38B92AB07F81008CE9D1 /* Delete.swift */,
 				946F38BC2AB07F81008CE9D1 /* Haptics.swift */,
 				946F38BB2AB07F81008CE9D1 /* Image.swift */,
@@ -411,6 +414,7 @@
 				946F38D72AB07F81008CE9D1 /* CurrentUserView.swift in Sources */,
 				946F38D12AB07F81008CE9D1 /* Image.swift in Sources */,
 				946F38CF2AB07F81008CE9D1 /* Delete.swift in Sources */,
+				94A31B352AB517410052A922 /* CaseIterable.swift in Sources */,
 				946F38DD2AB07F81008CE9D1 /* RootView.swift in Sources */,
 				9448FF4F2AB34F0A003D63F1 /* VolumeCircleView.swift in Sources */,
 				946F38D62AB07F81008CE9D1 /* DownloadsView.swift in Sources */,

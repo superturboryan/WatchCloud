@@ -11,6 +11,15 @@ import MediaPlayer
 import SoundCloud
 import SwiftUI
 
+enum PlaybackSpeed: Float, CaseIterable {
+    case ThreeQuarters = 0.75
+    case One = 1.0
+    case OneAndAQuarter = 1.25
+    case OnePointFive = 1.5
+    case OneAndThreeQuarters = 1.75
+    case Double = 2.0
+}
+
 @MainActor
 final class SCAudioPlayer: ObservableObject {
     
@@ -30,6 +39,7 @@ final class SCAudioPlayer: ObservableObject {
             }
         }
     }
+    @Published var playbackSpeed: PlaybackSpeed = .One
     
     let systemVolumePublisher = AVAudioSession.sharedInstance().publisher(for: \.outputVolume).eraseToAnyPublisher()
     
@@ -40,6 +50,8 @@ final class SCAudioPlayer: ObservableObject {
     private let audioSession = AVAudioSession.sharedInstance()
     private let decoder = JSONDecoder()
     private var subscriptions = Set<AnyCancellable>()
+    
+    
     
     init(_ sc: SoundCloud) {
         self.sc = sc
@@ -163,6 +175,11 @@ extension SCAudioPlayer {
         } else { // Just go to beginning
             progress = 0
         }
+    }
+    
+    func cyclePlaybackSpeed() {
+        playbackSpeed = playbackSpeed.next()
+        player.rate = playbackSpeed.rawValue
     }
     
     private func showBluetoothOptionsIfBluetoothAudioOutputNotDetected() {

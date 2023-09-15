@@ -11,6 +11,7 @@ import SwiftUI
 struct PlayerOptionsView: View {
     
     @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var player: SCAudioPlayer
     @Environment(\.dismiss) var dismiss
     
     @Binding var track: Track
@@ -24,7 +25,7 @@ struct PlayerOptionsView: View {
                 downloadButton.disabled(!Config.isDownloadingEnabled(for: sc.myUser?.id))
             }
             HStack(spacing: hSpacing) {
-                addToPlaylistButton.disabled(true)
+                playbackSpeedButton.disabled(false)
                 shareButton.disabled(false)
             }
         }
@@ -49,9 +50,9 @@ struct PlayerOptionsView: View {
         }
     }
     
-    var addToPlaylistButton: some View {
-        Button {} label: {
-            buttonView("plus", .scOrange, "Add")
+    var playbackSpeedButton: some View {
+        Button { player.cyclePlaybackSpeed() } label: {
+            playbackSpeedView
         }
     }
     
@@ -107,12 +108,36 @@ struct PlayerOptionsView: View {
             .clipShape(Capsule(style: .continuous))
             .overlay {
                 Text(text)
+                    .opacity(0.9)
                     .lineLimit(1)
                     .font(.footnote)
                     .fontWeight(.medium)
                     .offset(y: 34)
                     .minimumScaleFactor(0.8)
             }
+    }
+    
+    var playbackSpeedView: some View {
+        ZStack {
+            Color.scOrange.opacity(0.2)
+            Text("\(String(format: "%.\(player.playbackSpeed.numDecimalToDisplay)f", player.playbackSpeed.rawValue))x")
+                .font(.system(size: 28, weight: .medium))
+                .minimumScaleFactor(0.8)
+                .padding(.horizontal, 8)
+                .foregroundColor(.scOrange)
+        }
+        .frame(width: 76, height: 45)
+        .fixedSize()
+        .clipShape(Capsule(style: .continuous))
+        .overlay {
+            Text("Playback")
+                .opacity(0.9)
+                .lineLimit(1)
+                .font(.footnote)
+                .fontWeight(.medium)
+                .offset(y: 34)
+                .minimumScaleFactor(0.8)
+        }
     }
     
     func downloadButtonView() -> some View {
@@ -128,6 +153,7 @@ struct PlayerOptionsView: View {
             .clipShape(Capsule(style: .continuous))
             .overlay {
                 Text(isTrackDownloading ? "Downloading" : (isTrackDownloaded ? "Downloaded" : "Download"))
+                    .opacity(0.9)
                     .lineLimit(1)
                     .font(.footnote)
                     .fontWeight(.medium)
@@ -144,9 +170,26 @@ struct PlayerOptionsView_Previews: PreviewProvider {
     static var previews: some View {
         PlayerOptionsView(track: trackBinding)
             .environmentObject({ () -> SoundCloud in
-                testSC.myUser = testUser
                 testSC.downloadsInProgress = [track : Progress.with(0.69)]
                 return testSC
             }())
+            .environmentObject({ () -> SCAudioPlayer in
+                let player = SCAudioPlayer(testSC)
+                player.playbackSpeed = .ThreeQuarters
+                return player
+            }())
+    }
+}
+
+extension PlaybackSpeed {
+    var numDecimalToDisplay: Int {
+        switch self {
+        case .ThreeQuarters: return 2
+        case .One: return 0
+        case .OneAndAQuarter: return 2
+        case .OnePointFive: return 1
+        case .OneAndThreeQuarters: return 2
+        case .Double: return 0
+        }
     }
 }
