@@ -11,7 +11,7 @@ import SwiftUI
 struct DownloadsView: View {
     
     @EnvironmentObject var sc: SoundCloud
-    @EnvironmentObject var player: SCAudioPlayer //TODO: Remove dependency
+    @EnvironmentObject var player: SCAudioPlayer
     
     @State var isEmpty = false
     
@@ -92,11 +92,11 @@ struct DownloadsView: View {
                     
                     do {
                         try sc.removeDownload(displayedTrack.wrappedValue)
+                        Haptics.click()
                     } catch {
                         // TODO: Handle delete playing track error
                         print("❌ Error deleting download: \(error)");
                     }
-                    Haptics.click()
                 }
             }
             .animation(.default, value: sc.downloadedTracks)

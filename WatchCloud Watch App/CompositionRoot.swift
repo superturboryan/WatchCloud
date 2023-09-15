@@ -17,16 +17,15 @@ enum CompositionRoot {
     static let rootView = RootView()
     
     @MainActor
-    static let sc = SoundCloud(
-        clientId: clientId,
-        clientSecret: clientSecret,
-        redirectURI: redirectURI
-    )
-    
-    @MainActor
     static let scAudioPlayer = SCAudioPlayer(sc)
     
-    private static let clientId = Config.clientId
-    private static let clientSecret = Config.clientSecret
-    private static let redirectURI = Config.redirectURI
+    @MainActor
+    static let sc = SoundCloud(config)
+    
+    private static let config = SoundCloudConfig(
+        apiURL: Config.apiUrl,
+        clientId: Config.clientId,
+        clientSecret: Config.clientSecret,
+        redirectURI: Config.redirectURI
+    )
 }

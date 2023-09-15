@@ -169,7 +169,6 @@ struct PlaylistView: View {
     var trackList: some View {
         if let tracksBinding = Binding($playlist.tracks),
            !tracksBinding.wrappedValue.isEmpty {
-            // TODO: Verify LazyVStack behaviour when adding-removing tracks, reloading
             LazyVStack(spacing: 5) {
                 ForEach(tracksBinding) { track in
                     TrackCellView(

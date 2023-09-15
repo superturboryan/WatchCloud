@@ -184,7 +184,6 @@ struct LibraryView: View {
             imageName = "arrow.down.circle.fill"
             colour = .green
             
-            // TODO: Rework playlist enum for other types?
         case -1: // Current User View
             imageName = "figure.dance"
             gradient = LinearGradient.scOrange(.vertical)
@@ -223,7 +222,7 @@ struct LibraryView_Previews: PreviewProvider {
     static var previews: some View {
         LibraryView(rootSelectedTab: Binding(get: { RootTab.library }, set: { _ in }))
             .environmentObject({() -> SoundCloud in
-                let sc = SoundCloud(clientId: "", clientSecret: "", redirectURI: "")
+                let sc = SoundCloud(testSCConfig)
                 sc.loadedPlaylists = testDefaultLoadedPlaylists
                 let testPlaylist = testPlaylist(empty: true)
                 let testPlaylistId = testPlaylist.id

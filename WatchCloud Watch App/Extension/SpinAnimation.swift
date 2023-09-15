@@ -31,7 +31,6 @@ struct SpinAnimation: ViewModifier {
 }
 
 extension View {
-    // TODO: add property parameters?
     func spinAnimation(_ enabled: Bool = true) -> some View {
         enabled ? AnyView(modifier(SpinAnimation())) : AnyView(self)
     }
