@@ -5,6 +5,7 @@
 //  Created by Ryan Forsyth on 2023-09-12.
 //
 
+import Nuke
 import SoundCloud
 import SwiftUI
 
@@ -13,6 +14,11 @@ struct WatchCloud_Watch_AppApp: App {
     
     @StateObject var sc = CompositionRoot.sc
     @StateObject var player = CompositionRoot.scAudioPlayer
+    
+    init() {
+        // Set aggressive image caching by default
+        ImagePipeline.shared = ImagePipeline(configuration: .withDataCache)
+    }
     
     var body: some Scene {
         WindowGroup {

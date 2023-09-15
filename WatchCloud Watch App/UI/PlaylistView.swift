@@ -5,6 +5,7 @@
 //  Created by Ryan Forsyth on 2023-08-19.
 //
 
+import NukeUI
 import SoundCloud
 import SwiftUI
 
@@ -80,10 +81,14 @@ struct PlaylistView: View {
             HStack(spacing: 8) {
                 let size = CGSize(width: geo.size.width / 2.5, height: geo.size.width / 2.5)
                 // First track or playlist artist artwork
-                AsyncImage(url: playlist.artworkUrlWithTrackAndUserFallback) {
-                    $0.image?
-                    .resizable()
-                    .scaledToFit()
+                LazyImage(url: playlist.artworkUrlWithTrackAndUserFallback) { state in
+                    if let image = state.image {
+                        image.resizable().scaledToFit()
+                    } else if state.error != nil {
+                        Image(systemName: "x.circle").resizable().scaledToFit()
+                    } else {
+                        ProgressView()
+                    }
                 }
                 .size(size)
                 .cornerRadius(4)

@@ -158,23 +158,7 @@ struct PlayerView: View {
             .font(.footnote)
         }
     }
-    
-    @ViewBuilder
-    var artwork: some View {
-        ZStack {
-            if let currentTrack = sc.loadedTrack {
-                let url = currentTrack.largerArtworkUrl ?? currentTrack.user.avatarUrl
-                AsyncImage(url: URL(string: url)) { image in
-                    image.image?
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(4)
-                    .shadow(radius: 10)
-                }
-            }
-        }
-    }
-    
+
     var optionsButton: some ToolbarContent {
         ToolbarItem(placement: .cancellationAction) {
             Button {

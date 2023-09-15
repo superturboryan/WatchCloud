@@ -5,6 +5,7 @@
 //  Created by Ryan Forsyth on 2023-08-29.
 //
 
+import NukeUI
 import SoundCloud
 import SwiftUI
 
@@ -64,18 +65,15 @@ struct CurrentUserView: View {
     }
     
     var userAvatarImage: some View {
-        AsyncImage(
-            url: URL(string: sc.myUser!.avatarUrl),
-            content: {
-                $0
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-            },
-            placeholder: {
-                Image(systemName: "person")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            })
+        LazyImage(url: URL(string: sc.myUser!.avatarUrl)) { state in
+            if let image = state.image {
+                image.resizable().scaledToFit()
+            } else if state.error != nil {
+                Image(systemName: "person").resizable().scaledToFit()
+            } else {
+                ProgressView()
+            }
+        }
         .cornerRadius(4)
     }
 }
