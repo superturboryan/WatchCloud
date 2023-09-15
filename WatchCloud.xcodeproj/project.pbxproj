@@ -42,6 +42,8 @@
 		946F38ED2AB08470008CE9D1 /* Complication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38EC2AB08470008CE9D1 /* Complication.swift */; };
 		946F38EF2AB08471008CE9D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946F38EE2AB08471008CE9D1 /* Assets.xcassets */; };
 		946F38F32AB08471008CE9D1 /* ComplicationExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 946F38E62AB08470008CE9D1 /* ComplicationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		94C169A02AB474EE00570B4F /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 94C1699F2AB474EE00570B4F /* Nuke */; };
+		94C169A22AB474EE00570B4F /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 94C169A12AB474EE00570B4F /* NukeUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,7 +134,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94C169A22AB474EE00570B4F /* NukeUI in Frameworks */,
 				946F38B12AB07A2E008CE9D1 /* SoundCloud in Frameworks */,
+				94C169A02AB474EE00570B4F /* Nuke in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +305,8 @@
 			name = "WatchCloud Watch App";
 			packageProductDependencies = (
 				946F38B02AB07A2E008CE9D1 /* SoundCloud */,
+				94C1699F2AB474EE00570B4F /* Nuke */,
+				94C169A12AB474EE00570B4F /* NukeUI */,
 			);
 			productName = "WatchCloud Watch App";
 			productReference = 946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */;
@@ -353,6 +359,9 @@
 				Base,
 			);
 			mainGroup = 946F38892AB079C9008CE9D1;
+			packageReferences = (
+				94C1699E2AB474EE00570B4F /* XCRemoteSwiftPackageReference "Nuke" */,
+			);
 			productRefGroup = 946F38912AB079C9008CE9D1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -762,10 +771,31 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		94C1699E2AB474EE00570B4F /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		946F38B02AB07A2E008CE9D1 /* SoundCloud */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SoundCloud;
+		};
+		94C1699F2AB474EE00570B4F /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94C1699E2AB474EE00570B4F /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		94C169A12AB474EE00570B4F /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94C1699E2AB474EE00570B4F /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
