@@ -89,9 +89,13 @@ struct DownloadsView: View {
                 )
                 .onTapGesture { tapped(displayedTrack.wrappedValue) }
                 .onLongPressGesture {
-                    // Handle delete playing track?
-                    do { try sc.removeDownload(displayedTrack.wrappedValue) }
-                    catch { print("❌ Error deleting download: \(error)"); fatalError() }
+                    
+                    do {
+                        try sc.removeDownload(displayedTrack.wrappedValue)
+                    } catch {
+                        // TODO: Handle delete playing track error
+                        print("❌ Error deleting download: \(error)");
+                    }
                     Haptics.click()
                 }
             }

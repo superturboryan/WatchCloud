@@ -37,7 +37,9 @@ struct RootView: View {
         TabView(selection: $selectedTab) {
             LibraryView(rootSelectedTab: $selectedTab).tag(RootTab.library)
             // 👇 Loading PlayerView is the culprit for "Attribute graph cycle detected"... 
-            if playlistIsLoaded { PlayerView().tag(RootTab.player) }
+            if playlistIsLoaded {
+                PlayerView().tag(RootTab.player)
+            }
         }
         .tabViewStyle(PageTabViewStyle())
     }
@@ -60,10 +62,11 @@ struct RootView: View {
         do {
             try await sc.loadLibrary()
             loaded = true
-        } catch {
-            // TODO: Check error type before logging out (offline use?)
-            print("❌ Loading library failed with error: \(error)")
+        } catch SoundCloud.Error.userNotAuthorized {
+            print("❌ AuthTokens don't exist or API denied access. Performing logout, presenting login screen...")
             sc.logout()
+        } catch {
+            print("Failed to load library but AuthTokens exist, going into offline mode...")
         }
     }
 }
