@@ -162,7 +162,7 @@ struct PlaylistView: View {
             Text("Loading tracks...")
                 .foregroundColor(.secondary)
         }
-        .padding(.vertical, 20)
+        .padding(.vertical, 10)
     }
     
     @ViewBuilder
@@ -180,7 +180,15 @@ struct PlaylistView: View {
                     // .id() automatically applied when using ForEach(Identifiable) 🤓
                     .onTapGesture { tapped(track.wrappedValue) }
                 }
-                sectionFooterView("End of playlist")
+                if playlist.hasNextPage {
+                    trackListLoadingView.onAppear {
+                        Task {
+                            try await sc.loadNextPageOfTracksForPlaylist(playlist)
+                        }
+                    }
+                } else {
+                    sectionFooterView("End of playlist")
+                }
             }
             .padding(.top, 10)
         } else {
