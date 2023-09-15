@@ -82,13 +82,16 @@ struct PlaylistView: View {
                 let size = CGSize(width: geo.size.width / 2.5, height: geo.size.width / 2.5)
                 // First track or playlist artist artwork
                 LazyImage(url: playlist.artworkUrlWithTrackAndUserFallback) { state in
-                    if let image = state.image {
-                        image.resizable().scaledToFit()
-                    } else if state.error != nil {
-                        Image(systemName: "x.circle").resizable().scaledToFit()
-                    } else {
-                        ProgressView()
+                    ZStack {
+                        if let image = state.image {
+                            image.resizable().scaledToFit()
+                        } else if state.error != nil {
+                            Image(systemName: "x.circle").resizable().scaledToFit()
+                        } else {
+                            ProgressView()
+                        }
                     }
+                    .animation(.default, value: state.image)
                 }
                 .size(size)
                 .cornerRadius(4)
@@ -97,8 +100,7 @@ struct PlaylistView: View {
                 Button {
                     tapped(playlist.tracks!.first!)
                     scrollToFirstTrack()
-                }
-                label: {
+                } label: {
                     Image(systemName: "play.square.stack")
                     .resizable()
                     .symbolRenderingMode(.palette)
@@ -138,8 +140,7 @@ struct PlaylistView: View {
                 }
                 
                 // Shuffle button
-                Button { tappedShuffle() }
-                label: {
+                Button { tappedShuffle() } label: {
                     Image(systemName: "shuffle")
                         .resizable()
                         .scaledToFit()
@@ -160,6 +161,7 @@ struct PlaylistView: View {
             ProgressView()
                 .tint(.scOrange)
             Text("Loading tracks...")
+                .font(.footnote)
                 .foregroundColor(.secondary)
         }
         .padding(.vertical, 10)

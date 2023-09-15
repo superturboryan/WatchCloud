@@ -15,8 +15,7 @@ struct LoginView: View {
     var body: some View {
         VStack {
             Spacer()
-            Button { Task { await sc.login() } }
-            label: {
+            Button { Task { await sc.login() } } label: {
                 Image.connectSC
             }
             Spacer()
