@@ -130,7 +130,7 @@ struct PlayerOptionsView: View {
         .fixedSize()
         .clipShape(Capsule(style: .continuous))
         .overlay {
-            Text("Playback")
+            Text("Speed")
                 .opacity(0.9)
                 .lineLimit(1)
                 .font(.footnote)

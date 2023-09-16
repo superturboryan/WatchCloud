@@ -180,6 +180,8 @@ struct PlaylistView: View {
                     // .id() automatically applied when using ForEach(Identifiable) 🤓
                     .onTapGesture { tapped(track.wrappedValue) }
                 }
+                .animation(.default, value: playlist.tracks)
+                
                 if playlist.hasNextPage {
                     trackListLoadingView.onAppear {
                         Task {
