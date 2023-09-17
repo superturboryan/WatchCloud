@@ -22,7 +22,9 @@ struct PlayerOptionsView: View {
         VStack(spacing: 36) {
             HStack(spacing: hSpacing) {
                 likeButton.disabled(false)
-                downloadButton.disabled(!Config.isDownloadingEnabled(for: sc.myUser?.id))
+                downloadButton
+                    .disabled(!Config.isDownloadingEnabled(for: sc.myUser?.id))
+                    .opacity(Config.isDownloadingEnabled(for: sc.myUser?.id) ? 1 : 0)
             }
             HStack(spacing: hSpacing) {
                 playbackSpeedButton.disabled(false)
