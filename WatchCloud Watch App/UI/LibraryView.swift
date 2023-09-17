@@ -62,7 +62,7 @@ struct LibraryView: View {
 
                         Section(header: sectionHeaderView("My Account")) {
                             currentUserCell
-                            settingsCell
+//                            settingsCell
                         }
 
                         poweredBySCLogo

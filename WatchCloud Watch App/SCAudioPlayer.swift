@@ -184,7 +184,7 @@ extension SCAudioPlayer {
     
     private func showBluetoothOptionsIfBluetoothAudioOutputNotDetected() {
         audioSession.activate(options: []) { [weak self] success, error in
-            // Handle error, show alert?
+            // TODO: Handle error, show alert?
             if let error { print("Session activation error: \(error.localizedDescription)") }
             if success { DispatchQueue.main.async { self?.player.play() } }
         }
