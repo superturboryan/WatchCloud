@@ -39,13 +39,19 @@ struct LibraryView: View {
                         playlistCell(Binding($sc.loadedPlaylists[PlaylistType.recentlyPosted.rawValue])!)
 
                         Section(header: sectionHeaderView("My Playlists")) {
-                            ForEach($sc.loadedPlaylists.values.filter { sc.myPlaylistIds.contains($0.wrappedValue.id) }) {
+                            ForEach($sc.loadedPlaylists.values
+                                .filter { sc.myPlaylistIds.contains($0.wrappedValue.id) }
+                                .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
+                            ) {
                                 playlistCell($0)
                             }
                         }
 
                         Section(header: sectionHeaderView("Liked Playlists")) {
-                            ForEach($sc.loadedPlaylists.values.filter { sc.myLikedPlaylistIds.contains($0.wrappedValue.id) }) {
+                            ForEach($sc.loadedPlaylists.values
+                                .filter { sc.myLikedPlaylistIds.contains($0.wrappedValue.id) }
+                                .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
+                            ) {
                                 playlistCell($0)
                             }
                         }

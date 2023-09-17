@@ -17,7 +17,7 @@ struct TrackCellView: View {
         VStack(alignment: .leading) {
             Text(track.title)
             
-            HStack {
+            HStack(spacing: 4) {
                 if isDownloaded {
                     Image(systemName: "arrow.down.circle.fill")
                         .foregroundColor(.green)
@@ -27,17 +27,23 @@ struct TrackCellView: View {
                 Text(track.durationInSeconds.timeStringFromSeconds)
             }
             .font(.footnote)
-            .foregroundColor(.secondary)
+            .foregroundColor(.primary.opacity(0.7))
         }
         .lineLimit(1)
-        .padding(.horizontal, 8)
-        .padding(.vertical, 4)
+        .padding(10)
         .foregroundColor(isPlaying ? .scOrange : nil)
+        .background(.secondary.opacity(0.2))
+        .cornerRadius(10)
     }
 }
 
 struct TrackCellView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackCellView(track: testTrackBinding(), isPlaying: false, isDownloaded: false)
+        TrackCellView(
+            track: testTrackBinding(),
+            isPlaying: false,
+            isDownloaded: true
+        )
+        .previewLayout(.sizeThatFits)
     }
 }
