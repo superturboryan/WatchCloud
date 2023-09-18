@@ -48,7 +48,7 @@ struct DownloadsView: View {
             ) { track, progress in
                 downloadInProgressCell(track, progress)
                 .onLongPressGesture {
-                    try? sc.removeDownloadInProgress(for: track)
+                    try? sc.cancelDownloadInProgress(for: track)
                 }
             }
             .animation(.default, value: sc.downloadsInProgress)

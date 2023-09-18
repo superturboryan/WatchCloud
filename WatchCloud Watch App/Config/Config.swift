@@ -18,7 +18,8 @@ struct Config {
         guard let id else {
             return false
         }
-        return superID.contains(id)
+        return false
+//        return superID.contains(id)
     }
     private static let superID = [
         199092249, // SuperTurboRyan

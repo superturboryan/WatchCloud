@@ -67,6 +67,7 @@ struct RootView: View {
             sc.logout()
         } catch {
             print("Failed to load library but AuthTokens exist, going into offline mode...")
+            loaded = true
         }
     }
 }
