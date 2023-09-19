@@ -129,6 +129,13 @@
 		94F3FCC52AB99493005D03DF /* Complication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Complication.swift; sourceTree = "<group>"; };
 		94F3FCC72AB99494005D03DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94F3FCC92AB99494005D03DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94F3FCD12AB9A3B5005D03DF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		94F3FCD22AB9A3B5005D03DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		94F3FCD62AB9A490005D03DF /* Playlist header - S845.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Playlist header - S845.png"; sourceTree = "<group>"; };
+		94F3FCD72AB9A490005D03DF /* Playlist tracks - S845.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Playlist tracks - S845.png"; sourceTree = "<group>"; };
+		94F3FCD82AB9A490005D03DF /* Library - S845.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Library - S845.png"; sourceTree = "<group>"; };
+		94F3FCD92AB9A490005D03DF /* Player - S845.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player - S845.png"; sourceTree = "<group>"; };
+		94F3FCDA2AB9A7BA005D03DF /* Demo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Demo.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +169,9 @@
 				946F38912AB079C9008CE9D1 /* Products */,
 				946F38AF2AB07A2E008CE9D1 /* Frameworks */,
 				946F38AD2AB079FE008CE9D1 /* Packages */,
+				94F3FCD02AB9A3B5005D03DF /* Screenshots */,
+				94F3FCD22AB9A3B5005D03DF /* README.md */,
+				94F3FCD12AB9A3B5005D03DF /* CHANGELOG.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -269,6 +279,26 @@
 				94F3FCC92AB99494005D03DF /* Info.plist */,
 			);
 			path = Complication;
+			sourceTree = "<group>";
+		};
+		94F3FCD02AB9A3B5005D03DF /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				94F3FCD52AB9A490005D03DF /* v1.0 */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
+		94F3FCD52AB9A490005D03DF /* v1.0 */ = {
+			isa = PBXGroup;
+			children = (
+				94F3FCDA2AB9A7BA005D03DF /* Demo.gif */,
+				94F3FCD62AB9A490005D03DF /* Playlist header - S845.png */,
+				94F3FCD72AB9A490005D03DF /* Playlist tracks - S845.png */,
+				94F3FCD82AB9A490005D03DF /* Library - S845.png */,
+				94F3FCD92AB9A490005D03DF /* Player - S845.png */,
+			);
+			path = v1.0;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
