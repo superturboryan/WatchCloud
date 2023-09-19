@@ -15,7 +15,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "946F38E52AB08470008CE9D1"
+               BlueprintIdentifier = "94F3FCC02AB99493005D03DF"
                BuildableName = "ComplicationExtension.appex"
                BlueprintName = "ComplicationExtension"
                ReferencedContainer = "container:WatchCloud.xcodeproj">
@@ -74,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "946F38E52AB08470008CE9D1"
+            BlueprintIdentifier = "94F3FCC02AB99493005D03DF"
             BuildableName = "ComplicationExtension.appex"
             BlueprintName = "ComplicationExtension"
             ReferencedContainer = "container:WatchCloud.xcodeproj">
@@ -117,7 +117,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "946F38E52AB08470008CE9D1"
+            BlueprintIdentifier = "94F3FCC02AB99493005D03DF"
             BuildableName = "ComplicationExtension.appex"
             BlueprintName = "ComplicationExtension"
             ReferencedContainer = "container:WatchCloud.xcodeproj">
