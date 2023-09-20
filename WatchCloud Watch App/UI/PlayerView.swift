@@ -74,6 +74,7 @@ struct PlayerView: View {
                     }
                 }
                 .padding(.trailing, 4)
+                .animation(.default, value: sc.loadedTrack)
             }
         }
         .lineLimit(1)
