@@ -1,14 +1,19 @@
 # Changelog
 
 ## 1.0.1
-🔨 Xcode 14.3.1
+🔨 Xcode 15.0  
+⌚️ watchOS 10.0   
+
 ### Features
 - Watch complication
 
+### Bug fixes
+- LoginView: Hide close button in toolbar added in watchOS 10
 
 ## 1.0 (initial release)
 🔨 Xcode 14.3.1  
 ⌚️ watchOS 9.4  
+  
 ### Features
 - Sign in with SoundCloud account, refresh OAuth access token
 - Play music

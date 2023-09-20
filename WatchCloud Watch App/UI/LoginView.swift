@@ -34,6 +34,7 @@ struct LoginView: View {
         .alert("Failed to connect to SoundCloud, \nplease try again", isPresented: $showErrorAlert) {
             Button("Ok") {}
         }
+        .toolbar(.hidden, for: .navigationBar)
         .buttonStyle(.plain)
         .padding(.vertical, 10)
         .fullWidth()
