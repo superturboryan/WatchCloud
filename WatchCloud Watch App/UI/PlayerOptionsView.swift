@@ -31,6 +31,8 @@ struct PlayerOptionsView: View {
                 shareButton.disabled(false)
             }
         }
+        .padding(.bottom, 20)
+        .fullWidthAndHeight()
         .toolbar { closeToolbarButton }
         .fontDesign(.rounded)
         .buttonStyle(.plain)
