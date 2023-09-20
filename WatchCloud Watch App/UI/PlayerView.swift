@@ -42,6 +42,7 @@ struct PlayerView: View {
             .sheet(isPresented: $showOptions) {
                 if let currentTrackBinding = Binding($sc.loadedTrack) {
                     PlayerOptionsView(track: currentTrackBinding)
+                        .background(.black.opacity(0.5))
                 }
             }
             .buttonStyle(.plain)
