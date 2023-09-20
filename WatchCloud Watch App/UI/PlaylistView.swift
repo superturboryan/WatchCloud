@@ -58,8 +58,8 @@ struct PlaylistView: View {
         }
         .buttonStyle(.plain)
         .fontDesign(.rounded)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(playlist.title)
+//        .navigationBarTitleDisplayMode(.inline)
+//        .navigationTitle(playlist.title)
         .edgesIgnoringSafeArea([.leading, .trailing, .bottom])
     }
     

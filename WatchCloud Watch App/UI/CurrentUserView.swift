@@ -17,14 +17,15 @@ struct CurrentUserView: View {
     @State var showLogoutAlert = false
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 10) {
-                userView
-                Button("Logout") { showLogoutAlert = true }
-                    .foregroundColor(.red)
-                    .fontWeight(.medium)
-            }
+        VStack(spacing: 10) {
+            userView
+            Button("Logout") { showLogoutAlert = true }
+                .foregroundColor(.red)
+                .fontWeight(.medium)
         }
+        .padding(.bottom, 6)
+        .padding(.top, -20)
+        .edgesIgnoringSafeArea([.bottom])
         .alert("Are you sure you want to logout?", isPresented: $showLogoutAlert) {
             Button("Logout", role: .destructive) {
                 Haptics.click()
@@ -33,33 +34,31 @@ struct CurrentUserView: View {
             }
             Button("Cancel", role: .cancel) {}
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("Current User")
     }
     
     var userView: some View {
-        VStack(spacing: 10) {
-            HStack(spacing: 10) {
-                userAvatarImage
-                    .frame(width: 80)
-                    .clipShape(Circle())
-                    .overlay(alignment: .bottom) {
-                        Text(sc.myUser!.subscription)
-                            .font(.system(size: 13, weight: .semibold))
-                            .padding(.horizontal, 2)
-                            .background(LinearGradient.scOrange())
-                            .cornerRadius(2)
-                            .offset(y: 6)
-                }
-                ShareLink(item: URL(string: sc.myUser!.permalinkUrl)!, label: {
-                    Image(systemName: "square.and.arrow.up")
-                })
-                .foregroundColor(.blue)
-                .frame(width: 40)
+        VStack(spacing: 12) {
+            userAvatarImage
+                .frame(width: 120)
+                .clipShape(Circle())
+                .overlay(alignment: .bottom) {
+                    Text(sc.myUser!.subscription)
+                        .font(.system(size: 13, weight: .semibold))
+                        .padding(.horizontal, 2)
+                        .background(LinearGradient.scOrange())
+                        .cornerRadius(2)
+                        .offset(y: 6)
             }
-            Text(sc.myUser!.username)
-                .lineLimit(2)
+            ShareLink(item: URL(string: sc.myUser!.permalinkUrl)!, label: {
+                HStack {
+                    Image(systemName: "square.and.arrow.up")
+                        .foregroundColor(.blue)
+                    Text(sc.myUser!.username)
+                        .lineLimit(2)
+                }
                 .font(.headline)
+            })
+            .buttonStyle(.plain)
         }
         .padding(4)
     }
@@ -74,7 +73,6 @@ struct CurrentUserView: View {
                 ProgressView()
             }
         }
-        .cornerRadius(4)
     }
 }
 
