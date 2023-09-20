@@ -153,8 +153,9 @@ struct PlayerView: View {
             HStack {
                 Text(Int(player.progress).timeStringFromSeconds)
                 Spacer()
-                Text("-\(((sc.loadedTrack?.durationInSeconds ?? 0) - Int(player.progress)).timeStringFromSeconds)") // Time remaining
+                Text("-\((sc.loadedTrack!.durationInSeconds - Int(player.progress)).timeStringFromSeconds)") // Time remaining
             }
+            .animation(.default, value: player.progress)
             .font(.footnote)
         }
     }
