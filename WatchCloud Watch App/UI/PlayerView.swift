@@ -44,6 +44,7 @@ struct PlayerView: View {
                     PlayerOptionsView(track: currentTrackBinding)
                 }
             }
+            .buttonStyle(.plain)
             .opacity(isLuminanceReduced ? 0.5 : 1)
         }
     }
@@ -125,7 +126,6 @@ struct PlayerView: View {
                     .frame(width: 15, height: 15)
             }
         }
-        .buttonStyle(.plain)
         .background { VolumeControlView().opacity(0) } // Hack to control volume with crown
         .onReceive(player.systemVolumePublisher) {
             handleVolumeUpdate($0)
