@@ -58,9 +58,7 @@ struct PlaylistView: View {
         }
         .buttonStyle(.plain)
         .fontDesign(.rounded)
-//        .navigationBarTitleDisplayMode(.inline)
-//        .navigationTitle(playlist.title)
-        .edgesIgnoringSafeArea([.leading, .trailing, .bottom])
+        .edgesIgnoringSafeArea([.horizontal, .bottom])
     }
     
     // MARK: - UI
@@ -112,7 +110,7 @@ struct PlaylistView: View {
             }
             
             // Playlist info labels
-            VStack {
+            VStack(spacing: 0) {
                 Text(playlist.title)
                     .font(.headline)
                 Text(subtitleText)
