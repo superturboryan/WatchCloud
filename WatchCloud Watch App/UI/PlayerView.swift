@@ -25,7 +25,7 @@ struct PlayerView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                VStack(spacing: 18) {
+                VStack(spacing: 16) {
                     info
                     playbackButtons
                     progressBar
@@ -114,7 +114,7 @@ struct PlayerView: View {
                 }
             }
             .animation(.default, value: showVolumeCircle)
-            .frame(width: 50, height: 50)
+            .frame(width: 60, height: 60)
             
             // Next
             Button {
