@@ -30,14 +30,15 @@ struct PlayerView: View {
                     playbackButtons
                     progressBar
                 }
-                .padding(.bottom, 15)
-                .padding(.top, 30)
+                .padding(.top, -10)
+                .padding(.bottom, 10)
                 .padding(.horizontal, 5)
             }
+            .buttonStyle(.plain)
             .toolbar { optionsButton }
             .fontDesign(.rounded)
             .fullWidthAndHeight()
-            .ignoresSafeArea()
+            .edgesIgnoringSafeArea([.horizontal, .bottom])
             .toolbarBackground(.hidden, for: .navigationBar)
             .sheet(isPresented: $showOptions) {
                 if let currentTrackBinding = Binding($sc.loadedTrack) {
@@ -45,7 +46,6 @@ struct PlayerView: View {
                         .background(.black.opacity(0.5))
                 }
             }
-            .buttonStyle(.plain)
             .opacity(isLuminanceReduced ? 0.5 : 1)
         }
     }
@@ -116,7 +116,7 @@ struct PlayerView: View {
                 }
             }
             .animation(.default, value: showVolumeCircle)
-            .frame(width: 60, height: 60)
+            .frame(width: 50, height: 50)
             
             // Next
             Button {
@@ -145,7 +145,7 @@ struct PlayerView: View {
     
     @ViewBuilder
     var progressBar: some View {
-        VStack(spacing: 5) {
+        VStack(spacing: 4) {
             ProgressView(value: player.progress, total: TimeInterval(sc.loadedTrack?.durationInSeconds ?? 1))
                 .progressViewStyle(LinearGradientProgressViewStyle(
                     fill: LinearGradient.scOrange(.horizontal),
@@ -157,8 +157,10 @@ struct PlayerView: View {
                 Spacer()
                 Text("-\((sc.loadedTrack!.durationInSeconds - Int(player.progress)).timeStringFromSeconds)") // Time remaining
             }
-            .animation(.default, value: player.progress)
             .font(.footnote)
+            .padding(.horizontal, 4)
+            .animation(.default, value: player.progress)
+            
         }
     }
 
@@ -173,6 +175,7 @@ struct PlayerView: View {
                     .frame(width: 22, height: 22) // Should this be custom size??
                     .foregroundStyle(LinearGradient.scOrange(.horizontal))
             }
+            .offset(y: -6)
         }
     }
     
