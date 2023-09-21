@@ -39,6 +39,9 @@ struct SimpleEntry: TimelineEntry {
 }
 
 struct ComplicationEntryView : View {
+    
+    @Environment(\.widgetFamily) private var family
+    
     var entry: Provider.Entry
 
     var body: some View {

@@ -44,7 +44,7 @@
 		94F3FCC32AB99493005D03DF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946F38E92AB08470008CE9D1 /* SwiftUI.framework */; };
 		94F3FCC62AB99493005D03DF /* Complication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F3FCC52AB99493005D03DF /* Complication.swift */; };
 		94F3FCC82AB99494005D03DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94F3FCC72AB99494005D03DF /* Assets.xcassets */; };
-		94F3FCCC2AB99494005D03DF /* ComplicationExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 94F3FCC12AB99493005D03DF /* ComplicationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		94F3FCCC2AB99494005D03DF /* Complication.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 94F3FCC12AB99493005D03DF /* Complication.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,7 +82,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				94F3FCCC2AB99494005D03DF /* ComplicationExtension.appex in Embed Foundation Extensions */,
+				94F3FCCC2AB99494005D03DF /* Complication.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,7 +125,7 @@
 		946F38E72AB08470008CE9D1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		946F38E92AB08470008CE9D1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		94A31B342AB517410052A922 /* CaseIterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseIterable.swift; sourceTree = "<group>"; };
-		94F3FCC12AB99493005D03DF /* ComplicationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ComplicationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		94F3FCC12AB99493005D03DF /* Complication.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Complication.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		94F3FCC52AB99493005D03DF /* Complication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Complication.swift; sourceTree = "<group>"; };
 		94F3FCC72AB99494005D03DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94F3FCC92AB99494005D03DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 			children = (
 				946F38902AB079C9008CE9D1 /* WatchCloud.app */,
 				946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */,
-				94F3FCC12AB99493005D03DF /* ComplicationExtension.appex */,
+				94F3FCC12AB99493005D03DF /* Complication.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -345,9 +345,9 @@
 			productReference = 946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
-		94F3FCC02AB99493005D03DF /* ComplicationExtension */ = {
+		94F3FCC02AB99493005D03DF /* Complication */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 94F3FCCF2AB99494005D03DF /* Build configuration list for PBXNativeTarget "ComplicationExtension" */;
+			buildConfigurationList = 94F3FCCF2AB99494005D03DF /* Build configuration list for PBXNativeTarget "Complication" */;
 			buildPhases = (
 				94F3FCBD2AB99493005D03DF /* Sources */,
 				94F3FCBE2AB99493005D03DF /* Frameworks */,
@@ -357,9 +357,9 @@
 			);
 			dependencies = (
 			);
-			name = ComplicationExtension;
+			name = Complication;
 			productName = ComplicationExtension;
-			productReference = 94F3FCC12AB99493005D03DF /* ComplicationExtension.appex */;
+			productReference = 94F3FCC12AB99493005D03DF /* Complication.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -401,7 +401,7 @@
 			targets = (
 				946F388F2AB079C9008CE9D1 /* WatchCloud */,
 				946F38952AB079C9008CE9D1 /* WatchCloud Watch App */,
-				94F3FCC02AB99493005D03DF /* ComplicationExtension */,
+				94F3FCC02AB99493005D03DF /* Complication */,
 			);
 		};
 /* End PBXProject section */
@@ -486,7 +486,7 @@
 		};
 		94F3FCCB2AB99494005D03DF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 94F3FCC02AB99493005D03DF /* ComplicationExtension */;
+			target = 94F3FCC02AB99493005D03DF /* Complication */;
 			targetProxy = 94F3FCCA2AB99494005D03DF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -794,7 +794,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		94F3FCCF2AB99494005D03DF /* Build configuration list for PBXNativeTarget "ComplicationExtension" */ = {
+		94F3FCCF2AB99494005D03DF /* Build configuration list for PBXNativeTarget "Complication" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				94F3FCCD2AB99494005D03DF /* Debug */,
