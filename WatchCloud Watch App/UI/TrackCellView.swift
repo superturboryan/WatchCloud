@@ -37,13 +37,11 @@ struct TrackCellView: View {
     }
 }
 
-struct TrackCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        TrackCellView(
-            track: testTrackBinding(),
-            isPlaying: false,
-            isDownloaded: true
-        )
-        .previewLayout(.sizeThatFits)
-    }
+@available(watchOS 10, *)
+#Preview(traits: .sizeThatFitsLayout) {
+    TrackCellView(
+        track: testTrackBinding(),
+        isPlaying: false,
+        isDownloaded: true
+    )
 }

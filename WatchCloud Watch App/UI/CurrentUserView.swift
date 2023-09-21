@@ -76,13 +76,11 @@ struct CurrentUserView: View {
     }
 }
 
-struct CurrentUserView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            CurrentUserView().environmentObject({ () -> SoundCloud in
-                testSC.myUser = testUser
-                return testSC
-            }())
-        }
+#Preview {
+    NavigationStack {
+        CurrentUserView().environmentObject({ () -> SoundCloud in
+            testSC.myUser = testUser
+            return testSC
+        }())
     }
 }

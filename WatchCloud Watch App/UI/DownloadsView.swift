@@ -151,8 +151,8 @@ struct DownloadsView: View {
     }
 }
 
-struct DownloadsView_Previews: PreviewProvider {
-    static let sc: SoundCloud = { () -> SoundCloud in
+#Preview {
+    let sc: SoundCloud = { () -> SoundCloud in
         var sc = testSC
         sc.myUser = testUser
         sc.loadedPlaylists = testDefaultLoadedPlaylists
@@ -161,12 +161,9 @@ struct DownloadsView_Previews: PreviewProvider {
         return sc
     }()
 
-    static var previews: some View {
-        NavigationStack {
-            DownloadsView(didSelectTrack: { _ in })
-                .environmentObject(sc)
-                .environmentObject(SCAudioPlayer(sc))
-        }
-            
+    return NavigationStack {
+        DownloadsView(didSelectTrack: { _ in })
+            .environmentObject(sc)
+            .environmentObject(SCAudioPlayer(sc))
     }
 }

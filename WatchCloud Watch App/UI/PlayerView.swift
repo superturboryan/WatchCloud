@@ -186,23 +186,20 @@ struct PlayerView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var sc = testSC
-    static var previews: some View {
-        PlayerView()
+#Preview {
+    PlayerView()
         .environmentObject({ () -> SoundCloud in
-            sc.loadedPlaylists = testDefaultLoadedPlaylists
+            testSC.loadedPlaylists = testDefaultLoadedPlaylists
             var track = testTrack()
             track.userFavorite = true
-            sc.loadedTrack = track
-            sc.downloadedTracks = [track]
-            return sc
+            testSC.loadedTrack = track
+            testSC.downloadedTracks = [track]
+            return testSC
         }())
         .environmentObject({ () -> SCAudioPlayer in
-            let player = SCAudioPlayer(sc)
+            let player = SCAudioPlayer(testSC)
             player.progress = 3015
             player.isPlaying = true
             return player
         }() )
-    }
 }

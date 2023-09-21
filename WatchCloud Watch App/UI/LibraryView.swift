@@ -228,19 +228,16 @@ struct LibraryView: View {
     }
 }
 
-struct LibraryView_Previews: PreviewProvider {
-    static var previews: some View {
-        LibraryView(rootSelectedTab: Binding(get: { RootTab.library }, set: { _ in }))
-            .environmentObject({() -> SoundCloud in
-                let sc = SoundCloud(testSCConfig)
-                sc.loadedPlaylists = testDefaultLoadedPlaylists
-                let testPlaylist = testPlaylist(empty: true)
-                let testPlaylistId = testPlaylist.id
-                sc.myPlaylistIds = [testPlaylistId]
-                sc.myLikedPlaylistIds = [testPlaylistId]
-                sc.loadedPlaylists[testPlaylistId] = testPlaylist
-                return sc
-            }())
-            
-    }
+#Preview {
+    LibraryView(rootSelectedTab: Binding(get: { RootTab.library }, set: { _ in }))
+        .environmentObject({() -> SoundCloud in
+            let sc = SoundCloud(testSCConfig)
+            sc.loadedPlaylists = testDefaultLoadedPlaylists
+            let testPlaylist = testPlaylist(empty: true)
+            let testPlaylistId = testPlaylist.id
+            sc.myPlaylistIds = [testPlaylistId]
+            sc.myLikedPlaylistIds = [testPlaylistId]
+            sc.loadedPlaylists[testPlaylistId] = testPlaylist
+            return sc
+        }())
 }

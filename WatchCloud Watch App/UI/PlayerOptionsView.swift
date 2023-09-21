@@ -161,24 +161,6 @@ struct PlayerOptionsView: View {
     }
 }
 
-struct PlayerOptionsView_Previews: PreviewProvider {
-    static var track = testTrack()
-    static var trackBinding = Binding(get: { track }, set: { _ in })
-    
-    static var previews: some View {
-        PlayerOptionsView(track: trackBinding)
-            .environmentObject({ () -> SoundCloud in
-                testSC.downloadsInProgress = [track : Progress.with(0.69)]
-                return testSC
-            }())
-            .environmentObject({ () -> SCAudioPlayer in
-                let player = SCAudioPlayer(testSC)
-                player.playbackSpeed = .ThreeQuarters
-                return player
-            }())
-    }
-}
-
 extension PlaybackSpeed {
     var numDecimalToDisplay: Int {
         switch self {
@@ -190,4 +172,20 @@ extension PlaybackSpeed {
         case .Double: return 0
         }
     }
+}
+
+#Preview {
+    let track = testTrack()
+    let trackBinding = Binding(get: { track }, set: { _ in })
+    
+    return PlayerOptionsView(track: trackBinding)
+        .environmentObject({ () -> SoundCloud in
+            testSC.downloadsInProgress = [track : Progress.with(0.69)]
+            return testSC
+        }())
+        .environmentObject({ () -> SCAudioPlayer in
+            let player = SCAudioPlayer(testSC)
+            player.playbackSpeed = .ThreeQuarters
+            return player
+        }())
 }

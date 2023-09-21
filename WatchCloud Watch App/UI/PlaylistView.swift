@@ -227,18 +227,15 @@ struct PlaylistView: View {
     }
 }
 
-struct PlaylistView_Previews: PreviewProvider {
-    static var sc = testSC
-    static var previews: some View {
-        NavigationStack {
-            PlaylistView(
-                playlist: Binding(get: { testPlaylist(empty: false) }, set: { _ in }),
-                downloadedTracks: [],
-                didSelectTrack: { _ in },
-                showHeader: true
-            )
-            .environmentObject(sc)
-            .environmentObject(SCAudioPlayer(sc))
-        }
+#Preview {
+    NavigationStack {
+        PlaylistView(
+            playlist: Binding(get: { testPlaylist(empty: false) }, set: { _ in }),
+            downloadedTracks: [],
+            didSelectTrack: { _ in },
+            showHeader: true
+        )
+        .environmentObject(testSC)
+        .environmentObject(SCAudioPlayer(testSC))
     }
 }

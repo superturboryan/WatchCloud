@@ -44,9 +44,6 @@ struct LoginView: View {
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        LoginView().environmentObject(testSC)
-    }
+#Preview {
+    LoginView().environmentObject(testSC)
 }
