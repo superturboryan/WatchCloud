@@ -44,7 +44,7 @@ struct PlayerOptionsView: View {
             buttonView(
                 track.userFavorite ? "heart.fill" : "heart",
                 .pink,
-                track.userFavorite ? String(localized: "Unlike") : String(localized: "Like")
+                track.userFavorite ? String(localized: "Unlike", comment: "Verb") : String(localized: "Like", comment: "Verb")
             )
         }
     }
@@ -150,7 +150,10 @@ struct PlayerOptionsView: View {
             .foregroundColor(Color.green)
             .clipShape(Capsule(style: .continuous))
             .overlay {
-                Text(isTrackDownloading ? "Downloading" : (isTrackDownloaded ? "Downloaded" : "Download"))
+                Text(isTrackDownloading ?
+                     String(localized: "Downloading") : (isTrackDownloaded ?
+                                      String(localized: "Downloaded", comment: "Past participle") :
+                                      String(localized: "Download", comment: "Verb")))
                     .opacity(0.9)
                     .lineLimit(1)
                     .font(.footnote)

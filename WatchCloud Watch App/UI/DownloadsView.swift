@@ -35,7 +35,7 @@ struct DownloadsView: View {
         .disabled(sc.downloadsInProgress.isEmpty && sc.downloadedTracks.isEmpty)
         .fontDesign(.rounded)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("Downloads")
+        .navigationTitle(String(localized: "Downloads", comment: "Plural noun"))
     }
     
     var downloadsInProgressList: some View {

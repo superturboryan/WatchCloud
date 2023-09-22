@@ -3,6 +3,12 @@
   "strings" : {
     " to download tracks to watch" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "um Titel auf das Gerät herunterzuladen"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14,6 +20,12 @@
     "%@hrs" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@h"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24,6 +36,24 @@
     },
     "%d tracks" : {
       "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Titel"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Titel"
+                }
+              }
+            }
+          }
+        },
         "en" : {
           "variations" : {
             "plural" : {
@@ -64,6 +94,24 @@
     },
     "%dmins" : {
       "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d Min"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d Min"
+                }
+              }
+            }
+          }
+        },
         "en" : {
           "variations" : {
             "plural" : {
@@ -104,6 +152,12 @@
     },
     "Are you sure you want to logout?" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sind Sie sicher?"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -114,6 +168,12 @@
     },
     "Cancel" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stornieren"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -124,6 +184,12 @@
     },
     "Connect" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -133,7 +199,14 @@
       }
     },
     "Download" : {
+      "comment" : "Verb",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herunterladen"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -143,7 +216,14 @@
       }
     },
     "Downloaded" : {
+      "comment" : "Past participle",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heruntergeladen"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -154,6 +234,12 @@
     },
     "Downloading" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wird heruntergeladen"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -163,7 +249,14 @@
       }
     },
     "Downloads" : {
+      "comment" : "Plural noun",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloads"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -174,6 +267,12 @@
     },
     "Failed to connect to SoundCloud, \nplease try again" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es konnte keine Verbindung zu SoundCloud hergestellt werden. Bitte versuchen Sie es erneut"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -184,6 +283,12 @@
     },
     "Getting ready..." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fertig werden..."
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -194,6 +299,12 @@
     },
     "in the top-left corner of the player, then tap" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "in der oberen linken Ecke"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -204,6 +315,12 @@
     },
     "Library" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bibliothek"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -213,7 +330,14 @@
       }
     },
     "Like" : {
+      "comment" : "Verb",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lieben"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -224,6 +348,12 @@
     },
     "Liked Playlists" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lieblings-Playlists"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -234,6 +364,12 @@
     },
     "Loading tracks..." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Tracks werden geladen..."
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -244,6 +380,12 @@
     },
     "Logout" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ausloggen"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -254,6 +396,12 @@
     },
     "My Account" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mein Konto"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -264,6 +412,12 @@
     },
     "My Playlists" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meine Playlists"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -274,6 +428,12 @@
     },
     "Ok" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -284,6 +444,12 @@
     },
     "Playlist is empty" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Playlist ist leer"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -294,6 +460,12 @@
     },
     "powered by" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "angetrieben von"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -304,6 +476,12 @@
     },
     "Settings" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -314,6 +492,12 @@
     },
     "Share" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teilen"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -324,6 +508,12 @@
     },
     "Speed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geschwindigkeit"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -334,6 +524,12 @@
     },
     "Tap" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spielerrate"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -343,7 +539,14 @@
       }
     },
     "Unlike" : {
+      "comment" : "Verb",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beliebt"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
