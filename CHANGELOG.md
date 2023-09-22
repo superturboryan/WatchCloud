@@ -4,14 +4,14 @@
 ☁️📦 SoundCloud Swift Package 0.0.1
 
 ### ✨ Features
-- Watch complication
+- Watch complication: open app (circular, corner)
 - French, German, Korean localizations
 
 ### 🐞 Bug fixes
+- CurrentUserView: share button UI
 - LoginView: hide close button added in watchOS 10
 - LoginView: replace blurry _Connect with SoundCloud_ button with SF symbol-based login button
 - LoginView: don't show error alert when user cancels login flow
-- CurrentUserView: share button UI
 - PlayerView: fix time remaining going to 0 when time remaining was exactly 1 hour, animate changes
 - PlayerOptionsView: toggling playback speed doesn't start music if stopped
 - PlayerOptionsView: add black bg to (new watchOS 10 material bg was too translucent)
