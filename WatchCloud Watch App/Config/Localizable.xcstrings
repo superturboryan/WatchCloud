@@ -1,0 +1,72 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    " to download tracks to watch" : {
+
+    },
+    "Are you sure you want to logout?" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Connect" : {
+
+    },
+    "Download" : {
+
+    },
+    "Downloaded" : {
+
+    },
+    "Downloading" : {
+
+    },
+    "Downloads" : {
+
+    },
+    "Failed to connect to SoundCloud, \nplease try again" : {
+
+    },
+    "Getting ready..." : {
+
+    },
+    "in the top-left corner of the player, then tap" : {
+
+    },
+    "Library" : {
+
+    },
+    "Loading tracks..." : {
+
+    },
+    "Logout" : {
+
+    },
+    "Ok" : {
+
+    },
+    "Pause" : {
+
+    },
+    "Play" : {
+
+    },
+    "Playlist is empty" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Speed" : {
+
+    },
+    "Tap" : {
+
+    }
+  },
+  "version" : "1.0"
+}

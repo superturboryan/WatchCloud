@@ -154,12 +154,12 @@ struct LibraryView: View {
             HStack(spacing: 8) {
                 imageForCell(id)
                 VStack {
-                    Text(title)
+                    Text(verbatim: title)
                         .font(subtitle == nil ? .body : .headline) // Make prominent if subtitle exists
                         .fullWidth(.leading)
                         .minimumScaleFactor(0.9)
                     if let subtitle {
-                        Text(subtitle)
+                        Text(verbatim: subtitle)
                             .font(.footnote)
                             .foregroundColor(.secondary)
                             .fullWidth(.leading)

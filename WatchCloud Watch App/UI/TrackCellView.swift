@@ -15,16 +15,16 @@ struct TrackCellView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(track.title)
+            Text(verbatim: track.title)
             
             HStack(spacing: 4) {
                 if isDownloaded {
                     Image(systemName: "arrow.down.circle.fill")
                         .foregroundColor(.green)
                 }
-                Text(track.user.username)
+                Text(verbatim: track.user.username)
                 Spacer()
-                Text(track.durationInSeconds.timeStringFromSeconds)
+                Text(verbatim: track.durationInSeconds.timeStringFromSeconds)
             }
             .font(.footnote)
             .foregroundColor(.primary.opacity(0.7))

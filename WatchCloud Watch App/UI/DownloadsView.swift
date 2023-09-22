@@ -57,14 +57,14 @@ struct DownloadsView: View {
     
     func downloadInProgressCell(_ track: Track, _ progress: Progress) -> some View {
         VStack(spacing: 4) {
-            Text(track.title)
+            Text(verbatim: track.title)
                 .lineLimit(1)
 
             HStack(spacing: 8) {
                 ProgressView(value: progress.fractionCompleted, total: 1.0)
                     .progressViewStyle(LinearGradientProgressViewStyle(fill: .green, height: 8))
                     .animation(.default, value: progress.fractionCompleted)
-                Text("\(Int(progress.fractionCompleted * 100.0))%")
+                Text(verbatim: "\(Int(progress.fractionCompleted * 100.0))%")
                     .font(.footnote)
                     .fontWeight(.semibold)
                     .fixedSize()

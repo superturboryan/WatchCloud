@@ -42,7 +42,7 @@ struct CurrentUserView: View {
                 .frame(width: 120)
                 .clipShape(Circle())
                 .overlay(alignment: .bottom) {
-                    Text(sc.myUser!.subscription)
+                    Text(verbatim: sc.myUser!.subscription)
                         .font(.system(size: 13, weight: .semibold))
                         .padding(.horizontal, 2)
                         .background(LinearGradient.scOrange())
@@ -53,7 +53,7 @@ struct CurrentUserView: View {
                 HStack {
                     Image(systemName: "square.and.arrow.up")
                         .foregroundColor(.blue)
-                    Text(sc.myUser!.username)
+                    Text(verbatim: sc.myUser!.username)
                         .lineLimit(2)
                 }
                 .font(.headline)

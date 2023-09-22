@@ -59,7 +59,7 @@ struct PlayerView: View {
                 )
                 .fontWeight(.semibold)
                 HStack {
-                    Text(currentTrack.user.username)
+                    Text(verbatim: currentTrack.user.username)
                         .foregroundColor(.secondary)
                         .font(.subheadline)
                     Spacer(minLength: 4)
@@ -153,9 +153,9 @@ struct PlayerView: View {
                     animation: .linear(duration: 1)
                 ))
             HStack {
-                Text(Int(player.progress).timeStringFromSeconds)
+                Text(verbatim: Int(player.progress).timeStringFromSeconds)
                 Spacer()
-                Text("-\((sc.loadedTrack!.durationInSeconds - Int(player.progress)).timeStringFromSeconds)") // Time remaining
+                Text(verbatim: "-\((sc.loadedTrack!.durationInSeconds - Int(player.progress)).timeStringFromSeconds)") // Time remaining
             }
             .font(.footnote)
             .padding(.horizontal, 4)

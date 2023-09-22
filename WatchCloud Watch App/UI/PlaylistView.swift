@@ -113,9 +113,9 @@ struct PlaylistView: View {
             
             // Playlist info labels
             VStack(spacing: 0) {
-                Text(playlist.title)
+                Text(verbatim: playlist.title)
                     .font(.headline)
-                Text(subtitleText)
+                Text(verbatim: subtitleText)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }

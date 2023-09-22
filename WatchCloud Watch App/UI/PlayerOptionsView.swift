@@ -105,7 +105,7 @@ struct PlayerOptionsView: View {
             .foregroundColor(color)
             .clipShape(Capsule(style: .continuous))
             .overlay {
-                Text(text)
+                Text(verbatim: text)
                     .opacity(0.9)
                     .lineLimit(1)
                     .font(.footnote)
@@ -118,7 +118,7 @@ struct PlayerOptionsView: View {
     var playbackSpeedView: some View {
         ZStack {
             Color.scOrange.opacity(0.2)
-            Text("\(String(format: "%.\(player.playbackSpeed.numDecimalToDisplay)f", player.playbackSpeed.rawValue))x")
+            Text(verbatim: "\(String(format: "%.\(player.playbackSpeed.numDecimalToDisplay)f", player.playbackSpeed.rawValue))x")
                 .font(.system(size: 28, weight: .medium))
                 .minimumScaleFactor(0.8)
                 .padding(.horizontal, 8)
