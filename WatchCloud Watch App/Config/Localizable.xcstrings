@@ -14,6 +14,12 @@
             "state" : "translated",
             "value" : "pour télécharger des morceaux"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시청할 음악을 다운로드하려면"
+          }
         }
       }
     },
@@ -30,6 +36,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@hrs"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 시간"
           }
         }
       }
@@ -89,6 +101,18 @@
               }
             }
           }
+        },
+        "ko" : {
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld 노래"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -118,13 +142,13 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%dmin"
+                  "value" : "%d min"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "new",
-                  "value" : "%dmins"
+                  "state" : "translated",
+                  "value" : "%d mins"
                 }
               }
             }
@@ -136,13 +160,25 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%dmin"
+                  "value" : "%d min"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%dmins"
+                  "value" : "%d mins"
+                }
+              }
+            }
+          }
+        },
+        "ko" : {
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d 분"
                 }
               }
             }
@@ -163,10 +199,17 @@
             "state" : "translated",
             "value" : "Êtes-vous sûr de vouloir vous déconnecter?"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "정말로 로그아웃하시겠습니까?"
+          }
         }
       }
     },
     "Cancel" : {
+      "comment" : "Verb",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -179,10 +222,17 @@
             "state" : "translated",
             "value" : "Annuler"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소하다"
+          }
         }
       }
     },
     "Connect" : {
+      "comment" : "Verb",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -194,6 +244,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Se Connecter"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "로그인"
           }
         }
       }
@@ -212,6 +268,12 @@
             "state" : "translated",
             "value" : "Télécharger"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다운로드"
+          }
         }
       }
     },
@@ -229,6 +291,12 @@
             "state" : "translated",
             "value" : "Téléchargée"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다운로드됨"
+          }
         }
       }
     },
@@ -244,6 +312,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Téléchargant"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다운로드 중"
           }
         }
       }
@@ -262,6 +336,12 @@
             "state" : "translated",
             "value" : "Téléchargements"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다운로드"
+          }
         }
       }
     },
@@ -277,6 +357,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Connexion à Soundcloud échouée, veuillez réessayer"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SoundCloud에 연결하지 못했습니다. 다시 시도해 주세요."
           }
         }
       }
@@ -294,6 +380,12 @@
             "state" : "translated",
             "value" : "L'app se prépare..."
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "준비 중..."
+          }
         }
       }
     },
@@ -310,6 +402,12 @@
             "state" : "translated",
             "value" : "dans le coin supérieur gauche du lecteur, en suite tappez sur"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "왼쪽 상단에서"
+          }
         }
       }
     },
@@ -325,6 +423,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bibliothèque"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "도서관"
           }
         }
       }
@@ -343,6 +447,35 @@
             "state" : "translated",
             "value" : "Aimer"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "좋아하다"
+          }
+        }
+      }
+    },
+    "Liked" : {
+      "comment" : "Adjective",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geliebt"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aimée"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "좋아했다"
+          }
         }
       }
     },
@@ -358,6 +491,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Playlists aimés"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "좋아요를 누른 재생목록"
           }
         }
       }
@@ -375,6 +514,12 @@
             "state" : "translated",
             "value" : "Chargement des morceaux..."
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "트랙 로드 중"
+          }
         }
       }
     },
@@ -390,6 +535,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Se Déconnecter"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "로그 아웃"
           }
         }
       }
@@ -407,6 +558,12 @@
             "state" : "translated",
             "value" : "Mon compte"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "내 계정"
+          }
         }
       }
     },
@@ -422,6 +579,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mes playlists"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "내 재생목록"
           }
         }
       }
@@ -439,6 +602,12 @@
             "state" : "translated",
             "value" : "Ok"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "좋아요"
+          }
         }
       }
     },
@@ -455,10 +624,17 @@
             "state" : "translated",
             "value" : "La playlist est vide"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "재생목록이 비어 있습니다"
+          }
         }
       }
     },
     "powered by" : {
+      "comment" : "Used next to SC logo",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -470,6 +646,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "alimentée par"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "에 의해 구동"
           }
         }
       }
@@ -487,6 +669,12 @@
             "state" : "translated",
             "value" : "Réglages"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정"
+          }
         }
       }
     },
@@ -502,6 +690,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Partager"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "함께 나누다"
           }
         }
       }
@@ -519,6 +713,12 @@
             "state" : "translated",
             "value" : "Vitesse"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "재생 속도"
+          }
         }
       }
     },
@@ -535,22 +735,11 @@
             "state" : "translated",
             "value" : "Appuyez sur"
           }
-        }
-      }
-    },
-    "Unlike" : {
-      "comment" : "Verb",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Beliebt"
-          }
         },
-        "fr" : {
+        "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aimée"
+            "value" : "대다"
           }
         }
       }

@@ -32,7 +32,7 @@ struct CurrentUserView: View {
                 sc.logout()
                 dismiss()
             }
-            Button("Cancel", role: .cancel) {}
+            Button(String(localized: "Cancel", comment: "Verb"), role: .cancel) {}
         }
     }
     

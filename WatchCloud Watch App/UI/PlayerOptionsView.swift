@@ -44,7 +44,7 @@ struct PlayerOptionsView: View {
             buttonView(
                 track.userFavorite ? "heart.fill" : "heart",
                 .pink,
-                track.userFavorite ? String(localized: "Unlike", comment: "Verb") : String(localized: "Like", comment: "Verb")
+                track.userFavorite ? String(localized: "Liked", comment: "Adjective") : String(localized: "Like", comment: "Verb")
             )
         }
     }

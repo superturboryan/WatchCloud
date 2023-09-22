@@ -26,7 +26,7 @@ struct LoginView: View {
                 } label: {
                     HStack(spacing: 6) {
                         Image(systemName: "cloud.fill")
-                        Text("Connect")
+                        Text(String(localized: "Connect", comment: "Verb"))
                             .lineLimit(1)
                             .fontWeight(.semibold)
                             .minimumScaleFactor(0.8)
