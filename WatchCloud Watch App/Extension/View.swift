@@ -24,7 +24,7 @@ extension View {
 
 // MARK: - LazyVStack header + footer
 func sectionHeaderView(_ title: String) -> some View {
-    Text(title.uppercased())
+    Text(verbatim: title.uppercased())
         .font(.system(size: 12))
         .foregroundColor(.secondary)
         .padding(.leading)
@@ -33,7 +33,7 @@ func sectionHeaderView(_ title: String) -> some View {
 }
 
 func sectionFooterView(_ text: String) -> some View {
-    Text(text)
+    Text(verbatim: text)
         .font(.footnote)
         .fontWeight(.medium)
         .foregroundColor(.secondary)

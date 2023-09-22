@@ -56,19 +56,19 @@ struct PlaylistView: View {
                 }
             }
         }
+        .navigationTitle(playlist.title)
+        .navigationBarTitleDisplayMode(.inline)
         .buttonStyle(.plain)
         .fontDesign(.rounded)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(playlist.title)
-        .edgesIgnoringSafeArea([.leading, .trailing, .bottom])
+        .edgesIgnoringSafeArea([.horizontal, .bottom])
     }
     
     // MARK: - UI
     @ViewBuilder
     func header(container geo: GeometryProxy, tracklistSV: ScrollViewProxy) -> some View {
-        let subtitleText =
-            "\(playlist.trackCount) track\(playlist.trackCount == 0 ? "" : "s"), "
-            + playlist.durationInSeconds.hoursAndMinutesStringFromSeconds
+        let trackCountText = String(localized: "%d tracks", defaultValue: "\(playlist.tracks?.count ?? 0) tracks")
+        let durationText =
+        playlist.durationInSeconds.hoursAndMinutesStringFromSeconds
         let isTracksEmpty = playlist.tracks?.isEmpty ?? true
         let scrollToFirstTrack = {
             let firstTrackId = playlist.tracks?.first?.id ?? -1
@@ -81,7 +81,7 @@ struct PlaylistView: View {
             HStack(spacing: 8) {
                 let size = CGSize(width: geo.size.width / 2.5, height: geo.size.width / 2.5)
                 // First track or playlist artist artwork
-                LazyImage(url: playlist.artworkUrlWithTrackAndUserFallback) { state in
+                LazyImage(url: playlist.largerArtworkUrlWithTrackAndUserFallback) { state in
                     ZStack {
                         if let image = state.image {
                             image.resizable().scaledToFit()
@@ -112,12 +112,16 @@ struct PlaylistView: View {
             }
             
             // Playlist info labels
-            VStack {
-                Text(playlist.title)
+            VStack(spacing: 0) {
+                Text(verbatim: playlist.title)
                     .font(.headline)
-                Text(subtitleText)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                HStack {
+                    Text(trackCountText)
+                    Text(verbatim: "-")
+                    Text(durationText)
+                }
+                .font(.subheadline)
+                .foregroundColor(.secondary)
             }
             .lineLimit(1)
             .minimumScaleFactor(0.9)
@@ -227,18 +231,15 @@ struct PlaylistView: View {
     }
 }
 
-struct PlaylistView_Previews: PreviewProvider {
-    static var sc = testSC
-    static var previews: some View {
-        NavigationStack {
-            PlaylistView(
-                playlist: Binding(get: { testPlaylist(empty: false) }, set: { _ in }),
-                downloadedTracks: [],
-                didSelectTrack: { _ in },
-                showHeader: true
-            )
-            .environmentObject(sc)
-            .environmentObject(SCAudioPlayer(sc))
-        }
+#Preview {
+    NavigationStack {
+        PlaylistView(
+            playlist: Binding(get: { testPlaylist(empty: false) }, set: { _ in }),
+            downloadedTracks: [],
+            didSelectTrack: { _ in },
+            showHeader: true
+        )
+        .environmentObject(testSC)
+        .environmentObject(SCAudioPlayer(testSC))
     }
 }

@@ -35,7 +35,7 @@ struct DownloadsView: View {
         .disabled(sc.downloadsInProgress.isEmpty && sc.downloadedTracks.isEmpty)
         .fontDesign(.rounded)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("Downloads")
+        .navigationTitle(String(localized: "Downloads", comment: "Plural noun"))
     }
     
     var downloadsInProgressList: some View {
@@ -57,14 +57,14 @@ struct DownloadsView: View {
     
     func downloadInProgressCell(_ track: Track, _ progress: Progress) -> some View {
         VStack(spacing: 4) {
-            Text(track.title)
+            Text(verbatim: track.title)
                 .lineLimit(1)
 
             HStack(spacing: 8) {
                 ProgressView(value: progress.fractionCompleted, total: 1.0)
                     .progressViewStyle(LinearGradientProgressViewStyle(fill: .green, height: 8))
                     .animation(.default, value: progress.fractionCompleted)
-                Text("\(Int(progress.fractionCompleted * 100.0))%")
+                Text(verbatim: "\(Int(progress.fractionCompleted * 100.0))%")
                     .font(.footnote)
                     .fontWeight(.semibold)
                     .fixedSize()
@@ -114,11 +114,9 @@ struct DownloadsView: View {
             Text("in the top-left corner of the player, then tap")
             playerOptionsDownloadButton
             Text(" to download tracks to watch")
-                
         }
         .fontWeight(.medium)
         .multilineTextAlignment(.center)
-        .padding(.top)
     }
     
     var playerOptionsDownloadButton: some View {
@@ -151,8 +149,8 @@ struct DownloadsView: View {
     }
 }
 
-struct DownloadsView_Previews: PreviewProvider {
-    static let sc: SoundCloud = { () -> SoundCloud in
+#Preview {
+    let sc: SoundCloud = { () -> SoundCloud in
         var sc = testSC
         sc.myUser = testUser
         sc.loadedPlaylists = testDefaultLoadedPlaylists
@@ -161,12 +159,9 @@ struct DownloadsView_Previews: PreviewProvider {
         return sc
     }()
 
-    static var previews: some View {
-        NavigationStack {
-            DownloadsView(didSelectTrack: { _ in })
-                .environmentObject(sc)
-                .environmentObject(SCAudioPlayer(sc))
-        }
-            
+    return NavigationStack {
+        DownloadsView(didSelectTrack: { _ in })
+            .environmentObject(sc)
+            .environmentObject(SCAudioPlayer(sc))
     }
 }

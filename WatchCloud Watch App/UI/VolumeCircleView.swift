@@ -33,16 +33,14 @@ struct VolumeCircleView: View {
     }
 }
 
-struct VolumeCircleView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        StatefulPreviewWrapper(Float(1)) { progress in
-            VStack(spacing: 20) {
-                VolumeCircleView(progress: progress, lineWidth: 4)
-                    .frame(width: 50, height: 50)
-                
-                Slider(value: progress, in: 0 ... 1.0, step: 0.33333)
-            }
+#Preview {
+    StatefulPreviewWrapper(Float(1)) { progress in
+        VStack(spacing: 20) {
+            VolumeCircleView(progress: progress, lineWidth: 4)
+                .frame(width: 50, height: 50)
+            
+            Slider(value: progress, in: 0 ... 1.0, step: 0.33333)
         }
     }
 }
+

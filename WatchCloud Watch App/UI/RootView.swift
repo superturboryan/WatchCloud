@@ -15,16 +15,19 @@ struct RootView: View {
     @EnvironmentObject var sc: SoundCloud
     
     @State var loaded = false
+    @State var loading = false
     @State private var selectedTab: RootTab = .library
     
     var body: some View {
         ZStack {
-            if loaded { rootTabView }
-            else { loadingView }
+            if loaded {
+                rootTabView
+            } else {
+                loadingView
+            }
         }
-        .transition(.opacity)
         .animation(.default, value: loaded)
-        .fullScreenCover(isPresented: Binding(get: { !sc.isLoggedIn }, set: { (_, _) in })) {
+        .fullScreenCover(isPresented: Binding(get: { !sc.isLoggedIn }) { _ in }) {
             LoginView()
         }
         // On login
@@ -39,6 +42,8 @@ struct RootView: View {
             // 👇 Loading PlayerView is the culprit for "Attribute graph cycle detected"... 
             if playlistIsLoaded {
                 PlayerView().tag(RootTab.player)
+                    .transition(.move(edge: .trailing))
+                    .animation(.default, value: playlistIsLoaded)
             }
         }
         .tabViewStyle(PageTabViewStyle())
@@ -46,19 +51,24 @@ struct RootView: View {
     
     var loadingView: some View {
         ProgressView() {
-            Text("Getting ready... \n\n💃🕺")
-                .fontWeight(.semibold)
-                .fontDesign(.rounded)
-                .multilineTextAlignment(.center)
-                .foregroundColor(.secondary)
+            VStack(spacing: 12) {
+                Text("Getting ready...")
+                Text(verbatim: "💃🕺")
+            }
+            .fontWeight(.semibold)
+            .fontDesign(.rounded)
+            .foregroundColor(.secondary)
         }
         .controlSize(.large)
         .tint(Color.scOrange)
+        .opacity(loading ? 1 : 0)
+        .animation(.default, value: loading)
         // On first load
         .task { await load() }
     }
     
     func load() async {
+        loading = true
         do {
             try await sc.loadLibrary()
             loaded = true
@@ -69,12 +79,10 @@ struct RootView: View {
             print("Failed to load library but AuthTokens exist, going into offline mode...")
             loaded = true
         }
+        loading = false
     }
 }
 
-struct RootView_Previews: PreviewProvider {
-    static var previews: some View {
-        RootView()
-            .environmentObject(testSC)
-    }
+#Preview {
+    RootView().environmentObject(testSC)    
 }

@@ -25,23 +25,25 @@ struct PlayerView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                VStack(spacing: 18) {
+                VStack(spacing: 16) {
                     info
                     playbackButtons
                     progressBar
                 }
-                .padding(.bottom, 15)
-                .padding(.top, 30)
+                .padding(.top, -10)
+                .padding(.bottom, 10)
                 .padding(.horizontal, 5)
             }
+            .buttonStyle(.plain)
             .toolbar { optionsButton }
             .fontDesign(.rounded)
             .fullWidthAndHeight()
-            .ignoresSafeArea()
+            .edgesIgnoringSafeArea([.horizontal, .bottom])
             .toolbarBackground(.hidden, for: .navigationBar)
             .sheet(isPresented: $showOptions) {
                 if let currentTrackBinding = Binding($sc.loadedTrack) {
                     PlayerOptionsView(track: currentTrackBinding)
+                        .background(.black.opacity(0.5))
                 }
             }
             .opacity(isLuminanceReduced ? 0.5 : 1)
@@ -57,7 +59,7 @@ struct PlayerView: View {
                 )
                 .fontWeight(.semibold)
                 HStack {
-                    Text(currentTrack.user.username)
+                    Text(verbatim: currentTrack.user.username)
                         .foregroundColor(.secondary)
                         .font(.subheadline)
                     Spacer(minLength: 4)
@@ -73,6 +75,7 @@ struct PlayerView: View {
                     }
                 }
                 .padding(.trailing, 4)
+                .animation(.default, value: sc.loadedTrack)
             }
         }
         .lineLimit(1)
@@ -105,7 +108,7 @@ struct PlayerView: View {
                     }
                     .contentShape(.focusEffect, Circle())
                     .accessibilityQuickAction(style: .outline) {
-                        Button(player.isPlaying ? "Pause" : "Play") {
+                        Button(String(player.isPlaying ? "Pause" : "Play")) {
                             player.togglePlayback()
                         }
                     }
@@ -113,7 +116,7 @@ struct PlayerView: View {
                 }
             }
             .animation(.default, value: showVolumeCircle)
-            .frame(width: 50, height: 50)
+            .frame(width: 55, height: 55)
             
             // Next
             Button {
@@ -125,7 +128,6 @@ struct PlayerView: View {
                     .frame(width: 15, height: 15)
             }
         }
-        .buttonStyle(.plain)
         .background { VolumeControlView().opacity(0) } // Hack to control volume with crown
         .onReceive(player.systemVolumePublisher) {
             handleVolumeUpdate($0)
@@ -143,7 +145,7 @@ struct PlayerView: View {
     
     @ViewBuilder
     var progressBar: some View {
-        VStack(spacing: 5) {
+        VStack(spacing: 4) {
             ProgressView(value: player.progress, total: TimeInterval(sc.loadedTrack?.durationInSeconds ?? 1))
                 .progressViewStyle(LinearGradientProgressViewStyle(
                     fill: LinearGradient.scOrange(.horizontal),
@@ -151,11 +153,14 @@ struct PlayerView: View {
                     animation: .linear(duration: 1)
                 ))
             HStack {
-                Text(Int(player.progress).timeStringFromSeconds)
+                Text(verbatim: Int(player.progress).timeStringFromSeconds)
                 Spacer()
-                Text("-\(((sc.loadedTrack?.durationInSeconds ?? 0) - Int(player.progress)).timeStringFromSeconds)") // Time remaining
+                Text(verbatim: "-\((sc.loadedTrack!.durationInSeconds - Int(player.progress)).timeStringFromSeconds)") // Time remaining
             }
             .font(.footnote)
+            .padding(.horizontal, 4)
+            .animation(.default, value: player.progress)
+            
         }
     }
 
@@ -170,6 +175,7 @@ struct PlayerView: View {
                     .frame(width: 22, height: 22) // Should this be custom size??
                     .foregroundStyle(LinearGradient.scOrange(.horizontal))
             }
+            .offset(y: -6)
         }
     }
     
@@ -180,23 +186,20 @@ struct PlayerView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var sc = testSC
-    static var previews: some View {
-        PlayerView()
+#Preview {
+    PlayerView()
         .environmentObject({ () -> SoundCloud in
-            sc.loadedPlaylists = testDefaultLoadedPlaylists
+            testSC.loadedPlaylists = testDefaultLoadedPlaylists
             var track = testTrack()
             track.userFavorite = true
-            sc.loadedTrack = track
-            sc.downloadedTracks = [track]
-            return sc
+            testSC.loadedTrack = track
+            testSC.downloadedTracks = [track]
+            return testSC
         }())
         .environmentObject({ () -> SCAudioPlayer in
-            let player = SCAudioPlayer(sc)
+            let player = SCAudioPlayer(testSC)
             player.progress = 3015
             player.isPlaying = true
             return player
         }() )
-    }
 }

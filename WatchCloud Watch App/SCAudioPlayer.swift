@@ -124,6 +124,7 @@ extension SCAudioPlayer {
         Task { [weak self] in
             try await self?.loadTrack(track)
             self?.player.play()
+            self?.player.rate = self?.playbackSpeed.rawValue ?? 1
         }
     }
     
@@ -134,12 +135,18 @@ extension SCAudioPlayer {
             return
         }
         
-        isPlaying ? player.pause() : player.play()
+        if isPlaying {
+            player.pause()
+        } else {
+            player.play()
+            player.rate = playbackSpeed.rawValue
+        }
         print(isPlaying ? "🎧 Resumed" : "🎧 Paused")
     }
     
     func continuePlayback() {
         player.play()
+        player.rate = playbackSpeed.rawValue
     }
     
     func pausePlayback() {
@@ -179,7 +186,9 @@ extension SCAudioPlayer {
     
     func cyclePlaybackSpeed() {
         playbackSpeed = playbackSpeed.next()
-        player.rate = playbackSpeed.rawValue
+        if isPlaying {
+            player.rate = playbackSpeed.rawValue
+        }
     }
     
     private func showBluetoothOptionsIfBluetoothAudioOutputNotDetected() {

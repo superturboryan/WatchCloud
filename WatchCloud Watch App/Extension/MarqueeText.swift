@@ -27,7 +27,7 @@ public struct MarqueeText : View {
             GeometryReader { geo in
                 if stringWidth > geo.size.width { // don't use self.animate as conditional here
                     Group {
-                        Text(self.text)
+                        Text(verbatim: self.text)
                             .lineLimit(1)
                             .font(.init(font))
                             .offset(x: self.animate ? -stringWidth - stringHeight * 2 : 0)
@@ -40,7 +40,7 @@ public struct MarqueeText : View {
                             .fixedSize(horizontal: true, vertical: false)
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                         
-                        Text(self.text)
+                        Text(verbatim: self.text)
                             .lineLimit(1)
                             .font(.init(font))
                             .offset(x: self.animate ? 0 : stringWidth + stringHeight * 2)
@@ -79,7 +79,7 @@ public struct MarqueeText : View {
                     .frame(width: geo.size.width + leftFade)
                     .offset(x: leftFade * -1)
                 } else {
-                    Text(self.text)
+                    Text(verbatim: self.text)
                         .font(.init(font))
                         .onChange(of: self.text, perform: {text in
                             self.animate = false

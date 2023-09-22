@@ -14,38 +14,54 @@ struct LoginView: View {
     @State var showErrorAlert = false
 
     var body: some View {
-        VStack(spacing: 10) {
-            Spacer()
-            
+        ZStack {
             Button {
-                Task {
-                    do {
-                        try await sc.login()
-                    } catch {
-                        showErrorAlert = true
+                    Task {
+                        do {
+                            try await sc.login()
+                        } catch {
+                            showErrorAlert = true
+                        }
                     }
+                } label: {
+                    HStack(spacing: 6) {
+                        Image(systemName: "cloud.fill")
+                        Text(String(localized: "Connect", comment: "Verb"))
+                            .lineLimit(1)
+                            .fontWeight(.semibold)
+                            .minimumScaleFactor(0.8)
+                            
+                    }
+                    .font(.title3)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 18)
+                    .background(.white.opacity(0.12))
+                    .overlay {
+                        Capsule()
+                            .strokeBorder(style: StrokeStyle(lineWidth: 6))
+                            .foregroundStyle(LinearGradient.scOrange(.horizontal))
+                    }
+                    .clipShape(Capsule())
                 }
-            } label: {
-                Image.connectSC
-            }
-            Spacer()
-            Image.poweredBySoundCloud
         }
-        .alert("Failed to connect to SoundCloud, \nplease try again", isPresented: $showErrorAlert) {
+        .fullWidthAndHeight()
+        .overlay(alignment: .bottom) {
+            PoweredBySCView()
+                .padding(.bottom, 8)
+        }.alert(
+            "Failed to connect to SoundCloud, \nplease try again",
+            isPresented: $showErrorAlert
+        ) {
             Button("Ok") {}
         }
+        .toolbar(.hidden, for: .navigationBar)
         .buttonStyle(.plain)
-        .padding(.vertical, 10)
-        .fullWidth()
         .ignoresSafeArea()
-        .navigationTitle("")
-        .interactiveDismissDisabled() // Disables dismiss with watch crown
+        .navigationTitle(String.empty)
+        .interactiveDismissDisabled()
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        LoginView().environmentObject(testSC)
-    }
+#Preview {
+    LoginView().environmentObject(testSC)
 }

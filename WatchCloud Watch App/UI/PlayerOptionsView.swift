@@ -18,8 +18,11 @@ struct PlayerOptionsView: View {
     
     let hSpacing: CGFloat = 12
     
+    let buttonSize = CGSize(width: 76, height: 45)
+    let labelYOffset: CGFloat = 36
+    
     var body: some View {
-        VStack(spacing: 36) {
+        VStack(spacing: 32) {
             HStack(spacing: hSpacing) {
                 likeButton.disabled(false)
                 downloadButton
@@ -31,7 +34,7 @@ struct PlayerOptionsView: View {
                 shareButton.disabled(false)
             }
         }
-        .toolbar { closeToolbarButton }
+        .padding(.bottom, 10)
         .fontDesign(.rounded)
         .buttonStyle(.plain)
     }
@@ -41,7 +44,7 @@ struct PlayerOptionsView: View {
             buttonView(
                 track.userFavorite ? "heart.fill" : "heart",
                 .pink,
-                track.userFavorite ? "Unlike" : "Like"
+                track.userFavorite ? String(localized: "Liked", comment: "Adjective") : String(localized: "Like", comment: "Verb")
             )
         }
     }
@@ -60,16 +63,9 @@ struct PlayerOptionsView: View {
     
     var shareButton: some View {
         ShareLink(item: URL(string: track.permalinkUrl)!) {
-            buttonView("square.and.arrow.up", .blue, "Share")
+            buttonView("square.and.arrow.up", .blue, String(localized: "Share"))
         }
     }
-    
-    var closeToolbarButton: some ToolbarContent {
-        ToolbarItem(placement: .cancellationAction) {
-            Button("Close") { dismiss() }
-        }
-    }
-    
     
     func tappedLike() {
         Haptics.click()
@@ -104,17 +100,17 @@ struct PlayerOptionsView: View {
             .scaledToFit()
             .font(Font.title.weight(.medium))
             .padding(.vertical, 10)
-            .frame(width: 76, height: 45)
+            .size(buttonSize)
             .background(color.opacity(0.2))
             .foregroundColor(color)
             .clipShape(Capsule(style: .continuous))
             .overlay {
-                Text(text)
+                Text(verbatim: text)
                     .opacity(0.9)
                     .lineLimit(1)
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .offset(y: 34)
+                    .offset(y: labelYOffset)
                     .minimumScaleFactor(0.8)
             }
     }
@@ -122,13 +118,13 @@ struct PlayerOptionsView: View {
     var playbackSpeedView: some View {
         ZStack {
             Color.scOrange.opacity(0.2)
-            Text("\(String(format: "%.\(player.playbackSpeed.numDecimalToDisplay)f", player.playbackSpeed.rawValue))x")
+            Text(verbatim: "\(String(format: "%.\(player.playbackSpeed.numDecimalToDisplay)f", player.playbackSpeed.rawValue))x")
                 .font(.system(size: 28, weight: .medium))
                 .minimumScaleFactor(0.8)
                 .padding(.horizontal, 8)
                 .foregroundColor(.scOrange)
         }
-        .frame(width: 76, height: 45)
+        .size(buttonSize)
         .fixedSize()
         .clipShape(Capsule(style: .continuous))
         .overlay {
@@ -137,7 +133,7 @@ struct PlayerOptionsView: View {
                 .lineLimit(1)
                 .font(.footnote)
                 .fontWeight(.medium)
-                .offset(y: 34)
+                .offset(y: labelYOffset)
                 .minimumScaleFactor(0.8)
         }
     }
@@ -149,37 +145,22 @@ struct PlayerOptionsView: View {
             .font(Font.title.weight(.medium))
             .spinAnimation(isTrackDownloading)
             .padding(.vertical, 10)
-            .frame(width: 76, height: 45)
+            .size(buttonSize)
             .background(Color.green.opacity(0.2))
             .foregroundColor(Color.green)
             .clipShape(Capsule(style: .continuous))
             .overlay {
-                Text(isTrackDownloading ? "Downloading" : (isTrackDownloaded ? "Downloaded" : "Download"))
+                Text(isTrackDownloading ?
+                     String(localized: "Downloading") : (isTrackDownloaded ?
+                                      String(localized: "Downloaded", comment: "Past participle") :
+                                      String(localized: "Download", comment: "Verb")))
                     .opacity(0.9)
                     .lineLimit(1)
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .offset(y: 34)
+                    .offset(y: labelYOffset)
                     .minimumScaleFactor(0.8)
             }
-    }
-}
-
-struct PlayerOptionsView_Previews: PreviewProvider {
-    static var track = testTrack()
-    static var trackBinding = Binding(get: { track }, set: { _ in })
-    
-    static var previews: some View {
-        PlayerOptionsView(track: trackBinding)
-            .environmentObject({ () -> SoundCloud in
-                testSC.downloadsInProgress = [track : Progress.with(0.69)]
-                return testSC
-            }())
-            .environmentObject({ () -> SCAudioPlayer in
-                let player = SCAudioPlayer(testSC)
-                player.playbackSpeed = .ThreeQuarters
-                return player
-            }())
     }
 }
 
@@ -194,4 +175,20 @@ extension PlaybackSpeed {
         case .Double: return 0
         }
     }
+}
+
+#Preview {
+    let track = testTrack()
+    let trackBinding = Binding(get: { track }, set: { _ in })
+    
+    return PlayerOptionsView(track: trackBinding)
+        .environmentObject({ () -> SoundCloud in
+            testSC.downloadsInProgress = [track : Progress.with(0.69)]
+            return testSC
+        }())
+        .environmentObject({ () -> SCAudioPlayer in
+            let player = SCAudioPlayer(testSC)
+            player.playbackSpeed = .ThreeQuarters
+            return player
+        }())
 }
