@@ -2,7 +2,7 @@
 //  Complication.swift
 //  Complication
 //
-//  Created by Ryan Forsyth on 2023-09-19.
+//  Created by Ryan Forsyth on 2023-09-22.
 //
 
 import WidgetKit
@@ -10,11 +10,11 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date())
+        SimpleEntry(date: Date(), emoji: "😀")
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date())
+        let entry = SimpleEntry(date: Date(), emoji: "😀")
         completion(entry)
     }
 
@@ -25,7 +25,7 @@ struct Provider: TimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate)
+            let entry = SimpleEntry(date: entryDate, emoji: "😀")
             entries.append(entry)
         }
 
@@ -36,24 +36,21 @@ struct Provider: TimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    let emoji: String
 }
 
 struct ComplicationEntryView : View {
-    
     @Environment(\.widgetFamily) private var family
     
     var entry: Provider.Entry
 
     var body: some View {
         VStack(alignment: .center) {
-            Image(systemName: "cloud.fill")
+            Image(systemName: family == .accessoryCorner ? "cloud.circle.fill" : "cloud.fill")
                 .resizable()
                 .scaledToFit()
-                .padding(2)
         }
-        .widgetLabel {
-            Text("WatchCloud")
-        }
+        .padding(.horizontal, 4)
     }
 }
 
@@ -63,16 +60,29 @@ struct Complication: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            ComplicationEntryView(entry: entry)
+            if #available(watchOS 10.0, *) {
+                ComplicationEntryView(entry: entry)
+                    .containerBackground(.fill.tertiary, for: .widget)
+            } else {
+                ComplicationEntryView(entry: entry)
+                    .padding()
+                    .background()
+            }
         }
         .configurationDisplayName("Open WatchCloud")
-        .description("Opens the WatchCloud app.")
+        .description("Opens the WatchCloud app")
+        .supportedFamilies([.accessoryCircular, .accessoryCorner])
     }
 }
 
-struct Complication_Previews: PreviewProvider {
-    static var previews: some View {
-        ComplicationEntryView(entry: SimpleEntry(date: Date()))
-            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-    }
+#Preview(as: .accessoryCorner) {
+    Complication()
+} timeline: {
+    SimpleEntry(date: .now, emoji: "😀")
+}
+
+#Preview(as: .accessoryCircular) {
+    Complication()
+} timeline: {
+    SimpleEntry(date: .now, emoji: "😀")
 }
