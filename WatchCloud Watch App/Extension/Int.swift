@@ -21,9 +21,8 @@ public extension Int {
     
     var hoursAndMinutesStringFromSeconds: String {
         let minutesInt = (self % 3600) / 60
-        let minutes = String(format: "%02d", minutesInt)
         
-        let formattedMinutes = String(localized: "%dmins", defaultValue: "\(minutes)mins")
+        let formattedMinutes = String(localized: "%02d mins", defaultValue: "\(minutesInt)mins")
         if self > 3600 {
             let hours = String(format: "%.1f", Double(self) / 3600.0)
             let formattedHours = String(localized: "\(hours)hrs")

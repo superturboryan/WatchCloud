@@ -81,7 +81,7 @@ struct PlaylistView: View {
             HStack(spacing: 8) {
                 let size = CGSize(width: geo.size.width / 2.5, height: geo.size.width / 2.5)
                 // First track or playlist artist artwork
-                LazyImage(url: playlist.artworkUrlWithTrackAndUserFallback) { state in
+                LazyImage(url: playlist.largerArtworkUrlWithTrackAndUserFallback) { state in
                     ZStack {
                         if let image = state.image {
                             image.resizable().scaledToFit()

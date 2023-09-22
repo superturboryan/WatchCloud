@@ -47,6 +47,7 @@ struct LoginView: View {
         .fullWidthAndHeight()
         .overlay(alignment: .bottom) {
             PoweredBySCView()
+                .padding(.bottom, 8)
         }.alert(
             "Failed to connect to SoundCloud, \nplease try again",
             isPresented: $showErrorAlert
