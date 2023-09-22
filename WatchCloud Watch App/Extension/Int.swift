@@ -1,0 +1,34 @@
+//
+//  Int.swift
+//  SC Demo
+//
+//  Created by Ryan Forsyth on 2023-08-12.
+//
+
+import Foundation
+
+public extension Int {
+    var timeStringFromSeconds: String {
+        let minutes = String(format: "%02d", ((self % 3600) / 60))
+        let seconds = String(format: "%02d", ((self % 3600) % 60))
+        var result = minutes + ":" + seconds
+        if self >= 3600 {
+            let hours = String(format: "%02d", (self / 3600))
+            result = hours + ":" + result
+        }
+        return result
+    }
+    
+    var hoursAndMinutesStringFromSeconds: String {
+        let minutesInt = (self % 3600) / 60
+        let minutes = String(format: "%02d", minutesInt)
+        
+        let formattedMinutes = String(localized: "%dmins", defaultValue: "\(minutes)mins")
+        if self > 3600 {
+            let hours = String(format: "%.1f", Double(self) / 3600.0)
+            let formattedHours = String(localized: "\(hours)hrs")
+            return formattedHours
+        }
+        return formattedMinutes
+    }
+}

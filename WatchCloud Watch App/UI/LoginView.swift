@@ -27,10 +27,13 @@ struct LoginView: View {
                     HStack(spacing: 6) {
                         Image(systemName: "cloud.fill")
                         Text("Connect")
+                            .lineLimit(1)
                             .fontWeight(.semibold)
+                            .minimumScaleFactor(0.8)
+                            
                     }
                     .font(.title3)
-                    .padding(.horizontal, 30)
+                    .padding(.horizontal, 24)
                     .padding(.vertical, 18)
                     .background(.white.opacity(0.12))
                     .overlay {
@@ -53,7 +56,7 @@ struct LoginView: View {
         .toolbar(.hidden, for: .navigationBar)
         .buttonStyle(.plain)
         .ignoresSafeArea()
-        .navigationTitle("")
+        .navigationTitle(String.empty)
         .interactiveDismissDisabled()
     }
 }

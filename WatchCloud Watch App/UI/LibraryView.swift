@@ -39,7 +39,7 @@ struct LibraryView: View {
                         playlistCell(Binding($sc.loadedPlaylists[PlaylistType.recentlyPosted.rawValue])!)
 
                         if !sc.myPlaylistIds.isEmpty {
-                            Section(header: sectionHeaderView("My Playlists")) {
+                            Section(header: sectionHeaderView(String(localized:"My Playlists"))) {
                                 ForEach($sc.loadedPlaylists.values
                                     .filter { sc.myPlaylistIds.contains($0.wrappedValue.id) }
                                     .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
@@ -50,7 +50,7 @@ struct LibraryView: View {
                         }
                         
                         if !sc.myLikedPlaylistIds.isEmpty {
-                            Section(header: sectionHeaderView("Liked Playlists")) {
+                            Section(header: sectionHeaderView(String(localized: "Liked Playlists"))) {
                                 ForEach($sc.loadedPlaylists.values
                                     .filter { sc.myLikedPlaylistIds.contains($0.wrappedValue.id) }
                                     .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
@@ -60,17 +60,18 @@ struct LibraryView: View {
                             }
                         }
 
-                        Section(header: sectionHeaderView("My Account")) {
+                        Section(header: sectionHeaderView(String(localized: "My Account"))) {
                             currentUserCell
 //                            settingsCell
                         }
 
-                        poweredBySCLogo
+                        PoweredBySCView()
+                            .padding(.top, 20)
                     }
                     .padding(.horizontal, 4)
                 }
                 .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle("Library")
+                .navigationTitle(String(localized:"Library"))
                 .onChange(of: sc.isLoggedIn) { if $0 { scrollToTop() } } // Don't need to scroll if not logged in? 🤔
             }
         }
@@ -128,7 +129,9 @@ struct LibraryView: View {
         }
     }
     
+    @ViewBuilder
     var settingsCell: some View {
+        let settingsTitle = "Settings"
         navigationCell(id: -2, title: "Settings") {
             SettingsView()
         }

@@ -108,7 +108,7 @@ struct PlayerView: View {
                     }
                     .contentShape(.focusEffect, Circle())
                     .accessibilityQuickAction(style: .outline) {
-                        Button(player.isPlaying ? "Pause" : "Play") {
+                        Button(String(player.isPlaying ? "Pause" : "Play")) {
                             player.togglePlayback()
                         }
                     }
@@ -116,7 +116,7 @@ struct PlayerView: View {
                 }
             }
             .animation(.default, value: showVolumeCircle)
-            .frame(width: 50, height: 50)
+            .frame(width: 55, height: 55)
             
             // Next
             Button {

@@ -114,11 +114,9 @@ struct DownloadsView: View {
             Text("in the top-left corner of the player, then tap")
             playerOptionsDownloadButton
             Text(" to download tracks to watch")
-                
         }
         .fontWeight(.medium)
         .multilineTextAlignment(.center)
-        .padding(.top)
     }
     
     var playerOptionsDownloadButton: some View {

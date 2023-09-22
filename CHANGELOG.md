@@ -5,16 +5,16 @@
 
 ### ✨ Features
 - Watch complication
-- Animated progress bar time labels
+- French, German, Korean localizations
 
 ### 🐞 Bug fixes
 - LoginView: hide close button added in watchOS 10
 - LoginView: replace blurry _Connect with SoundCloud_ button with SF symbol-based login button
 - LoginView: don't show error alert when user cancels login flow
 - CurrentUserView: share button UI
-- PlayerView: Fix time remaining going to 0 when time remaining was exactly 1 hour
+- PlayerView: fix time remaining going to 0 when time remaining was exactly 1 hour, animate changes
 - PlayerOptionsView: toggling playback speed doesn't start music if stopped
-- PlayerOptionsView: Add black bg to (new watchOS 10 material bg was too translucent)
+- PlayerOptionsView: add black bg to (new watchOS 10 material bg was too translucent)
 
 # 1.0 🐣
 🔨 Xcode 14.3.1  

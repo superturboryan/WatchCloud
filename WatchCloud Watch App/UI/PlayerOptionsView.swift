@@ -44,7 +44,7 @@ struct PlayerOptionsView: View {
             buttonView(
                 track.userFavorite ? "heart.fill" : "heart",
                 .pink,
-                track.userFavorite ? "Unlike" : "Like"
+                track.userFavorite ? String(localized: "Unlike") : String(localized: "Like")
             )
         }
     }
@@ -63,7 +63,7 @@ struct PlayerOptionsView: View {
     
     var shareButton: some View {
         ShareLink(item: URL(string: track.permalinkUrl)!) {
-            buttonView("square.and.arrow.up", .blue, "Share")
+            buttonView("square.and.arrow.up", .blue, String(localized: "Share"))
         }
     }
     

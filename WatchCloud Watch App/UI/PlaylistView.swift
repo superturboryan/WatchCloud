@@ -66,9 +66,9 @@ struct PlaylistView: View {
     // MARK: - UI
     @ViewBuilder
     func header(container geo: GeometryProxy, tracklistSV: ScrollViewProxy) -> some View {
-        let subtitleText =
-            "\(playlist.trackCount) track\(playlist.trackCount == 0 ? "" : "s"), "
-            + playlist.durationInSeconds.hoursAndMinutesStringFromSeconds
+        let trackCountText = String(localized: "%d tracks", defaultValue: "\(playlist.tracks?.count ?? 0) tracks")
+        let durationText =
+        playlist.durationInSeconds.hoursAndMinutesStringFromSeconds
         let isTracksEmpty = playlist.tracks?.isEmpty ?? true
         let scrollToFirstTrack = {
             let firstTrackId = playlist.tracks?.first?.id ?? -1
@@ -115,9 +115,13 @@ struct PlaylistView: View {
             VStack(spacing: 0) {
                 Text(verbatim: playlist.title)
                     .font(.headline)
-                Text(verbatim: subtitleText)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                HStack {
+                    Text(trackCountText)
+                    Text(verbatim: "-")
+                    Text(durationText)
+                }
+                .font(.subheadline)
+                .foregroundColor(.secondary)
             }
             .lineLimit(1)
             .minimumScaleFactor(0.9)
