@@ -1,7 +1,19 @@
+# 1.0.2
+🔨 Xcode 15.0  
+⌚️ watchOS 10.0  
+☁️📦 SoundCloud Swift Package 0.0.2
+
+### ✨ Features
+- 
+
+### 🐞 Bug fixes
+- Localization errors
+- 
+
 # 1.0.1
 🔨 **Xcode 15.0 ⭐️**  
 ⌚️ **watchOS 10.0 ⭐️**  
-☁️📦 SoundCloud Swift Package 0.0.1
+☁️📦 **SoundCloud Swift Package 0.0.2 ⭐️**
 
 ### ✨ Features
 - Watch complication: open app (circular, corner)
