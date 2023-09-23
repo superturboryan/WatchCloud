@@ -193,7 +193,7 @@ struct PlaylistView: View {
                         }
                     }
                 } else {
-                    sectionFooterView("End of playlist")
+                    sectionFooterView(String(localized: "End of playlist"))
                 }
             }
             .padding(.top, 10)

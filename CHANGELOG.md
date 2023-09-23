@@ -7,7 +7,7 @@
 - 
 
 ### 🐞 Bug fixes
-- Localization errors
+- Missing localizations, translation errors
 - 
 
 # 1.0.1

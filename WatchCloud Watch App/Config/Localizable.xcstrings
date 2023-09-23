@@ -346,6 +346,28 @@
         }
       }
     },
+    "End of playlist" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ende der Playlist"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fin de playlist"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "재생목록 끝"
+          }
+        }
+      }
+    },
     "Failed to connect to SoundCloud, \nplease try again" : {
       "localizations" : {
         "de" : {
