@@ -16,33 +16,29 @@ struct LoginView: View {
     var body: some View {
         ZStack {
             Button {
-                    Task {
-                        do {
-                            try await sc.login()
-                        } catch {
-                            showErrorAlert = true
-                        }
+                Task {
+                    do {
+                        try await sc.login()
+                    } catch {
+                        showErrorAlert = true
                     }
-                } label: {
-                    HStack(spacing: 6) {
-                        Image(systemName: "cloud.fill")
-                        Text(String(localized: "Connect", comment: "Verb"))
-                            .lineLimit(1)
-                            .fontWeight(.semibold)
-                            .minimumScaleFactor(0.8)
-                            
-                    }
-                    .font(.title3)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 18)
-                    .background(.white.opacity(0.12))
-                    .overlay {
-                        Capsule()
-                            .strokeBorder(style: StrokeStyle(lineWidth: 6))
-                            .foregroundStyle(LinearGradient.scOrange(.horizontal))
-                    }
-                    .clipShape(Capsule())
                 }
+            } label: {
+                Label(String(localized: "Connect", comment: "Verb"), systemImage: "cloud.fill")
+                    .lineLimit(1)
+                    .fontWeight(.semibold)
+                    .minimumScaleFactor(0.8)
+            }
+            .font(.title3)
+            .padding(.horizontal, 24)
+            .padding(.vertical, 18)
+            .background(.white.opacity(0.12))
+            .overlay {
+                Capsule()
+                    .strokeBorder(style: StrokeStyle(lineWidth: 6))
+                    .foregroundStyle(LinearGradient.scOrange(.horizontal))
+            }
+            .clipShape(Capsule())
         }
         .fullWidthAndHeight()
         .overlay(alignment: .bottom) {

@@ -22,6 +22,8 @@ struct PlayerView: View {
     @State var volumeCircleVisibleTime = 0
     let volumeTimer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     
+    let isRightToLeft = Locale.current.language.characterDirection == .rightToLeft
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -89,6 +91,7 @@ struct PlayerView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 15, height: 15)
+                    .rotationEffect(.degrees(isRightToLeft ? 180 : 0))
             }
             
             // Play-pause + Volume
@@ -126,6 +129,7 @@ struct PlayerView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 15, height: 15)
+                    .rotationEffect(.degrees(isRightToLeft ? 180 : 0))
             }
         }
         .background { VolumeControlView().opacity(0) } // Hack to control volume with crown

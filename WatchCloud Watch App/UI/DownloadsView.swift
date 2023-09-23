@@ -26,10 +26,15 @@ struct DownloadsView: View {
                 // 3 - Neither 1 or 2 (Empty)
                 // 4 - Both 1 and 2
                 
-                if !sc.downloadsInProgress.isEmpty { downloadsInProgressList }
+                if !sc.downloadsInProgress.isEmpty {
+                    downloadsInProgressList
+                }
                 
-                if !sc.downloadedTracks.isEmpty { downloadedTrackList }
-                else if sc.downloadsInProgress.isEmpty { downloadedTracksEmptyView }
+                if !sc.downloadedTracks.isEmpty {
+                    downloadedTrackList
+                } else if sc.downloadsInProgress.isEmpty {
+                    downloadedTracksEmptyView
+                }
             }
         }
         .disabled(sc.downloadsInProgress.isEmpty && sc.downloadedTracks.isEmpty)
@@ -39,6 +44,7 @@ struct DownloadsView: View {
     }
     
     var downloadsInProgressList: some View {
+        // TODO: Translate
         Section(header: sectionHeaderView("In Progress (\(sc.downloadsInProgress.count))")) {
             ForEach(
                 sc.downloadsInProgress
@@ -77,6 +83,7 @@ struct DownloadsView: View {
     }
     
     var downloadedTrackList: some View {
+        // TODO: Translate
         Section(
             header: sectionHeaderView("Downloaded (\(sc.downloadedTracks.count))"),
             footer: sectionFooterView("Press and hold track\n to remove download")
@@ -104,7 +111,7 @@ struct DownloadsView: View {
     }
     
     var downloadedTracksEmptyView: some View {
-        VStack(spacing: 6) {
+        VStack(spacing: 4) {
             HStack(spacing: 10) {
                 Text("Tap")
                 Image(systemName: "ellipsis")
