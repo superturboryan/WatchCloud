@@ -76,10 +76,10 @@ struct PlayerOptionsView: View {
         }
     }
     
+    #warning("Errors not handled")
     func tappedDownload() {
         Haptics.click()
         Task {
-            // TODO: Handle errors
             if isTrackDownloaded { try sc.removeDownload(track) }
             else { try await sc.download(track) }
         }

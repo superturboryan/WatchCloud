@@ -43,8 +43,8 @@ struct DownloadsView: View {
         .navigationTitle(String(localized: "Downloads", comment: "Plural noun"))
     }
     
+    #warning("Localize strings")
     var downloadsInProgressList: some View {
-        // TODO: Translate
         Section(header: sectionHeaderView("In Progress (\(sc.downloadsInProgress.count))")) {
             ForEach(
                 sc.downloadsInProgress
@@ -82,8 +82,8 @@ struct DownloadsView: View {
         .cornerRadius(10)
     }
     
+    #warning("Localize strings, handle error")
     var downloadedTrackList: some View {
-        // TODO: Translate
         Section(
             header: sectionHeaderView("Downloaded (\(sc.downloadedTracks.count))"),
             footer: sectionFooterView("Press and hold track\n to remove download")
@@ -101,7 +101,6 @@ struct DownloadsView: View {
                         try sc.removeDownload(displayedTrack.wrappedValue)
                         Haptics.click()
                     } catch {
-                        // TODO: Handle delete playing track error
                         print("❌ Error deleting download: \(error)");
                     }
                 }

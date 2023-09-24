@@ -14,7 +14,7 @@ struct LibraryView: View {
 
     @Binding var rootSelectedTab: RootTab
     
-    let 👆 = "👆" // TODO: Stringify all emojis?
+    let 👆 = "👆"
     
     var body: some View {
         NavigationStack {

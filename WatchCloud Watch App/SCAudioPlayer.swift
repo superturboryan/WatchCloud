@@ -62,8 +62,8 @@ final class SCAudioPlayer: ObservableObject {
         NotificationCenter.default.removeObserver(self)
     }
 
+    #warning("Errors not handled")
     func setupPlayer() {
-        // TODO: Handle errors
         try? audioSession.setCategory(
             .playback,
             mode: .default,
@@ -90,14 +90,13 @@ final class SCAudioPlayer: ObservableObject {
 }
 
 // MARK: - Play audio
+#warning("Errors not handled")
 extension SCAudioPlayer {
     private func loadTrack(_ track: Track) async throws {
         if !isPlayerLoaded {
             setupPlayer()
             isPlayerLoaded = true
         }
-        
-        //TODO: Handle error with do-catch
         let header = try await sc.authHeader
         let avUrlAsset = AVURLAsset(
             url: URL(string: track.playbackUrl!)!,
@@ -191,9 +190,9 @@ extension SCAudioPlayer {
         }
     }
     
+    #warning("Errors not handled")
     private func showBluetoothOptionsIfBluetoothAudioOutputNotDetected() {
         audioSession.activate(options: []) { [weak self] success, error in
-            // TODO: Handle error, show alert?
             if let error { print("Session activation error: \(error.localizedDescription)") }
             if success { DispatchQueue.main.async { self?.player.play() } }
         }
@@ -281,13 +280,12 @@ extension SCAudioPlayer {
         center.nowPlayingInfo = info
     }
     
+    #warning("Error, response not handled")
     private func fetchArtwork(_ url: String) async -> MPMediaItemArtwork {
         let largerImageUrl = url.replacingOccurrences(of: "large.jpg", with: "t500x500.jpg")
         guard
             let url = URL(string: largerImageUrl),
-            // TODO: Handle response
             let (data, _) = try? await URLSession.shared.data(for: URLRequest(url: url))
-        //TODO: Check response
         else {
             let fallbackImage = UIImage(systemName: "xmark.icloud.fill")!
             return MPMediaItemArtwork(boundsSize: fallbackImage.size) { _ in fallbackImage }
