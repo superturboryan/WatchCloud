@@ -22,6 +22,8 @@ import SwiftUI
 /// ```
 struct VolumeControlView: WKInterfaceObjectRepresentable {
     typealias WKInterfaceObjectType = WKInterfaceVolumeControl
+    
+    var hidden = true
 
     func makeWKInterfaceObject(context: Self.Context) -> WKInterfaceVolumeControl {
         let view = WKInterfaceVolumeControl(origin: .local)
@@ -35,6 +37,7 @@ struct VolumeControlView: WKInterfaceObjectRepresentable {
         DispatchQueue.main.async {
             view.focus()
         }
+        view.setHidden(hidden)
         return view
     }
     func updateWKInterfaceObject(_ wkInterfaceObject: WKInterfaceVolumeControl, context: WKInterfaceObjectRepresentableContext<VolumeControlView>) { }

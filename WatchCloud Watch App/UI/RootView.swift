@@ -43,11 +43,18 @@ struct RootView: View {
             LibraryView(rootSelectedTab: $selectedTab).tag(RootTab.library)
             // 👇 Loading PlayerView is the culprit for "Attribute graph cycle detected"... 
             if playlistIsLoaded {
-                PlayerView().tag(RootTab.player)
-                    .transition(.move(edge: .trailing))
-                    .animation(.default, value: playlistIsLoaded)
+                if #available(watchOS 10, *) {
+                    NewPlayerView().tag(RootTab.player)
+                        .transition(.move(edge: .trailing))
+                        .animation(.default, value: playlistIsLoaded)
+                } else {
+                    PlayerView().tag(RootTab.player)
+                        .transition(.move(edge: .trailing))
+                        .animation(.default, value: playlistIsLoaded)
+                }
             }
         }
+        
         .tabViewStyle(PageTabViewStyle())
     }
     

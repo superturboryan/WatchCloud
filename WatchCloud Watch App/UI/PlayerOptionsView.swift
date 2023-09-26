@@ -37,6 +37,8 @@ struct PlayerOptionsView: View {
         .padding(.bottom, 10)
         .fontDesign(.rounded)
         .buttonStyle(.plain)
+        .fullWidthAndHeight()
+        .background(.black)
     }
     
     var likeButton: some View {
@@ -188,7 +190,7 @@ extension PlaybackSpeed {
         }())
         .environmentObject({ () -> SCAudioPlayer in
             let player = SCAudioPlayer(testSC)
-            player.playbackSpeed = .ThreeQuarters
+            player.playbackSpeed = .OneAndAQuarter
             return player
         }())
 }

@@ -14,25 +14,57 @@ struct NewPlayerView: View {
     
     @EnvironmentObject var sc: SoundCloud
     @EnvironmentObject private var player: SCAudioPlayer
+    @Environment(\.isLuminanceReduced) var isLuminanceReduced
     
     @State private var showOptions = false
     
+    @State var volume: Float = 0
+    @State var showVolumeCircle = false
+    @State var volumeCircleVisibleTime = 0
+    let volumeTimer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+    
     var body: some View {
-        VStack {
-            artwork
-            trackInfoLabels
-        }
-        .padding(.top, -8)
-        .padding(.bottom, 2)
-        .toolbar {
-            optionsButton
-            shazamButton
-            playbackButtons
+        NavigationStack { // Needed for toolbar
+            playerView
         }
     }
     
+    private var playerView: some View {
+        VStack(spacing: 6) {
+            artwork
+            trackInfoLabels
+        }
+        .padding(.bottom, 10)
+        .padding(.top, -6)
+        .toolbar {
+            optionsButton
+            playbackButtons
+        }
+        .sheet(isPresented: $showOptions) {
+            if let currentTrackBinding = Binding($sc.loadedTrack) {
+                PlayerOptionsView(track: currentTrackBinding)
+            }
+        }
+        .background { VolumeControlView(hidden: true) } // Hack to control volume with crown
+        .onReceive(player.systemVolumePublisher) {
+            handleVolumeUpdate($0)
+        }
+        .onReceive(volumeTimer) { _ in
+            volumeCircleVisibleTime += 1
+        }
+        .onChange(of: volumeCircleVisibleTime) { visibleTime in
+            if visibleTime > 1 {
+                showVolumeCircle = false
+                volumeCircleVisibleTime = 0
+            }
+        }
+        .opacity(isLuminanceReduced ? 0.5 : 1)
+    }
+    
+    
+    @ViewBuilder
     private var artwork: some View {
-        LazyImage(url: URL(string: sc.loadedTrack!.largerArtworkUrl!)!) { state in
+        LazyImage(url: URL(string: sc.loadedTrack?.largerArtworkUrl ?? "")!) { state in
             ZStack {
                 if let image = state.image {
                     image.resizable().scaledToFit()
@@ -42,10 +74,23 @@ struct NewPlayerView: View {
                     ProgressView()
                 }
             }
-        }
-        .clipShape(RoundedRectangle(cornerRadius: 8))
-        .overlay(alignment: .topTrailing) {
-//            trackExtraInfo
+            .opacity(showVolumeCircle || player.isLoading ? 0.6 : 1)
+            .animation(.default, value: player.isLoading || showVolumeCircle)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .overlay {
+                ZStack {
+                    if showVolumeCircle {
+                        VolumeCircleView(progress: $volume, lineWidth: 5)
+                            .background(.black) // VolumeCircleView has transparent bg
+                            .frame(width: 50, height: 50)
+                            .clipShape(Circle())
+                            .transition(.scale)
+                    } else if player.isLoading {
+                        ProgressView()
+                    }
+                }
+                .animation(.default, value: showVolumeCircle)
+            }
         }
     }
     
@@ -60,7 +105,7 @@ struct NewPlayerView: View {
                 
                 Text(verbatim: currentTrack.user.username)
                     .foregroundColor(.secondary)
-                    .font(.subheadline)
+                    .font(.system(size: 14, weight: .semibold, design: .rounded))
                     .padding(.trailing, 4)
                     .animation(.default, value: sc.loadedTrack)
             }
@@ -83,40 +128,46 @@ struct NewPlayerView: View {
         .padding(1)
     }
     
-    private var yOffset: CGFloat = 6
+    private var yOffset: CGFloat = 2
     private var playbackButtons: some ToolbarContent {
         ToolbarItemGroup(placement: .bottomBar) {
             Button {
-                
+                player.skipToPreviousTrack()
             } label: {
                 Image(systemName:"backward.fill")
             }
-            .offset(y: yOffset)
             
             Button {
-                
+                player.togglePlayback()
             } label: {
                 Image(systemName:player.isPlaying ? "pause.fill" : "play.fill")
+                    .contentTransition(.symbolEffect(.replace))
             }
             .controlSize(.large)
             .overlay {
                 Circle()
-                    .trim(from: 0, to: CGFloat(player.progress / Double(sc.loadedTrack!.durationInSeconds)))
+                    .trim(from: 0, to: CGFloat(player.progress / Double(sc.loadedTrack?.durationInSeconds ?? 1)))
                     .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
                     .foregroundStyle(LinearGradient.scOrange(.vertical, reversed: true))
                     .rotationEffect(.degrees(-90))
-                    .opacity(player.isPlaying ? 1 : 0.8)
+                    .opacity(player.isLoading ? 0.7 : 1)
                     .animation(.default, value: player.progress)
-                    .animation(.default, value: player.isPlaying)
+                    .animation(.default, value: player.isLoading)
+                
             }
-            .offset(y: yOffset)
+            .contentShape(.focusEffect, Circle())
+            .accessibilityQuickAction(style: .outline) {
+                Button(String(player.isPlaying ? "Pause" : "Play")) {
+                    player.togglePlayback()
+                }
+            }
+            .disabled(player.isLoading)
             
             Button {
-                
+                player.skipToNextTrack()
             } label: {
                 Image(systemName:"forward.fill")
             }
-            .offset(y: yOffset)
         }
     }
     
@@ -131,40 +182,28 @@ struct NewPlayerView: View {
         }
     }
     
-    #warning("Remove before submitting 1.0.2!")
-    private var shazamButton: some ToolbarContent {
-        ToolbarItem(placement: .topBarTrailing) {
-            Button {
-                print("Show shazam")
-            } label: {
-                Image(systemName: "shazam.logo.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 34, height: 34) // Should this be custom size??
-                    .foregroundStyle(LinearGradient.scOrange(.horizontal))
-            }
-            .buttonStyle(.plain)
-        }
+    private func handleVolumeUpdate(_ newVolume: Float) {
+        showVolumeCircle = true
+        volumeCircleVisibleTime = 0
+        volume = newVolume
     }
 }
 
 @available(watchOS 10, *)
 #Preview {
-    NavigationStack {
-        NewPlayerView()
-            .environmentObject({ () -> SoundCloud in
-                testSC.loadedPlaylists = testDefaultLoadedPlaylists
-                var track = testTrack()
-                track.userFavorite = true
-                testSC.loadedTrack = track
-                testSC.downloadedTracks = [track]
-                return testSC
-            }())
-            .environmentObject({ () -> SCAudioPlayer in
-                let player = SCAudioPlayer(testSC)
-                player.progress = 2500
-                player.isPlaying = true
-                return player
-            }() )
-    }
+    NewPlayerView()
+        .environmentObject({ () -> SoundCloud in
+            testSC.loadedPlaylists = testDefaultLoadedPlaylists
+            var track = testTrack()
+            track.userFavorite = true
+            testSC.loadedTrack = track
+            testSC.downloadedTracks = [track]
+            return testSC
+        }())
+        .environmentObject({ () -> SCAudioPlayer in
+            let player = SCAudioPlayer(testSC)
+            player.progress = 2500
+            player.isPlaying = true
+            return player
+        }() )
 }

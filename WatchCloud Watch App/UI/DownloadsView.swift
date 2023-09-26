@@ -43,7 +43,7 @@ struct DownloadsView: View {
         .navigationTitle(String(localized: "Downloads", comment: "Plural noun"))
     }
     
-    #warning("Localize strings")
+    #warning("🌍 Localize strings")
     var downloadsInProgressList: some View {
         Section(header: sectionHeaderView("In Progress (\(sc.downloadsInProgress.count))")) {
             ForEach(
@@ -82,7 +82,7 @@ struct DownloadsView: View {
         .cornerRadius(10)
     }
     
-    #warning("Localize strings, handle error")
+    #warning("🌍 Localize strings")
     var downloadedTrackList: some View {
         Section(
             header: sectionHeaderView("Downloaded (\(sc.downloadedTracks.count))"),
@@ -96,7 +96,7 @@ struct DownloadsView: View {
                 )
                 .onTapGesture { tapped(displayedTrack.wrappedValue) }
                 .onLongPressGesture {
-                    
+                    #warning("Handle error")
                     do {
                         try sc.removeDownload(displayedTrack.wrappedValue)
                         Haptics.click()
