@@ -16,7 +16,7 @@ struct WatchCloud_Watch_AppApp: App {
     @StateObject var player = CompositionRoot.scAudioPlayer
     
     init() {
-        // Set aggressive image caching by default
+        // Set aggressive image caching by default for whole app
         ImagePipeline.shared = ImagePipeline(configuration: .withDataCache)
     }
     
