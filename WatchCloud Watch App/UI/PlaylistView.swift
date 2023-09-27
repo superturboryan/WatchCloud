@@ -40,8 +40,8 @@ struct PlaylistView: View {
                     }
                 }
                 .task {
+                    #warning("Errors not handled")
                     if isFirstLoad, let onFirstLoad {
-                        // TODO: Loading state, handle error
                         isFirstLoad = false
                         isLoading = true
                         try? await onFirstLoad()
@@ -193,7 +193,7 @@ struct PlaylistView: View {
                         }
                     }
                 } else {
-                    sectionFooterView("End of playlist")
+                    sectionFooterView(String(localized: "End of playlist"))
                 }
             }
             .padding(.top, 10)

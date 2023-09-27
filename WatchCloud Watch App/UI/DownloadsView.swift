@@ -26,10 +26,15 @@ struct DownloadsView: View {
                 // 3 - Neither 1 or 2 (Empty)
                 // 4 - Both 1 and 2
                 
-                if !sc.downloadsInProgress.isEmpty { downloadsInProgressList }
+                if !sc.downloadsInProgress.isEmpty {
+                    downloadsInProgressList
+                }
                 
-                if !sc.downloadedTracks.isEmpty { downloadedTrackList }
-                else if sc.downloadsInProgress.isEmpty { downloadedTracksEmptyView }
+                if !sc.downloadedTracks.isEmpty {
+                    downloadedTrackList
+                } else if sc.downloadsInProgress.isEmpty {
+                    downloadedTracksEmptyView
+                }
             }
         }
         .disabled(sc.downloadsInProgress.isEmpty && sc.downloadedTracks.isEmpty)
@@ -38,6 +43,7 @@ struct DownloadsView: View {
         .navigationTitle(String(localized: "Downloads", comment: "Plural noun"))
     }
     
+    #warning("🌍 Localize strings")
     var downloadsInProgressList: some View {
         Section(header: sectionHeaderView("In Progress (\(sc.downloadsInProgress.count))")) {
             ForEach(
@@ -76,6 +82,7 @@ struct DownloadsView: View {
         .cornerRadius(10)
     }
     
+    #warning("🌍 Localize strings")
     var downloadedTrackList: some View {
         Section(
             header: sectionHeaderView("Downloaded (\(sc.downloadedTracks.count))"),
@@ -89,12 +96,11 @@ struct DownloadsView: View {
                 )
                 .onTapGesture { tapped(displayedTrack.wrappedValue) }
                 .onLongPressGesture {
-                    
+                    #warning("Handle error")
                     do {
                         try sc.removeDownload(displayedTrack.wrappedValue)
                         Haptics.click()
                     } catch {
-                        // TODO: Handle delete playing track error
                         print("❌ Error deleting download: \(error)");
                     }
                 }
@@ -104,7 +110,7 @@ struct DownloadsView: View {
     }
     
     var downloadedTracksEmptyView: some View {
-        VStack(spacing: 6) {
+        VStack(spacing: 4) {
             HStack(spacing: 10) {
                 Text("Tap")
                 Image(systemName: "ellipsis")
@@ -151,7 +157,7 @@ struct DownloadsView: View {
 
 #Preview {
     let sc: SoundCloud = { () -> SoundCloud in
-        var sc = testSC
+        let sc = testSC
         sc.myUser = testUser
         sc.loadedPlaylists = testDefaultLoadedPlaylists
         sc.downloadsInProgress = [testTrack() : Progress.with(0.69)]

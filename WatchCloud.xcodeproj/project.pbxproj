@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		941A00EB2AC304B6000F4693 /* NewPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A00EA2AC304B6000F4693 /* NewPlayerView.swift */; };
 		9446C5FB2ABDA57E00BCE5DF /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9446C5FA2ABDA57E00BCE5DF /* Localizable.xcstrings */; };
 		9448FF4B2AB31308003D63F1 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */; };
 		9448FF4D2AB343D7003D63F1 /* WatchKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4C2AB343D7003D63F1 /* WatchKit.swift */; };
@@ -16,7 +17,6 @@
 		946F38A02AB079CA008CE9D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946F389F2AB079CA008CE9D1 /* Assets.xcassets */; };
 		946F38A32AB079CA008CE9D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946F38A22AB079CA008CE9D1 /* Preview Assets.xcassets */; };
 		946F38B12AB07A2E008CE9D1 /* SoundCloud in Frameworks */ = {isa = PBXBuildFile; productRef = 946F38B02AB07A2E008CE9D1 /* SoundCloud */; };
-		946F38B52AB07D74008CE9D1 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 946F38B42AB07D74008CE9D1 /* Config.xcconfig */; };
 		946F38CD2AB07F81008CE9D1 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38B72AB07F81008CE9D1 /* View.swift */; };
 		946F38CE2AB07F81008CE9D1 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38B82AB07F81008CE9D1 /* Progress.swift */; };
 		946F38CF2AB07F81008CE9D1 /* Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38B92AB07F81008CE9D1 /* Delete.swift */; };
@@ -94,6 +94,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		941A00EA2AC304B6000F4693 /* NewPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlayerView.swift; sourceTree = "<group>"; };
+		941A00ED2AC44793000F4693 /* Player - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player - S945.png"; sourceTree = "<group>"; };
+		941A00EE2AC44793000F4693 /* Player Options - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player Options - S945.png"; sourceTree = "<group>"; };
+		941A00EF2AC44793000F4693 /* Login - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Login - S945.png"; sourceTree = "<group>"; };
+		941A00F02AC44793000F4693 /* Library - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Library - S945.png"; sourceTree = "<group>"; };
+		941A00F12AC44793000F4693 /* Playlist Summary - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Playlist Summary - S945.png"; sourceTree = "<group>"; };
+		941A00F22AC44793000F4693 /* Playlist Tracks - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Playlist Tracks - S945.png"; sourceTree = "<group>"; };
 		9446C5FA2ABDA57E00BCE5DF /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		9448FF4C2AB343D7003D63F1 /* WatchKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchKit.swift; sourceTree = "<group>"; };
@@ -137,13 +144,19 @@
 		94B6343E2ABDFAF900E6FCDA /* Complication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Complication.swift; sourceTree = "<group>"; };
 		94B634402ABDFAFA00E6FCDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94B634422ABDFAFA00E6FCDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94B6344A2ABE5B7700E6FCDA /* Playlist Summary - S845.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Playlist Summary - S845.png"; sourceTree = "<group>"; };
+		94B6344B2ABE5B7700E6FCDA /* Library - S845.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Library - S845.png"; sourceTree = "<group>"; };
+		94B6344C2ABE5B7700E6FCDA /* Player - S845.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player - S845.png"; sourceTree = "<group>"; };
+		94B6344D2ABE5B7700E6FCDA /* Demo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Demo.gif; sourceTree = "<group>"; };
+		94B6344E2ABE5B7700E6FCDA /* Playlist tracks - S845.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Playlist tracks - S845.png"; sourceTree = "<group>"; };
+		94B634502ABE5B7700E6FCDA /* Playlist Summary - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Playlist Summary - S945.png"; sourceTree = "<group>"; };
+		94B634512ABE5B7700E6FCDA /* Login - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Login - S945.png"; sourceTree = "<group>"; };
+		94B634522ABE5B7700E6FCDA /* Playlist Tracks - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Playlist Tracks - S945.png"; sourceTree = "<group>"; };
+		94B634532ABE5B7700E6FCDA /* Library - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Library - S945.png"; sourceTree = "<group>"; };
+		94B634542ABE5B7700E6FCDA /* Player Options - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player Options - S945.png"; sourceTree = "<group>"; };
+		94B634552ABE5B7700E6FCDA /* Player - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player - S945.png"; sourceTree = "<group>"; };
 		94F3FCD12AB9A3B5005D03DF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		94F3FCD22AB9A3B5005D03DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		94F3FCD62AB9A490005D03DF /* Playlist header - S845.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Playlist header - S845.png"; sourceTree = "<group>"; };
-		94F3FCD72AB9A490005D03DF /* Playlist tracks - S845.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Playlist tracks - S845.png"; sourceTree = "<group>"; };
-		94F3FCD82AB9A490005D03DF /* Library - S845.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Library - S845.png"; sourceTree = "<group>"; };
-		94F3FCD92AB9A490005D03DF /* Player - S845.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player - S845.png"; sourceTree = "<group>"; };
-		94F3FCDA2AB9A7BA005D03DF /* Demo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Demo.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +182,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		941A00EC2AC4474C000F4693 /* 1.0.2 */ = {
+			isa = PBXGroup;
+			children = (
+				941A00F02AC44793000F4693 /* Library - S945.png */,
+				941A00EF2AC44793000F4693 /* Login - S945.png */,
+				941A00ED2AC44793000F4693 /* Player - S945.png */,
+				941A00EE2AC44793000F4693 /* Player Options - S945.png */,
+				941A00F12AC44793000F4693 /* Playlist Summary - S945.png */,
+				941A00F22AC44793000F4693 /* Playlist Tracks - S945.png */,
+			);
+			path = 1.0.2;
+			sourceTree = "<group>";
+		};
 		946F38892AB079C9008CE9D1 = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +299,7 @@
 				946F38C62AB07F81008CE9D1 /* LoginView.swift */,
 				946F38C32AB07F81008CE9D1 /* PlayerOptionsView.swift */,
 				946F38CA2AB07F81008CE9D1 /* PlayerView.swift */,
+				941A00EA2AC304B6000F4693 /* NewPlayerView.swift */,
 				946F38C42AB07F81008CE9D1 /* PlaylistView.swift */,
 				94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */,
 				946F38C82AB07F81008CE9D1 /* RootView.swift */,
@@ -293,24 +320,39 @@
 			path = Complication;
 			sourceTree = "<group>";
 		};
+		94B634492ABE5B7700E6FCDA /* 1.0 */ = {
+			isa = PBXGroup;
+			children = (
+				94B6344D2ABE5B7700E6FCDA /* Demo.gif */,
+				94B6344B2ABE5B7700E6FCDA /* Library - S845.png */,
+				94B6344C2ABE5B7700E6FCDA /* Player - S845.png */,
+				94B6344A2ABE5B7700E6FCDA /* Playlist Summary - S845.png */,
+				94B6344E2ABE5B7700E6FCDA /* Playlist tracks - S845.png */,
+			);
+			path = 1.0;
+			sourceTree = "<group>";
+		};
+		94B6344F2ABE5B7700E6FCDA /* 1.0.1 */ = {
+			isa = PBXGroup;
+			children = (
+				94B634532ABE5B7700E6FCDA /* Library - S945.png */,
+				94B634512ABE5B7700E6FCDA /* Login - S945.png */,
+				94B634552ABE5B7700E6FCDA /* Player - S945.png */,
+				94B634542ABE5B7700E6FCDA /* Player Options - S945.png */,
+				94B634502ABE5B7700E6FCDA /* Playlist Summary - S945.png */,
+				94B634522ABE5B7700E6FCDA /* Playlist Tracks - S945.png */,
+			);
+			path = 1.0.1;
+			sourceTree = "<group>";
+		};
 		94F3FCD02AB9A3B5005D03DF /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
-				94F3FCD52AB9A490005D03DF /* v1.0 */,
+				94B634492ABE5B7700E6FCDA /* 1.0 */,
+				94B6344F2ABE5B7700E6FCDA /* 1.0.1 */,
+				941A00EC2AC4474C000F4693 /* 1.0.2 */,
 			);
 			path = Screenshots;
-			sourceTree = "<group>";
-		};
-		94F3FCD52AB9A490005D03DF /* v1.0 */ = {
-			isa = PBXGroup;
-			children = (
-				94F3FCDA2AB9A7BA005D03DF /* Demo.gif */,
-				94F3FCD62AB9A490005D03DF /* Playlist header - S845.png */,
-				94F3FCD72AB9A490005D03DF /* Playlist tracks - S845.png */,
-				94F3FCD82AB9A490005D03DF /* Library - S845.png */,
-				94F3FCD92AB9A490005D03DF /* Player - S845.png */,
-			);
-			path = v1.0;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,7 +424,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					946F388F2AB079C9008CE9D1 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -405,6 +447,8 @@
 				fr,
 				de,
 				ko,
+				ar,
+				"es-419",
 			);
 			mainGroup = 946F38892AB079C9008CE9D1;
 			packageReferences = (
@@ -434,7 +478,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				946F38A32AB079CA008CE9D1 /* Preview Assets.xcassets in Resources */,
-				946F38B52AB07D74008CE9D1 /* Config.xcconfig in Resources */,
 				9446C5FB2ABDA57E00BCE5DF /* Localizable.xcstrings in Resources */,
 				946F38A02AB079CA008CE9D1 /* Assets.xcassets in Resources */,
 			);
@@ -457,6 +500,7 @@
 			files = (
 				946F38DC2AB07F81008CE9D1 /* TrackCellView.swift in Sources */,
 				946F38D52AB07F81008CE9D1 /* LinearGradientProgressViewStyle.swift in Sources */,
+				941A00EB2AC304B6000F4693 /* NewPlayerView.swift in Sources */,
 				946F38D72AB07F81008CE9D1 /* CurrentUserView.swift in Sources */,
 				94923C6F2ABDBBD500A67EBE /* Int.swift in Sources */,
 				946F38D12AB07F81008CE9D1 /* Image.swift in Sources */,
@@ -516,6 +560,7 @@
 			baseConfigurationReference = 946F38B42AB07D74008CE9D1 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -545,6 +590,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -576,6 +622,7 @@
 			baseConfigurationReference = 946F38B42AB07D74008CE9D1 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -605,6 +652,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -644,7 +692,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -676,7 +724,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -697,7 +745,7 @@
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T6MXF72738;
 				INFOPLIST_KEY_CFBundleDisplayName = WatchCloud;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -713,7 +761,7 @@
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T6MXF72738;
 				INFOPLIST_KEY_CFBundleDisplayName = WatchCloud;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -729,7 +777,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T6MXF72738;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -744,7 +792,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp.Comp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -753,7 +801,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
 			};
 			name = Debug;
 		};
@@ -764,7 +812,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T6MXF72738;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -779,7 +827,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp.Comp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -788,7 +836,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
 			};
 			name = Release;
 		};

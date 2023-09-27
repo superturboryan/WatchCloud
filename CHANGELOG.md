@@ -1,7 +1,23 @@
+# 1.0.2
+🌎 Published 27 September
+🔨 Xcode 15.0  
+⌚️ watchOS 10.0  
+☁️📦 **SoundCloud Swift Package 0.0.3 ⭐️**
+
+### ✨ Features
+- Redesigned PlayerView for watchOS 10: bottom toolbar, show track artwork
+- Spanish (LATAM), Arabic localizations
+
+### 🐞 Bug fixes
+- Strings not localized, translation errors
+- Info.plist missing localizations array
+- PlayerOptionsView background not taking up full size
+
 # 1.0.1
+🌎 Published 23 September
 🔨 **Xcode 15.0 ⭐️**  
 ⌚️ **watchOS 10.0 ⭐️**  
-☁️📦 SoundCloud Swift Package 0.0.1
+☁️📦 **SoundCloud Swift Package 0.0.2 ⭐️**
 
 ### ✨ Features
 - Watch complication: open app (circular, corner)
@@ -17,6 +33,7 @@
 - PlayerOptionsView: add black bg to (new watchOS 10 material bg was too translucent)
 
 # 1.0 🐣
+🌎 Published 19 September
 🔨 Xcode 14.3.1  
 ⌚️ watchOS 9.4  
 ☁️📦 SoundCloud Swift Package 0.0.1

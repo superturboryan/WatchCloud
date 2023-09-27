@@ -18,6 +18,8 @@ struct RootView: View {
     @State var loading = false
     @State private var selectedTab: RootTab = .library
     
+    let isRightToLeft = Locale.current.language.characterDirection == .rightToLeft
+    
     var body: some View {
         ZStack {
             if loaded {
@@ -41,11 +43,18 @@ struct RootView: View {
             LibraryView(rootSelectedTab: $selectedTab).tag(RootTab.library)
             // 👇 Loading PlayerView is the culprit for "Attribute graph cycle detected"... 
             if playlistIsLoaded {
-                PlayerView().tag(RootTab.player)
-                    .transition(.move(edge: .trailing))
-                    .animation(.default, value: playlistIsLoaded)
+                if #available(watchOS 10, *) {
+                    NewPlayerView().tag(RootTab.player)
+                        .transition(.move(edge: .trailing))
+                        .animation(.default, value: playlistIsLoaded)
+                } else {
+                    PlayerView().tag(RootTab.player)
+                        .transition(.move(edge: .trailing))
+                        .animation(.default, value: playlistIsLoaded)
+                }
             }
         }
+        
         .tabViewStyle(PageTabViewStyle())
     }
     
@@ -53,7 +62,7 @@ struct RootView: View {
         ProgressView() {
             VStack(spacing: 12) {
                 Text("Getting ready...")
-                Text(verbatim: "💃🕺")
+                Text(verbatim: isRightToLeft ? "🎶🎶" : "💃🕺")
             }
             .fontWeight(.semibold)
             .fontDesign(.rounded)

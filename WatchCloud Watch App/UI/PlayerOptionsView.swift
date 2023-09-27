@@ -37,6 +37,8 @@ struct PlayerOptionsView: View {
         .padding(.bottom, 10)
         .fontDesign(.rounded)
         .buttonStyle(.plain)
+        .fullWidthAndHeight()
+        .background(.black)
     }
     
     var likeButton: some View {
@@ -76,10 +78,10 @@ struct PlayerOptionsView: View {
         }
     }
     
+    #warning("Errors not handled")
     func tappedDownload() {
         Haptics.click()
         Task {
-            // TODO: Handle errors
             if isTrackDownloaded { try sc.removeDownload(track) }
             else { try await sc.download(track) }
         }
@@ -188,7 +190,7 @@ extension PlaybackSpeed {
         }())
         .environmentObject({ () -> SCAudioPlayer in
             let player = SCAudioPlayer(testSC)
-            player.playbackSpeed = .ThreeQuarters
+            player.playbackSpeed = .OneAndAQuarter
             return player
         }())
 }
