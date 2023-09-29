@@ -17,7 +17,7 @@ struct CachedImageView: View {
     // Defaults
     var fallbackSystemImageName = "photo"
     var useCache = true
-    var ratio: AspectRatio = .fill
+    var ratio: AspectRatio = .fit
     var animated = true
     
     var body: some View {
@@ -30,7 +30,6 @@ struct CachedImageView: View {
                     } else if state.error != nil {
                         Image(systemName: fallbackSystemImageName).resizable()
                             .aspectRatio(contentMode: ratio == .fit ? .fit : .fill)
-                            .padding(geo.size.height / 5)
                     } else {
                         ProgressView()
                     }

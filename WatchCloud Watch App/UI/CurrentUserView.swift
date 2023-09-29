@@ -5,7 +5,6 @@
 //  Created by Ryan Forsyth on 2023-08-29.
 //
 
-import NukeUI
 import SoundCloud
 import SwiftUI
 
@@ -39,9 +38,10 @@ struct CurrentUserView: View {
     var userView: some View {
         GeometryReader { geo in
             VStack(spacing: 12) {
-                userAvatarImage
+                CachedImageView(url: sc.myUser!.avatarUrl)
                     .frame(width: geo.size.width * 0.6)
                     .clipShape(Circle())
+                    
                 ShareLink(item: URL(string: sc.myUser!.permalinkUrl)!, label: {
                     HStack {
                         Image(systemName: "square.and.arrow.up")
@@ -55,18 +55,6 @@ struct CurrentUserView: View {
             }
             .padding(4)
             .fullWidthAndHeight()
-        }
-    }
-    
-    var userAvatarImage: some View {
-        LazyImage(url: URL(string: sc.myUser!.avatarUrl)) { state in
-            if let image = state.image {
-                image.resizable().scaledToFit()
-            } else if state.error != nil {
-                Image(systemName: "person").resizable().scaledToFit()
-            } else {
-                ProgressView()
-            }
         }
     }
 }
