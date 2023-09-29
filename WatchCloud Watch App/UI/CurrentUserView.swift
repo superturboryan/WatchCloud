@@ -37,30 +37,25 @@ struct CurrentUserView: View {
     }
     
     var userView: some View {
-        VStack(spacing: 12) {
-            userAvatarImage
-                .frame(width: 120)
-                .clipShape(Circle())
-                .overlay(alignment: .bottom) {
-                    Text(verbatim: sc.myUser!.subscription)
-                        .font(.system(size: 13, weight: .semibold))
-                        .padding(.horizontal, 2)
-                        .background(LinearGradient.scOrange())
-                        .cornerRadius(2)
-                        .offset(y: 6)
+        GeometryReader { geo in
+            VStack(spacing: 12) {
+                userAvatarImage
+                    .frame(width: geo.size.width * 0.6)
+                    .clipShape(Circle())
+                ShareLink(item: URL(string: sc.myUser!.permalinkUrl)!, label: {
+                    HStack {
+                        Image(systemName: "square.and.arrow.up")
+                            .foregroundColor(.blue)
+                        Text(verbatim: sc.myUser!.username)
+                            .lineLimit(2)
+                    }
+                    .font(.headline)
+                })
+                .buttonStyle(.plain)
             }
-            ShareLink(item: URL(string: sc.myUser!.permalinkUrl)!, label: {
-                HStack {
-                    Image(systemName: "square.and.arrow.up")
-                        .foregroundColor(.blue)
-                    Text(verbatim: sc.myUser!.username)
-                        .lineLimit(2)
-                }
-                .font(.headline)
-            })
-            .buttonStyle(.plain)
+            .padding(4)
+            .fullWidthAndHeight()
         }
-        .padding(4)
     }
     
     var userAvatarImage: some View {
