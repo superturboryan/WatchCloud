@@ -19,6 +19,7 @@ struct CachedImageView: View {
     var useCache = true
     var ratio: AspectRatio = .fit
     var animated = true
+    var roundedCorners = true
     
     var body: some View {
         GeometryReader { geo in
@@ -37,8 +38,7 @@ struct CachedImageView: View {
                 .transition(.opacity)
                 .animation(.default, value: state.image)
                 .fullWidthAndHeight()
-                .clipShape(RoundedRectangle(cornerRadius: geo.size.width / 6))
-                .clipped()
+                .clipShape(RoundedRectangle(cornerRadius: roundedCorners ? geo.size.width / 6 : 0))
             }
             .pipeline(useCache ? ImagePipeline(configuration: .withDataCache) : ImagePipeline.shared)
         }
