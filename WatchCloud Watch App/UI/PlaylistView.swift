@@ -76,24 +76,12 @@ struct PlaylistView: View {
         }
         
         VStack(spacing: 10) {
-            
             // Artwork and play all button
             HStack(spacing: 8) {
                 let size = CGSize(width: geo.size.width / 2.5, height: geo.size.width / 2.5)
                 // First track or playlist artist artwork
-                LazyImage(url: playlist.largerArtworkUrlWithTrackAndUserFallback) { state in
-                    ZStack {
-                        if let image = state.image {
-                            image.resizable().scaledToFit()
-                        } else if state.error != nil {
-                            Image(systemName: "x.circle").resizable().scaledToFit()
-                        } else {
-                            ProgressView()
-                        }
-                    }
-                }
+                CachedImageView(url: playlist.largerArtworkUrlWithTrackAndUserFallback.absoluteString)
                 .size(size)
-                .cornerRadius(4)
                 
                 // "Play all" button, starts playlist from first track
                 Button {

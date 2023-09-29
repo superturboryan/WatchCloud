@@ -13,7 +13,7 @@ struct VolumeCircleView: View {
     var lineWidth: CGFloat
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .center) {
             Circle().stroke(
                 Color.scOrange.opacity(0.5),
                 lineWidth: lineWidth

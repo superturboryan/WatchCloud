@@ -5,7 +5,6 @@
 //  Created by Ryan Forsyth on 2023-09-26.
 //
 
-import NukeUI
 import SoundCloud
 import SwiftUI
 
@@ -30,7 +29,7 @@ struct NewPlayerView: View {
     }
     
     private var playerView: some View {
-        VStack(spacing: 6) {
+        VStack(spacing: 14) {
             artwork
             trackInfoLabels
         }
@@ -64,33 +63,27 @@ struct NewPlayerView: View {
     
     @ViewBuilder
     private var artwork: some View {
-        LazyImage(url: URL(string: sc.loadedTrack?.largerArtworkUrl ?? "")!) { state in
+        GeometryReader { geo in
+            CachedImageView(url: sc.loadedTrack?.largerArtworkUrl)
+                .frame(width: geo.size.width / 2, height: geo.size.width / 2)
+                .fixedSize()
+                .fullWidthAndHeight()
+                .opacity(player.isLoading ? 0.6 : 1)
+                .animation(.default, value: player.isLoading)
+        }
+        .overlay {
             ZStack {
-                if let image = state.image {
-                    image.resizable().scaledToFit()
-                } else if state.error != nil {
-                    Image(systemName: "x.circle").resizable().scaledToFit()
-                } else {
+                if showVolumeCircle {
+                    VolumeCircleView(progress: $volume, lineWidth: 5)
+                        .background(.black) // VolumeCircleView has transparent bg
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                        
+                } else if player.isLoading {
                     ProgressView()
                 }
             }
-            .opacity(showVolumeCircle || player.isLoading ? 0.6 : 1)
-            .animation(.default, value: player.isLoading || showVolumeCircle)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
-            .overlay {
-                ZStack {
-                    if showVolumeCircle {
-                        VolumeCircleView(progress: $volume, lineWidth: 5)
-                            .background(.black) // VolumeCircleView has transparent bg
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
-                            .transition(.scale)
-                    } else if player.isLoading {
-                        ProgressView()
-                    }
-                }
-                .animation(.default, value: showVolumeCircle)
-            }
+            .animation(.default, value: showVolumeCircle)
         }
     }
     

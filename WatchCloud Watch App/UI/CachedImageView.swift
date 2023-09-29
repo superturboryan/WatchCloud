@@ -11,16 +11,18 @@ import SwiftUI
 
 struct CachedImageView: View {
     
-    enum AspectRatio { case fit, fill }
-    
+    // Dependencies
     let url: String?
+    
+    // Defaults
     var fallbackSystemImageName = "photo"
-    var useCache = true // Default
-    var ratio: AspectRatio = .fit
+    var useCache = true
+    var ratio: AspectRatio = .fill
+    var animated = true
     
     var body: some View {
-        LazyImage(url: URL(string: url ?? "")) { state in
-            GeometryReader { geo in
+        GeometryReader { geo in
+            LazyImage(url: URL(string: url ?? "")) { state in
                 ZStack {
                     if let image = state.image {
                         image.resizable()
@@ -33,12 +35,19 @@ struct CachedImageView: View {
                         ProgressView()
                     }
                 }
+                .transition(.opacity)
+                .animation(.default, value: state.image)
                 .fullWidthAndHeight()
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .clipShape(RoundedRectangle(cornerRadius: geo.size.width / 6))
+                .clipped()
             }
+            .pipeline(useCache ? ImagePipeline(configuration: .withDataCache) : ImagePipeline.shared)
         }
-        .pipeline(useCache ? ImagePipeline(configuration: .withDataCache) : ImagePipeline.shared)
     }
+}
+
+extension CachedImageView {
+    enum AspectRatio { case fit, fill }
 }
 
 @available(watchOS 10, *)
