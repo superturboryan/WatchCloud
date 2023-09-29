@@ -141,7 +141,7 @@ struct NewPlayerView: View {
                 player.togglePlayback()
             } label: {
                 Image(systemName:player.isPlaying ? "pause.fill" : "play.fill")
-                    .contentTransition(.symbolEffect(.replace))
+                    .contentTransition(.symbolEffect(.replace, options: .speed(2.0)))
             }
             .controlSize(.large)
             .overlay {
