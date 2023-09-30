@@ -9,7 +9,9 @@
 
 ### 🐞 Bug fixes
 - Add .lproj folder for all localizations
-- Standardize artwork image view
+- Standardize image view used in NewPlayerView and PlaylistView
+- Remove subcription label from CurrentUserView
+- Old PlayerView: stop animating playback time labels, remove offset from toolbar button
 
 # 1.0.2
 🌎 Published 27 September  
