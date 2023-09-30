@@ -33,6 +33,7 @@ struct CurrentUserView: View {
             }
             Button(String(localized: "Cancel", comment: "Verb"), role: .cancel) {}
         }
+        .toolbarBackground(.clear, for: .navigationBar)
     }
     
     var userView: some View {

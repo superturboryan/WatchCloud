@@ -12,6 +12,7 @@
 - Standardize image view used in NewPlayerView and PlaylistView
 - Remove subcription label from CurrentUserView
 - Old PlayerView: stop animating playback time labels, remove offset from toolbar button
+- CurrentUserView: hide navigation bar bg (clipping image on SE44)
 
 # 1.0.2
 🌎 Published 27 September  
