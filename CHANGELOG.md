@@ -1,3 +1,16 @@
+# 1.0.3
+🌎 Published 30 September  
+🔨 Xcode 15.0  
+⌚️ watchOS 10.0  
+☁️📦 SoundCloud Swift Package 0.0.3
+
+### ✨ Features
+- Use new .contentTransition(.symbolEffect(.replace)) for icon transitions
+
+### 🐞 Bug fixes
+- Add .lproj folder for all localizations
+- Standardize artwork image view
+
 # 1.0.2
 🌎 Published 27 September  
 🔨 Xcode 15.0  
@@ -12,6 +25,7 @@
 - Strings not localized, translation errors
 - Info.plist missing localizations array
 - PlayerOptionsView background not taking up full size
+
 
 # 1.0.1
 🌎 Published 23 September  
@@ -31,6 +45,7 @@
 - PlayerView: fix time remaining going to 0 when time remaining was exactly 1 hour, animate changes
 - PlayerOptionsView: toggling playback speed doesn't start music if stopped
 - PlayerOptionsView: add black bg to (new watchOS 10 material bg was too translucent)
+
 
 # 1.0 🐣
 🌎 Published 19 September  
