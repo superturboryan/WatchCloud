@@ -156,6 +156,7 @@ struct PlayerView: View {
                     height: 6,
                     animation: .linear(duration: 1)
                 ))
+                .animation(.default, value: player.progress)
             HStack {
                 Text(verbatim: Int(player.progress).timeStringFromSeconds)
                 Spacer()
@@ -163,8 +164,6 @@ struct PlayerView: View {
             }
             .font(.footnote)
             .padding(.horizontal, 4)
-            .animation(.default, value: player.progress)
-            
         }
     }
 
@@ -179,7 +178,6 @@ struct PlayerView: View {
                     .frame(width: 22, height: 22) // Should this be custom size??
                     .foregroundStyle(LinearGradient.scOrange(.horizontal))
             }
-            .offset(y: -6)
         }
     }
     

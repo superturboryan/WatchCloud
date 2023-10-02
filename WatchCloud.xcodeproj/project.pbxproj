@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		941A00EB2AC304B6000F4693 /* NewPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A00EA2AC304B6000F4693 /* NewPlayerView.swift */; };
+		941A00F82AC70CEE000F4693 /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A00F72AC70CEE000F4693 /* CachedImageView.swift */; };
 		9446C5FB2ABDA57E00BCE5DF /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9446C5FA2ABDA57E00BCE5DF /* Localizable.xcstrings */; };
 		9448FF4B2AB31308003D63F1 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */; };
 		9448FF4D2AB343D7003D63F1 /* WatchKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4C2AB343D7003D63F1 /* WatchKit.swift */; };
@@ -101,6 +102,7 @@
 		941A00F02AC44793000F4693 /* Library - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Library - S945.png"; sourceTree = "<group>"; };
 		941A00F12AC44793000F4693 /* Playlist Summary - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Playlist Summary - S945.png"; sourceTree = "<group>"; };
 		941A00F22AC44793000F4693 /* Playlist Tracks - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Playlist Tracks - S945.png"; sourceTree = "<group>"; };
+		941A00F72AC70CEE000F4693 /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
 		9446C5FA2ABDA57E00BCE5DF /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		9448FF4C2AB343D7003D63F1 /* WatchKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchKit.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 		946F38C02AB07F81008CE9D1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				941A00F72AC70CEE000F4693 /* CachedImageView.swift */,
 				946F38C22AB07F81008CE9D1 /* CurrentUserView.swift */,
 				946F38C12AB07F81008CE9D1 /* DownloadsView.swift */,
 				946F38C92AB07F81008CE9D1 /* LibraryView.swift */,
@@ -518,6 +521,7 @@
 				946F38D82AB07F81008CE9D1 /* PlayerOptionsView.swift in Sources */,
 				94923C6B2ABDB5A300A67EBE /* PoweredBySCView.swift in Sources */,
 				946F38DA2AB07F81008CE9D1 /* SettingsView.swift in Sources */,
+				941A00F82AC70CEE000F4693 /* CachedImageView.swift in Sources */,
 				94923C6D2ABDBB2C00A67EBE /* String.swift in Sources */,
 				946F38DB2AB07F81008CE9D1 /* LoginView.swift in Sources */,
 				946F38D92AB07F81008CE9D1 /* PlaylistView.swift in Sources */,
@@ -679,7 +683,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Watch App/Config/Preview Content\"";
 				DEVELOPMENT_TEAM = T6MXF72738;
 				ENABLE_PREVIEWS = YES;
@@ -692,7 +696,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -711,7 +715,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Watch App/Config/Preview Content\"";
 				DEVELOPMENT_TEAM = T6MXF72738;
 				ENABLE_PREVIEWS = YES;
@@ -724,7 +728,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -742,10 +746,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T6MXF72738;
 				INFOPLIST_KEY_CFBundleDisplayName = WatchCloud;
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -758,10 +762,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T6MXF72738;
 				INFOPLIST_KEY_CFBundleDisplayName = WatchCloud;
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -777,7 +781,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T6MXF72738;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -792,7 +796,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp.Comp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -812,7 +816,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T6MXF72738;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -827,7 +831,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp.Comp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;

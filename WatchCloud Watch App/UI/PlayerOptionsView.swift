@@ -97,34 +97,61 @@ struct PlayerOptionsView: View {
     
     // MARK: - UI Helpers
     func buttonView(_ name: String, _ color: Color, _ text: String) -> some View {
-        Image(systemName: name)
-            .resizable()
-            .scaledToFit()
-            .font(Font.title.weight(.medium))
-            .padding(.vertical, 10)
-            .size(buttonSize)
-            .background(color.opacity(0.2))
-            .foregroundColor(color)
-            .clipShape(Capsule(style: .continuous))
-            .overlay {
-                Text(verbatim: text)
-                    .opacity(0.9)
-                    .lineLimit(1)
-                    .font(.footnote)
-                    .fontWeight(.medium)
-                    .offset(y: labelYOffset)
-                    .minimumScaleFactor(0.8)
+        ZStack {
+            if #available(watchOS 10.0, *) {
+                Image(systemName: name)
+                    .resizable()
+                    .scaledToFit()
+                    .contentTransition(.symbolEffect(.replace, options: .speed(2.0)))
+                    .font(Font.title.weight(.medium))
+                    .padding(.vertical, 10)
+                    .size(buttonSize)
+                    .background(color.opacity(0.2))
+                    .foregroundColor(color)
+                    .clipShape(Capsule(style: .continuous))
+                    .overlay {
+                        Text(verbatim: text)
+                            .opacity(0.9)
+                            .lineLimit(1)
+                            .font(.footnote)
+                            .fontWeight(.medium)
+                            .offset(y: labelYOffset)
+                            .minimumScaleFactor(0.8)
+                    }
+            } else {
+                Image(systemName: name)
+                    .resizable()
+                    .scaledToFit()
+                    .font(Font.title.weight(.medium))
+                    .padding(.vertical, 10)
+                    .size(buttonSize)
+                    .background(color.opacity(0.2))
+                    .foregroundColor(color)
+                    .clipShape(Capsule(style: .continuous))
+                    .overlay {
+                        Text(verbatim: text)
+                            .opacity(0.9)
+                            .lineLimit(1)
+                            .font(.footnote)
+                            .fontWeight(.medium)
+                            .offset(y: labelYOffset)
+                            .minimumScaleFactor(0.8)
+                    }
             }
+        }
     }
     
+    @ViewBuilder
     var playbackSpeedView: some View {
+        let speedString = "\(String(format: "%.\(player.playbackSpeed.numDecimalToDisplay)f", player.playbackSpeed.rawValue))x"
         ZStack {
             Color.scOrange.opacity(0.2)
-            Text(verbatim: "\(String(format: "%.\(player.playbackSpeed.numDecimalToDisplay)f", player.playbackSpeed.rawValue))x")
+            Text(verbatim: speedString)
                 .font(.system(size: 28, weight: .medium))
                 .minimumScaleFactor(0.8)
                 .padding(.horizontal, 8)
                 .foregroundColor(.scOrange)
+                .animation(.default, value: speedString)
         }
         .size(buttonSize)
         .fixedSize()

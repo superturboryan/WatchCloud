@@ -1,5 +1,21 @@
+# 1.0.3
+🌎 Published 30 September  
+🔨 Xcode 15.0  
+⌚️ watchOS 10.0  
+☁️📦 SoundCloud Swift Package 0.0.3
+
+### ✨ Features
+- Use new .contentTransition(.symbolEffect(.replace)) for icon transitions
+
+### 🐞 Bug fixes
+- Add .lproj folder for all localizations
+- Standardize image view used in NewPlayerView and PlaylistView
+- Remove subcription label from CurrentUserView
+- Old PlayerView: stop animating playback time labels, remove offset from toolbar button
+- CurrentUserView: hide navigation bar bg (clipping image on SE44)
+
 # 1.0.2
-🌎 Published 27 September
+🌎 Published 27 September  
 🔨 Xcode 15.0  
 ⌚️ watchOS 10.0  
 ☁️📦 **SoundCloud Swift Package 0.0.3 ⭐️**
@@ -13,8 +29,9 @@
 - Info.plist missing localizations array
 - PlayerOptionsView background not taking up full size
 
+
 # 1.0.1
-🌎 Published 23 September
+🌎 Published 23 September  
 🔨 **Xcode 15.0 ⭐️**  
 ⌚️ **watchOS 10.0 ⭐️**  
 ☁️📦 **SoundCloud Swift Package 0.0.2 ⭐️**
@@ -32,8 +49,9 @@
 - PlayerOptionsView: toggling playback speed doesn't start music if stopped
 - PlayerOptionsView: add black bg to (new watchOS 10 material bg was too translucent)
 
+
 # 1.0 🐣
-🌎 Published 19 September
+🌎 Published 19 September  
 🔨 Xcode 14.3.1  
 ⌚️ watchOS 9.4  
 ☁️📦 SoundCloud Swift Package 0.0.1
@@ -52,4 +70,4 @@
 - Share tracks, playlists, my profile
 - Change playback speed
 - OS media controls
-- **Minium watchOS: 9.1**
+- **Minimum watchOS: 9.1**
