@@ -8,7 +8,7 @@
 import SoundCloud
 import SwiftUI
 
-struct UserList: View {
+struct UserListView: View {
     
     @Binding var users: [User]
     @Binding var canLoadMore: Bool
@@ -55,7 +55,7 @@ struct UserList: View {
 
 #Preview {
     NavigationStack {
-        UserList(
+        UserListView(
             users: .constant([testUser(), testUser(), testUser(), testUser(), testUser()]),
             canLoadMore: .constant(false),
             title: "Following"
