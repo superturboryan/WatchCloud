@@ -158,7 +158,7 @@ struct DownloadsView: View {
 #Preview {
     let sc: SoundCloud = { () -> SoundCloud in
         let sc = testSC
-        sc.myUser = testUser
+        sc.myUser = testUser()
         sc.loadedPlaylists = testDefaultLoadedPlaylists
         sc.downloadsInProgress = [testTrack() : Progress.with(0.69)]
         sc.downloadedTracks = [testTrack(), testTrack(), testTrack()]

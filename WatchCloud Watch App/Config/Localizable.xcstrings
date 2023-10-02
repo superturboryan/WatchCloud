@@ -441,6 +441,9 @@
         }
       }
     },
+    "Detail view: %@" : {
+
+    },
     "Download" : {
       "comment" : "Verb",
       "localizations" : {

@@ -63,7 +63,7 @@ struct CurrentUserView: View {
 #Preview {
     NavigationStack {
         CurrentUserView().environmentObject({ () -> SoundCloud in
-            testSC.myUser = testUser
+            testSC.myUser = testUser()
             return testSC
         }())
     }
