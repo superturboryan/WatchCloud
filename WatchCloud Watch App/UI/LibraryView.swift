@@ -139,9 +139,20 @@ struct LibraryView: View {
         }
     }
     
+    @ViewBuilder
     var followingCell: some View {
-        navigationCell(id: -3, title: "Following") {
-            Text(verbatim: "Users I'm following list")
+        let title = String(localized: "Following")
+        if let usersImFollowingBinding = Binding($sc.usersImFollowing) {
+            navigationCell(id: -3, title: title) {
+                UserList(
+                    users: usersImFollowingBinding.collection,
+                    canLoadMore: Binding(get: { usersImFollowingBinding.wrappedValue.hasNextPage }, set: { _ in }),
+                    title: title) {
+                    Task {
+                        try? await sc.loadUsersImFollowing()
+                    }
+                }
+            }
         }
     }
 

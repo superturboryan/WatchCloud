@@ -50,6 +50,7 @@
 		94B634452ABDFAFA00E6FCDA /* ComplicationExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 94B6343A2ABDFAF900E6FCDA /* ComplicationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		94C169A02AB474EE00570B4F /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 94C1699F2AB474EE00570B4F /* Nuke */; };
 		94C169A22AB474EE00570B4F /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 94C169A12AB474EE00570B4F /* NukeUI */; };
+		94FAA18A2ACB319600EF97CE /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1892ACB319600EF97CE /* UserList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +160,7 @@
 		94B634552ABE5B7700E6FCDA /* Player - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player - S945.png"; sourceTree = "<group>"; };
 		94F3FCD12AB9A3B5005D03DF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		94F3FCD22AB9A3B5005D03DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		94FAA1892ACB319600EF97CE /* UserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,14 +302,15 @@
 				946F38C12AB07F81008CE9D1 /* DownloadsView.swift */,
 				946F38C92AB07F81008CE9D1 /* LibraryView.swift */,
 				946F38C62AB07F81008CE9D1 /* LoginView.swift */,
+				941A00EA2AC304B6000F4693 /* NewPlayerView.swift */,
 				946F38C32AB07F81008CE9D1 /* PlayerOptionsView.swift */,
 				946F38CA2AB07F81008CE9D1 /* PlayerView.swift */,
-				941A00EA2AC304B6000F4693 /* NewPlayerView.swift */,
 				946F38C42AB07F81008CE9D1 /* PlaylistView.swift */,
 				94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */,
 				946F38C82AB07F81008CE9D1 /* RootView.swift */,
 				946F38C52AB07F81008CE9D1 /* SettingsView.swift */,
 				946F38C72AB07F81008CE9D1 /* TrackCellView.swift */,
+				94FAA1892ACB319600EF97CE /* UserList.swift */,
 				9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */,
 			);
 			path = UI;
@@ -505,6 +508,7 @@
 				946F38D52AB07F81008CE9D1 /* LinearGradientProgressViewStyle.swift in Sources */,
 				941A00EB2AC304B6000F4693 /* NewPlayerView.swift in Sources */,
 				946F38D72AB07F81008CE9D1 /* CurrentUserView.swift in Sources */,
+				94FAA18A2ACB319600EF97CE /* UserList.swift in Sources */,
 				94923C6F2ABDBBD500A67EBE /* Int.swift in Sources */,
 				946F38D12AB07F81008CE9D1 /* Image.swift in Sources */,
 				946F38CF2AB07F81008CE9D1 /* Delete.swift in Sources */,
