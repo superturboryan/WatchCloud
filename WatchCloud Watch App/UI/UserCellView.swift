@@ -16,6 +16,7 @@ struct UserCellView: View {
 
             CachedImageView(url: user.avatarUrl)
                 .frame(width: 30, height: 30)
+                .clipShape(Circle())
 
             Text(verbatim: user.username)
 
