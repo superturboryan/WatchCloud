@@ -38,6 +38,8 @@ struct LibraryView: View {
 
                         playlistCell(Binding($sc.loadedPlaylists[PlaylistType.recentlyPosted.rawValue])!)
 
+                        followingCell
+
                         if !sc.myPlaylistIds.isEmpty {
                             Section(header: sectionHeaderView(String(localized:"My Playlists"))) {
                                 ForEach($sc.loadedPlaylists.values
@@ -137,6 +139,12 @@ struct LibraryView: View {
         }
     }
     
+    var followingCell: some View {
+        navigationCell(id: -3, title: "Following") {
+            Text(verbatim: "Users I'm following list")
+        }
+    }
+
     func switchToPlayerViewTabAfterDelay() {
         Task {
             try await Task.sleep(for: .seconds(0.4))
@@ -203,6 +211,9 @@ struct LibraryView: View {
         case -2: // Settings
             imageName = "gearshape.fill"
             colour = .gray
+        case -3:
+            imageName = "person.2.wave.2.fill"
+            colour = .scOrange
         
         default:
             imageName = "music.note.list"
