@@ -23,4 +23,6 @@ struct Config {
     private static let superID = [
         199092249, // SuperTurboRyan
     ]
+    
+    static let isKoreanLocale = String(Locale.preferredLanguages[0].prefix(2)) == Locale(identifier: "ko").language.languageCode?.identifier
 }
