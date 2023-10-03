@@ -20,7 +20,6 @@ struct PlaylistView: View {
     var downloadedTracks: [Track]
     
     var onFirstLoad: (() async throws -> Void)? = nil
-    var didSelectTrack: (Track) -> Void
     var showHeader = true
     var scrollToNowPlaying = false
     var updateNowPlayingPlaylist = true
@@ -201,19 +200,20 @@ struct PlaylistView: View {
         if sc.loadedTrack != track {
             // Start new track from beginning
             player.loadAndPlayTrack(track)
-        } else if !player.isPlaying {
+        } else  {
             // Continue playing
             player.continuePlayback()
         }
-        // Let parent container know selection was made
-        didSelectTrack(track)
+        
+        NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
     }
     
     func tappedShuffle() {
         sc.loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks = playlist.tracks?.shuffled()
         if let firstTrack = sc.loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks?.first {
             player.loadAndPlayTrack(firstTrack)
-            didSelectTrack(firstTrack)
+            
+            NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
         }
     }
 }
@@ -223,7 +223,6 @@ struct PlaylistView: View {
         PlaylistView(
             playlist: Binding(get: { testPlaylist(empty: false) }, set: { _ in }),
             downloadedTracks: [],
-            didSelectTrack: { _ in },
             showHeader: true
         )
         .environmentObject(testSC)

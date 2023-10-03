@@ -12,8 +12,6 @@ struct LibraryView: View {
 
     @EnvironmentObject var sc: SoundCloud
 
-    @Binding var rootSelectedTab: RootTab
-    
     let 👆 = "👆"
     
     var body: some View {
@@ -89,9 +87,6 @@ struct LibraryView: View {
                 PlaylistView(
                     playlist: playlist,
                     downloadedTracks: sc.downloadedTracks,
-                    didSelectTrack: { _ in
-                        switchToPlayerViewTabAfterDelay()
-                    },
                     showHeader: false,
                     scrollToNowPlaying: true,
                     updateNowPlayingPlaylist: false
@@ -103,9 +98,7 @@ struct LibraryView: View {
         navigationCell(
             id: PlaylistType.downloads.rawValue,
             title: PlaylistType.downloads.title) {
-                DownloadsView(didSelectTrack: { _ in
-                    switchToPlayerViewTabAfterDelay()
-                })
+                DownloadsView()
             }
     }
     // /////////////////////////////////////////////////////////////////////////////////////////////
@@ -117,9 +110,6 @@ struct LibraryView: View {
                 downloadedTracks: sc.downloadedTracks,
                 onFirstLoad: {
                     try await sc.loadTracksForPlaylist(with: playlist.id)
-                },
-                didSelectTrack: { _ in
-                    switchToPlayerViewTabAfterDelay()
                 }
             )
         }
@@ -153,13 +143,6 @@ struct LibraryView: View {
                     }
                 }
             }
-        }
-    }
-
-    func switchToPlayerViewTabAfterDelay() {
-        Task {
-            try await Task.sleep(for: .seconds(0.4))
-            withAnimation { rootSelectedTab = RootTab.player }
         }
     }
     
@@ -254,7 +237,7 @@ struct LibraryView: View {
 }
 
 #Preview {
-    LibraryView(rootSelectedTab: Binding(get: { RootTab.library }, set: { _ in }))
+    LibraryView()
         .environmentObject({() -> SoundCloud in
             let sc = SoundCloud(testSCConfig)
             sc.loadedPlaylists = testDefaultLoadedPlaylists

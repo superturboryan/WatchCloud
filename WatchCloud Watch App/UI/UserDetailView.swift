@@ -52,10 +52,11 @@ struct UserDetailView: View {
     
     @MainActor
     private func loadTracks() async {
+        let numberOfTracksToLoad = 1000
         isLoading = true
         do {
-            tracks = try await sc.getTracksForUser(user.id, 1000).items
-            likedTracks = try await sc.getLikedTracksForUser(user.id, 1000).items
+            tracks = try await sc.getTracksForUser(user.id, numberOfTracksToLoad).items
+            likedTracks = try await sc.getLikedTracksForUser(user.id, numberOfTracksToLoad).items
         } catch {
             print("❌ Failed to load tracks for user")
         }
@@ -126,7 +127,7 @@ struct UserDetailView: View {
     @ViewBuilder
     private var subscriptionLabel: some View {
         if user.subscription.lowercased() != "free" {
-            Text(user.subscription)
+            Text(verbatim: user.subscription)
                 .font(.system(size: 12, weight: .semibold))
                 .padding(.horizontal, 3)
                 .background { LinearGradient.scOrange(.vertical) }

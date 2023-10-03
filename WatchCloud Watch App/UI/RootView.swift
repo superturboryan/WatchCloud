@@ -40,7 +40,7 @@ struct RootView: View {
     var rootTabView: some View {
         let playlistIsLoaded = !(sc.nowPlayingQueue?.isEmpty ?? true)
         TabView(selection: $selectedTab) {
-            LibraryView(rootSelectedTab: $selectedTab).tag(RootTab.library)
+            LibraryView().tag(RootTab.library)
             // 👇 Loading PlayerView is the culprit for "Attribute graph cycle detected"... 
             if playlistIsLoaded {
                 if #available(watchOS 10, *) {
@@ -54,8 +54,17 @@ struct RootView: View {
                 }
             }
         }
-        
         .tabViewStyle(PageTabViewStyle())
+        .onReceive(NotificationCenter.default.publisher(for: .switchToPlayerTab)) { _ in
+            switchToPlayerTabAfterDelay()
+        }
+    }
+    
+    private func switchToPlayerTabAfterDelay() {
+        Task {
+            try await Task.sleep(for: .seconds(0.4))
+            withAnimation { selectedTab = .player }
+        }
     }
     
     var loadingView: some View {
@@ -94,4 +103,8 @@ struct RootView: View {
 
 #Preview {
     RootView().environmentObject(testSC)    
+}
+
+extension Notification.Name {
+    static let switchToPlayerTab = Notification.Name("switchToPlayerTab")
 }
