@@ -11,6 +11,8 @@ import SwiftUI
 struct UserDetailView: View {
     
     @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var player: SCAudioPlayer
+    
     @Binding var user: User
     
     @State var isLoading = false
@@ -39,6 +41,7 @@ struct UserDetailView: View {
             .padding(.top, -20)
             .padding(.horizontal)
             .fontDesign(.rounded)
+            .buttonStyle(.plain)
         }
         .task {
             if tracks.isEmpty && likedTracks.isEmpty {
@@ -91,17 +94,17 @@ struct UserDetailView: View {
         VStack {
             Text(user.username)
                 .font(.headline)
-            HStack(spacing: 6) {
-                HStack(spacing: 2) {
-                    Image(systemName: "mappin").foregroundStyle(.blue)
-                    Text(user.city ?? "?")
+            HStack(spacing: 8) {
+                if let city = user.city, !city.isEmpty {
+                    HStack(spacing: 2) {
+                        Image(systemName: "mappin").foregroundStyle(.blue)
+                        Text(verbatim: city)
+                    }
                 }
-                Spacer(minLength: 0)
                 HStack(spacing: 2) {
                     Image(systemName: "person.wave.2.fill").foregroundStyle(Color.scOrange)
                     Text(user.followersCount.formattedIfOver1000)
                 }
-                Spacer(minLength: 0)
                 HStack(spacing: 2) {
                     Image(systemName: "music.note").foregroundStyle(Color.scOrange)
                     Text(user.trackCount.formattedIfOver1000)
@@ -136,26 +139,54 @@ struct UserDetailView: View {
         }
     }
     
+    @ViewBuilder
     private func playlistSection(_ title: String, _ tracks: [Track]) -> some View {
+        let playlist = Playlist(id: 0, user: user, title: title, tracks: tracks)
         VStack {
-            HStack {
-                Text(title)
-                Spacer()
-                Text(String(localized: "View all"))
-                    .foregroundStyle(.secondary)
-            }
-            .font(.footnote)
-            .onTapGesture {
-                // Go to PlaylistView
+            NavigationLink {
+                PlaylistView(
+                    playlist: .constant(playlist),
+                    downloadedTracks: sc.downloadedTracks,
+                    showHeader: false
+                )
+            } label: {
+                HStack {
+                    Text(title)
+                    Spacer()
+                    Text(String(localized: "View all"))
+                        .foregroundStyle(.secondary)
+                }
+                .font(.footnote)
             }
             ForEach(Array(tracks.prefix(3))) { track in
                 TrackCellView(
                     track: .constant(track),
                     isPlaying: sc.loadedTrack == track,
                     isDownloaded: sc.downloadedTracks.contains(track)
-                )
+                ).onTapGesture {
+                    tapped(track, in: tracks)
+                }
             }
         }
+    }
+    
+    private func tapped(_ track: Track, in trackList: [Track]) {
+        // Copied from PlaylistView
+        
+        // Set queue
+        if sc.nowPlayingQueue != trackList {
+            sc.setNowPlayingQueue(with: trackList)
+        }
+        
+        if sc.loadedTrack != track {
+            // Start new track from beginning
+            player.loadAndPlayTrack(track)
+        } else  {
+            // Continue playing
+            player.continuePlayback()
+        }
+        
+        NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
     }
 }
 
@@ -163,5 +194,6 @@ struct UserDetailView: View {
     NavigationStack {
         UserDetailView(user: .constant(testUser(27127117)))
             .environmentObject(testSC)
+            .environmentObject(SCAudioPlayer(testSC))
     }
 }
