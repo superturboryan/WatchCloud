@@ -145,7 +145,7 @@ struct LibraryView: View {
         if let usersImFollowingBinding = Binding($sc.usersImFollowing) {
             navigationCell(id: -3, title: title) {
                 UserListView(
-                    users: usersImFollowingBinding.collection,
+                    users: usersImFollowingBinding.items,
                     canLoadMore: Binding(get: { usersImFollowingBinding.wrappedValue.hasNextPage }, set: { _ in }),
                     title: title) {
                     Task {

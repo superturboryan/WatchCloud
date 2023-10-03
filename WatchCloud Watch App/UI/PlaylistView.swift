@@ -171,7 +171,6 @@ struct PlaylistView: View {
                     // .id() automatically applied when using ForEach(Identifiable) 🤓
                     .onTapGesture { tapped(track.wrappedValue) }
                 }
-                .animation(.default, value: playlist.tracks)
                 
                 if playlist.hasNextPage {
                     trackListLoadingView.onAppear {
@@ -183,6 +182,7 @@ struct PlaylistView: View {
                     sectionFooterView(String(localized: "End of playlist"))
                 }
             }
+            .animation(.default, value: playlist.tracks)
             .padding(.top, 10)
         } else {
             Text("Playlist is empty")

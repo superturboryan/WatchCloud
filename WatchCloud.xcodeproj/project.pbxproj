@@ -52,6 +52,7 @@
 		94C169A22AB474EE00570B4F /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 94C169A12AB474EE00570B4F /* NukeUI */; };
 		94FAA18A2ACB319600EF97CE /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1892ACB319600EF97CE /* UserListView.swift */; };
 		94FAA18C2ACB3B4200EF97CE /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */; };
+		94FAA1D02ACC273600EF97CE /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1CF2ACC273600EF97CE /* UserDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +164,7 @@
 		94F3FCD22AB9A3B5005D03DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		94FAA1892ACB319600EF97CE /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
 		94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellView.swift; sourceTree = "<group>"; };
+		94FAA1CF2ACC273600EF97CE /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +315,7 @@
 				946F38C52AB07F81008CE9D1 /* SettingsView.swift */,
 				946F38C72AB07F81008CE9D1 /* TrackCellView.swift */,
 				94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */,
+				94FAA1CF2ACC273600EF97CE /* UserDetailView.swift */,
 				94FAA1892ACB319600EF97CE /* UserListView.swift */,
 				9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */,
 			);
@@ -511,6 +514,7 @@
 				946F38D52AB07F81008CE9D1 /* LinearGradientProgressViewStyle.swift in Sources */,
 				941A00EB2AC304B6000F4693 /* NewPlayerView.swift in Sources */,
 				946F38D72AB07F81008CE9D1 /* CurrentUserView.swift in Sources */,
+				94FAA1D02ACC273600EF97CE /* UserDetailView.swift in Sources */,
 				94FAA18C2ACB3B4200EF97CE /* UserCellView.swift in Sources */,
 				94FAA18A2ACB319600EF97CE /* UserListView.swift in Sources */,
 				94923C6F2ABDBBD500A67EBE /* Int.swift in Sources */,
