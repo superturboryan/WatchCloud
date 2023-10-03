@@ -18,8 +18,6 @@ struct RootView: View {
     @State var loading = false
     @State private var selectedTab: RootTab = .library
     
-    let isRightToLeft = Locale.current.language.characterDirection == .rightToLeft
-    
     var body: some View {
         ZStack {
             if loaded {
@@ -71,7 +69,7 @@ struct RootView: View {
         ProgressView() {
             VStack(spacing: 12) {
                 Text("Getting ready...")
-                Text(verbatim: isRightToLeft ? "🎶🎶" : "💃🕺")
+                Text(verbatim: Config.isRightToLeft ? "🎶🎶" : "💃🕺")
             }
             .fontWeight(.semibold)
             .fontDesign(.rounded)
