@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     " to download tracks to watch" : {
       "localizations" : {
         "ar" : {
@@ -440,9 +443,6 @@
           }
         }
       }
-    },
-    "Detail view: %@" : {
-
     },
     "Download" : {
       "comment" : "Verb",
