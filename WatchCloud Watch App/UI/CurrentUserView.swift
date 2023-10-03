@@ -39,7 +39,7 @@ struct CurrentUserView: View {
     var userView: some View {
         GeometryReader { geo in
             VStack(spacing: 12) {
-                CachedImageView(url: sc.myUser!.avatarUrl)
+                CachedImageView(url: sc.myUser!.largerAvatarUrl)
                     .frame(width: geo.size.width * 0.6)
                     .clipShape(Circle())
                     
