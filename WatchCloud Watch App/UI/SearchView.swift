@@ -5,13 +5,20 @@
 //  Created by Ryan Forsyth on 2023-10-04.
 //
 
+import SoundCloud
 import SwiftUI
 
 struct SearchView: View {
     
+    @EnvironmentObject var sc: SoundCloud
+    
     @State var showSearchResults = false
-    @State var searchText = ""
+    @State var query = ""
     @State var searchType: SearchType = .tracks
+    
+    @State var trackResults: Page<Track>? = nil
+    @State var playlistResults: Page<Playlist>? = nil
+    @State var artistResults: Page<User>? = nil
     
     @FocusState var isSearchFocused: Bool
     @Namespace var search
@@ -19,17 +26,15 @@ struct SearchView: View {
     var body: some View {
         ScrollView {
             VStack {
-                TextField("Search for \(searchType.rawValue)", text: $searchText)
+                TextField("Search for \(searchType.rawValue)", text: $query)
                     .autocorrectionDisabled()
                     .focused($isSearchFocused)
-                    .onSubmit {
-                        showSearchResults = true
-                    }
+                    .onSubmit { performSearch(with: query) }
                 GeometryReader { geo in
                     HStack {
                         searchCell(.tracks, width: (geo.size.width - 10) / 3)
                         searchCell(.playlists, width: (geo.size.width - 10) / 3)
-                        searchCell(.users, width: (geo.size.width - 10) / 3)
+                        searchCell(.artists, width: (geo.size.width - 10) / 3)
                     }
                     .fullWidth()
                 }
@@ -37,23 +42,75 @@ struct SearchView: View {
             }
             .fullWidthAndHeight()
         }
+        .toolbar {
+            searchButton
+        }
         .navigationDestination(isPresented: $showSearchResults) {
             searchResultsView
         }
         .focusScope(search)
+        .fontDesign(.rounded)
         .animation(.default, value: searchType)
         .navigationTitle("Search")
         .navigationBarTitleDisplayMode(.inline)
     }
     
+    private var searchButton: some ToolbarContent {
+        ToolbarItem(placement: .confirmationAction) {
+            Button {
+                performSearch(with: query)
+            } label: {
+                Image(systemName: "magnifyingglass.circle.fill")
+                    .foregroundStyle(LinearGradient.scOrange(.vertical))
+            }
+            .disabled(query.isEmpty)
+        }
+    }
+    
+    private func performSearch(with query: String) {
+        Task {
+            switch searchType {
+            case .tracks:
+                trackResults = try await sc.searchTracks(query)
+            case .playlists:
+                playlistResults = try await sc.searchPlaylists(query)
+            case .artists:
+                artistResults = try await sc.searchUsers(query)
+            }
+            
+            showSearchResults = true
+        }
+    }
+    
+    @ViewBuilder
     private var searchResultsView: some View {
         switch searchType {
         case .tracks:
-            Text("List of tracks")
+            if let tracks = trackResults?.items {
+                let playlist = Playlist(id: 0, user: sc.myUser!, title: query, tracks: tracks)
+                PlaylistView(
+                    playlist: .constant(playlist),
+                    downloadedTracks: sc.downloadedTracks,
+                    showHeader: false
+                )
+            }
         case .playlists:
             Text("List of playlists")
-        case .users:
-            Text("List of users")
+        case .artists:
+            if let results = Binding($artistResults) {
+                UserListView(
+                    users: results.items,
+                    canLoadMore: .constant(results.wrappedValue.hasNextPage),
+                    title: query
+                ) {
+                    Task {
+                        if let nextPage = results.wrappedValue.nextPage, 
+                            let nextResults: Page<User> = try? await sc.pageOfItems(for: nextPage) {
+                            artistResults?.update(with: nextResults)
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -76,7 +133,6 @@ struct SearchView: View {
                 
         }
         .fontWeight(searchType == type ? .medium : .regular)
-        .fontDesign(.rounded)
         .padding(.vertical, 10)
         .background(searchType == type ? Color.scOrange.opacity(0.3) : .secondary.opacity(0.2))
         .cornerRadius(10)
@@ -91,13 +147,13 @@ struct SearchView: View {
 
 extension SearchView {
     enum SearchType: String {
-        case tracks, playlists, users
+        case tracks, playlists, artists
     
         var icon: String {
             switch self {
             case .tracks: return "music.note"
             case .playlists: return "music.note.list"
-            case .users: return "person.crop.circle.fill"
+            case .artists: return "person.crop.circle.fill"
             }
         }
     }
@@ -106,5 +162,6 @@ extension SearchView {
 #Preview {
     NavigationStack {
         SearchView()
+            .environmentObject(testSC)
     }
 }
