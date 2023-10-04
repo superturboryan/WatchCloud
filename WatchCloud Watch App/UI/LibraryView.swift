@@ -30,8 +30,8 @@ struct LibraryView: View {
                         } else {
                             if Config.isDownloadingEnabled(for: sc.myUser?.id) {
                                 downloadsCell.id(👆)
-                                searchCell
                             }
+                            searchCell
                         }
 
                         playlistCell(Binding($sc.loadedPlaylists[PlaylistType.likes.rawValue])!)
@@ -217,8 +217,8 @@ struct LibraryView: View {
             imageName = "person.2.wave.2.fill"
             colour = .scOrange
         case -4:
-            imageName = "magnifyingglass"
-            colour = .orange
+            imageName = "magnifyingglass.circle.fill"
+            gradient = .scOrange(.vertical)
         
         default:
             imageName = "music.note.list"

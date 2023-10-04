@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
     
+    @State var showSearchResults = false
     @State var searchText = ""
     @State var searchType: SearchType = .tracks
     
@@ -19,9 +20,10 @@ struct SearchView: View {
         ScrollView {
             VStack {
                 TextField("Search for \(searchType.rawValue)", text: $searchText)
+                    .autocorrectionDisabled()
                     .focused($isSearchFocused)
                     .onSubmit {
-                        print("Searching for \(searchText)")
+                        showSearchResults = true
                     }
                 GeometryReader { geo in
                     HStack {
@@ -35,13 +37,27 @@ struct SearchView: View {
             }
             .fullWidthAndHeight()
         }
+        .navigationDestination(isPresented: $showSearchResults) {
+            searchResultsView
+        }
         .focusScope(search)
         .animation(.default, value: searchType)
         .navigationTitle("Search")
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    func searchCell(_ type: SearchType, width: CGFloat) -> some View {
+    private var searchResultsView: some View {
+        switch searchType {
+        case .tracks:
+            Text("List of tracks")
+        case .playlists:
+            Text("List of playlists")
+        case .users:
+            Text("List of users")
+        }
+    }
+    
+    private func searchCell(_ type: SearchType, width: CGFloat) -> some View {
         VStack(spacing: 4) {
             Image(systemName: type.icon)
                 .resizable()
