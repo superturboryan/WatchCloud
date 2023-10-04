@@ -23,12 +23,14 @@ struct LibraryView: View {
                         if let nowPlayingBinding = Binding($sc.loadedPlaylists[PlaylistType.nowPlaying.rawValue]),
                            !(nowPlayingBinding.wrappedValue.tracks?.isEmpty ?? true) {
                             nowPlayingCell(nowPlayingBinding).id(👆)
+                            searchCell
                             if Config.isDownloadingEnabled(for: sc.myUser?.id) {
                                 downloadsCell
                             }
                         } else {
                             if Config.isDownloadingEnabled(for: sc.myUser?.id) {
                                 downloadsCell.id(👆)
+                                searchCell
                             }
                         }
 
@@ -145,6 +147,12 @@ struct LibraryView: View {
             }
         }
     }
+
+    var searchCell: some View {
+        navigationCell(id: -4, title: String(localized: "Search")) {
+            Text("Search")
+        }
+    }
     
     func navigationCell(
         id: Int,
@@ -208,6 +216,9 @@ struct LibraryView: View {
         case -3:
             imageName = "person.2.wave.2.fill"
             colour = .scOrange
+        case -4:
+            imageName = "magnifyingglass"
+            colour = .purple
         
         default:
             imageName = "music.note.list"
