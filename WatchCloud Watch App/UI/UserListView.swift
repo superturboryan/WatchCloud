@@ -21,7 +21,7 @@ struct UserListView: View {
             LazyVStack {
                 ForEach($users, id: \.id) { user in
                     NavigationLink {
-                        UserDetailView(user: user)
+                        UserDetailView(user: user.wrappedValue)
                     } label: {
                         UserCellView(user: user)
                     }

@@ -13,14 +13,14 @@ struct UserDetailView: View {
     @EnvironmentObject var sc: SoundCloud
     @EnvironmentObject var player: SCAudioPlayer
     
-    @Binding var user: User
+    var user: User
     
     @State var isLoading = false
     @State var tracks: [Track] = []
     @State var likedTracks: [Track] = []
     
     var isFollowed: Bool {
-        (sc.usersImFollowing?.items ?? []).contains(user)
+        (sc.usersImFollowing?.items.map(\.id) ?? []).contains(user.id)
     }
     
     var body: some View {
@@ -120,10 +120,17 @@ struct UserDetailView: View {
     private var followButton: some ToolbarContent {
         ToolbarItem(placement: .confirmationAction) {
             Button {
-                print("Follow button tapped")
+                Task {
+                    if isFollowed {
+                        try await sc.unfollowUser(user)
+                    } else {
+                        try await sc.followUser(user)
+                    }
+                }
             } label: {
-                Image(systemName: isFollowed ? "person.fill.checkmark" : "person.fill.badge.plus")
+                Image(systemName: isFollowed ? "checkmark" : "plus")
                     .foregroundStyle(Color.scOrange)
+                    .fontWeight(.bold)
             }
         }
     }
@@ -176,12 +183,10 @@ struct UserDetailView: View {
     
     private func tapped(_ track: Track, in trackList: [Track]) {
         // Copied from PlaylistView
-        
         // Set queue
         if sc.nowPlayingQueue != trackList {
             sc.setNowPlayingQueue(with: trackList)
         }
-        
         if sc.loadedTrack != track {
             // Start new track from beginning
             player.loadAndPlayTrack(track)
@@ -189,14 +194,13 @@ struct UserDetailView: View {
             // Continue playing
             player.continuePlayback()
         }
-        
         NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
     }
 }
 
 #Preview {
     NavigationStack {
-        UserDetailView(user: .constant(testUser(27127117)))
+        UserDetailView(user: testUser(27127117))
             .environmentObject(testSC)
             .environmentObject(SCAudioPlayer(testSC))
     }
