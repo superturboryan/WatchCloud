@@ -19,6 +19,8 @@ struct UserDetailView: View {
     @State var tracks: [Track] = []
     @State var likedTracks: [Track] = []
     
+    @State var showFullDescriptionView = false
+
     var isFollowed: Bool {
         (sc.usersImFollowing?.items.map(\.id) ?? []).contains(user.id)
     }
@@ -40,9 +42,12 @@ struct UserDetailView: View {
             }
             .animation(.default, value: tracks)
             .animation(.default, value: likedTracks)
-            .padding(.top, -20)
+            .padding(.top, -14)
             .fontDesign(.rounded)
             .buttonStyle(.plain)
+        }
+        .sheet(isPresented: $showFullDescriptionView) {
+            fullDescriptionView
         }
         .task {
             if tracks.isEmpty && likedTracks.isEmpty {
@@ -89,12 +94,14 @@ struct UserDetailView: View {
 
             artistInfoLabels
         }
+        .padding(.horizontal)
     }
     
     private var artistInfoLabels: some View {
-        VStack {
+        VStack(spacing: 2) {
             Text(user.username)
                 .font(.headline)
+
             HStack(spacing: 8) {
                 if let city = user.city, !city.isEmpty {
                     HStack(spacing: 2) {
@@ -111,21 +118,35 @@ struct UserDetailView: View {
                     Text(user.trackCount.formattedIfOver1000)
                 }
             }
-            .font(.footnote)
             .minimumScaleFactor(0.8)
+
+            if let description = user.description?.removingAllExtraNewLines {
+                Text(description)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(.secondary)
+                    .onTapGesture {
+                        showFullDescriptionView = true
+                    }
+            }
         }
+        .font(.footnote)
         .lineLimit(1)
     }
     
+    private var fullDescriptionView: some View {
+        ScrollView(showsIndicators: false) {
+            Text(user.description ?? "")
+                .padding()
+                .fullWidthAndHeight()
+        }
+    }
+
     private var followButton: some ToolbarContent {
         ToolbarItem(placement: .confirmationAction) {
             Button {
                 Task {
-                    if isFollowed {
-                        try await sc.unfollowUser(user)
-                    } else {
-                        try await sc.followUser(user)
-                    }
+                    try await (isFollowed ? sc.unfollowUser(user) : sc.followUser(user))
                 }
             } label: {
                 Image(systemName: isFollowed ? "checkmark" : "plus")
