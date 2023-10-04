@@ -129,6 +129,7 @@ struct UserDetailView: View {
                 }
             } label: {
                 Image(systemName: isFollowed ? "checkmark" : "plus")
+                    .symbolReplaceEffect()
                     .foregroundStyle(Color.scOrange)
                     .fontWeight(.bold)
             }
