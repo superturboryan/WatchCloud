@@ -150,7 +150,7 @@ struct LibraryView: View {
 
     var searchCell: some View {
         navigationCell(id: -4, title: String(localized: "Search")) {
-            Text("Search")
+            SearchView()
         }
     }
     
@@ -218,7 +218,7 @@ struct LibraryView: View {
             colour = .scOrange
         case -4:
             imageName = "magnifyingglass"
-            colour = .purple
+            colour = .orange
         
         default:
             imageName = "music.note.list"
