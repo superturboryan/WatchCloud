@@ -1102,6 +1102,9 @@
         }
       }
     },
+    "See all" : {
+
+    },
     "Settings" : {
       "localizations" : {
         "ar" : {
@@ -1237,9 +1240,6 @@
           }
         }
       }
-    },
-    "View all" : {
-
     }
   },
   "version" : "1.0"

@@ -25,7 +25,7 @@ struct UserDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 8) {
+            VStack(spacing: 12) {
                 summary
                 if isLoading {
                     loadingView
@@ -38,8 +38,9 @@ struct UserDetailView: View {
                     playlistSection("Liked tracks", likedTracks)
                 }
             }
+            .animation(.default, value: tracks)
+            .animation(.default, value: likedTracks)
             .padding(.top, -20)
-            .padding(.horizontal)
             .fontDesign(.rounded)
             .buttonStyle(.plain)
         }
@@ -142,7 +143,7 @@ struct UserDetailView: View {
     @ViewBuilder
     private func playlistSection(_ title: String, _ tracks: [Track]) -> some View {
         let playlist = Playlist(id: 0, user: user, title: title, tracks: tracks)
-        VStack {
+        VStack(spacing: 12) {
             NavigationLink {
                 PlaylistView(
                     playlist: .constant(playlist),
@@ -153,18 +154,21 @@ struct UserDetailView: View {
                 HStack {
                     Text(title)
                     Spacer()
-                    Text(String(localized: "View all"))
+                    Text(String(localized: "See all"))
                         .foregroundStyle(.secondary)
                 }
                 .font(.footnote)
+                .padding(.horizontal)
             }
-            ForEach(Array(tracks.prefix(3))) { track in
-                TrackCellView(
-                    track: .constant(track),
-                    isPlaying: sc.loadedTrack == track,
-                    isDownloaded: sc.downloadedTracks.contains(track)
-                ).onTapGesture {
-                    tapped(track, in: tracks)
+            VStack(spacing: 4) {
+                ForEach(Array(tracks.prefix(3))) { track in
+                    TrackCellView(
+                        track: .constant(track),
+                        isPlaying: sc.loadedTrack == track,
+                        isDownloaded: sc.downloadedTracks.contains(track)
+                    ).onTapGesture {
+                        tapped(track, in: tracks)
+                    }
                 }
             }
         }
