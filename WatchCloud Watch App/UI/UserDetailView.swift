@@ -84,17 +84,21 @@ struct UserDetailView: View {
     }
     
     private var summary: some View {
-        VStack(spacing: 10) {
-            CachedImageView(url: user.largerAvatarUrl)
-                .frame(width: 100, height: 100)
-                .clipShape(Circle())
-                .overlay(alignment: .bottom) {
-                    subscriptionLabel
-                }
-
-            artistInfoLabels
+        GeometryReader { geo in
+            VStack(spacing: 10) {
+                CachedImageView(url: user.largerAvatarUrl)
+                    .frame(width: geo.size.width * 0.5, height: geo.size.width * 0.5)
+                    .clipShape(Circle())
+                    .overlay(alignment: .bottom) {
+                        subscriptionLabel
+                    }
+                artistInfoLabels
+            }
+            .padding(.top, geo.safeAreaInsets.top)
+            .padding(.horizontal)
+            .fullWidth()
         }
-        .padding(.horizontal)
+        .aspectRatio(contentMode: .fit)
     }
     
     private var artistInfoLabels: some View {
