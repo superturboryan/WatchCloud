@@ -35,7 +35,6 @@ struct PlaylistView: View {
                     trackList
                 }
             }
-            .padding(.top, showHeader ? -30 : 0)
             .task {
                 #warning("Errors not handled")
                 if isFirstLoad, let onFirstLoad {
@@ -48,7 +47,7 @@ struct PlaylistView: View {
                 if scrollToNowPlaying,
                 let nowPlaying = sc.loadedTrack,
                 (playlist.tracks ?? []).contains(nowPlaying) {
-                    withAnimation { sv.scrollTo(nowPlaying.id, anchor: .center) }
+                    withAnimation { sv.scrollTo(nowPlaying.id, anchor: .top) }
                 }
             }
         }
@@ -140,7 +139,6 @@ struct PlaylistView: View {
                 .disabled(isTracksEmpty)
             }
         }
-        .size(Device.screenSize)
     }
     
     var trackListLoadingView: some View {

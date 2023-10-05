@@ -371,6 +371,9 @@
         }
       }
     },
+    "artists" : {
+      "comment" : "Plural noun"
+    },
     "Cancel" : {
       "comment" : "Verb",
       "localizations" : {
@@ -1070,6 +1073,9 @@
         }
       }
     },
+    "playlists" : {
+      "comment" : "Plural noun"
+    },
     "powered by" : {
       "comment" : "Used next to SC logo",
       "localizations" : {
@@ -1249,6 +1255,9 @@
           }
         }
       }
+    },
+    "tracks" : {
+      "comment" : "Plural noun"
     }
   },
   "version" : "1.0"

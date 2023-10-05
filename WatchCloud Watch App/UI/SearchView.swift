@@ -21,7 +21,6 @@ struct SearchView: View {
     @State var artistResults: Page<User>? = nil
     
     @FocusState var isSearchFocused: Bool
-    @Namespace var search
     
     var body: some View {
         ScrollView {
@@ -41,7 +40,6 @@ struct SearchView: View {
         .navigationDestination(isPresented: $showSearchResults) {
             searchResultsView
         }
-        .focusScope(search)
         .fontDesign(.rounded)
         .animation(.default, value: searchType)
         .navigationTitle("Search")
@@ -108,7 +106,7 @@ struct SearchView: View {
                 PlaylistListView(
                     playlists: results.items,
                     canLoadMore: .constant(results.wrappedValue.hasNextPage),
-                    title: query
+                    title: "\"\(query)\""
                 ) {
                     Task {
                         if let nextPage = results.wrappedValue.nextPage,
@@ -144,7 +142,7 @@ struct SearchView: View {
                 .frame(width: 24, height: 24)
                 .foregroundStyle(LinearGradient.scOrange(.vertical))
                 
-            Text(verbatim: type.rawValue.capitalized)
+            Text(verbatim: type.localized.capitalized)
                 .font(.footnote)
                 .foregroundColor(searchType == type ? .primary : .secondary)
                 .lineLimit(1)
@@ -170,6 +168,14 @@ struct SearchView: View {
 extension SearchView {
     enum SearchType: String {
         case tracks, playlists, artists
+        
+        var localized: String {
+            switch self {
+            case .tracks: return String(localized: "tracks", comment: "Plural noun")
+            case .playlists: return String(localized: "playlists", comment: "Plural noun")
+            case .artists: return String(localized: "artists", comment: "Plural noun")
+            }
+        }
     
         var icon: String {
             switch self {

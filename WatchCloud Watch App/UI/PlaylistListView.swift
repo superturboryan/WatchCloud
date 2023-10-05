@@ -41,7 +41,11 @@ struct PlaylistListView: View {
             .animation(.default, value: playlists)
         }
         .navigationDestination(isPresented: .constant(selectedPlaylist != nil)) {
-            if let selectedPlaylist { PlaylistView(playlist: .constant(selectedPlaylist)) }
+            if let selectedPlaylist {
+                PlaylistView(playlist: .constant(selectedPlaylist)).onDisappear {
+                    self.selectedPlaylist = nil
+                }
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(title)
