@@ -35,7 +35,7 @@ struct PlaylistView: View {
                     trackList
                 }
             }
-            .padding(.top, -30)
+            .padding(.top, showHeader ? -30 : 0)
             .task {
                 #warning("Errors not handled")
                 if isFirstLoad, let onFirstLoad {
@@ -68,14 +68,14 @@ struct PlaylistView: View {
         let isTracksEmpty = playlist.tracks?.isEmpty ?? true
         let scrollToFirstTrack = {
             let firstTrackId = playlist.tracks?.first?.id ?? -1
-            withAnimation { tracklistSV.scrollTo(firstTrackId, anchor: .top) }
+            withAnimation { tracklistSV.scrollTo(firstTrackId, anchor: .center) }
         }
         
         VStack(spacing: 10) {
             // Artwork and play all button
             HStack(spacing: 8) {
                 let size = CGSize(width: Device.screenSize.width / 2.5, height: Device.screenSize.width / 2.5)
-                // First track or playlist artist artwork
+                
                 CachedImageView(url: playlist.largerArtworkUrlWithTrackAndUserFallback.absoluteString)
                 .size(size)
                 
