@@ -17,8 +17,6 @@ struct PlaylistView: View {
     @State private var isLoading = false
     
     @Binding var playlist: Playlist
-    #warning("REMOVE THIS")
-    var downloadedTracks: [Track]
     
     var onFirstLoad: (() async throws -> Void)? = nil
     var showHeader = true
@@ -166,7 +164,7 @@ struct PlaylistView: View {
                     TrackCellView(
                         track: track,
                         isPlaying: sc.loadedTrack == track.wrappedValue,
-                        isDownloaded: downloadedTracks.contains(track.wrappedValue)
+                        isDownloaded: sc.downloadedTracks.contains(track.wrappedValue)
                     )
                     // .id() automatically applied when using ForEach(Identifiable) 🤓
                     .onTapGesture { tapped(track.wrappedValue) }
@@ -222,8 +220,7 @@ struct PlaylistView: View {
 #Preview {
     NavigationStack {
         PlaylistView(
-            playlist: Binding(get: { testPlaylist(empty: false) }, set: { _ in }),
-            downloadedTracks: [],
+            playlist: .constant(testPlaylist()),
             showHeader: true
         )
         .environmentObject(testSC)

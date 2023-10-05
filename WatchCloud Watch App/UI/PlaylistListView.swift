@@ -23,7 +23,7 @@ struct PlaylistListView: View {
             LazyVStack {
                 ForEach($playlists, id: \.id) { playlist in
                     NavigationLink {
-                        PlaylistView(playlist: playlist, downloadedTracks: sc.downloadedTracks)
+                        PlaylistView(playlist: playlist)
                     } label: {
                         playlistCellView(playlist.wrappedValue)
                     }

@@ -171,7 +171,6 @@ struct UserDetailView: View {
             NavigationLink {
                 PlaylistView(
                     playlist: .constant(playlist),
-                    downloadedTracks: sc.downloadedTracks,
                     showHeader: false
                 )
             } label: {

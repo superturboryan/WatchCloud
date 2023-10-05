@@ -99,7 +99,6 @@ struct SearchView: View {
                 let playlist = Playlist(id: 0, user: sc.myUser!, title: query, tracks: tracks)
                 PlaylistView(
                     playlist: .constant(playlist),
-                    downloadedTracks: sc.downloadedTracks,
                     showHeader: false
                 )
             }

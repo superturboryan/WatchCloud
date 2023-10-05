@@ -88,7 +88,6 @@ struct LibraryView: View {
             bgColor: .orange) {
                 PlaylistView(
                     playlist: playlist,
-                    downloadedTracks: sc.downloadedTracks,
                     showHeader: false,
                     scrollToNowPlaying: true,
                     updateNowPlayingPlaylist: false
@@ -109,7 +108,6 @@ struct LibraryView: View {
         navigationCell(id: playlist.wrappedValue.id, title: playlist.wrappedValue.title) {
             PlaylistView(
                 playlist: playlist,
-                downloadedTracks: sc.downloadedTracks,
                 onFirstLoad: {
                     try await sc.loadTracksForPlaylist(with: playlist.id)
                 }
