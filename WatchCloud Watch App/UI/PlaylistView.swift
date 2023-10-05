@@ -24,32 +24,31 @@ struct PlaylistView: View {
     var updateNowPlayingPlaylist = true
     
     var body: some View {
-        GeometryReader { geo in
-            ScrollViewReader { sv in
-                ScrollView {
-                    if showHeader {
-                        header(container: geo, tracklistSV: sv)
-                    }
-                    if isLoading {
-                        trackListLoadingView
-                    } else {
-                        trackList
-                    }
+        ScrollViewReader { sv in
+            ScrollView {
+                if showHeader {
+                    header(tracklistSV: sv)
                 }
-                .task {
-                    #warning("Errors not handled")
-                    if isFirstLoad, let onFirstLoad {
-                        isFirstLoad = false
-                        isLoading = true
-                        try? await onFirstLoad()
-                        isLoading = false
-                    }
-                    
-                    if scrollToNowPlaying,
-                    let nowPlaying = sc.loadedTrack,
-                    (playlist.tracks ?? []).contains(nowPlaying) {
-                        withAnimation { sv.scrollTo(nowPlaying.id, anchor: .center) }
-                    }
+                if isLoading {
+                    trackListLoadingView
+                } else {
+                    trackList
+                }
+            }
+            .padding(.top, -30)
+            .task {
+                #warning("Errors not handled")
+                if isFirstLoad, let onFirstLoad {
+                    isFirstLoad = false
+                    isLoading = true
+                    try? await onFirstLoad()
+                    isLoading = false
+                }
+                
+                if scrollToNowPlaying,
+                let nowPlaying = sc.loadedTrack,
+                (playlist.tracks ?? []).contains(nowPlaying) {
+                    withAnimation { sv.scrollTo(nowPlaying.id, anchor: .center) }
                 }
             }
         }
@@ -62,7 +61,7 @@ struct PlaylistView: View {
     
     // MARK: - UI
     @ViewBuilder
-    func header(container geo: GeometryProxy, tracklistSV: ScrollViewProxy) -> some View {
+    func header(tracklistSV: ScrollViewProxy) -> some View {
         let trackCountText = String(localized: "%d tracks", defaultValue: "\(playlist.tracks?.count ?? 0) tracks")
         let durationText =
         playlist.durationInSeconds.hoursAndMinutesStringFromSeconds
@@ -75,7 +74,7 @@ struct PlaylistView: View {
         VStack(spacing: 10) {
             // Artwork and play all button
             HStack(spacing: 8) {
-                let size = CGSize(width: geo.size.width / 2.5, height: geo.size.width / 2.5)
+                let size = CGSize(width: Device.screenSize.width / 2.5, height: Device.screenSize.width / 2.5)
                 // First track or playlist artist artwork
                 CachedImageView(url: playlist.largerArtworkUrlWithTrackAndUserFallback.absoluteString)
                 .size(size)
@@ -113,7 +112,7 @@ struct PlaylistView: View {
             
             // Share and shuffle buttons
             HStack(spacing: 4) {
-                let bottomButtomSize = CGSize(width: (geo.size.width - 10) / 2, height: 40)
+                let bottomButtomSize = CGSize(width: (Device.screenSize.width - 10) / 2, height: 40)
 
                 // Share playlist url button
                 ShareLink(item: URL(string: playlist.permalinkUrl)!) {
@@ -141,7 +140,7 @@ struct PlaylistView: View {
                 .disabled(isTracksEmpty)
             }
         }
-        .size(geo.size)
+        .size(Device.screenSize)
     }
     
     var trackListLoadingView: some View {
@@ -181,7 +180,6 @@ struct PlaylistView: View {
                 }
             }
             .animation(.default, value: playlist.tracks)
-            .padding(.top, 10)
         } else {
             Text("Playlist is empty")
                 .foregroundColor(.secondary)

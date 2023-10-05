@@ -156,6 +156,7 @@ struct UserDetailView: View {
     private var subscriptionLabel: some View {
         if user.subscription.lowercased() != "free" {
             Text(verbatim: user.subscription)
+                .lineLimit(1)
                 .font(.system(size: 12, weight: .semibold))
                 .padding(.horizontal, 3)
                 .background { LinearGradient.scOrange(.vertical) }
