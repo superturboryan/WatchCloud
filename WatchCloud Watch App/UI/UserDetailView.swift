@@ -27,7 +27,7 @@ struct UserDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 12) {
+            VStack(spacing: 10) {
                 summary
                 if isLoading {
                     loadingView
@@ -80,25 +80,26 @@ struct UserDetailView: View {
                 .font(.footnote)
                 .foregroundColor(.secondary)
         }
-        .padding(.vertical, 10)
+        .padding(.bottom, 10)
     }
     
     private var summary: some View {
-        GeometryReader { geo in
-            VStack(spacing: 10) {
-                CachedImageView(url: user.largerAvatarUrl)
-                    .frame(width: geo.size.width * 0.5, height: geo.size.width * 0.5)
-                    .clipShape(Circle())
-                    .overlay(alignment: .bottom) {
-                        subscriptionLabel
-                    }
-                artistInfoLabels
-            }
-            .padding(.top, geo.safeAreaInsets.top)
-            .padding(.horizontal)
-            .fullWidth()
+        VStack(spacing: 10) {
+            CachedImageView(url: user.largerAvatarUrl)
+                .square(Device.screenSize.width * 0.5)
+                .clipShape(Circle())
+                .overlay(alignment: .bottom) {
+                    subscriptionLabel
+                }
+            artistInfoLabels
         }
-        .aspectRatio(contentMode: .fit)
+        .padding(.horizontal)
+        .fullWidth()
+        .onTapGesture {
+            if let description = user.description, !description.isEmpty {
+                showFullDescriptionView = true
+            }
+        }
     }
     
     private var artistInfoLabels: some View {
@@ -123,16 +124,6 @@ struct UserDetailView: View {
                 }
             }
             .minimumScaleFactor(0.8)
-
-            if let description = user.description?.removingAllExtraNewLines {
-                Text(description)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.secondary)
-                    .onTapGesture {
-                        showFullDescriptionView = true
-                    }
-            }
         }
         .font(.footnote)
         .lineLimit(1)

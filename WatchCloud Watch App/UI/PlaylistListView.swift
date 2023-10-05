@@ -56,7 +56,7 @@ struct PlaylistListView: View {
     
     func playlistCellView(_ playlist: Playlist) -> some View {
         HStack(spacing: 8) {
-            CachedImageView(url: playlist.artworkUrl)
+            CachedImageView(url: playlist.largerArtworkUrlWithTrackAndUserFallback.absoluteString)
                 .frame(width: 30, height: 30)
 
             Text(verbatim: playlist.title)

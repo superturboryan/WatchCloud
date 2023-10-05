@@ -20,6 +20,10 @@ extension View {
     func size(_ size: CGSize) -> some View {
         self.frame(width: size.width, height: size.height)
     }
+    
+    func square(_ size: CGFloat) -> some View {
+        self.frame(width: size, height: size)
+    }
 
     @ViewBuilder
     func symbolReplaceEffect(_ speed: Double = 1.0) -> some View {

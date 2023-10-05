@@ -29,16 +29,9 @@ struct SearchView: View {
                 TextField("Search for \(searchType.rawValue)", text: $query)
                     .autocorrectionDisabled()
                     .focused($isSearchFocused)
+                    .submitLabel(.search)
                     .onSubmit { performSearch(with: query) }
-                GeometryReader { geo in
-                    HStack {
-                        searchCell(.tracks, width: (geo.size.width - 10) / 3)
-                        searchCell(.playlists, width: (geo.size.width - 10) / 3)
-                        searchCell(.artists, width: (geo.size.width - 10) / 3)
-                    }
-                    .fullWidth()
-                }
-                .aspectRatio(contentMode: .fit)
+                searchOptionButtons
             }
             .fullWidthAndHeight()
         }
@@ -55,15 +48,31 @@ struct SearchView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
+    private var searchOptionButtons: some View {
+        GeometryReader { geo in
+            HStack {
+                searchCell(.tracks, width: (geo.size.width - 10) / 3)
+                searchCell(.playlists, width: (geo.size.width - 10) / 3)
+                searchCell(.artists, width: (geo.size.width - 10) / 3)
+            }
+            .fullWidth()
+        }
+        .aspectRatio(contentMode: .fit)
+    }
+    
     private var searchButton: some ToolbarContent {
         ToolbarItem(placement: .confirmationAction) {
             Button {
                 performSearch(with: query)
             } label: {
                 Image(systemName: "magnifyingglass.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
                     .foregroundStyle(LinearGradient.scOrange(.vertical))
             }
             .disabled(query.isEmpty)
+            .buttonStyle(.plain)
         }
     }
     
@@ -96,6 +105,7 @@ struct SearchView: View {
             }
         case .playlists:
             if let results = Binding($playlistResults) {
+                #warning("Playlists are loaded from sc.loadedPlaylists.....")
                 PlaylistListView(
                     playlists: results.items,
                     canLoadMore: .constant(results.wrappedValue.hasNextPage),
@@ -132,7 +142,7 @@ struct SearchView: View {
             Image(systemName: type.icon)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 20, height: 20)
+                .frame(width: 24, height: 24)
                 .foregroundStyle(LinearGradient.scOrange(.vertical))
                 
             Text(verbatim: type.rawValue.capitalized)
