@@ -17,6 +17,7 @@ struct PlaylistView: View {
     @State private var isLoading = false
     
     @Binding var playlist: Playlist
+    #warning("REMOVE THIS")
     var downloadedTracks: [Track]
     
     var onFirstLoad: (() async throws -> Void)? = nil

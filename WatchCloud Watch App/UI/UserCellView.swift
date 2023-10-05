@@ -13,7 +13,6 @@ struct UserCellView: View {
     
     var body: some View {
         HStack(spacing: 8) {
-
             CachedImageView(url: user.avatarUrl)
                 .frame(width: 30, height: 30)
                 .clipShape(Circle())

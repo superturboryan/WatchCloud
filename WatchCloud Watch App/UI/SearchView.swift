@@ -95,7 +95,20 @@ struct SearchView: View {
                 )
             }
         case .playlists:
-            Text("List of playlists")
+            if let results = Binding($playlistResults) {
+                PlaylistListView(
+                    playlists: results.items,
+                    canLoadMore: .constant(results.wrappedValue.hasNextPage),
+                    title: query
+                ) {
+                    Task {
+                        if let nextPage = results.wrappedValue.nextPage,
+                            let nextResult: Page<Playlist> = try? await sc.pageOfItems(for: nextPage) {
+                            playlistResults?.update(with: nextResult)
+                        }
+                    }
+                }
+            }
         case .artists:
             if let results = Binding($artistResults) {
                 UserListView(
@@ -105,8 +118,8 @@ struct SearchView: View {
                 ) {
                     Task {
                         if let nextPage = results.wrappedValue.nextPage, 
-                            let nextResults: Page<User> = try? await sc.pageOfItems(for: nextPage) {
-                            artistResults?.update(with: nextResults)
+                            let nextResult: Page<User> = try? await sc.pageOfItems(for: nextPage) {
+                            artistResults?.update(with: nextResult)
                         }
                     }
                 }
