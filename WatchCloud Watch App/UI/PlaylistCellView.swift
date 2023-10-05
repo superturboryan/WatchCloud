@@ -1,0 +1,32 @@
+//
+//  PlaylistCellView.swift
+//  WatchCloud Watch App
+//
+//  Created by Ryan Forsyth on 2023-10-05.
+//
+
+import SoundCloud
+import SwiftUI
+
+struct PlaylistCellView: View {
+    @Binding var playlist: Playlist
+    
+    var body: some View {
+        HStack(spacing: 8) {
+            CachedImageView(url: playlist.largerArtworkUrlWithTrackAndUserFallback.absoluteString)
+                .frame(width: 30, height: 30)
+
+            Text(verbatim: playlist.title)
+
+            Spacer()
+        }
+        .lineLimit(1)
+        .padding(10)
+        .background(.secondary.opacity(0.2))
+        .cornerRadius(10)
+    }
+}
+
+#Preview {
+    PlaylistCellView(playlist: .constant(testPlaylist()))
+}

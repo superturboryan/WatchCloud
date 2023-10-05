@@ -27,7 +27,7 @@ struct PlaylistListView: View {
                     Button {
                         selectedPlaylist = playlist.wrappedValue
                     } label: {
-                        playlistCellView(playlist.wrappedValue)
+                        PlaylistCellView(playlist: playlist)
                     }
                 }
                 if canLoadMore, let reachedBottomOfList {
@@ -61,21 +61,6 @@ struct PlaylistListView: View {
                 .foregroundColor(.secondary)
         }
         .padding(.vertical, 10)
-    }
-    
-    func playlistCellView(_ playlist: Playlist) -> some View {
-        HStack(spacing: 8) {
-            CachedImageView(url: playlist.largerArtworkUrlWithTrackAndUserFallback.absoluteString)
-                .frame(width: 30, height: 30)
-
-            Text(verbatim: playlist.title)
-
-            Spacer()
-        }
-        .lineLimit(1)
-        .padding(10)
-        .background(.secondary.opacity(0.2))
-        .cornerRadius(10)
     }
 }
 
