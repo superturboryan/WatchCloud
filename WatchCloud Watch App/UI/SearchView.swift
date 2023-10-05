@@ -23,17 +23,15 @@ struct SearchView: View {
     @FocusState var isSearchFocused: Bool
     
     var body: some View {
-        ScrollView {
-            VStack {
-                TextField("Search for \(searchType.rawValue)", text: $query)
-                    .autocorrectionDisabled()
-                    .focused($isSearchFocused)
-                    .submitLabel(.search)
-                    .onSubmit { performSearch(with: query) }
-                searchOptionButtons
-            }
-            .fullWidthAndHeight()
+        VStack {
+            TextField("Search for \(searchType.rawValue)", text: $query)
+                .autocorrectionDisabled()
+                .focused($isSearchFocused)
+                .submitLabel(.search)
+                .onSubmit { performSearch(with: query) }
+            searchOptionButtons
         }
+        .fullWidthAndHeight()
         .toolbar {
             searchButton
         }
@@ -46,16 +44,14 @@ struct SearchView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
+    @ViewBuilder
     private var searchOptionButtons: some View {
-        GeometryReader { geo in
-            HStack {
-                searchCell(.tracks, width: (geo.size.width - 10) / 3)
-                searchCell(.playlists, width: (geo.size.width - 10) / 3)
-                searchCell(.artists, width: (geo.size.width - 10) / 3)
-            }
-            .fullWidth()
+        let width = (Device.screenSize.width - 10) / 3
+        HStack {
+            searchCell(.tracks, width: width)
+            searchCell(.playlists, width: width)
+            searchCell(.artists, width: width)
         }
-        .aspectRatio(contentMode: .fit)
     }
     
     private var searchButton: some ToolbarContent {
@@ -102,7 +98,6 @@ struct SearchView: View {
             }
         case .playlists:
             if let results = Binding($playlistResults) {
-                #warning("Playlists are loaded from sc.loadedPlaylists.....")
                 PlaylistListView(
                     playlists: results.items,
                     canLoadMore: .constant(results.wrappedValue.hasNextPage),
@@ -144,15 +139,13 @@ struct SearchView: View {
                 
             Text(verbatim: type.localized.capitalized)
                 .font(.footnote)
+                .fontWeight(.medium)
                 .foregroundColor(searchType == type ? .primary : .secondary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
-                .padding(.horizontal, 2)
+                .padding(.horizontal, 6)
                 .frame(width: width, height: 18)
-                
-                
         }
-        .fontWeight(searchType == type ? .medium : .regular)
         .padding(.vertical, 10)
         .background(searchType == type ? Color.scOrange.opacity(0.3) : .secondary.opacity(0.2))
         .cornerRadius(10)
