@@ -15,6 +15,8 @@ struct PlaylistListView: View {
     @Binding var playlists: [Playlist]
     @Binding var canLoadMore: Bool
     
+    @State var selectedPlaylist: Playlist? = nil
+    
     let title: String
     var reachedBottomOfList: (() -> Void)? = nil
     
@@ -22,8 +24,8 @@ struct PlaylistListView: View {
         ScrollView {
             LazyVStack {
                 ForEach($playlists, id: \.id) { playlist in
-                    NavigationLink {
-                        PlaylistView(playlist: playlist)
+                    Button {
+                        selectedPlaylist = playlist.wrappedValue
                     } label: {
                         playlistCellView(playlist.wrappedValue)
                     }
@@ -37,6 +39,9 @@ struct PlaylistListView: View {
                 }
             }
             .animation(.default, value: playlists)
+        }
+        .navigationDestination(isPresented: .constant(selectedPlaylist != nil)) {
+            if let selectedPlaylist { PlaylistView(playlist: .constant(selectedPlaylist)) }
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(title)
