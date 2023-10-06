@@ -169,9 +169,7 @@ struct PlaylistView: View {
                 
                 if playlist.hasNextPage {
                     trackListLoadingView.onAppear {
-                        Task {
-                            try await sc.loadNextPageOfTracksForPlaylist(playlist)
-                        }
+                        loadNextPageOfTracks()
                     }
                 } else {
                     sectionFooterView(String(localized: "End of playlist"))
@@ -182,6 +180,14 @@ struct PlaylistView: View {
             Text("Playlist is empty")
                 .foregroundColor(.secondary)
                 .padding(20)
+        }
+    }
+    
+    private func loadNextPageOfTracks() {
+        Task {
+            let page: Page<Track> = try await sc.pageOfItems(for: playlist.nextPageUrl!)
+            playlist.tracks! += page.items
+            playlist.nextPageUrl = page.nextPage
         }
     }
     

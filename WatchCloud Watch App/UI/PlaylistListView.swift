@@ -25,7 +25,7 @@ struct PlaylistListView: View {
             LazyVStack {
                 ForEach($playlists, id: \.id) { playlist in
                     Button {
-                        selectedPlaylist = playlist.wrappedValue
+                        tapped(playlist.wrappedValue)
                     } label: {
                         PlaylistCellView(playlist: playlist)
                     }
@@ -41,8 +41,8 @@ struct PlaylistListView: View {
             .animation(.default, value: playlists)
         }
         .navigationDestination(isPresented: .constant(selectedPlaylist != nil)) {
-            if let selectedPlaylist {
-                PlaylistView(playlist: .constant(selectedPlaylist)).onDisappear {
+            if let selectedPlaylist = Binding($selectedPlaylist) {
+                PlaylistView(playlist: selectedPlaylist).onDisappear {
                     self.selectedPlaylist = nil
                 }
             }
@@ -50,6 +50,16 @@ struct PlaylistListView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(title)
         .buttonStyle(.plain)
+    }
+    
+    func tapped(_ playlist: Playlist) {
+        Task {
+            var playlistWithTracks = playlist
+            let page = try await sc.getTracksForPlaylist(with: playlist.id)
+            playlistWithTracks.tracks = page.items
+            playlistWithTracks.nextPageUrl = page.nextPage
+            selectedPlaylist = playlistWithTracks
+        }
     }
     
     var userListLoadingView: some View {
