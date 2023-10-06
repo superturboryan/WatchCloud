@@ -61,7 +61,8 @@ struct PlaylistView: View {
     // MARK: - UI
     @ViewBuilder
     func header(tracklistSV: ScrollViewProxy) -> some View {
-        let trackCountText = String(localized: "%d tracks", defaultValue: "\(playlist.tracks?.count ?? 0) tracks")
+        let trackCount = playlist.trackCount == 0 ? (playlist.tracks?.count ?? 0) : playlist.trackCount
+        let trackCountText = String(localized: "%d tracks", defaultValue: "\(trackCount) tracks")
         let durationText =
         playlist.durationInSeconds.hoursAndMinutesStringFromSeconds
         let isTracksEmpty = playlist.tracks?.isEmpty ?? true
