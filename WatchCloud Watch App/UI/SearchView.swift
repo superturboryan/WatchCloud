@@ -116,7 +116,7 @@ struct SearchView: View {
                 UserListView(
                     users: results.items,
                     canLoadMore: .constant(results.wrappedValue.hasNextPage),
-                    title: query
+                    title: "\"\(query)\""
                 ) {
                     Task {
                         if let nextPage = results.wrappedValue.nextPage, 

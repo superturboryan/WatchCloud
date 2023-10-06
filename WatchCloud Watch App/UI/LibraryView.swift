@@ -235,14 +235,6 @@ struct LibraryView: View {
         
         return AnyView(image)
     }
-    
-    var poweredBySCLogo: some View {
-        Image.poweredBySoundCloud
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(height: 20)
-            .padding(.top)
-    }
 }
 
 #Preview {

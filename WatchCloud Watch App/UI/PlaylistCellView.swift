@@ -16,7 +16,13 @@ struct PlaylistCellView: View {
             CachedImageView(url: playlist.largerArtworkUrlWithTrackAndUserFallback.absoluteString)
                 .frame(width: 30, height: 30)
 
-            Text(verbatim: playlist.title)
+            VStack(alignment: .leading) {
+                Text(verbatim: playlist.title)
+                
+                Text(String(localized: "%d tracks", defaultValue: "\(playlist.trackCount) tracks"))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
 
             Spacer()
         }
