@@ -88,7 +88,7 @@ struct LibraryView: View {
             bgColor: .orange) {
                 PlaylistView(
                     playlist: playlist,
-                    showHeader: false,
+                    showSummary: false,
                     scrollToNowPlaying: true,
                     updateNowPlayingPlaylist: false
                 )

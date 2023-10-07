@@ -53,6 +53,7 @@ struct PlaylistListView: View {
     }
     
     func tapped(_ playlist: Playlist) {
+        #warning("Move loading logic inside PlaylistView! Standardize loading for all playlists")
         Task {
             var playlistWithTracks = playlist
             let page = try await sc.getTracksForPlaylist(with: playlist.id)

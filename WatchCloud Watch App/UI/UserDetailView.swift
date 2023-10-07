@@ -172,7 +172,7 @@ struct UserDetailView: View {
             NavigationLink {
                 PlaylistView(
                     playlist: .constant(playlist),
-                    showHeader: false
+                    showSummary: false
                 )
             } label: {
                 HStack {
