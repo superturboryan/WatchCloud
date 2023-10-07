@@ -39,15 +39,8 @@ struct PlaylistView: View {
                         playlist: $playlist,
                         isLiked: .constant(isLiked),
                         isLikeable: !isUserPlaylist,
-                        tappedPlayAll: {
-                            // Start playing from first track + scroll
-                            tapped(playlist.tracks!.first!)
-                            let firstTrackId = playlist.tracks?.first?.id ?? -1
-                            withAnimation { sv.scrollTo(firstTrackId, anchor: .center) }
-                        },
-                        tappedLike: { 
-                            tappedLike()
-                        }
+                        tappedPlayAll: { tappedPlayAll(sv) },
+                        tappedLike: { tappedLike() }
                     )
                 }
                 
@@ -132,6 +125,12 @@ struct PlaylistView: View {
     }
     
     // MARK: - Tap actions
+    func tappedPlayAll(_ sv: ScrollViewProxy) {
+        tapped(playlist.tracks!.first!)
+        let firstTrackId = playlist.tracks?.first?.id ?? -1
+        withAnimation { sv.scrollTo(firstTrackId, anchor: .center) }
+    }
+    
     func tapped(_ track: Track) {
         // Set queue
         if let tracks = playlist.tracks, sc.nowPlayingQueue != tracks, updateNowPlayingPlaylist {
