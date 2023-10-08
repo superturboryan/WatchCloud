@@ -48,5 +48,7 @@
 	<array>
 		<string>audio</string>
 	</array>
+	<key>MP_PROJECT_TOKEN</key>
+	<string>$(MP_PROJECT_TOKEN)</string>
 </dict>
 </plist>

@@ -9,10 +9,12 @@ import Foundation
 
 struct Config {
     private init() {}
-    static var apiUrl = "https://api.soundcloud.com/"
-    static var clientId: String { Bundle.main.object(forInfoDictionaryKey: "SC_CLIENT_ID") as! String }
-    static var clientSecret: String { Bundle.main.object(forInfoDictionaryKey: "SC_CLIENT_SECRET") as! String }
-    static var redirectURI: String { Bundle.main.object(forInfoDictionaryKey: "SC_REDIRECT_URI") as! String }
+    static let apiUrl = "https://api.soundcloud.com/"
+    static let clientId = Bundle.main.object(forInfoDictionaryKey: "SC_CLIENT_ID") as! String
+    static let clientSecret = Bundle.main.object(forInfoDictionaryKey: "SC_CLIENT_SECRET") as! String
+    static let redirectURI = Bundle.main.object(forInfoDictionaryKey: "SC_REDIRECT_URI") as! String
+    
+    static let mpProjectToken = Bundle.main.object(forInfoDictionaryKey: "MP_PROJECT_TOKEN") as! String
     
     static func isDownloadingEnabled(for id: Int?) -> Bool {
         guard let id else {
