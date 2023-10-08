@@ -45,7 +45,7 @@ struct RootView: View {
     
     @ViewBuilder
     var rootTabView: some View {
-        let playlistIsLoaded = !(sc.nowPlayingQueue?.isEmpty ?? true)
+        let playlistIsLoaded = !sc.nowPlayingQueue.isEmptyOrNil
         TabView(selection: $selectedTab) {
             LibraryView().tag(RootTab.library)
             // 👇 Loading PlayerView is the culprit for "Attribute graph cycle detected"... 
