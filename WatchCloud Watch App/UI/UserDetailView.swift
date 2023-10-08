@@ -169,6 +169,7 @@ struct UserDetailView: View {
     private func playlistSection(_ title: String, _ tracks: [Track]) -> some View {
         let playlist = Playlist(id: 0, user: user, title: title, tracks: tracks)
         VStack(spacing: 12) {
+            // See all button
             NavigationLink {
                 PlaylistView(
                     playlist: .constant(playlist),
@@ -184,6 +185,7 @@ struct UserDetailView: View {
                 .font(.footnote)
                 .padding(.horizontal)
             }
+            // First three tracks from playlist
             VStack(spacing: 4) {
                 ForEach(Array(tracks.prefix(3))) { track in
                     TrackCellView(

@@ -5,11 +5,15 @@
 ☁️📦 SoundCloud Swift Package 0.0.3
 
 ### ✨ Features
-- List of followed users
-- Search (tracks, playlists, users)
+- View followed artists
+- Artist detail view w/ most played, recent, liked tracks, description
+- View most played, recent, liked tracks playlists
+- Search (tracks, playlists, artists) + results pages
 
 ### 🐞 Bug fixes
-- 
+- Use larger avatar image url
+- Use device screen size instead of GeometryReader
+- Display Playlist.tracksCount instead of Playlist.tracks.count in PlaylistSummaryView
 
 
 # 1.0.3
