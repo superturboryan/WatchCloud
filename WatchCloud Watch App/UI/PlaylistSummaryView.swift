@@ -20,7 +20,7 @@ struct PlaylistSummaryView: View {
         VStack(spacing: 10) {
             HStack(spacing: 8) {
                 let size = CGSize(width: Device.screenSize.width / 2.5, height: Device.screenSize.width / 2.5)
-                CachedImageView(url: playlist.largerArtworkUrlWithTrackAndUserFallback.absoluteString)
+                CachedImageView(url: playlist.largerArtworkUrlWithTrackAndUserFallback)
                     .size(size)
                 playAllButton
                     .size(size)

@@ -13,21 +13,23 @@ struct PlaylistCellView: View {
     
     var body: some View {
         HStack(spacing: 8) {
-            CachedImageView(url: playlist.largerArtworkUrlWithTrackAndUserFallback.absoluteString)
+            CachedImageView(url: playlist.largerArtworkUrlWithTrackAndUserFallback)
                 .frame(width: 30, height: 30)
 
             VStack(alignment: .leading) {
                 Text(verbatim: playlist.title)
+                    .minimumScaleFactor(0.8)
                 
                 Text(String(localized: "%d tracks", defaultValue: "\(playlist.trackCount) tracks"))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
 
-            Spacer()
+            Spacer(minLength: 0)
         }
         .lineLimit(1)
-        .padding(10)
+        .padding([.vertical, .leading], 10)
+        .padding(.trailing, 2)
         .background(.secondary.opacity(0.2))
         .cornerRadius(10)
     }

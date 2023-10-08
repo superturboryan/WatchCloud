@@ -46,7 +46,7 @@ struct LibraryView: View {
                                     .filter { sc.myPlaylistIds.contains($0.wrappedValue.id) }
                                     .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
                                 ) {
-                                    playlistCell($0)
+                                    PlaylistCellView(playlist: $0)
                                 }
                             }
                         }
@@ -57,7 +57,7 @@ struct LibraryView: View {
                                     .filter { sc.myLikedPlaylistIds.contains($0.wrappedValue.id) }
                                     .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
                                 ) {
-                                    playlistCell($0)
+                                    PlaylistCellView(playlist: $0)
                                 }
                             }
                         }
