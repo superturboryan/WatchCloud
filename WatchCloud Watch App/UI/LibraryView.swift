@@ -64,7 +64,6 @@ struct LibraryView: View {
 
                         Section(header: sectionHeaderView(String(localized: "My Account"))) {
                             currentUserCell
-//                            settingsCell
                         }
 
                         PoweredBySCView()
@@ -74,7 +73,8 @@ struct LibraryView: View {
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle(String(localized:"Library"))
-                .onChange(of: sc.isLoggedIn) { if $0 { scrollToTop() } } // Don't need to scroll if not logged in? 🤔
+                .onChange(of: sc.isLoggedIn) { if $0 { scrollToTop() } } 
+                // Don't need to scroll if not logged in? 🤔
             }
         }
     }

@@ -13,6 +13,7 @@ enum RootTab { case library, player }
 struct RootView: View {
     
     @EnvironmentObject var sc: SoundCloud
+    @Environment(\.scenePhase) var scenePhase
     
     @State var loaded = false
     @State var loading = false
@@ -32,6 +33,11 @@ struct RootView: View {
         }
         // On login
         .onChange(of: sc.isLoggedIn) { if $0 { Task { await load() } } }
+        .onChange(of: scenePhase) { phase in
+            if phase == .active && loaded && sc.isSessionExpired {
+                Task { await load() }
+            }
+        }
     }
     
     @ViewBuilder
