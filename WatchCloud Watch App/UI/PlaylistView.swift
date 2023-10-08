@@ -127,7 +127,7 @@ struct PlaylistView: View {
                 .scaledToFit()
                 .padding()
                 .frame(width: 40, height: 40)
-                .foregroundColor(.scOrange)
+                .foregroundStyle(LinearGradient.scOrange(.horizontal))
                 .fullWidth()
                 .background(Color.gray.opacity(0.2))
         }
