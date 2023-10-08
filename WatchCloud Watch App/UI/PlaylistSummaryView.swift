@@ -93,6 +93,7 @@ struct PlaylistSummaryView: View {
                 .symbolReplaceEffect()
                 .padding()
                 .size(CGSize(width: (Device.screenSize.width - 10) / 2, height: 40))
+                .fontWeight(.semibold)
                 .background(Color.gray.opacity(0.2))
                 .foregroundColor(.pink)
                 .cornerRadius(8)

@@ -46,7 +46,7 @@ struct LibraryView: View {
                                     .filter { sc.myPlaylistIds.contains($0.wrappedValue.id) }
                                     .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
                                 ) {
-                                    PlaylistCellView(playlist: $0)
+                                    nonUserPlaylistCell($0)
                                 }
                             }
                         }
@@ -57,7 +57,7 @@ struct LibraryView: View {
                                     .filter { sc.myLikedPlaylistIds.contains($0.wrappedValue.id) }
                                     .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
                                 ) {
-                                    PlaylistCellView(playlist: $0)
+                                    nonUserPlaylistCell($0)
                                 }
                             }
                         }
@@ -67,7 +67,7 @@ struct LibraryView: View {
                         }
 
                         PoweredBySCView()
-                            .padding(.top, 20)
+                            .padding(.top, 14)
                     }
                     .padding(.horizontal, 4)
                 }
@@ -113,6 +113,20 @@ struct LibraryView: View {
                 }
             )
         }
+    }
+    
+    func nonUserPlaylistCell(_ playlist: Binding<Playlist>) -> some View {
+        NavigationLink {
+            PlaylistView(
+                playlist: playlist,
+                onFirstLoad: {
+                    try await sc.loadTracksForPlaylist(with: playlist.id)
+                }
+            )
+        } label: {
+            PlaylistCellView(playlist: playlist)
+        }
+        .buttonStyle(.plain)
     }
     
     var currentUserCell: some View {

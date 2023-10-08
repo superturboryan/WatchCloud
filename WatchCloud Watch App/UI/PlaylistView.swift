@@ -125,6 +125,7 @@ struct PlaylistView: View {
             Image(systemName: "shuffle")
                 .resizable()
                 .scaledToFit()
+                .fontWeight(.semibold)
                 .padding()
                 .frame(width: 40, height: 40)
                 .foregroundStyle(LinearGradient.scOrange(.horizontal))

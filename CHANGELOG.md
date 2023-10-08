@@ -9,6 +9,7 @@
 - Artist detail view w/ most played, recent, liked tracks, description
 - View most played, recent, liked tracks playlists
 - Search (tracks, playlists, artists) + results pages
+- Shuffle now playing playlist
 
 ### 🐞 Bug fixes
 - Use larger avatar image url

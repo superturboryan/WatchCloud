@@ -36,11 +36,11 @@ struct RootView: View {
                 Task { await load() }
             }
         }
-        .onChange(of: scenePhase) { phase in
-            if phase == .active && loaded && sc.isSessionExpired {
-                Task { await load() }
-            }
-        }
+//        .onChange(of: scenePhase) { phase in
+//            if phase == .active && loaded && sc.isSessionExpired {
+//                Task { await load() }
+//            }
+//        }
     }
     
     @ViewBuilder
