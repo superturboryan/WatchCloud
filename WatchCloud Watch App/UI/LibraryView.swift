@@ -28,15 +28,15 @@ struct LibraryView: View {
                                 downloadsCell
                             }
                         } else {
+                            searchCell.id(👆)
                             if Config.isDownloadingEnabled(for: sc.myUser?.id) {
-                                downloadsCell.id(👆)
+                                downloadsCell
                             }
-                            searchCell
                         }
 
-                        playlistCell(Binding($sc.loadedPlaylists[PlaylistType.likes.rawValue])!)
+                        userPlaylistCell(Binding($sc.loadedPlaylists[PlaylistType.likes.rawValue])!)
 
-                        playlistCell(Binding($sc.loadedPlaylists[PlaylistType.recentlyPosted.rawValue])!)
+                        userPlaylistCell(Binding($sc.loadedPlaylists[PlaylistType.recentlyPosted.rawValue])!)
 
                         followingCell
 
@@ -104,7 +104,7 @@ struct LibraryView: View {
     }
     // /////////////////////////////////////////////////////////////////////////////////////////////
     
-    func playlistCell(_ playlist: Binding<Playlist>) -> some View {
+    func userPlaylistCell(_ playlist: Binding<Playlist>) -> some View {
         navigationCell(id: playlist.wrappedValue.id, title: playlist.wrappedValue.title) {
             PlaylistView(
                 playlist: playlist,

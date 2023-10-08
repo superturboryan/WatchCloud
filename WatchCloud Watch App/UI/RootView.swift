@@ -31,8 +31,11 @@ struct RootView: View {
         .fullScreenCover(isPresented: Binding(get: { !sc.isLoggedIn }) { _ in }) {
             LoginView()
         }
-        // On login
-        .onChange(of: sc.isLoggedIn) { if $0 { Task { await load() } } }
+        .onChange(of: sc.isLoggedIn) { isLoggedIn in
+            if isLoggedIn {
+                Task { await load() }
+            }
+        }
         .onChange(of: scenePhase) { phase in
             if phase == .active && loaded && sc.isSessionExpired {
                 Task { await load() }
