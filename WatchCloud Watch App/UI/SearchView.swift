@@ -81,6 +81,7 @@ struct SearchView: View {
                 artistResults = try await sc.searchUsers(query)
             }
             
+            AnalyticsManager.shared.log(.search(type: searchType.rawValue))
             showSearchResults = true
         }
     }

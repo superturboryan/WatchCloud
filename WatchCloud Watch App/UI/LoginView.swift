@@ -19,8 +19,12 @@ struct LoginView: View {
                 Task {
                     do {
                         try await sc.login()
+                        AnalyticsManager.shared.log(.loginSuccess)
+                    } catch(SoundCloud.Error.cancelledLogin) {
+                        AnalyticsManager.shared.log(.loginCancelled)
                     } catch {
                         showErrorAlert = true
+                        AnalyticsManager.shared.log(.loginFailure)
                     }
                 }
             } label: {

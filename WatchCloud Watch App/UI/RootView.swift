@@ -25,6 +25,8 @@ struct RootView: View {
                 rootTabView
             } else {
                 loadingView
+                // On first load
+                .task { await load() }
             }
         }
         .animation(.default, value: loaded)
@@ -36,11 +38,6 @@ struct RootView: View {
                 Task { await load() }
             }
         }
-//        .onChange(of: scenePhase) { phase in
-//            if phase == .active && loaded && sc.isSessionExpired {
-//                Task { await load() }
-//            }
-//        }
     }
     
     @ViewBuilder
@@ -88,8 +85,6 @@ struct RootView: View {
         .tint(Color.scOrange)
         .opacity(loading ? 1 : 0)
         .animation(.default, value: loading)
-        // On first load
-        .task { await load() }
     }
     
     func load() async {
@@ -100,10 +95,15 @@ struct RootView: View {
         } catch SoundCloud.Error.userNotAuthorized {
             print("❌ AuthTokens don't exist or API denied access. Performing logout, presenting login screen...")
             sc.logout()
+            return
+        } catch SoundCloud.Error.tooManyRequests {
+            AnalyticsManager.shared.log(.tooManyRequests)
+            loaded = true
         } catch {
             print("Failed to load library but AuthTokens exist, going into offline mode...")
             loaded = true
         }
+        AnalyticsManager.shared.log(.loadLibrarySuccess)
         loading = false
     }
 }

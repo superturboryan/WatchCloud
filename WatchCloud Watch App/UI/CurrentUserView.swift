@@ -29,6 +29,7 @@ struct CurrentUserView: View {
             Button("Logout", role: .destructive) {
                 Haptics.click()
                 sc.logout()
+                AnalyticsManager.shared.log(.logout)
                 dismiss()
             }
             Button(String(localized: "Cancel", comment: "Verb"), role: .cancel) {}

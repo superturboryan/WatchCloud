@@ -171,6 +171,7 @@ struct PlayerView: View {
         ToolbarItem(placement: .cancellationAction) {
             Button {
                 showOptions = true
+                AnalyticsManager.shared.log(.tappedPlayerOptions)
             } label: {
                 Image(systemName: "ellipsis")
                     .resizable()

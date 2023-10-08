@@ -9,16 +9,18 @@ import Mixpanel
 
 final class MixpanelAnalyticsService {
     
-    private let service = Mixpanel.mainInstance()
-    
-    private init() {
+    init() {
         Mixpanel.initialize(token: Config.mpProjectToken)
-        service.trackAutomaticEventsEnabled = true
+        #if DEBUG
+//        Mixpanel.mainInstance().loggingEnabled = true
+        Mixpanel.mainInstance().optOutTracking()
+        #endif
+        Mixpanel.mainInstance().trackAutomaticEventsEnabled = true
     }
 }
 
 extension MixpanelAnalyticsService: AnalyticsService {
     func sendEvent(_ name: String, with properties: [String : String]? = nil) {
-        service.track(event: name, properties: properties)
+        Mixpanel.mainInstance().track(event: name, properties: properties)
     }
 }

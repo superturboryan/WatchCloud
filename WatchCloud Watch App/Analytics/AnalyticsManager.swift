@@ -10,6 +10,9 @@ protocol AnalyticsService: AnyObject {
 }
 
 final class AnalyticsManager {
+    
+    static let shared = AnalyticsManager(MixpanelAnalyticsService())
+    
     private let service: AnalyticsService
     
     init(_ service: AnalyticsService) {

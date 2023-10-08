@@ -46,7 +46,7 @@ struct PlaylistView: View {
                 
                 if isLoading {
                     trackListLoadingView
-                } else {
+                } else if !playlist.tracks.isEmptyOrNil {
                     trackList
                         .padding(.top)
                 }
@@ -150,6 +150,7 @@ struct PlaylistView: View {
         tapped(playlist.tracks!.first!)
         let firstTrackId = playlist.tracks?.first?.id ?? -1
         withAnimation { sv.scrollTo(firstTrackId, anchor: .center) }
+        AnalyticsManager.shared.log(.tappedPlayAll)
     }
     
     func tapped(_ track: Track) {
@@ -166,6 +167,7 @@ struct PlaylistView: View {
             player.continuePlayback()
         }
         
+        AnalyticsManager.shared.log(.tappedTrack)
         NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
     }
     
@@ -174,6 +176,7 @@ struct PlaylistView: View {
             try await isLiked ?
             sc.unlikePlaylist(playlist) :
             sc.likePlaylist(playlist)
+            AnalyticsManager.shared.log(.tappedLikePlaylist)
         }
     }
     
@@ -182,6 +185,7 @@ struct PlaylistView: View {
         if let firstTrack = sc.loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks?.first {
             player.loadAndPlayTrack(firstTrack)
             
+            AnalyticsManager.shared.log(.tappedShuffle)
             NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
         }
     }

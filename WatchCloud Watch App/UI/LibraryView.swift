@@ -109,6 +109,7 @@ struct LibraryView: View {
             PlaylistView(
                 playlist: playlist,
                 onFirstLoad: {
+                    AnalyticsManager.shared.log(.tappedPlaylist)
                     try await sc.loadTracksForPlaylist(with: playlist.id)
                 }
             )
@@ -120,6 +121,7 @@ struct LibraryView: View {
             PlaylistView(
                 playlist: playlist,
                 onFirstLoad: {
+                    AnalyticsManager.shared.log(.tappedPlaylist)
                     try await sc.loadTracksForPlaylist(with: playlist.id)
                 }
             )

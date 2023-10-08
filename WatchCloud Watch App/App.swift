@@ -14,6 +14,10 @@ struct WatchCloud_Watch_AppApp: App {
     @StateObject var sc = CompositionRoot.sc
     @StateObject var player = CompositionRoot.scAudioPlayer
 
+    init() {
+        _ = AnalyticsManager.shared
+    }
+    
     var body: some Scene {
         WindowGroup {
             CompositionRoot.rootView

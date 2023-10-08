@@ -75,6 +75,7 @@ struct PlayerOptionsView: View {
             if track.userFavorite { try await sc.unlikeTrack(track) }
             else { try await sc.likeTrack(track) }
             track.userFavorite.toggle()
+            AnalyticsManager.shared.log(.tappedLikeTrack)
         }
     }
     

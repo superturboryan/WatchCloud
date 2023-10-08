@@ -16,14 +16,17 @@ enum AnalyticsEvent {
     // Buttons
     case tappedPlaylist
     case tappedTrack
+    case tappedPlayAll
+    case tappedShuffle
     case tappedLikeTrack
     case tappedLikePlaylist
     case tappedPlayerOptions
     
-    // Critical
+    // API
     case tooManyRequests
     
     // Misc
+    case loadLibrarySuccess
     case search(type: String)
 }
 
