@@ -48,6 +48,7 @@ struct PlaylistView: View {
                     trackListLoadingView
                 } else {
                     trackList
+                        .padding(.top)
                 }
             }
             .task {
@@ -90,6 +91,9 @@ struct PlaylistView: View {
         if let tracksBinding = Binding($playlist.tracks),
            !tracksBinding.wrappedValue.isEmpty {
             LazyVStack(spacing: 5) {
+                
+                shuffleButton
+                
                 ForEach(tracksBinding) { track in
                     TrackCellView(
                         track: track,
@@ -114,6 +118,22 @@ struct PlaylistView: View {
                 .foregroundColor(.secondary)
                 .padding(20)
         }
+    }
+    
+    private var shuffleButton: some View {
+        Button { tappedShuffle() } label: {
+            Image(systemName: "shuffle")
+                .resizable()
+                .scaledToFit()
+                .padding()
+                .frame(width: 40, height: 40)
+                .foregroundColor(.scOrange)
+                .fullWidth()
+                .background(Color.gray.opacity(0.2))
+        }
+        .cornerRadius(8)
+        .disabled(playlist.tracks.isEmptyOrNil)
+
     }
     
     private func loadNextPageOfTracks() {
