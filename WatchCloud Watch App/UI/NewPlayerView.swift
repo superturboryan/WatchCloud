@@ -33,7 +33,7 @@ struct NewPlayerView: View {
             artwork
             trackInfoLabels
         }
-        .padding(.bottom, 14)
+        .padding(.bottom, 6)
         .padding(.top, -6)
         .toolbar {
             optionsButton
