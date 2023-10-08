@@ -15,6 +15,7 @@
 		9421D2A92ACF5B59005FE857 /* PlaylistCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9421D2A82ACF5B59005FE857 /* PlaylistCellView.swift */; };
 		9421D2AD2AD17834005FE857 /* PlaylistSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9421D2AC2AD17834005FE857 /* PlaylistSummaryView.swift */; };
 		9421D2AF2AD2D151005FE857 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9421D2AE2AD2D151005FE857 /* Optional.swift */; };
+		9421D2B52AD2FB67005FE857 /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 9421D2B42AD2FB67005FE857 /* Mixpanel */; };
 		943756CF2ACDA02500C84006 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943756CE2ACDA02500C84006 /* SearchView.swift */; };
 		9446C5FB2ABDA57E00BCE5DF /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9446C5FA2ABDA57E00BCE5DF /* Localizable.xcstrings */; };
 		9448FF4B2AB31308003D63F1 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */; };
@@ -188,6 +189,7 @@
 			files = (
 				94C169A22AB474EE00570B4F /* NukeUI in Frameworks */,
 				946F38B12AB07A2E008CE9D1 /* SoundCloud in Frameworks */,
+				9421D2B52AD2FB67005FE857 /* Mixpanel in Frameworks */,
 				94C169A02AB474EE00570B4F /* Nuke in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,6 +429,7 @@
 				946F38B02AB07A2E008CE9D1 /* SoundCloud */,
 				94C1699F2AB474EE00570B4F /* Nuke */,
 				94C169A12AB474EE00570B4F /* NukeUI */,
+				9421D2B42AD2FB67005FE857 /* Mixpanel */,
 			);
 			productName = "WatchCloud Watch App";
 			productReference = 946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */;
@@ -486,6 +489,7 @@
 			mainGroup = 946F38892AB079C9008CE9D1;
 			packageReferences = (
 				94C1699E2AB474EE00570B4F /* XCRemoteSwiftPackageReference "Nuke" */,
+				9421D2B32AD2FB67005FE857 /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
 			);
 			productRefGroup = 946F38912AB079C9008CE9D1 /* Products */;
 			projectDirPath = "";
@@ -926,6 +930,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9421D2B32AD2FB67005FE857 /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mixpanel/mixpanel-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		94C1699E2AB474EE00570B4F /* XCRemoteSwiftPackageReference "Nuke" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Nuke";
@@ -937,6 +949,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9421D2B42AD2FB67005FE857 /* Mixpanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9421D2B32AD2FB67005FE857 /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
+			productName = Mixpanel;
+		};
 		946F38B02AB07A2E008CE9D1 /* SoundCloud */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SoundCloud;
