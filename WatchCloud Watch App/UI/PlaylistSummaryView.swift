@@ -17,7 +17,7 @@ struct PlaylistSummaryView: View {
     let tappedLike: () -> Void
     
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 4) {
             HStack(spacing: 8) {
                 let size = CGSize(width: Device.screenSize.width / 2.5, height: Device.screenSize.width / 2.5)
                 CachedImageView(url: playlist.largerArtworkUrlWithTrackAndUserFallback)
