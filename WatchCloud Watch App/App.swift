@@ -17,7 +17,7 @@ struct WatchCloud_Watch_AppApp: App {
     
     @State var isLaunched = false // Used to determine first launch
     @Environment(\.scenePhase) var scenePhase
-
+    
     init() {
         _ = AnalyticsManager.shared // Calls init on shared instance
         configureTipKit()
@@ -31,14 +31,16 @@ struct WatchCloud_Watch_AppApp: App {
                 .onChange(of: scenePhase) { log($0) }
         }
     }
-    
-    private func log(_ scenePhase: ScenePhase) {
+}
+
+private extension WatchCloud_Watch_AppApp {
+    func log(_ scenePhase: ScenePhase) {
         let event = isLaunched ? scenePhase.event : .appLaunch
         AnalyticsManager.shared.log(event)
         isLaunched = true
     }
     
-    private func configureTipKit() {
+    func configureTipKit() {
         if #available(watchOS 10, *) {
             #warning("💡 Always showing tips")
             try? Tips.resetDatastore()
