@@ -14,12 +14,13 @@ struct UserListView: View {
     @Binding var canLoadMore: Bool
     
     let title: String
+    var sortedAlphabetically = true
     var reachedBottomOfList: (() -> Void)? = nil
     
     var body: some View {
         ScrollView {
             LazyVStack {
-                ForEach($users, id: \.id) { user in
+                ForEach( $users.sorted(by: { sortedAlphabetically ? $0.wrappedValue.username < $1.wrappedValue.username : false }), id: \.wrappedValue.id) { user in
                     NavigationLink {
                         UserDetailView(user: user.wrappedValue).onAppear {
                             AnalyticsManager.shared.log(.tappedUser)

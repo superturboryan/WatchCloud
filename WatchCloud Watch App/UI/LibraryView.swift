@@ -139,7 +139,6 @@ struct LibraryView: View {
     
     @ViewBuilder
     var settingsCell: some View {
-        let settingsTitle = "Settings"
         navigationCell(id: -2, title: "Settings") {
             SettingsView()
         }
@@ -153,11 +152,13 @@ struct LibraryView: View {
                 UserListView(
                     users: usersImFollowingBinding.items,
                     canLoadMore: Binding(get: { usersImFollowingBinding.wrappedValue.hasNextPage }, set: { _ in }),
-                    title: title) {
+                    title: title,
+                    sortedAlphabetically: true,
+                    reachedBottomOfList: {
                     Task {
                         try? await sc.loadUsersImFollowing()
                     }
-                }
+                })
             }
         }
     }
