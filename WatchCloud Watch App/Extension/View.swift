@@ -28,9 +28,17 @@ extension View {
     @ViewBuilder
     func symbolReplaceEffect(_ speed: Double = 1.0) -> some View {
         if #available(watchOS 10.0, *) {
-            AnyView(self.contentTransition(.symbolEffect(.replace, options: .speed(speed))))
+            self.contentTransition(.symbolEffect(.replace, options: .speed(speed)))
         } else {
-            AnyView(self)
+            self
+        }
+    }
+    
+    func onVisibilityChange(_ perform: @escaping (Bool) -> Void) -> some View {
+        self.onAppear {
+            perform(true)
+        }.onDisappear {
+            perform(false)
         }
     }
 }
