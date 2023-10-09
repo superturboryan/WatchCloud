@@ -24,7 +24,7 @@ struct SearchView: View {
     
     var body: some View {
         VStack {
-            TextField(String(localized: "Search for \(searchType.rawValue)", comment: "Prompt"), text: $query)
+            TextField(String(localized: "Search for \(searchType.localized)", comment: "Prompt"), text: $query)
                 .autocorrectionDisabled()
                 .focused($isSearchFocused)
                 .submitLabel(.search)
