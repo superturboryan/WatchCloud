@@ -12,7 +12,7 @@ import WatchKit
 struct PlayerView: View {
     
     @EnvironmentObject var sc: SoundCloud
-    @EnvironmentObject var player: SCAudioPlayer
+    @EnvironmentObject var player: AudioPlayer
     @Environment(\.isLuminanceReduced) var isLuminanceReduced
     
     @State var showOptions = false
@@ -199,8 +199,8 @@ struct PlayerView: View {
             testSC.downloadedTracks = [track]
             return testSC
         }())
-        .environmentObject({ () -> SCAudioPlayer in
-            let player = SCAudioPlayer(testSC)
+        .environmentObject({ () -> AudioPlayer in
+            let player = AudioPlayer(testSC)
             player.progress = 3015
             player.isPlaying = true
             return player

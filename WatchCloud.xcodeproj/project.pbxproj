@@ -50,7 +50,7 @@
 		946F38DD2AB07F81008CE9D1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38C82AB07F81008CE9D1 /* RootView.swift */; };
 		946F38DE2AB07F81008CE9D1 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38C92AB07F81008CE9D1 /* LibraryView.swift */; };
 		946F38DF2AB07F81008CE9D1 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CA2AB07F81008CE9D1 /* PlayerView.swift */; };
-		946F38E02AB07F81008CE9D1 /* SCAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CB2AB07F81008CE9D1 /* SCAudioPlayer.swift */; };
+		946F38E02AB07F81008CE9D1 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CB2AB07F81008CE9D1 /* AudioPlayer.swift */; };
 		946F38E12AB07F81008CE9D1 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CC2AB07F81008CE9D1 /* App.swift */; };
 		94923C6B2ABDB5A300A67EBE /* PoweredBySCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */; };
 		94923C6D2ABDBB2C00A67EBE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6C2ABDBB2C00A67EBE /* String.swift */; };
@@ -162,7 +162,7 @@
 		946F38C82AB07F81008CE9D1 /* RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		946F38C92AB07F81008CE9D1 /* LibraryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		946F38CA2AB07F81008CE9D1 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
-		946F38CB2AB07F81008CE9D1 /* SCAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCAudioPlayer.swift; sourceTree = "<group>"; };
+		946F38CB2AB07F81008CE9D1 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		946F38CC2AB07F81008CE9D1 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		946F38E72AB08470008CE9D1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		946F38E92AB08470008CE9D1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -276,8 +276,8 @@
 			isa = PBXGroup;
 			children = (
 				946F38CC2AB07F81008CE9D1 /* App.swift */,
+				946F38CB2AB07F81008CE9D1 /* AudioPlayer.swift */,
 				9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */,
-				946F38CB2AB07F81008CE9D1 /* SCAudioPlayer.swift */,
 				9446C5FA2ABDA57E00BCE5DF /* Localizable.xcstrings */,
 				9421D2B62AD34C0E005FE857 /* Analytics */,
 				946F38B32AB07CB1008CE9D1 /* Config */,
@@ -588,7 +588,7 @@
 				9448FF4F2AB34F0A003D63F1 /* VolumeCircleView.swift in Sources */,
 				946F38D62AB07F81008CE9D1 /* DownloadsView.swift in Sources */,
 				946F38DE2AB07F81008CE9D1 /* LibraryView.swift in Sources */,
-				946F38E02AB07F81008CE9D1 /* SCAudioPlayer.swift in Sources */,
+				946F38E02AB07F81008CE9D1 /* AudioPlayer.swift in Sources */,
 				946F38E12AB07F81008CE9D1 /* App.swift in Sources */,
 				946F38DF2AB07F81008CE9D1 /* PlayerView.swift in Sources */,
 				9448FF4D2AB343D7003D63F1 /* WatchKit.swift in Sources */,

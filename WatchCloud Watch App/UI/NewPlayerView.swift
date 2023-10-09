@@ -12,7 +12,7 @@ import SwiftUI
 struct NewPlayerView: View {
     
     @EnvironmentObject var sc: SoundCloud
-    @EnvironmentObject private var player: SCAudioPlayer
+    @EnvironmentObject private var player: AudioPlayer
     @Environment(\.isLuminanceReduced) var isLuminanceReduced
     
     @State private var showOptions = false
@@ -196,8 +196,8 @@ struct NewPlayerView: View {
             testSC.downloadedTracks = [track]
             return testSC
         }())
-        .environmentObject({ () -> SCAudioPlayer in
-            let player = SCAudioPlayer(testSC)
+        .environmentObject({ () -> AudioPlayer in
+            let player = AudioPlayer(testSC)
             player.progress = 2500
             player.isPlaying = true
             return player

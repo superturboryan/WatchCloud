@@ -11,7 +11,7 @@ import SwiftUI
 struct DownloadsView: View {
     
     @EnvironmentObject var sc: SoundCloud
-    @EnvironmentObject var player: SCAudioPlayer
+    @EnvironmentObject var player: AudioPlayer
     
     @State var isEmpty = false
     
@@ -166,6 +166,6 @@ struct DownloadsView: View {
     return NavigationStack {
         DownloadsView()
             .environmentObject(sc)
-            .environmentObject(SCAudioPlayer(sc))
+            .environmentObject(AudioPlayer(sc))
     }
 }

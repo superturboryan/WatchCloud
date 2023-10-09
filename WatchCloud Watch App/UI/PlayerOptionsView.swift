@@ -11,7 +11,7 @@ import SwiftUI
 struct PlayerOptionsView: View {
     
     @EnvironmentObject var sc: SoundCloud
-    @EnvironmentObject var player: SCAudioPlayer
+    @EnvironmentObject var player: AudioPlayer
     @Environment(\.dismiss) var dismiss
     
     @Binding var track: Track
@@ -195,8 +195,8 @@ extension PlaybackSpeed {
             testSC.downloadsInProgress = [track : Progress.with(0.69)]
             return testSC
         }())
-        .environmentObject({ () -> SCAudioPlayer in
-            let player = SCAudioPlayer(testSC)
+        .environmentObject({ () -> AudioPlayer in
+            let player = AudioPlayer(testSC)
             player.playbackSpeed = .OneAndAQuarter
             return player
         }())

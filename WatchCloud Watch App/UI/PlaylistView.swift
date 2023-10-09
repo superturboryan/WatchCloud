@@ -11,7 +11,7 @@ import SwiftUI
 struct PlaylistView: View {
     
     @EnvironmentObject var sc: SoundCloud
-    @EnvironmentObject var player: SCAudioPlayer
+    @EnvironmentObject var player: AudioPlayer
     
     @State private var isFirstLoad = true
     @State private var isLoading = false
@@ -198,6 +198,6 @@ struct PlaylistView: View {
             showSummary: true
         )
         .environmentObject(testSC)
-        .environmentObject(SCAudioPlayer(testSC))
+        .environmentObject(AudioPlayer(testSC))
     }
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct UserDetailView: View {
     
     @EnvironmentObject var sc: SoundCloud
-    @EnvironmentObject var player: SCAudioPlayer
+    @EnvironmentObject var player: AudioPlayer
     
     var user: User
     
@@ -222,6 +222,6 @@ struct UserDetailView: View {
     NavigationStack {
         UserDetailView(user: testUser(27127117))
             .environmentObject(testSC)
-            .environmentObject(SCAudioPlayer(testSC))
+            .environmentObject(AudioPlayer(testSC))
     }
 }

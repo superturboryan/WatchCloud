@@ -21,7 +21,7 @@ enum PlaybackSpeed: Float, CaseIterable {
 }
 
 @MainActor
-final class SCAudioPlayer: ObservableObject {
+final class AudioPlayer: ObservableObject {
     
     private weak var sc: SoundCloud!
     
@@ -91,7 +91,7 @@ final class SCAudioPlayer: ObservableObject {
 
 // MARK: - Play audio
 #warning("Errors not handled")
-extension SCAudioPlayer {
+extension AudioPlayer {
     private func loadTrack(_ track: Track) async throws {
         if !isPlayerLoaded {
             setupPlayer()
@@ -199,7 +199,7 @@ extension SCAudioPlayer {
 }
 
 // MARK: - MPNowPlayingInfoCenter
-extension SCAudioPlayer {
+extension AudioPlayer {
     
     private func setupDeviceMediaControls() {
         let center = MPRemoteCommandCenter.shared()
