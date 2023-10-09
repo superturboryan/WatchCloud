@@ -7,6 +7,7 @@
 
 import SoundCloud
 import SwiftUI
+import TipKit
 
 @main
 struct WatchCloud_Watch_AppApp: App {
@@ -19,6 +20,14 @@ struct WatchCloud_Watch_AppApp: App {
 
     init() {
         _ = AnalyticsManager.shared
+        
+        if #available(watchOS 10, *) {
+//            try? Tips.resetDatastore()
+            try? Tips.configure([
+                .displayFrequency(.immediate),
+                .datastoreLocation(.applicationDefault)
+            ])
+        }
     }
     
     var body: some Scene {
