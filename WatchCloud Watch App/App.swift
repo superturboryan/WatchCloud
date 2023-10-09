@@ -15,19 +15,12 @@ struct WatchCloud_Watch_AppApp: App {
     @StateObject var sc = CompositionRoot.sc
     @StateObject var player = CompositionRoot.scAudioPlayer
     
-    @State var isLaunched = false // Use to determine first launch
+    @State var isLaunched = false // Used to determine first launch
     @Environment(\.scenePhase) var scenePhase
 
     init() {
-        _ = AnalyticsManager.shared
-        
-        if #available(watchOS 10, *) {
-//            try? Tips.resetDatastore()
-            try? Tips.configure([
-                .displayFrequency(.immediate),
-                .datastoreLocation(.applicationDefault)
-            ])
-        }
+        _ = AnalyticsManager.shared // Calls init on shared instance
+        configureTipKit()
     }
     
     var body: some Scene {
@@ -43,6 +36,17 @@ struct WatchCloud_Watch_AppApp: App {
         let event = isLaunched ? scenePhase.event : .appLaunch
         AnalyticsManager.shared.log(event)
         isLaunched = true
+    }
+    
+    private func configureTipKit() {
+        if #available(watchOS 10, *) {
+            #warning("💡 Always showing tips")
+            try? Tips.resetDatastore()
+            try? Tips.configure([
+                .displayFrequency(.immediate),
+                .datastoreLocation(.applicationDefault)
+            ])
+        }
     }
 }
 

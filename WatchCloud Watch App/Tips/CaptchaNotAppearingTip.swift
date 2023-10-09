@@ -9,6 +9,7 @@ import TipKit
 
 @available(watchOS 10, *)
 struct CaptchaNotAppearingTip: Tip {
+    
     var title: Text {
         Text("Trouble signing in?").font(.footnote).fontWeight(.medium)
     }
@@ -19,4 +20,8 @@ struct CaptchaNotAppearingTip: Tip {
     var image: Image? { // Doesn't show on watchOS?
         Image(systemName: "exclamationmark.triangle")
     }
+    
+    var rules: [Rule] {[
+        #Rule(LoginView.$hasTriedToLoginAndCancelled) { $0 == true },
+    ]}
 }

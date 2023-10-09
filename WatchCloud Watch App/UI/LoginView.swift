@@ -14,6 +14,9 @@ struct LoginView: View {
     @EnvironmentObject var sc: SoundCloud
     @State var showErrorAlert = false
     @State var showingTip = false
+    
+    @available(watchOS 10, *)
+    @Parameter static var hasTriedToLoginAndCancelled: Bool = false
 
     var body: some View {
         VStack {
@@ -33,6 +36,9 @@ struct LoginView: View {
                         AnalyticsManager.shared.log(.loginSuccess)
                     } catch(SoundCloud.Error.cancelledLogin) {
                         AnalyticsManager.shared.log(.loginCancelled)
+                        if #available(watchOS 10, *) {
+                            LoginView.hasTriedToLoginAndCancelled = true
+                        }
                     } catch {
                         showErrorAlert = true
                         AnalyticsManager.shared.log(.loginFailure)
