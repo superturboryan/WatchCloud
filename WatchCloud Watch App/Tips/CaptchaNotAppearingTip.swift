@@ -14,9 +14,8 @@ struct CaptchaNotAppearingTip: Tip {
         Text(String(localized: "Trouble signing in?", comment: "Tip title")).font(.footnote).fontWeight(.medium)
     }
     var message: Text? {
-        Text(verbatim: "\n")
-        + Text("If captcha is not appearing, try using").fontDesign(.rounded)
-        + Text(verbatim: "\n\n")
+        Text("If captcha is not appearing, try using").fontDesign(.rounded)
+        + Text(verbatim: "\n")
         + Text("Sign in with Google").fontWeight(.bold).fontDesign(.rounded)
     }
     var image: Image? { // Doesn't show on watchOS?
