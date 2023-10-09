@@ -11,10 +11,12 @@ import TipKit
 struct CaptchaNotAppearingTip: Tip {
     
     var title: Text {
-        Text("Trouble signing in?").font(.footnote).fontWeight(.medium)
+        Text(String(localized: "Trouble signing in?", comment: "Tip title")).font(.footnote).fontWeight(.medium)
     }
     var message: Text? {
-        Text("\nIf captcha is not appearing, try using \n\n").fontDesign(.rounded)
+        Text(verbatim: "\n")
+        + Text("If captcha is not appearing, try using").fontDesign(.rounded)
+        + Text(verbatim: "\n\n")
         + Text("Sign in with Google").fontWeight(.bold).fontDesign(.rounded)
     }
     var image: Image? { // Doesn't show on watchOS?

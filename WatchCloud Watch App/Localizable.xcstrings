@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "\nIf captcha is not appearing, try using \n\n" : {
-
-    },
     " to download tracks to watch" : {
       "localizations" : {
         "ar" : {
@@ -375,7 +372,15 @@
       }
     },
     "artists" : {
-      "comment" : "Plural noun"
+      "comment" : "Plural noun",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "artistes"
+          }
+        }
+      }
     },
     "Cancel" : {
       "comment" : "Verb",
@@ -587,7 +592,14 @@
       }
     },
     "End of list" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fin de la liste"
+          }
+        }
+      }
     },
     "End of playlist" : {
       "localizations" : {
@@ -658,7 +670,14 @@
       }
     },
     "Following" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aboné(e)"
+          }
+        }
+      }
     },
     "Getting ready..." : {
       "localizations" : {
@@ -690,6 +709,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "준비 중..."
+          }
+        }
+      }
+    },
+    "If captcha is not appearing, try using" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si le captcha ne s'affiche pas, essayez d'utiliser le"
           }
         }
       }
@@ -821,7 +850,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aimée"
+            "value" : "Titres aimés"
           }
         },
         "ko" : {
@@ -867,7 +896,14 @@
       }
     },
     "Loading playlists..." : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chargement des playlists..."
+          }
+        }
+      }
     },
     "Loading tracks..." : {
       "localizations" : {
@@ -904,7 +940,14 @@
       }
     },
     "Loading users..." : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chargement des artistes..."
+          }
+        }
+      }
     },
     "Logout" : {
       "localizations" : {
@@ -1077,7 +1120,15 @@
       }
     },
     "playlists" : {
-      "comment" : "Plural noun"
+      "comment" : "Plural noun",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "playlists"
+          }
+        }
+      }
     },
     "powered by" : {
       "comment" : "Used next to SC logo",
@@ -1115,13 +1166,35 @@
       }
     },
     "Search" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher"
+          }
+        }
+      }
     },
     "Search for %@" : {
-      "comment" : "Prompt"
+      "comment" : "Prompt",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher des %@"
+          }
+        }
+      }
     },
     "See all" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout voir"
+          }
+        }
+      }
     },
     "Settings" : {
       "localizations" : {
@@ -1192,7 +1265,14 @@
       }
     },
     "Sign in with Google" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with Google"
+          }
+        }
+      }
     },
     "Speed" : {
       "localizations" : {
@@ -1263,10 +1343,26 @@
       }
     },
     "tracks" : {
-      "comment" : "Plural noun"
+      "comment" : "Plural noun",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "titres"
+          }
+        }
+      }
     },
     "Trouble signing in?" : {
-
+      "comment" : "Tip title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous rencontrez des difficultés pour vous connecter ?"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
