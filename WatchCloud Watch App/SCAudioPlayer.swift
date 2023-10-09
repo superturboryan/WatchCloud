@@ -140,7 +140,6 @@ extension SCAudioPlayer {
             player.play()
             player.rate = playbackSpeed.rawValue
         }
-        print(isPlaying ? "🎧 Resumed" : "🎧 Paused")
     }
     
     func continuePlayback() {
@@ -271,9 +270,10 @@ extension SCAudioPlayer {
             
             let url = loadedTrack.artworkUrl ?? loadedTrack.user.avatarUrl 
             Task { [weak self] in
-                let artwork = await self?.fetchArtwork(url)
-                info![MPMediaItemPropertyArtwork] = artwork
-                center.nowPlayingInfo = info
+                guard let artwork = await self?.fetchArtwork(url) else {
+                    return
+                }
+                center.nowPlayingInfo?[MPMediaItemPropertyArtwork] = artwork
             }
         }
         
