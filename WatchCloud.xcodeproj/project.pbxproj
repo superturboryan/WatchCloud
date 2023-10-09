@@ -20,6 +20,7 @@
 		9421D2BC2AD34E88005FE857 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9421D2BB2AD34E88005FE857 /* AnalyticsEvent.swift */; };
 		9421D2BE2AD34FFC005FE857 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9421D2BD2AD34FFC005FE857 /* AnalyticsManager.swift */; };
 		943477BC2AD3E1CA00A6DED6 /* DebugAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943477BB2AD3E1CA00A6DED6 /* DebugAnalyticsService.swift */; };
+		943477BF2AD421E200A6DED6 /* CaptchaNotAppearingTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943477BE2AD421E200A6DED6 /* CaptchaNotAppearingTip.swift */; };
 		943756CF2ACDA02500C84006 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943756CE2ACDA02500C84006 /* SearchView.swift */; };
 		9446C5FB2ABDA57E00BCE5DF /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9446C5FA2ABDA57E00BCE5DF /* Localizable.xcstrings */; };
 		9448FF4B2AB31308003D63F1 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */; };
@@ -128,6 +129,7 @@
 		9421D2BB2AD34E88005FE857 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		9421D2BD2AD34FFC005FE857 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		943477BB2AD3E1CA00A6DED6 /* DebugAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugAnalyticsService.swift; sourceTree = "<group>"; };
+		943477BE2AD421E200A6DED6 /* CaptchaNotAppearingTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaNotAppearingTip.swift; sourceTree = "<group>"; };
 		943756CE2ACDA02500C84006 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		9446C5FA2ABDA57E00BCE5DF /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
@@ -238,6 +240,14 @@
 			path = Analytics;
 			sourceTree = "<group>";
 		};
+		943477BD2AD421AE00A6DED6 /* Tips */ = {
+			isa = PBXGroup;
+			children = (
+				943477BE2AD421E200A6DED6 /* CaptchaNotAppearingTip.swift */,
+			);
+			path = Tips;
+			sourceTree = "<group>";
+		};
 		946F38892AB079C9008CE9D1 = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +282,7 @@
 				946F38B32AB07CB1008CE9D1 /* Config */,
 				946F38B62AB07F81008CE9D1 /* Extension */,
 				946F38C02AB07F81008CE9D1 /* UI */,
+				943477BD2AD421AE00A6DED6 /* Tips */,
 			);
 			path = "WatchCloud Watch App";
 			sourceTree = "<group>";
@@ -561,6 +572,7 @@
 				946F38D72AB07F81008CE9D1 /* CurrentUserView.swift in Sources */,
 				94FAA1D02ACC273600EF97CE /* UserDetailView.swift in Sources */,
 				94FAA18C2ACB3B4200EF97CE /* UserCellView.swift in Sources */,
+				943477BF2AD421E200A6DED6 /* CaptchaNotAppearingTip.swift in Sources */,
 				94FAA18A2ACB319600EF97CE /* UserListView.swift in Sources */,
 				9421D2A12ACED420005FE857 /* Device.swift in Sources */,
 				94923C6F2ABDBBD500A67EBE /* Int.swift in Sources */,

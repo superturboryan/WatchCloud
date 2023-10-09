@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "\nIf captcha is not appearing, try using \n\n" : {
+
+    },
     " to download tracks to watch" : {
       "localizations" : {
         "ar" : {
@@ -1188,6 +1191,9 @@
         }
       }
     },
+    "Sign in with Google" : {
+
+    },
     "Speed" : {
       "localizations" : {
         "ar" : {
@@ -1258,6 +1264,9 @@
     },
     "tracks" : {
       "comment" : "Plural noun"
+    },
+    "Trouble signing in?" : {
+
     }
   },
   "version" : "1.0"

@@ -10,6 +10,7 @@
 - View most played, recent, liked tracks playlists
 - Search (tracks, playlists, artists) + results pages
 - Shuffle now playing playlist
+- CaptchaNotAppearing tip
 
 ### 🐞 Bug fixes
 - Use larger avatar image url

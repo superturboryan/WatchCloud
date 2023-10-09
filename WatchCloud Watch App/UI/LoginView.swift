@@ -7,14 +7,25 @@
 
 import SoundCloud
 import SwiftUI
+import TipKit
 
 struct LoginView: View {
 
     @EnvironmentObject var sc: SoundCloud
     @State var showErrorAlert = false
+    @State var showingTip = false
 
     var body: some View {
-        ZStack {
+        VStack {
+            if #available(watchOS 10, *) {
+                TipView(CaptchaNotAppearingTip(), arrowEdge: .bottom).onAppear {
+                    showingTip = true
+                }.onDisappear {
+                    showingTip = false
+                }
+                .animation(.default, value: showingTip)
+            }
+            
             Button {
                 Task {
                     do {
@@ -46,8 +57,11 @@ struct LoginView: View {
         }
         .fullWidthAndHeight()
         .overlay(alignment: .bottom) {
-            PoweredBySCView()
-                .padding(.bottom, 8)
+            if !showingTip {
+                PoweredBySCView()
+                    .padding(.bottom, 8)
+                    .animation(.default, value: showingTip)
+            }
         }.alert(
             "Failed to connect to SoundCloud, \nplease try again",
             isPresented: $showErrorAlert
