@@ -34,9 +34,9 @@ struct LibraryView: View {
                             }
                         }
 
-                        userPlaylistCell(Binding($sc.loadedPlaylists[PlaylistType.likes.rawValue])!)
+                        systemPlaylistCell(Binding($sc.loadedPlaylists[PlaylistType.likes.rawValue])!)
 
-                        userPlaylistCell(Binding($sc.loadedPlaylists[PlaylistType.recentlyPosted.rawValue])!)
+                        systemPlaylistCell(Binding($sc.loadedPlaylists[PlaylistType.recentlyPosted.rawValue])!)
 
                         followingCell
 
@@ -46,7 +46,7 @@ struct LibraryView: View {
                                     .filter { sc.myPlaylistIds.contains($0.wrappedValue.id) }
                                     .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
                                 ) {
-                                    nonUserPlaylistCell($0)
+                                    userPlaylistCell($0)
                                 }
                             }
                         }
@@ -57,7 +57,7 @@ struct LibraryView: View {
                                     .filter { sc.myLikedPlaylistIds.contains($0.wrappedValue.id) }
                                     .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
                                 ) {
-                                    nonUserPlaylistCell($0)
+                                    userPlaylistCell($0)
                                 }
                             }
                         }
@@ -104,24 +104,24 @@ struct LibraryView: View {
     }
     // /////////////////////////////////////////////////////////////////////////////////////////////
     
-    func userPlaylistCell(_ playlist: Binding<Playlist>) -> some View {
+    func systemPlaylistCell(_ playlist: Binding<Playlist>) -> some View {
         navigationCell(id: playlist.wrappedValue.id, title: playlist.wrappedValue.title) {
             PlaylistView(
                 playlist: playlist,
                 onFirstLoad: {
-                    AnalyticsManager.shared.log(.tappedPlaylist)
+                    AnalyticsManager.shared.log(.tappedSystemPlaylist)
                     try await sc.loadTracksForPlaylist(with: playlist.id)
                 }
             )
         }
     }
     
-    func nonUserPlaylistCell(_ playlist: Binding<Playlist>) -> some View {
+    func userPlaylistCell(_ playlist: Binding<Playlist>) -> some View {
         NavigationLink {
             PlaylistView(
                 playlist: playlist,
                 onFirstLoad: {
-                    AnalyticsManager.shared.log(.tappedPlaylist)
+                    AnalyticsManager.shared.log(.tappedUserPlaylist)
                     try await sc.loadTracksForPlaylist(with: playlist.id)
                 }
             )

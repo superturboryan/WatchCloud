@@ -21,7 +21,9 @@ struct UserListView: View {
             LazyVStack {
                 ForEach($users, id: \.id) { user in
                     NavigationLink {
-                        UserDetailView(user: user.wrappedValue)
+                        UserDetailView(user: user.wrappedValue).onAppear {
+                            AnalyticsManager.shared.log(.tappedUser)
+                        }
                     } label: {
                         UserCellView(user: user)
                     }

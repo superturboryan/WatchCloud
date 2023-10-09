@@ -13,7 +13,6 @@ enum RootTab { case library, player }
 struct RootView: View {
     
     @EnvironmentObject var sc: SoundCloud
-    @Environment(\.scenePhase) var scenePhase
     
     @State var loaded = false
     @State var loading = false

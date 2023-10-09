@@ -7,6 +7,12 @@
 
 enum AnalyticsEvent {
     
+    // App lifecycle
+    case appLaunch
+    case appBackground
+    case appInactive
+    case appActive
+    
     // Auth
     case loginSuccess
     case loginFailure
@@ -14,13 +20,20 @@ enum AnalyticsEvent {
     case logout
     
     // Buttons
-    case tappedPlaylist
+    case tappedSystemPlaylist
+    case tappedUserPlaylist
+    case tappedUser
+    case tappedFollowUser
     case tappedTrack
     case tappedPlayAll
     case tappedShuffle
     case tappedLikeTrack
     case tappedLikePlaylist
     case tappedPlayerOptions
+    
+    case tappedTogglePlayback
+    case tappedSkipToNextTrack
+    case tappedSkipToPreviousTrack
     
     // API
     case tooManyRequests

@@ -140,6 +140,7 @@ struct UserDetailView: View {
     private var followButton: some ToolbarContent {
         ToolbarItem(placement: .confirmationAction) {
             Button {
+                AnalyticsManager.shared.log(.tappedFollowUser)
                 Task {
                     try await (isFollowed ? sc.unfollowUser(user) : sc.followUser(user))
                 }

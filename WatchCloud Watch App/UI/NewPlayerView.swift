@@ -124,50 +124,53 @@ struct NewPlayerView: View {
     private var yOffset: CGFloat = 2
     private var playbackButtons: some ToolbarContent {
         ToolbarItemGroup(placement: .bottomBar) {
-            Button {
+            Button { // ⏮️
                 player.skipToPreviousTrack()
+                AnalyticsManager.shared.log(.tappedSkipToPreviousTrack)
             } label: {
                 Image(systemName:"backward.fill")
             }
-            
-            Button {
+            Button { // ⏯️
                 player.togglePlayback()
+                AnalyticsManager.shared.log(.tappedTogglePlayback)
             } label: {
                 Image(systemName:player.isPlaying ? "pause.fill" : "play.fill")
                     .symbolReplaceEffect(2.0)
             }
             .controlSize(.large)
-            .overlay {
-                Circle()
-                    .trim(from: 0, to: CGFloat(player.progress / Double(sc.loadedTrack?.durationInSeconds ?? 1)))
-                    .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
-                    .foregroundStyle(LinearGradient.scOrange(.vertical, reversed: true))
-                    .rotationEffect(.degrees(-90))
-                    .opacity(player.isLoading ? 0.7 : 1)
-                    .animation(.default, value: player.progress)
-                    .animation(.default, value: player.isLoading)
-                
-            }
+            .overlay { playbackCircleOverlay }
             .contentShape(.focusEffect, Circle())
-            .accessibilityQuickAction(style: .outline) {
+            .accessibilityQuickAction(style: .outline) { // ♿️
                 Button(String(player.isPlaying ? "Pause" : "Play")) {
                     player.togglePlayback()
                 }
             }
             .disabled(player.isLoading)
-            
-            Button {
+            Button { // ⏭️
                 player.skipToNextTrack()
+                AnalyticsManager.shared.log(.tappedSkipToNextTrack)
             } label: {
                 Image(systemName:"forward.fill")
             }
         }
     }
     
+    private var playbackCircleOverlay: some View {
+        Circle()
+            .trim(from: 0, to: CGFloat(player.progress / Double(sc.loadedTrack?.durationInSeconds ?? 1)))
+            .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+            .foregroundStyle(LinearGradient.scOrange(.vertical, reversed: true))
+            .rotationEffect(.degrees(-90))
+            .opacity(player.isLoading ? 0.7 : 1)
+            .animation(.default, value: player.progress)
+            .animation(.default, value: player.isLoading)
+    }
+    
     private var optionsButton: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             Button {
                 showOptions = true
+                AnalyticsManager.shared.log(.tappedPlayerOptions)
             } label: {
                 Image(systemName: "ellipsis")
                     .foregroundStyle(LinearGradient.scOrange(.horizontal))

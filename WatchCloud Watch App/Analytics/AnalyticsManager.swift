@@ -11,7 +11,11 @@ protocol AnalyticsService: AnyObject {
 
 final class AnalyticsManager {
     
+    #if DEBUG
+    static let shared = AnalyticsManager(DebugAnalyticsService())
+    #else
     static let shared = AnalyticsManager(MixpanelAnalyticsService())
+    #endif
     
     private let service: AnalyticsService
     
