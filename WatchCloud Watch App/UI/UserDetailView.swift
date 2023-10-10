@@ -176,8 +176,9 @@ struct UserDetailView: View {
     }
     
     @ViewBuilder
-    private func playlistSection(_ title: String, _ tracks: [Track]) -> some View {
+    private func playlistSection(_ title: String, _ tracks: [Track], _ trackLimit: Int = 3) -> some View {
         let playlist = Playlist(id: 0, user: user, title: title, tracks: tracks)
+        let hasMoreTracksToShow = tracks.count > trackLimit
         VStack(spacing: 12) {
             // See all button
             NavigationLink {
@@ -189,15 +190,18 @@ struct UserDetailView: View {
                 HStack {
                     Text(title)
                     Spacer()
-                    Text(String(localized: "See all"))
-                        .foregroundStyle(.secondary)
+                    if hasMoreTracksToShow {
+                        Text(String(localized: "See all"))
+                            .foregroundStyle(.secondary)
+                    }
                 }
                 .font(.footnote)
                 .padding(.horizontal)
             }
+            .disabled(!hasMoreTracksToShow)
             // First three tracks from playlist
             VStack(spacing: 4) {
-                ForEach(Array(tracks.prefix(3))) { track in
+                ForEach(Array(tracks.prefix(trackLimit))) { track in
                     TrackCellView(
                         track: .constant(track),
                         isPlaying: sc.loadedTrack == track,
