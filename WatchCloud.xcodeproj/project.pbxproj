@@ -21,6 +21,7 @@
 		9421D2BE2AD34FFC005FE857 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9421D2BD2AD34FFC005FE857 /* AnalyticsManager.swift */; };
 		943477BC2AD3E1CA00A6DED6 /* DebugAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943477BB2AD3E1CA00A6DED6 /* DebugAnalyticsService.swift */; };
 		943477BF2AD421E200A6DED6 /* CaptchaNotAppearingTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943477BE2AD421E200A6DED6 /* CaptchaNotAppearingTip.swift */; };
+		943477C02AD5AAA800A6DED6 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9446C5FA2ABDA57E00BCE5DF /* Localizable.xcstrings */; };
 		943756CF2ACDA02500C84006 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943756CE2ACDA02500C84006 /* SearchView.swift */; };
 		9446C5FB2ABDA57E00BCE5DF /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9446C5FA2ABDA57E00BCE5DF /* Localizable.xcstrings */; };
 		9448FF4B2AB31308003D63F1 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */; };
@@ -538,6 +539,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				943477C02AD5AAA800A6DED6 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
