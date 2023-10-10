@@ -24,11 +24,15 @@ struct SearchView: View {
     
     var body: some View {
         VStack {
-            TextField(String(localized: "Search for \(searchType.localized)", comment: "Prompt"), text: $query)
-                .autocorrectionDisabled()
-                .focused($isSearchFocused)
-                .submitLabel(.search)
-                .onSubmit { performSearch(with: query) }
+            TextField(
+                String(localized: "Search for \(searchType.localized)", comment: "Prompt"),
+                text: $query
+            )
+            .autocorrectionDisabled()
+            .focused($isSearchFocused)
+            .submitLabel(.search)
+            .onSubmit { performSearch(with: query) }
+            
             searchOptionButtons
         }
         .fullWidthAndHeight()

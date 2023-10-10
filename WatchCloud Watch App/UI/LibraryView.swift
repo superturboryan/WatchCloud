@@ -164,7 +164,7 @@ struct LibraryView: View {
     }
 
     var searchCell: some View {
-        navigationCell(id: -4, title: String(localized: "Search")) {
+        navigationCell(id: -4, title: String(localized: "Search", comment: "Verb")) {
             SearchView()
         }
     }

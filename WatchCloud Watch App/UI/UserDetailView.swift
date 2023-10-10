@@ -33,11 +33,20 @@ struct UserDetailView: View {
                     loadingView
                 }
                 if !tracks.isEmpty {
-                    playlistSection("Top tracks", tracks.sorted(by: { $0.playbackCount ?? 0 > $1.playbackCount ?? 0 }))
-                    playlistSection("Most recent", tracks.sorted(by: { $0.createdAt > $1.createdAt }))
+                    playlistSection(
+                        String(localized: "Top tracks"),
+                        tracks.sorted(by: { $0.playbackCount ?? 0 > $1.playbackCount ?? 0 })
+                    )
+                    playlistSection(
+                        String(localized: "Most recent", comment: "Playlist section title"),
+                        tracks.sorted(by: { $0.createdAt > $1.createdAt })
+                    )
                 }
                 if !likedTracks.isEmpty {
-                    playlistSection("Liked tracks", likedTracks)
+                    playlistSection(
+                        String(localized: "Liked tracks"),
+                        likedTracks
+                    )
                 }
             }
             .animation(.default, value: tracks)
