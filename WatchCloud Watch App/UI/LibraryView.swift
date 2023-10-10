@@ -214,7 +214,7 @@ struct LibraryView: View {
             colour = .pink
         case PlaylistType.recentlyPosted.rawValue:
             imageName = "dot.radiowaves.up.forward"
-            colour = .indigo
+            colour = .green
         case PlaylistType.nowPlaying.rawValue:
             imageName = "speaker.wave.2.fill"
             gradient = LinearGradient.scOrange(.horizontal)
@@ -228,12 +228,12 @@ struct LibraryView: View {
         case -2: // Settings
             imageName = "gearshape.fill"
             colour = .gray
-        case -3:
-            imageName = "person.2.wave.2.fill"
-            colour = .scOrange
-        case -4:
-            imageName = "magnifyingglass.circle.fill"
-            gradient = .scOrange(.vertical)
+        case -3: // Following
+            imageName = "person.2.fill"
+            gradient = .scOrange(.horizontal, reversed: true)
+        case -4: // Search
+            imageName = "magnifyingglass"
+            colour = .blue
         
         default:
             imageName = "music.note.list"
