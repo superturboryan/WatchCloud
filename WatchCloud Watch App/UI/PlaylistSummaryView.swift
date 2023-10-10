@@ -69,6 +69,7 @@ struct PlaylistSummaryView: View {
             .scaleEffect(0.9)
         }
         .disabled(playlist.tracks.isEmptyOrNil)
+        .animation(.default, value: playlist.tracks.isEmptyOrNil)
     }
     
     private var shareButton: some View {
@@ -99,6 +100,7 @@ struct PlaylistSummaryView: View {
                 .cornerRadius(8)
         }
         .disabled(playlist.tracks.isEmptyOrNil)
+        .animation(.default, value: playlist.tracks.isEmptyOrNil)
     }
 }
 
