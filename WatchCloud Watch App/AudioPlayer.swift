@@ -151,6 +151,11 @@ extension AudioPlayer {
         player.pause()
     }
     
+    func stop() {
+        player.pause()
+        player.replaceCurrentItem(with: nil)
+    }
+    
     @objc // Called by AVPlayerItemDidPlayToEndTime Notification
     func skipToNextTrack() {
         guard let nextTrack = sc.nextTrackInNowPlayingQueue
