@@ -30,4 +30,11 @@ public extension Int {
         }
         return formattedMinutes
     }
+    
+    var formattedIfOver1000: String {
+        if self < 1000 {
+            return "\(self)"
+        }
+        return String(format: "%.1fK", Double(self) / Double(1000))
+    }
 }

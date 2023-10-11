@@ -11,11 +11,9 @@ import SwiftUI
 struct DownloadsView: View {
     
     @EnvironmentObject var sc: SoundCloud
-    @EnvironmentObject var player: SCAudioPlayer
+    @EnvironmentObject var player: AudioPlayer
     
     @State var isEmpty = false
-    
-    var didSelectTrack: (Track) -> Void
     
     var body: some View {
         ScrollView {
@@ -150,15 +148,15 @@ struct DownloadsView: View {
         } else if !player.isPlaying {
             player.continuePlayback()
         }
-        // Let parent container know selection was made
-        didSelectTrack(track)
+        
+        NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
     }
 }
 
 #Preview {
     let sc: SoundCloud = { () -> SoundCloud in
         let sc = testSC
-        sc.myUser = testUser
+        sc.myUser = testUser()
         sc.loadedPlaylists = testDefaultLoadedPlaylists
         sc.downloadsInProgress = [testTrack() : Progress.with(0.69)]
         sc.downloadedTracks = [testTrack(), testTrack(), testTrack()]
@@ -166,8 +164,8 @@ struct DownloadsView: View {
     }()
 
     return NavigationStack {
-        DownloadsView(didSelectTrack: { _ in })
+        DownloadsView()
             .environmentObject(sc)
-            .environmentObject(SCAudioPlayer(sc))
+            .environmentObject(AudioPlayer(sc))
     }
 }

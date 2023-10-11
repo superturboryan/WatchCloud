@@ -21,7 +21,7 @@ enum PlaybackSpeed: Float, CaseIterable {
 }
 
 @MainActor
-final class SCAudioPlayer: ObservableObject {
+final class AudioPlayer: ObservableObject {
     
     private weak var sc: SoundCloud!
     
@@ -91,7 +91,7 @@ final class SCAudioPlayer: ObservableObject {
 
 // MARK: - Play audio
 #warning("Errors not handled")
-extension SCAudioPlayer {
+extension AudioPlayer {
     private func loadTrack(_ track: Track) async throws {
         if !isPlayerLoaded {
             setupPlayer()
@@ -140,7 +140,6 @@ extension SCAudioPlayer {
             player.play()
             player.rate = playbackSpeed.rawValue
         }
-        print(isPlaying ? "🎧 Resumed" : "🎧 Paused")
     }
     
     func continuePlayback() {
@@ -150,6 +149,11 @@ extension SCAudioPlayer {
     
     func pausePlayback() {
         player.pause()
+    }
+    
+    func stop() {
+        player.pause()
+        player.replaceCurrentItem(with: nil)
     }
     
     @objc // Called by AVPlayerItemDidPlayToEndTime Notification
@@ -200,7 +204,7 @@ extension SCAudioPlayer {
 }
 
 // MARK: - MPNowPlayingInfoCenter
-extension SCAudioPlayer {
+extension AudioPlayer {
     
     private func setupDeviceMediaControls() {
         let center = MPRemoteCommandCenter.shared()
@@ -271,9 +275,10 @@ extension SCAudioPlayer {
             
             let url = loadedTrack.artworkUrl ?? loadedTrack.user.avatarUrl 
             Task { [weak self] in
-                let artwork = await self?.fetchArtwork(url)
-                info![MPMediaItemPropertyArtwork] = artwork
-                center.nowPlayingInfo = info
+                guard let artwork = await self?.fetchArtwork(url) else {
+                    return
+                }
+                center.nowPlayingInfo?[MPMediaItemPropertyArtwork] = artwork
             }
         }
         

@@ -11,47 +11,59 @@ import SwiftUI
 struct PlaylistView: View {
     
     @EnvironmentObject var sc: SoundCloud
-    @EnvironmentObject var player: SCAudioPlayer
+    @EnvironmentObject var player: AudioPlayer
     
     @State private var isFirstLoad = true
     @State private var isLoading = false
     
     @Binding var playlist: Playlist
-    var downloadedTracks: [Track]
     
     var onFirstLoad: (() async throws -> Void)? = nil
-    var didSelectTrack: (Track) -> Void
-    var showHeader = true
+    var showSummary = true
     var scrollToNowPlaying = false
     var updateNowPlayingPlaylist = true
     
+    var isLiked: Bool {
+        sc.myLikedPlaylistIds.contains(playlist.id)
+    }
+    
+    var isUserPlaylist: Bool {
+        PlaylistType(rawValue: playlist.id) != nil || sc.myPlaylistIds.contains(playlist.id)
+    }
+    
     var body: some View {
-        GeometryReader { geo in
-            ScrollViewReader { sv in
-                ScrollView {
-                    if showHeader {
-                        header(container: geo, tracklistSV: sv)
-                    }
-                    if isLoading {
-                        trackListLoadingView
-                    } else {
-                        trackList
-                    }
+        ScrollViewReader { sv in
+            ScrollView {
+                if showSummary {
+                    PlaylistSummaryView(
+                        playlist: $playlist,
+                        isLiked: .constant(isLiked),
+                        isLikeable: !isUserPlaylist,
+                        tappedPlayAll: { tappedPlayAll(sv) },
+                        tappedLike: { tappedLike() }
+                    )
                 }
-                .task {
-                    #warning("Errors not handled")
-                    if isFirstLoad, let onFirstLoad {
-                        isFirstLoad = false
-                        isLoading = true
-                        try? await onFirstLoad()
-                        isLoading = false
-                    }
-                    
-                    if scrollToNowPlaying,
-                    let nowPlaying = sc.loadedTrack,
-                    (playlist.tracks ?? []).contains(nowPlaying) {
-                        withAnimation { sv.scrollTo(nowPlaying.id, anchor: .center) }
-                    }
+                
+                if isLoading {
+                    trackListLoadingView
+                } else if !playlist.tracks.isEmptyOrNil {
+                    trackList
+                        .padding(.top)
+                }
+            }
+            .task {
+                #warning("Errors not handled")
+                if isFirstLoad, let onFirstLoad {
+                    isFirstLoad = false
+                    isLoading = true
+                    try? await onFirstLoad()
+                    isLoading = false
+                }
+                
+                if scrollToNowPlaying,
+                let nowPlaying = sc.loadedTrack,
+                (playlist.tracks ?? []).contains(nowPlaying) {
+                    withAnimation { sv.scrollTo(nowPlaying.id, anchor: .top) }
                 }
             }
         }
@@ -63,89 +75,6 @@ struct PlaylistView: View {
     }
     
     // MARK: - UI
-    @ViewBuilder
-    func header(container geo: GeometryProxy, tracklistSV: ScrollViewProxy) -> some View {
-        let trackCountText = String(localized: "%d tracks", defaultValue: "\(playlist.tracks?.count ?? 0) tracks")
-        let durationText =
-        playlist.durationInSeconds.hoursAndMinutesStringFromSeconds
-        let isTracksEmpty = playlist.tracks?.isEmpty ?? true
-        let scrollToFirstTrack = {
-            let firstTrackId = playlist.tracks?.first?.id ?? -1
-            withAnimation { tracklistSV.scrollTo(firstTrackId, anchor: .top) }
-        }
-        
-        VStack(spacing: 10) {
-            // Artwork and play all button
-            HStack(spacing: 8) {
-                let size = CGSize(width: geo.size.width / 2.5, height: geo.size.width / 2.5)
-                // First track or playlist artist artwork
-                CachedImageView(url: playlist.largerArtworkUrlWithTrackAndUserFallback.absoluteString)
-                .size(size)
-                
-                // "Play all" button, starts playlist from first track
-                Button {
-                    tapped(playlist.tracks!.first!)
-                    scrollToFirstTrack()
-                } label: {
-                    Image(systemName: "play.square.stack")
-                    .resizable()
-                    .symbolRenderingMode(.palette)
-                    .foregroundStyle(LinearGradient.scOrange(.horizontal), .white)
-                    .scaledToFit()
-                    .size(size)
-                    .scaleEffect(0.9)
-                }
-                .disabled(isTracksEmpty)
-            }
-            
-            // Playlist info labels
-            VStack(spacing: 0) {
-                Text(verbatim: playlist.title)
-                    .font(.headline)
-                HStack {
-                    Text(trackCountText)
-                    Text(verbatim: "-")
-                    Text(durationText)
-                }
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-            }
-            .lineLimit(1)
-            .minimumScaleFactor(0.9)
-            
-            // Share and shuffle buttons
-            HStack(spacing: 4) {
-                let bottomButtomSize = CGSize(width: (geo.size.width - 10) / 2, height: 40)
-
-                // Share playlist url button
-                ShareLink(item: URL(string: playlist.permalinkUrl)!) {
-                    Image(systemName: "square.and.arrow.up")
-                        .resizable()
-                        .scaledToFit()
-                        .padding()
-                        .size(bottomButtomSize)
-                        .background(Color.gray.opacity(0.2))
-                        .foregroundColor(.blue)
-                        .cornerRadius(8)
-                }
-                
-                // Shuffle button
-                Button { tappedShuffle() } label: {
-                    Image(systemName: "shuffle")
-                        .resizable()
-                        .scaledToFit()
-                        .padding()
-                        .size(bottomButtomSize)
-                        .background(Color.gray.opacity(0.2))
-                        .foregroundColor(.scOrange)
-                        .cornerRadius(8)
-                }
-                .disabled(isTracksEmpty)
-            }
-        }
-        .size(geo.size)
-    }
-    
     var trackListLoadingView: some View {
         VStack(spacing: 8) {
             ProgressView()
@@ -162,28 +91,28 @@ struct PlaylistView: View {
         if let tracksBinding = Binding($playlist.tracks),
            !tracksBinding.wrappedValue.isEmpty {
             LazyVStack(spacing: 5) {
+                
+                shuffleButton
+                
                 ForEach(tracksBinding) { track in
                     TrackCellView(
                         track: track,
                         isPlaying: sc.loadedTrack == track.wrappedValue,
-                        isDownloaded: downloadedTracks.contains(track.wrappedValue)
+                        isDownloaded: sc.downloadedTracks.contains(track.wrappedValue)
                     )
                     // .id() automatically applied when using ForEach(Identifiable) 🤓
                     .onTapGesture { tapped(track.wrappedValue) }
                 }
-                .animation(.default, value: playlist.tracks)
                 
                 if playlist.hasNextPage {
                     trackListLoadingView.onAppear {
-                        Task {
-                            try await sc.loadNextPageOfTracksForPlaylist(playlist)
-                        }
+                        loadNextPageOfTracks()
                     }
                 } else {
                     sectionFooterView(String(localized: "End of playlist"))
                 }
             }
-            .padding(.top, 10)
+            .animation(.default, value: playlist.tracks)
         } else {
             Text("Playlist is empty")
                 .foregroundColor(.secondary)
@@ -191,7 +120,39 @@ struct PlaylistView: View {
         }
     }
     
+    private var shuffleButton: some View {
+        Button { tappedShuffle() } label: {
+            Image(systemName: "shuffle")
+                .resizable()
+                .scaledToFit()
+                .fontWeight(.semibold)
+                .padding()
+                .frame(width: 40, height: 40)
+                .foregroundStyle(LinearGradient.scOrange(.horizontal))
+                .fullWidth()
+                .background(Color.gray.opacity(0.2))
+        }
+        .cornerRadius(8)
+        .disabled(playlist.tracks.isEmptyOrNil)
+
+    }
+    
+    private func loadNextPageOfTracks() {
+        Task {
+            let page: Page<Track> = try await sc.pageOfItems(for: playlist.nextPageUrl!)
+            playlist.tracks! += page.items
+            playlist.nextPageUrl = page.nextPage
+        }
+    }
+    
     // MARK: - Tap actions
+    func tappedPlayAll(_ sv: ScrollViewProxy) {
+        tapped(playlist.tracks!.first!)
+        let firstTrackId = playlist.tracks?.first?.id ?? -1
+        withAnimation { sv.scrollTo(firstTrackId, anchor: .center) }
+        AnalyticsManager.shared.log(.tappedPlayAll)
+    }
+    
     func tapped(_ track: Track) {
         // Set queue
         if let tracks = playlist.tracks, sc.nowPlayingQueue != tracks, updateNowPlayingPlaylist {
@@ -201,19 +162,31 @@ struct PlaylistView: View {
         if sc.loadedTrack != track {
             // Start new track from beginning
             player.loadAndPlayTrack(track)
-        } else if !player.isPlaying {
+        } else  {
             // Continue playing
             player.continuePlayback()
         }
-        // Let parent container know selection was made
-        didSelectTrack(track)
+        
+        AnalyticsManager.shared.log(.tappedTrack)
+        NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
+    }
+    
+    func tappedLike() {
+        Task {
+            try await isLiked ?
+            sc.unlikePlaylist(playlist) :
+            sc.likePlaylist(playlist)
+            AnalyticsManager.shared.log(.tappedLikePlaylist)
+        }
     }
     
     func tappedShuffle() {
         sc.loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks = playlist.tracks?.shuffled()
         if let firstTrack = sc.loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks?.first {
             player.loadAndPlayTrack(firstTrack)
-            didSelectTrack(firstTrack)
+            
+            AnalyticsManager.shared.log(.tappedShuffle)
+            NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
         }
     }
 }
@@ -221,12 +194,10 @@ struct PlaylistView: View {
 #Preview {
     NavigationStack {
         PlaylistView(
-            playlist: Binding(get: { testPlaylist(empty: false) }, set: { _ in }),
-            downloadedTracks: [],
-            didSelectTrack: { _ in },
-            showHeader: true
+            playlist: .constant(testPlaylist()),
+            showSummary: true
         )
         .environmentObject(testSC)
-        .environmentObject(SCAudioPlayer(testSC))
+        .environmentObject(AudioPlayer(testSC))
     }
 }

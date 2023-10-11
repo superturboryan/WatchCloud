@@ -17,7 +17,7 @@ enum CompositionRoot {
     static let rootView = RootView()
     
     @MainActor
-    static let scAudioPlayer = SCAudioPlayer(sc)
+    static let scAudioPlayer = AudioPlayer(sc)
     
     @MainActor
     static let sc = SoundCloud(config)

@@ -11,6 +11,7 @@ import SwiftUI
 struct CurrentUserView: View {
     
     @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var player: AudioPlayer
     @Environment(\.dismiss) var dismiss
     
     @State var showLogoutAlert = false
@@ -26,20 +27,24 @@ struct CurrentUserView: View {
         .padding(.top, -20)
         .edgesIgnoringSafeArea([.bottom])
         .alert("Are you sure you want to logout?", isPresented: $showLogoutAlert) {
-            Button("Logout", role: .destructive) {
-                Haptics.click()
-                sc.logout()
-                dismiss()
-            }
+            Button("Logout", role: .destructive) { tappedLogout() }
             Button(String(localized: "Cancel", comment: "Verb"), role: .cancel) {}
         }
         .toolbarBackground(.clear, for: .navigationBar)
     }
     
-    var userView: some View {
+    private func tappedLogout() {
+        Haptics.click()
+        sc.logout()
+        player.stop()
+        AnalyticsManager.shared.log(.logout)
+        dismiss()
+    }
+    
+    private var userView: some View {
         GeometryReader { geo in
             VStack(spacing: 12) {
-                CachedImageView(url: sc.myUser!.avatarUrl)
+                CachedImageView(url: sc.myUser!.largerAvatarUrl)
                     .frame(width: geo.size.width * 0.6)
                     .clipShape(Circle())
                     
@@ -62,9 +67,11 @@ struct CurrentUserView: View {
 
 #Preview {
     NavigationStack {
-        CurrentUserView().environmentObject({ () -> SoundCloud in
-            testSC.myUser = testUser
+        CurrentUserView()
+        .environmentObject({ () -> SoundCloud in
+            testSC.myUser = testUser()
             return testSC
         }())
+        .environmentObject(AudioPlayer(testSC))
     }
 }

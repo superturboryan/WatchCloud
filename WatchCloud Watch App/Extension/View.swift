@@ -20,6 +20,27 @@ extension View {
     func size(_ size: CGSize) -> some View {
         self.frame(width: size.width, height: size.height)
     }
+    
+    func square(_ size: CGFloat) -> some View {
+        self.frame(width: size, height: size)
+    }
+
+    @ViewBuilder
+    func symbolReplaceEffect(_ speed: Double = 1.0) -> some View {
+        if #available(watchOS 10.0, *) {
+            self.contentTransition(.symbolEffect(.replace, options: .speed(speed)))
+        } else {
+            self
+        }
+    }
+    
+    func onVisibilityChange(_ perform: @escaping (Bool) -> Void) -> some View {
+        self.onAppear {
+            perform(true)
+        }.onDisappear {
+            perform(false)
+        }
+    }
 }
 
 // MARK: - LazyVStack header + footer

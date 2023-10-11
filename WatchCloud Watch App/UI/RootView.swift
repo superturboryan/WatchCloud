@@ -18,29 +18,32 @@ struct RootView: View {
     @State var loading = false
     @State private var selectedTab: RootTab = .library
     
-    let isRightToLeft = Locale.current.language.characterDirection == .rightToLeft
-    
     var body: some View {
         ZStack {
             if loaded {
                 rootTabView
             } else {
                 loadingView
+                // On first load
+                .task { await load() }
             }
         }
         .animation(.default, value: loaded)
         .fullScreenCover(isPresented: Binding(get: { !sc.isLoggedIn }) { _ in }) {
             LoginView()
         }
-        // On login
-        .onChange(of: sc.isLoggedIn) { if $0 { Task { await load() } } }
+        .onChange(of: sc.isLoggedIn) { isLoggedIn in
+            if isLoggedIn {
+                Task { await load() }
+            }
+        }
     }
     
     @ViewBuilder
     var rootTabView: some View {
-        let playlistIsLoaded = !(sc.nowPlayingQueue?.isEmpty ?? true)
+        let playlistIsLoaded = !sc.nowPlayingQueue.isEmptyOrNil
         TabView(selection: $selectedTab) {
-            LibraryView(rootSelectedTab: $selectedTab).tag(RootTab.library)
+            LibraryView().tag(RootTab.library)
             // 👇 Loading PlayerView is the culprit for "Attribute graph cycle detected"... 
             if playlistIsLoaded {
                 if #available(watchOS 10, *) {
@@ -54,15 +57,24 @@ struct RootView: View {
                 }
             }
         }
-        
         .tabViewStyle(PageTabViewStyle())
+        .onReceive(NotificationCenter.default.publisher(for: .switchToPlayerTab)) { _ in
+            switchToPlayerTabAfterDelay()
+        }
+    }
+    
+    private func switchToPlayerTabAfterDelay() {
+        Task {
+            try await Task.sleep(for: .seconds(0.4))
+            withAnimation { selectedTab = .player }
+        }
     }
     
     var loadingView: some View {
         ProgressView() {
             VStack(spacing: 12) {
                 Text("Getting ready...")
-                Text(verbatim: isRightToLeft ? "🎶🎶" : "💃🕺")
+                Text(verbatim: Config.isRightToLeft ? "🎶🎶" : "💃🕺")
             }
             .fontWeight(.semibold)
             .fontDesign(.rounded)
@@ -72,8 +84,6 @@ struct RootView: View {
         .tint(Color.scOrange)
         .opacity(loading ? 1 : 0)
         .animation(.default, value: loading)
-        // On first load
-        .task { await load() }
     }
     
     func load() async {
@@ -84,14 +94,23 @@ struct RootView: View {
         } catch SoundCloud.Error.userNotAuthorized {
             print("❌ AuthTokens don't exist or API denied access. Performing logout, presenting login screen...")
             sc.logout()
+            return
+        } catch SoundCloud.Error.tooManyRequests {
+            AnalyticsManager.shared.log(.tooManyRequests)
+            loaded = true
         } catch {
             print("Failed to load library but AuthTokens exist, going into offline mode...")
             loaded = true
         }
+        AnalyticsManager.shared.log(.loadLibrarySuccess)
         loading = false
     }
 }
 
 #Preview {
     RootView().environmentObject(testSC)    
+}
+
+extension Notification.Name {
+    static let switchToPlayerTab = Notification.Name("switchToPlayerTab")
 }

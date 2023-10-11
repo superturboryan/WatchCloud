@@ -1,5 +1,25 @@
+# 1.1.0 ?
+🌎 Published   
+🔨 Xcode 15.0  
+⌚️ watchOS 10.0  
+☁️📦 SoundCloud Swift Package 0.0.3
+
+### ✨ Features
+- View followed artists
+- Artist detail view w/ most played, recent, liked tracks, description
+- View most played, recent, liked tracks playlists
+- Search (tracks, playlists, artists) + results pages
+- Shuffle now playing playlist
+- CaptchaNotAppearing tip
+
+### 🐞 Bug fixes
+- Use larger avatar image url
+- Use device screen size instead of GeometryReader
+- Display Playlist.tracksCount instead of Playlist.tracks.count in PlaylistSummaryView
+
+
 # 1.0.3
-🌎 Published 30 September  
+🌎 Published 2 October 
 🔨 Xcode 15.0  
 ⌚️ watchOS 10.0  
 ☁️📦 SoundCloud Swift Package 0.0.3
@@ -13,6 +33,7 @@
 - Remove subcription label from CurrentUserView
 - Old PlayerView: stop animating playback time labels, remove offset from toolbar button
 - CurrentUserView: hide navigation bar bg (clipping image on SE44)
+
 
 # 1.0.2
 🌎 Published 27 September  

@@ -12,8 +12,6 @@ struct LibraryView: View {
 
     @EnvironmentObject var sc: SoundCloud
 
-    @Binding var rootSelectedTab: RootTab
-    
     let 👆 = "👆"
     
     var body: some View {
@@ -25,18 +23,22 @@ struct LibraryView: View {
                         if let nowPlayingBinding = Binding($sc.loadedPlaylists[PlaylistType.nowPlaying.rawValue]),
                            !(nowPlayingBinding.wrappedValue.tracks?.isEmpty ?? true) {
                             nowPlayingCell(nowPlayingBinding).id(👆)
+                            searchCell
                             if Config.isDownloadingEnabled(for: sc.myUser?.id) {
                                 downloadsCell
                             }
                         } else {
+                            searchCell.id(👆)
                             if Config.isDownloadingEnabled(for: sc.myUser?.id) {
-                                downloadsCell.id(👆)
+                                downloadsCell
                             }
                         }
 
-                        playlistCell(Binding($sc.loadedPlaylists[PlaylistType.likes.rawValue])!)
+                        systemPlaylistCell(Binding($sc.loadedPlaylists[PlaylistType.likes.rawValue])!)
 
-                        playlistCell(Binding($sc.loadedPlaylists[PlaylistType.recentlyPosted.rawValue])!)
+                        systemPlaylistCell(Binding($sc.loadedPlaylists[PlaylistType.recentlyPosted.rawValue])!)
+
+                        followingCell
 
                         if !sc.myPlaylistIds.isEmpty {
                             Section(header: sectionHeaderView(String(localized:"My Playlists"))) {
@@ -44,7 +46,7 @@ struct LibraryView: View {
                                     .filter { sc.myPlaylistIds.contains($0.wrappedValue.id) }
                                     .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
                                 ) {
-                                    playlistCell($0)
+                                    userPlaylistCell($0)
                                 }
                             }
                         }
@@ -55,24 +57,24 @@ struct LibraryView: View {
                                     .filter { sc.myLikedPlaylistIds.contains($0.wrappedValue.id) }
                                     .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
                                 ) {
-                                    playlistCell($0)
+                                    userPlaylistCell($0)
                                 }
                             }
                         }
 
                         Section(header: sectionHeaderView(String(localized: "My Account"))) {
                             currentUserCell
-//                            settingsCell
                         }
 
                         PoweredBySCView()
-                            .padding(.top, 20)
+                            .padding(.top, 14)
                     }
                     .padding(.horizontal, 4)
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle(String(localized:"Library"))
-                .onChange(of: sc.isLoggedIn) { if $0 { scrollToTop() } } // Don't need to scroll if not logged in? 🤔
+                .onChange(of: sc.isLoggedIn) { if $0 { scrollToTop() } } 
+                // Don't need to scroll if not logged in? 🤔
             }
         }
     }
@@ -86,11 +88,7 @@ struct LibraryView: View {
             bgColor: .orange) {
                 PlaylistView(
                     playlist: playlist,
-                    downloadedTracks: sc.downloadedTracks,
-                    didSelectTrack: { _ in
-                        switchToPlayerViewTabAfterDelay()
-                    },
-                    showHeader: false,
+                    showSummary: false,
                     scrollToNowPlaying: true,
                     updateNowPlayingPlaylist: false
                 )
@@ -101,26 +99,36 @@ struct LibraryView: View {
         navigationCell(
             id: PlaylistType.downloads.rawValue,
             title: PlaylistType.downloads.title) {
-                DownloadsView(didSelectTrack: { _ in
-                    switchToPlayerViewTabAfterDelay()
-                })
+                DownloadsView()
             }
     }
     // /////////////////////////////////////////////////////////////////////////////////////////////
     
-    func playlistCell(_ playlist: Binding<Playlist>) -> some View {
+    func systemPlaylistCell(_ playlist: Binding<Playlist>) -> some View {
         navigationCell(id: playlist.wrappedValue.id, title: playlist.wrappedValue.title) {
             PlaylistView(
                 playlist: playlist,
-                downloadedTracks: sc.downloadedTracks,
                 onFirstLoad: {
+                    AnalyticsManager.shared.log(.tappedSystemPlaylist)
                     try await sc.loadTracksForPlaylist(with: playlist.id)
-                },
-                didSelectTrack: { _ in
-                    switchToPlayerViewTabAfterDelay()
                 }
             )
         }
+    }
+    
+    func userPlaylistCell(_ playlist: Binding<Playlist>) -> some View {
+        NavigationLink {
+            PlaylistView(
+                playlist: playlist,
+                onFirstLoad: {
+                    AnalyticsManager.shared.log(.tappedUserPlaylist)
+                    try await sc.loadTracksForPlaylist(with: playlist.id)
+                }
+            )
+        } label: {
+            PlaylistCellView(playlist: playlist)
+        }
+        .buttonStyle(.plain)
     }
     
     var currentUserCell: some View {
@@ -131,16 +139,33 @@ struct LibraryView: View {
     
     @ViewBuilder
     var settingsCell: some View {
-        let settingsTitle = "Settings"
         navigationCell(id: -2, title: "Settings") {
             SettingsView()
         }
     }
     
-    func switchToPlayerViewTabAfterDelay() {
-        Task {
-            try await Task.sleep(for: .seconds(0.4))
-            withAnimation { rootSelectedTab = RootTab.player }
+    @ViewBuilder
+    var followingCell: some View {
+        let title = String(localized: "Following")
+        if let usersImFollowingBinding = Binding($sc.usersImFollowing) {
+            navigationCell(id: -3, title: title) {
+                UserListView(
+                    users: usersImFollowingBinding.items,
+                    canLoadMore: Binding(get: { usersImFollowingBinding.wrappedValue.hasNextPage }, set: { _ in }),
+                    title: title,
+                    sortedAlphabetically: true,
+                    reachedBottomOfList: {
+                    Task {
+                        try? await sc.loadUsersImFollowing()
+                    }
+                })
+            }
+        }
+    }
+
+    var searchCell: some View {
+        navigationCell(id: -4, title: String(localized: "Search", comment: "Verb")) {
+            SearchView()
         }
     }
     
@@ -189,7 +214,7 @@ struct LibraryView: View {
             colour = .pink
         case PlaylistType.recentlyPosted.rawValue:
             imageName = "dot.radiowaves.up.forward"
-            colour = .indigo
+            colour = .green
         case PlaylistType.nowPlaying.rawValue:
             imageName = "speaker.wave.2.fill"
             gradient = LinearGradient.scOrange(.horizontal)
@@ -203,6 +228,12 @@ struct LibraryView: View {
         case -2: // Settings
             imageName = "gearshape.fill"
             colour = .gray
+        case -3: // Following
+            imageName = "person.2.fill"
+            gradient = .scOrange(.horizontal, reversed: true)
+        case -4: // Search
+            imageName = "magnifyingglass"
+            colour = .blue
         
         default:
             imageName = "music.note.list"
@@ -221,18 +252,10 @@ struct LibraryView: View {
         
         return AnyView(image)
     }
-    
-    var poweredBySCLogo: some View {
-        Image.poweredBySoundCloud
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(height: 20)
-            .padding(.top)
-    }
 }
 
 #Preview {
-    LibraryView(rootSelectedTab: Binding(get: { RootTab.library }, set: { _ in }))
+    LibraryView()
         .environmentObject({() -> SoundCloud in
             let sc = SoundCloud(testSCConfig)
             sc.loadedPlaylists = testDefaultLoadedPlaylists

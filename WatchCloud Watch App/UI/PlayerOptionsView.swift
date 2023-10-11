@@ -11,7 +11,7 @@ import SwiftUI
 struct PlayerOptionsView: View {
     
     @EnvironmentObject var sc: SoundCloud
-    @EnvironmentObject var player: SCAudioPlayer
+    @EnvironmentObject var player: AudioPlayer
     @Environment(\.dismiss) var dismiss
     
     @Binding var track: Track
@@ -75,6 +75,7 @@ struct PlayerOptionsView: View {
             if track.userFavorite { try await sc.unlikeTrack(track) }
             else { try await sc.likeTrack(track) }
             track.userFavorite.toggle()
+            AnalyticsManager.shared.log(.tappedLikeTrack)
         }
     }
     
@@ -98,46 +99,25 @@ struct PlayerOptionsView: View {
     // MARK: - UI Helpers
     func buttonView(_ name: String, _ color: Color, _ text: String) -> some View {
         ZStack {
-            if #available(watchOS 10.0, *) {
-                Image(systemName: name)
-                    .resizable()
-                    .scaledToFit()
-                    .contentTransition(.symbolEffect(.replace, options: .speed(2.0)))
-                    .font(Font.title.weight(.medium))
-                    .padding(.vertical, 10)
-                    .size(buttonSize)
-                    .background(color.opacity(0.2))
-                    .foregroundColor(color)
-                    .clipShape(Capsule(style: .continuous))
-                    .overlay {
-                        Text(verbatim: text)
-                            .opacity(0.9)
-                            .lineLimit(1)
-                            .font(.footnote)
-                            .fontWeight(.medium)
-                            .offset(y: labelYOffset)
-                            .minimumScaleFactor(0.8)
-                    }
-            } else {
-                Image(systemName: name)
-                    .resizable()
-                    .scaledToFit()
-                    .font(Font.title.weight(.medium))
-                    .padding(.vertical, 10)
-                    .size(buttonSize)
-                    .background(color.opacity(0.2))
-                    .foregroundColor(color)
-                    .clipShape(Capsule(style: .continuous))
-                    .overlay {
-                        Text(verbatim: text)
-                            .opacity(0.9)
-                            .lineLimit(1)
-                            .font(.footnote)
-                            .fontWeight(.medium)
-                            .offset(y: labelYOffset)
-                            .minimumScaleFactor(0.8)
-                    }
-            }
+            Image(systemName: name)
+                .resizable()
+                .scaledToFit()
+                .symbolReplaceEffect(2.0)
+                .font(Font.title.weight(.medium))
+                .padding(.vertical, 10)
+                .size(buttonSize)
+                .background(color.opacity(0.2))
+                .foregroundColor(color)
+                .clipShape(Capsule(style: .continuous))
+                .overlay {
+                    Text(verbatim: text)
+                        .opacity(0.9)
+                        .lineLimit(1)
+                        .font(.footnote)
+                        .fontWeight(.medium)
+                        .offset(y: labelYOffset)
+                        .minimumScaleFactor(0.8)
+                }
         }
     }
     
@@ -215,8 +195,8 @@ extension PlaybackSpeed {
             testSC.downloadsInProgress = [track : Progress.with(0.69)]
             return testSC
         }())
-        .environmentObject({ () -> SCAudioPlayer in
-            let player = SCAudioPlayer(testSC)
+        .environmentObject({ () -> AudioPlayer in
+            let player = AudioPlayer(testSC)
             player.playbackSpeed = .OneAndAQuarter
             return player
         }())
