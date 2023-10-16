@@ -98,7 +98,8 @@ struct SearchView: View {
                 let playlist = Playlist(id: 0, user: sc.myUser!, title: query, tracks: tracks)
                 PlaylistView(
                     playlist: .constant(playlist),
-                    showSummary: false
+                    showSummary: false,
+                    showShuffleButton: false
                 )
             }
         case .playlists:
