@@ -127,10 +127,10 @@ struct PlayerOptionsView: View {
         ZStack {
             Color.scOrange.opacity(0.2)
             Text(verbatim: speedString)
-                .font(.system(size: 28, weight: .medium))
+                .font(.system(size: 28, weight: .semibold))
                 .minimumScaleFactor(0.8)
                 .padding(.horizontal, 8)
-                .foregroundColor(.scOrange)
+                .foregroundStyle(LinearGradient.scOrange(.vertical))
                 .animation(.default, value: speedString)
         }
         .size(buttonSize)
