@@ -27,6 +27,12 @@
             "value" : "pour télécharger des morceaux"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "per scaricare le canzoni sull'orologio"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -72,6 +78,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ hrs"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ ore"
           }
         },
         "ja" : {
@@ -200,6 +212,24 @@
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "%lld mins"
+                }
+              }
+            }
+          }
+        },
+        "it" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lldmin"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lldmin"
                 }
               }
             }
@@ -347,6 +377,24 @@
             }
           }
         },
+        "it" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld canzone"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld canzoni"
+                }
+              }
+            }
+          }
+        },
         "ja" : {
           "variations" : {
             "plural" : {
@@ -399,6 +447,12 @@
             "value" : "Êtes-vous sûr de vouloir vous déconnecter?"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È sicuro di voler continuare?"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -438,6 +492,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "artistes"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "artisti"
           }
         },
         "ja" : {
@@ -481,6 +541,12 @@
             "value" : "Annuler"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancellare"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -520,6 +586,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Se Connecter"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connetersi"
           }
         },
         "ja" : {
@@ -563,6 +635,12 @@
             "value" : "Télécharger"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricare"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -604,6 +682,12 @@
             "value" : "Téléchargée"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scaricato"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -642,6 +726,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Téléchargant"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download in corso"
           }
         },
         "ja" : {
@@ -685,6 +775,12 @@
             "value" : "Téléchargements"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -723,6 +819,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fin de la liste"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fine dell'elenco"
           }
         },
         "ja" : {
@@ -765,6 +867,12 @@
             "value" : "Fin de playlist"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fine della playlist"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -803,6 +911,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Connexion à Soundcloud échouée, veuillez réessayer"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile connettersi a SoundCloud, riprova"
           }
         },
         "ja" : {
@@ -845,6 +959,12 @@
             "value" : "Aboné(e)"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artisti seguiti"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -883,6 +1003,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'app se prépare..."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prepararsi..."
           }
         },
         "ja" : {
@@ -925,6 +1051,12 @@
             "value" : "Si le captcha ne s'affiche pas, essayez d'utiliser le"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se il captcha non apparisse, prova a utilizzare"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -965,6 +1097,12 @@
             "value" : "dans le coin supérieur gauche du lecteur, en suite tappez sur"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "nell'angolo in alto a sinistra, quindi tocca"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1003,6 +1141,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bibliothèque"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biblioteca"
           }
         },
         "ja" : {
@@ -1046,6 +1190,12 @@
             "value" : "Aimer"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amare"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1085,6 +1235,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Titres aimés"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amato"
           }
         },
         "ja" : {
@@ -1127,6 +1283,12 @@
             "value" : "Playlists aimés"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Playlist Piaciute"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1165,6 +1327,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mentions J'aime"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Canzoni Piaciute"
           }
         },
         "ja" : {
@@ -1207,6 +1375,12 @@
             "value" : "Chargement des playlists..."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento playlist..."
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1245,6 +1419,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chargement des morceaux..."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento canzoni..."
           }
         },
         "ja" : {
@@ -1287,6 +1467,12 @@
             "value" : "Chargement des artistes..."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento artisti..."
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1325,6 +1511,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Se Déconnecter"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disconnettersi"
           }
         },
         "ja" : {
@@ -1368,6 +1560,12 @@
             "value" : "Titres récents"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Canzoni più recenti"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1406,6 +1604,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mon compte"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il Mio Conto"
           }
         },
         "ja" : {
@@ -1448,6 +1652,12 @@
             "value" : "Mes playlists"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Mie Playlist"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1483,6 +1693,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ok"
@@ -1528,6 +1744,12 @@
             "value" : "La playlist est vide"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La playlist è vuota"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1567,6 +1789,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "playlists"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "playlist"
           }
         },
         "ja" : {
@@ -1610,6 +1838,12 @@
             "value" : "alimentée par"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "alimentato da"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1649,6 +1883,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rechercher"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cercare"
           }
         },
         "ja" : {
@@ -1692,6 +1932,12 @@
             "value" : "Rechercher des %@"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerca %@"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1730,6 +1976,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tout voir"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vede tutto"
           }
         },
         "ja" : {
@@ -1772,6 +2024,12 @@
             "value" : "Réglages"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regolazione"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1812,6 +2070,12 @@
             "value" : "Partager"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condividere"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1847,6 +2111,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with Google"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sign in with Google"
@@ -1892,6 +2162,12 @@
             "value" : "Vitesse"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velocità"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1932,6 +2208,12 @@
             "value" : "Appuyez sur"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tocca"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1970,6 +2252,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Meilleurs titres"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le migliori canzoni"
           }
         },
         "ja" : {
@@ -2013,6 +2301,12 @@
             "value" : "titres"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "canzoni"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2052,6 +2346,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous rencontrez des difficultés pour vous connecter ?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Problemi per connettersi?"
           }
         },
         "ja" : {
