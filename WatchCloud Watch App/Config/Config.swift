@@ -26,6 +26,9 @@ struct Config {
         199092249, // SuperTurboRyan
     ]
     
-    static let isKoreanLocale = String(Locale.preferredLanguages[0].prefix(2)) == Locale(identifier: "ko").language.languageCode?.identifier
+    static let isObjectFirstLanguage =
+    String(Locale.preferredLanguages[0].prefix(2)) == Locale(identifier: "ko").language.languageCode?.identifier
+    || String(Locale.preferredLanguages[0].prefix(2)) == Locale(identifier: "ja").language.languageCode?.identifier
+    
     static let isRightToLeft = Locale.current.language.characterDirection == .rightToLeft
 }

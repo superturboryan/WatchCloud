@@ -27,6 +27,12 @@
             "value" : "pour télécharger des morceaux"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "視聴するトラックをダウンロードするには"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -66,6 +72,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ hrs"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@時間"
           }
         },
         "ko" : {
@@ -188,6 +200,18 @@
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "%lld mins"
+                }
+              }
+            }
+          }
+        },
+        "ja" : {
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld分"
                 }
               }
             }
@@ -323,6 +347,18 @@
             }
           }
         },
+        "ja" : {
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld曲"
+                }
+              }
+            }
+          }
+        },
         "ko" : {
           "variations" : {
             "plural" : {
@@ -363,6 +399,12 @@
             "value" : "Êtes-vous sûr de vouloir vous déconnecter?"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログアウトしてもよろしいですか?"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -396,6 +438,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "artistes"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アーティスト"
           }
         },
         "ko" : {
@@ -433,6 +481,12 @@
             "value" : "Annuler"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取り消す"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -466,6 +520,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Se Connecter"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログイン"
           }
         },
         "ko" : {
@@ -503,6 +563,12 @@
             "value" : "Télécharger"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ダウンロード"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -538,6 +604,12 @@
             "value" : "Téléchargée"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ダウンロードされた"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -570,6 +642,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Téléchargant"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ダウンロード"
           }
         },
         "ko" : {
@@ -607,6 +685,12 @@
             "value" : "Téléchargements"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ダウンロード"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -639,6 +723,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fin de la liste"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "リストの終わり"
           }
         },
         "ko" : {
@@ -675,6 +765,12 @@
             "value" : "Fin de playlist"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プレイリストの終わり"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -707,6 +803,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Connexion à Soundcloud échouée, veuillez réessayer"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SoundCloud に接続できませんでした。もう一度お試しください。"
           }
         },
         "ko" : {
@@ -743,6 +845,12 @@
             "value" : "Aboné(e)"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "フォローしているアーティスト"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -775,6 +883,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'app se prépare..."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "準備中..."
           }
         },
         "ko" : {
@@ -811,6 +925,12 @@
             "value" : "Si le captcha ne s'affiche pas, essayez d'utiliser le"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "「キャプチャ」が表示されない場合"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -845,6 +965,12 @@
             "value" : "dans le coin supérieur gauche du lecteur, en suite tappez sur"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "左上隅にある"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -877,6 +1003,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bibliothèque"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "図書館"
           }
         },
         "ko" : {
@@ -914,6 +1046,12 @@
             "value" : "Aimer"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "愛する"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -947,6 +1085,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Titres aimés"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "愛された"
           }
         },
         "ko" : {
@@ -983,6 +1127,12 @@
             "value" : "Playlists aimés"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "気に入ったプレイリスト"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1015,6 +1165,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mentions J'aime"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "好きな曲"
           }
         },
         "ko" : {
@@ -1051,6 +1207,12 @@
             "value" : "Chargement des playlists..."
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プレイリストを読み込み中..."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1083,6 +1245,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chargement des morceaux..."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "トラックを読み込んでいます..."
           }
         },
         "ko" : {
@@ -1119,6 +1287,12 @@
             "value" : "Chargement des artistes..."
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ユーザーを読み込んでいます..."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1151,6 +1325,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Se Déconnecter"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログアウト"
           }
         },
         "ko" : {
@@ -1188,6 +1368,12 @@
             "value" : "Titres récents"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最近投稿された"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1220,6 +1406,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mon compte"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "私のアカウント"
           }
         },
         "ko" : {
@@ -1256,6 +1448,12 @@
             "value" : "Mes playlists"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "私のプレイリスト"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1290,6 +1488,12 @@
             "value" : "Ok"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "わかりました"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1322,6 +1526,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La playlist est vide"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プレイリストが空です"
           }
         },
         "ko" : {
@@ -1359,6 +1569,12 @@
             "value" : "playlists"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プレイリスト"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1392,6 +1608,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "alimentée par"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "による提供"
           }
         },
         "ko" : {
@@ -1429,6 +1651,12 @@
             "value" : "Rechercher"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "探す"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1462,6 +1690,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rechercher des %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ で検索"
           }
         },
         "ko" : {
@@ -1498,6 +1732,12 @@
             "value" : "Tout voir"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "すべてを見る"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1530,6 +1770,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Réglages"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定"
           }
         },
         "ko" : {
@@ -1566,6 +1812,12 @@
             "value" : "Partager"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分け合う"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1598,6 +1850,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sign in with Google"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Googleでサインイン"
           }
         },
         "ko" : {
@@ -1634,6 +1892,12 @@
             "value" : "Vitesse"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スピード"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1668,6 +1932,12 @@
             "value" : "Appuyez sur"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "傍受する"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1700,6 +1970,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Meilleurs titres"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "トップソング"
           }
         },
         "ko" : {
@@ -1737,6 +2013,12 @@
             "value" : "titres"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "曲"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1770,6 +2052,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous rencontrez des difficultés pour vous connecter ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サインインに問題がありますか?"
           }
         },
         "ko" : {

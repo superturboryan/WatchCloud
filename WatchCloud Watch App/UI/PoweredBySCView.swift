@@ -13,14 +13,14 @@ struct PoweredBySCView: View {
     
     var body: some View {
         VStack(spacing: 4) {
-            if !Config.isKoreanLocale {
+            if !Config.isObjectFirstLanguage {
                 Text(title)
             }
             Image.scLogoVertical
                 .resizable()
                 .scaledToFit()
                 .frame(height: 34)
-            if Config.isKoreanLocale {
+            if Config.isObjectFirstLanguage {
                 Text(title)
             }
         }
