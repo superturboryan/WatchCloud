@@ -22,6 +22,7 @@ struct PlaylistView: View {
     var showSummary = true
     var scrollToNowPlaying = false
     var updateNowPlayingPlaylist = true
+    var showShuffleButton = true
     
     var isLiked: Bool {
         sc.myLikedPlaylistIds.contains(playlist.id)
@@ -92,7 +93,9 @@ struct PlaylistView: View {
            !tracksBinding.wrappedValue.isEmpty {
             LazyVStack(spacing: 5) {
                 
-                shuffleButton
+                if showShuffleButton {
+                    shuffleButton
+                }
                 
                 ForEach(tracksBinding) { track in
                     TrackCellView(

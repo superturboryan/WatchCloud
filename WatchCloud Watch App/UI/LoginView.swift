@@ -82,7 +82,8 @@ struct LoginView: View {
     @ViewBuilder
     private var captchaNotAppearingTip: some View {
         if #available(watchOS 10, *) {
-            TipView(CaptchaNotAppearingTip(), arrowEdge: .bottom).onVisibilityChange {
+            TipView(CaptchaNotAppearingTip(), arrowEdge: .bottom)
+            .onVisibilityChange {
                 showingTip = $0
             }
             .animation(.default, value: showingTip)

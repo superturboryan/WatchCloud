@@ -1,5 +1,20 @@
-# 1.1.0 ?
-🌎 Published   
+# 1.1.1
+🌎 Published 16 October
+🔨 Xcode 15.0
+⌚️ watchOS 10.0
+☁️📦 SoundCloud Swift Package 0.0.3
+
+### ✨ Features
+- Italian, Japanese localizations
+
+### 🐞 Bug fixes
+- Hide shuffle button in track search results page
+- Format number of followers for millions
+- PlayerOptionsView: adjust padding for buttons, use gradient for speed text
+
+
+# 1.1.0
+🌎 Published 11 October
 🔨 Xcode 15.0  
 ⌚️ watchOS 10.0  
 ☁️📦 SoundCloud Swift Package 0.0.3

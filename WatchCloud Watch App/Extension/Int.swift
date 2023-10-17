@@ -32,9 +32,12 @@ public extension Int {
     }
     
     var formattedIfOver1000: String {
-        if self < 1000 {
+        if self < 1_000 { // Don't format
             return "\(self)"
         }
-        return String(format: "%.1fK", Double(self) / Double(1000))
+        if self < 1_000_000 {
+            return String(format: "%.1fk", Double(self) / Double(1_000))
+        }
+        return String(format: "%.1fM", Double(self) / Double(1_000_000))
     }
 }
