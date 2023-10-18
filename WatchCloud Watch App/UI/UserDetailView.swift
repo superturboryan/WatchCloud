@@ -10,7 +10,8 @@ import SwiftUI
 
 struct UserDetailView: View {
     
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var audioStore: AudioStore
+    @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var player: AudioPlayer
     
     var user: User
@@ -22,7 +23,7 @@ struct UserDetailView: View {
     @State var showFullDescriptionView = false
 
     var isFollowed: Bool {
-        (sc.usersImFollowing?.items.map(\.id) ?? []).contains(user.id)
+        (userStore.usersImFollowing?.items.map(\.id) ?? []).contains(user.id)
     }
     
     var body: some View {
@@ -73,8 +74,8 @@ struct UserDetailView: View {
         let numberOfTracksToLoad = 1000
         isLoading = true
         do {
-            tracks = try await sc.getTracksForUser(user.id, numberOfTracksToLoad).items
-            likedTracks = try await sc.getLikedTracksForUser(user.id, numberOfTracksToLoad).items
+            tracks = try await audioStore.getTracksForUser(user.id, numberOfTracksToLoad).items
+            likedTracks = try await audioStore.getLikedTracksForUser(user.id, numberOfTracksToLoad).items
         } catch {
             print("❌ Failed to load tracks for user")
         }
@@ -151,7 +152,7 @@ struct UserDetailView: View {
             Button {
                 AnalyticsManager.shared.log(.tappedFollowUser)
                 Task {
-                    try await (isFollowed ? sc.unfollowUser(user) : sc.followUser(user))
+                    try await (isFollowed ? userStore.unfollowUser(user) : userStore.followUser(user))
                 }
             } label: {
                 Image(systemName: isFollowed ? "checkmark" : "plus")
@@ -204,8 +205,8 @@ struct UserDetailView: View {
                 ForEach(Array(tracks.prefix(trackLimit))) { track in
                     TrackCellView(
                         track: .constant(track),
-                        isPlaying: sc.loadedTrack == track,
-                        isDownloaded: sc.downloadedTracks.contains(track)
+                        isPlaying: audioStore.loadedTrack == track,
+                        isDownloaded: audioStore.downloadedTracks.contains(track)
                     ).onTapGesture {
                         tapped(track, in: tracks)
                     }
@@ -217,10 +218,10 @@ struct UserDetailView: View {
     private func tapped(_ track: Track, in trackList: [Track]) {
         // Copied from PlaylistView
         // Set queue
-        if sc.nowPlayingQueue != trackList {
-            sc.setNowPlayingQueue(with: trackList)
+        if audioStore.nowPlayingQueue != trackList {
+            audioStore.setNowPlayingQueue(with: trackList)
         }
-        if sc.loadedTrack != track {
+        if audioStore.loadedTrack != track {
             // Start new track from beginning
             player.loadAndPlayTrack(track)
         } else  {
@@ -235,6 +236,6 @@ struct UserDetailView: View {
     NavigationStack {
         UserDetailView(user: testUser(27127117))
             .environmentObject(testSC)
-            .environmentObject(AudioPlayer(testSC))
+            .environmentObject(AudioPlayer(AudioStore(testSC2)))
     }
 }

@@ -10,7 +10,9 @@ import SwiftUI
 
 struct PlayerOptionsView: View {
     
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var audioStore: AudioStore
+    @EnvironmentObject var userStore: UserStore
+    
     @EnvironmentObject var player: AudioPlayer
     @Environment(\.dismiss) var dismiss
     
@@ -26,8 +28,8 @@ struct PlayerOptionsView: View {
             HStack(spacing: hSpacing) {
                 likeButton.disabled(false)
                 downloadButton
-                    .disabled(!Config.isDownloadingEnabled(for: sc.myUser?.id))
-                    .opacity(Config.isDownloadingEnabled(for: sc.myUser?.id) ? 1 : 0)
+                    .disabled(!Config.isDownloadingEnabled(for: userStore.myUser?.id))
+                    .opacity(Config.isDownloadingEnabled(for: userStore.myUser?.id) ? 1 : 0)
             }
             HStack(spacing: hSpacing) {
                 playbackSpeedButton.disabled(false)
@@ -72,8 +74,8 @@ struct PlayerOptionsView: View {
     func tappedLike() {
         Haptics.click()
         Task {
-            if track.userFavorite { try await sc.unlikeTrack(track) }
-            else { try await sc.likeTrack(track) }
+            if track.userFavorite { try await audioStore.unlikeTrack(track) }
+            else { try await audioStore.likeTrack(track) }
             track.userFavorite.toggle()
             AnalyticsManager.shared.log(.tappedLikeTrack)
         }
@@ -83,17 +85,17 @@ struct PlayerOptionsView: View {
     func tappedDownload() {
         Haptics.click()
         Task {
-            if isTrackDownloaded { try sc.removeDownload(track) }
-            else { try await sc.download(track) }
+            if isTrackDownloaded { try audioStore.removeDownload(track) }
+            else { try await audioStore.download(track) }
         }
     }
     
     var isTrackDownloaded: Bool {
-        sc.downloadedTracks.contains(where: { $0.id == track.id })
+        audioStore.downloadedTracks.contains(where: { $0.id == track.id })
     }
     
     var isTrackDownloading: Bool {
-        sc.downloadsInProgress.keys.contains(track)
+        audioStore.downloadsInProgress.keys.contains(track)
     }
     
     // MARK: - UI Helpers
@@ -191,12 +193,9 @@ extension PlaybackSpeed {
     let trackBinding = Binding(get: { track }, set: { _ in })
     
     return PlayerOptionsView(track: trackBinding)
-        .environmentObject({ () -> SoundCloud in
-            testSC.downloadsInProgress = [track : Progress.with(0.69)]
-            return testSC
-        }())
+        .environmentObject(AudioStore(testSC2))
         .environmentObject({ () -> AudioPlayer in
-            let player = AudioPlayer(testSC)
+            let player = AudioPlayer(AudioStore(testSC2))
             player.playbackSpeed = .OneAndAQuarter
             return player
         }())

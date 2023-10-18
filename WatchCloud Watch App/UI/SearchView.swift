@@ -10,7 +10,8 @@ import SwiftUI
 
 struct SearchView: View {
     
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var audioStore: AudioStore
+    @EnvironmentObject var userStore: UserStore
     
     @State var showSearchResults = false
     @State var query = ""
@@ -78,11 +79,11 @@ struct SearchView: View {
         Task {
             switch searchType {
             case .tracks:
-                trackResults = try await sc.searchTracks(query)
+                trackResults = try await audioStore.searchForTracks(query)
             case .playlists:
-                playlistResults = try await sc.searchPlaylists(query)
+                playlistResults = try await audioStore.searchForPlaylists(query)
             case .artists:
-                artistResults = try await sc.searchUsers(query)
+                artistResults = try await userStore.searchForUsers(query)
             }
             
             AnalyticsManager.shared.log(.search(type: searchType.rawValue))
@@ -95,7 +96,7 @@ struct SearchView: View {
         switch searchType {
         case .tracks:
             if let tracks = trackResults?.items {
-                let playlist = Playlist(id: 0, user: sc.myUser!, title: query, tracks: tracks)
+                let playlist = Playlist(id: 0, user: userStore.myUser!, title: query, tracks: tracks)
                 PlaylistView(
                     playlist: .constant(playlist),
                     showSummary: false,
@@ -111,7 +112,7 @@ struct SearchView: View {
                 ) {
                     Task {
                         if let nextPage = results.wrappedValue.nextPage,
-                            let nextResult: Page<Playlist> = try? await sc.pageOfItems(for: nextPage) {
+                           let nextResult: Page<Playlist> = try? await audioStore.pageOfPlaylists(nextPage) {
                             playlistResults?.update(with: nextResult)
                         }
                     }
@@ -127,7 +128,7 @@ struct SearchView: View {
                 ) {
                     Task {
                         if let nextPage = results.wrappedValue.nextPage, 
-                            let nextResult: Page<User> = try? await sc.pageOfItems(for: nextPage) {
+                            let nextResult: Page<User> = try? await userStore.pageOfUsers(nextPage) {
                             artistResults?.update(with: nextResult)
                         }
                     }
@@ -190,6 +191,7 @@ extension SearchView {
 #Preview {
     NavigationStack {
         SearchView()
-            .environmentObject(testSC)
+            .environmentObject(AudioStore(testSC2))
+            .environmentObject(UserStore(testSC2))
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 import SoundCloud
 
+@MainActor
 final class UserStore: ObservableObject {
     
     @Published public private(set) var isLoggedIn: Bool = true
@@ -42,6 +43,11 @@ extension UserStore {
 }
 
 extension UserStore {
+    func load() async throws {
+        try await loadMyProfile()
+        try await loadUsersImFollowing()
+    }
+    
     func loadMyProfile() async throws {
         if let savedUser = userPersistenceService.get() {
             myUser = savedUser
@@ -64,9 +70,7 @@ extension UserStore {
     
     func followUser(_ user: User) async throws {
         try await service.followUser(user)
-        if var usersImFollowing, !usersImFollowing.items.contains(user) {
-            usersImFollowing.items.insert(user, at: 0)
-        }
+        usersImFollowing?.items.insert(user, at: 0)
     }
     
     func unfollowUser(_ user: User) async throws {

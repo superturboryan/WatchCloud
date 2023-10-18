@@ -23,13 +23,13 @@ enum PlaybackSpeed: Float, CaseIterable {
 @MainActor
 final class AudioPlayer: ObservableObject {
     
-    private weak var sc: SoundCloud!
+    private weak var audioStore: AudioStore!
     
     @Published var isPlaying = false // Should be private(set)
     @Published private(set) var isLoading = false
     @Published var progress: TimeInterval = 0.0 {
         didSet {
-            if shouldSeek, let nowPlaying = sc.loadedTrack {
+            if shouldSeek, let nowPlaying = audioStore.loadedTrack {
                 let time = CMTime(
                     seconds: progress,
                     preferredTimescale: CMTimeScale(nowPlaying.durationInSeconds / 30)
@@ -51,10 +51,8 @@ final class AudioPlayer: ObservableObject {
     private let decoder = JSONDecoder()
     private var subscriptions = Set<AnyCancellable>()
     
-    
-    
-    init(_ sc: SoundCloud) {
-        self.sc = sc
+    init(_ audioStore: AudioStore) {
+        self.audioStore = audioStore
         setupDeviceMediaControls()
     }
     
@@ -81,7 +79,7 @@ final class AudioPlayer: ObservableObject {
         .sink { [weak self] status in
             self?.isPlaying = status == .playing || status == .waitingToPlayAtSpecifiedRate
             self?.isLoading = status == .waitingToPlayAtSpecifiedRate
-            if self?.sc.loadedTrack != nil {
+            if self?.audioStore.loadedTrack != nil {
                 self?.updateNowPlayingInfo()
             }
         }
@@ -97,7 +95,7 @@ extension AudioPlayer {
             setupPlayer()
             isPlayerLoaded = true
         }
-        let header = try await sc.authHeader
+        let header = try await audioStore.authHeader
         let avUrlAsset = AVURLAsset(
             url: URL(string: track.playbackUrl!)!,
             options: ["AVURLAssetHTTPHeaderFieldsKey" : header]
@@ -113,7 +111,7 @@ extension AudioPlayer {
         // Set AVAudioPlayer item
         player.replaceCurrentItem(with: avItem)
         // Set loaded track in SC
-        sc.loadedTrack = track
+        audioStore.loadedTrack = track
         progress = 0
     }
     
@@ -128,7 +126,7 @@ extension AudioPlayer {
     }
     
     func togglePlayback() {
-        if let queue = sc.nowPlayingQueue, !queue.isEmpty, sc.loadedTrack == nil {
+        if let queue = audioStore.nowPlayingQueue, !queue.isEmpty, audioStore.loadedTrack == nil {
             //What was this case for again?
             loadAndPlayTrack(queue.first!)
             return
@@ -158,7 +156,7 @@ extension AudioPlayer {
     
     @objc // Called by AVPlayerItemDidPlayToEndTime Notification
     func skipToNextTrack() {
-        guard let nextTrack = sc.nextTrackInNowPlayingQueue
+        guard let nextTrack = audioStore.nextTrackInNowPlayingQueue
         else { return }
         
         if isPlaying {
@@ -172,10 +170,10 @@ extension AudioPlayer {
     func skipToPreviousTrack() {
         let skipToPreviousTrackThreshold: Double = 3
         let isBeginningOfTrack = progress < skipToPreviousTrackThreshold
-        let isBeginningOfQueue = sc.loadedTrackNowPlayingQueueIndex == 0
+        let isBeginningOfQueue = audioStore.loadedTrackNowPlayingQueueIndex == 0
         let shouldSkipToPreviousTrack = isBeginningOfTrack && !isBeginningOfQueue
         
-        if shouldSkipToPreviousTrack, let previousTrack = sc.previousTrackInNowPlayingQueue {
+        if shouldSkipToPreviousTrack, let previousTrack = audioStore.previousTrackInNowPlayingQueue {
             if isPlaying {
                 loadAndPlayTrack(previousTrack)
             } else {
@@ -226,8 +224,8 @@ extension AudioPlayer {
 
         center.nextTrackCommand.addTarget { [weak self] _ in
             guard
-                let queue = self?.sc.nowPlayingQueue, // Queue exists
-                let nowPlayingQueueIndex = self?.sc.loadedTrackNowPlayingQueueIndex,
+                let queue = self?.audioStore.nowPlayingQueue, // Queue exists
+                let nowPlayingQueueIndex = self?.audioStore.loadedTrackNowPlayingQueueIndex,
                 nowPlayingQueueIndex < queue.count - 1 // Not at end of queue
             else {  return .commandFailed }
             
@@ -251,7 +249,7 @@ extension AudioPlayer {
     
     private func updateNowPlayingInfo(with time: CMTime? = nil) {
         let center = MPNowPlayingInfoCenter.default()
-        guard let loadedTrack = sc.loadedTrack else {
+        guard let loadedTrack = audioStore.loadedTrack else {
             center.nowPlayingInfo = nil
             return
         }

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct DownloadsView: View {
     
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var audioStore: AudioStore
     @EnvironmentObject var player: AudioPlayer
     
     @State var isEmpty = false
@@ -24,18 +24,18 @@ struct DownloadsView: View {
                 // 3 - Neither 1 or 2 (Empty)
                 // 4 - Both 1 and 2
                 
-                if !sc.downloadsInProgress.isEmpty {
+                if !audioStore.downloadsInProgress.isEmpty {
                     downloadsInProgressList
                 }
                 
-                if !sc.downloadedTracks.isEmpty {
+                if !audioStore.downloadedTracks.isEmpty {
                     downloadedTrackList
-                } else if sc.downloadsInProgress.isEmpty {
+                } else if audioStore.downloadsInProgress.isEmpty {
                     downloadedTracksEmptyView
                 }
             }
         }
-        .disabled(sc.downloadsInProgress.isEmpty && sc.downloadedTracks.isEmpty)
+        .disabled(audioStore.downloadsInProgress.isEmpty && audioStore.downloadedTracks.isEmpty)
         .fontDesign(.rounded)
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(String(localized: "Downloads", comment: "Plural noun"))
@@ -43,19 +43,19 @@ struct DownloadsView: View {
     
     #warning("🌍 Localize strings")
     var downloadsInProgressList: some View {
-        Section(header: sectionHeaderView("In Progress (\(sc.downloadsInProgress.count))")) {
+        Section(header: sectionHeaderView("In Progress (\(audioStore.downloadsInProgress.count))")) {
             ForEach(
-                sc.downloadsInProgress
+                audioStore.downloadsInProgress
                     .filter { $0.value.totalUnitCount != 0 }
                     .sorted(by: { $0.value.fractionCompleted > $1.value.fractionCompleted }),
                 id: \.key.id
             ) { track, progress in
                 downloadInProgressCell(track, progress)
                 .onLongPressGesture {
-                    try? sc.cancelDownloadInProgress(for: track)
+                    try? audioStore.cancelDownloadInProgress(for: track)
                 }
             }
-            .animation(.default, value: sc.downloadsInProgress)
+            .animation(.default, value: audioStore.downloadsInProgress)
         }
     }
     
@@ -83,27 +83,27 @@ struct DownloadsView: View {
     #warning("🌍 Localize strings")
     var downloadedTrackList: some View {
         Section(
-            header: sectionHeaderView("Downloaded (\(sc.downloadedTracks.count))"),
+            header: sectionHeaderView("Downloaded (\(audioStore.downloadedTracks.count))"),
             footer: sectionFooterView("Press and hold track\n to remove download")
         ) {
-            ForEach($sc.downloadedTracks) { displayedTrack in
+            ForEach($audioStore.downloadedTracks) { displayedTrack in
                 TrackCellView(
                     track: displayedTrack,
-                    isPlaying: sc.loadedTrack == displayedTrack.wrappedValue,
+                    isPlaying: audioStore.loadedTrack == displayedTrack.wrappedValue,
                     isDownloaded: true
                 )
                 .onTapGesture { tapped(displayedTrack.wrappedValue) }
                 .onLongPressGesture {
                     #warning("Handle error")
                     do {
-                        try sc.removeDownload(displayedTrack.wrappedValue)
+                        try audioStore.removeDownload(displayedTrack.wrappedValue)
                         Haptics.click()
                     } catch {
                         print("❌ Error deleting download: \(error)");
                     }
                 }
             }
-            .animation(.default, value: sc.downloadedTracks)
+            .animation(.default, value: audioStore.downloadedTracks)
         }
     }
     
@@ -138,11 +138,11 @@ struct DownloadsView: View {
     func tapped(_ track: Track) {
         // ⚠️ Copied from PlaylistView.tapped, move to LibraryView?
         // Set queue
-        if sc.nowPlayingQueue != sc.downloadedTracks {
-            sc.setNowPlayingQueue(with: sc.downloadedTracks)
+        if audioStore.nowPlayingQueue != audioStore.downloadedTracks {
+            audioStore.setNowPlayingQueue(with: audioStore.downloadedTracks)
         }
         // Play track
-        if sc.loadedTrack != track {
+        if audioStore.loadedTrack != track {
             // Start selected track from beginning
             player.loadAndPlayTrack(track)
         } else if !player.isPlaying {
@@ -154,18 +154,9 @@ struct DownloadsView: View {
 }
 
 #Preview {
-    let sc: SoundCloud = { () -> SoundCloud in
-        let sc = testSC
-        sc.myUser = testUser()
-        sc.loadedPlaylists = testDefaultLoadedPlaylists
-        sc.downloadsInProgress = [testTrack() : Progress.with(0.69)]
-        sc.downloadedTracks = [testTrack(), testTrack(), testTrack()]
-        return sc
-    }()
-
     return NavigationStack {
         DownloadsView()
-            .environmentObject(sc)
-            .environmentObject(AudioPlayer(sc))
+            .environmentObject(AudioStore(testSC2))
+            .environmentObject(AudioPlayer(AudioStore(testSC2)))
     }
 }

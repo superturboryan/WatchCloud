@@ -12,7 +12,8 @@ enum RootTab { case library, player }
 
 struct RootView: View {
     
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var audioStore: AudioStore
+    @EnvironmentObject var userStore: UserStore
     
     @State var loaded = false
     @State var loading = false
@@ -29,10 +30,10 @@ struct RootView: View {
             }
         }
         .animation(.default, value: loaded)
-        .fullScreenCover(isPresented: Binding(get: { !sc.isLoggedIn }) { _ in }) {
+        .fullScreenCover(isPresented: Binding(get: { !userStore.isLoggedIn }) { _ in }) {
             LoginView()
         }
-        .onChange(of: sc.isLoggedIn) { isLoggedIn in
+        .onChange(of: userStore.isLoggedIn) { isLoggedIn in
             if isLoggedIn {
                 Task { await load() }
             }
@@ -41,7 +42,7 @@ struct RootView: View {
     
     @ViewBuilder
     var rootTabView: some View {
-        let playlistIsLoaded = !sc.nowPlayingQueue.isEmptyOrNil
+        let playlistIsLoaded = !audioStore.nowPlayingQueue.isEmptyOrNil
         TabView(selection: $selectedTab) {
             LibraryView().tag(RootTab.library)
             // 👇 Loading PlayerView is the culprit for "Attribute graph cycle detected"... 
@@ -89,11 +90,12 @@ struct RootView: View {
     func load() async {
         loading = true
         do {
-            try await sc.loadLibrary()
+            try await userStore.load()
+            try await audioStore.load()
             loaded = true
         } catch SoundCloud.Error.userNotAuthorized {
             print("❌ AuthTokens don't exist or API denied access. Performing logout, presenting login screen...")
-            sc.logout()
+            userStore.logout()
             return
         } catch SoundCloud.Error.tooManyRequests {
             AnalyticsManager.shared.log(.tooManyRequests)
@@ -108,7 +110,7 @@ struct RootView: View {
 }
 
 #Preview {
-    RootView().environmentObject(testSC)    
+    RootView().environmentObject(AudioStore(testSC2))
 }
 
 extension Notification.Name {

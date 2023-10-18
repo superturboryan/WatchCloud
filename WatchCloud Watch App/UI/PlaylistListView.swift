@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PlaylistListView: View {
     
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var audioStore: AudioStore
     
     @Binding var playlists: [Playlist]
     @Binding var canLoadMore: Bool
@@ -56,7 +56,7 @@ struct PlaylistListView: View {
         #warning("Move loading logic inside PlaylistView! Standardize loading for all playlists")
         Task {
             var playlistWithTracks = playlist
-            let page = try await sc.getTracksForPlaylist(with: playlist.id)
+            let page = try await audioStore.getTracksForPlaylist(playlist.id)
             playlistWithTracks.tracks = page.items
             playlistWithTracks.nextPageUrl = page.nextPage
             selectedPlaylist = playlistWithTracks
@@ -82,6 +82,6 @@ struct PlaylistListView: View {
             canLoadMore: .constant(false),
             title: "Following"
         )
-        .environmentObject(testSC)
+        .environmentObject(AudioStore(testSC2))
     }
 }

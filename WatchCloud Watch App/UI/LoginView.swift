@@ -11,7 +11,7 @@ import TipKit
 
 struct LoginView: View {
 
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var userStore: UserStore
     @State var showErrorAlert = false
     @State var showingTip = false
     
@@ -65,7 +65,7 @@ struct LoginView: View {
     private func tappedLogin() {
         Task {
             do {
-                try await sc.login()
+                try await userStore.login()
                 AnalyticsManager.shared.log(.loginSuccess)
             } catch(SoundCloud.Error.cancelledLogin) {
                 AnalyticsManager.shared.log(.loginCancelled)
@@ -94,5 +94,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView().environmentObject(testSC)
+    LoginView().environmentObject(UserStore(testSC2))
 }

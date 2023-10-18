@@ -9,6 +9,7 @@ import Combine
 import Foundation
 import SoundCloud
 
+@MainActor
 final class AudioStore: ObservableObject {
     
     @Published public var loadedPlaylists: [Int : Playlist] = [:]
@@ -38,12 +39,17 @@ final class AudioStore: ObservableObject {
         return downloadedTracks.contains(loadedTrack)
     }
     
+    public var authHeader: [String : String] { get async throws {
+        try await service.authHeader
+    }}
+    
     private var subscriptions = Set<AnyCancellable>()
     
     // MARK: - Dependencies
     private let service: SoundCloudService
     init(_ service: SoundCloudService) {
         self.service = service
+        loadDefaultPlaylists()
         observeDownloads()
     }
     
@@ -60,7 +66,6 @@ final class AudioStore: ObservableObject {
     }
     
     func load() async throws {
-        loadDefaultPlaylists()
         try service.loadDownloadedTracks()
         try await loadMyPlaylistsWithoutTracks()
         try await loadMyLikedPlaylistsWithoutTracks()
@@ -96,6 +101,25 @@ extension AudioStore {
     
     func pageOfPlaylists(_ pageURL: String) async throws -> Page<Playlist> {
         try await service.pageOfItems(for: pageURL)
+    }
+    
+    func loadTracksForPlaylist(with id: Int) async throws {
+        if let userPlaylistType = PlaylistType(rawValue: id) {
+            switch userPlaylistType {
+            case .likes:
+                try await loadMyLikedTracksPlaylistWithTracks()
+            case .recentlyPosted:
+                try await loadRecentlyPostedPlaylistWithTracks()
+            // These playlists are not reloaded here
+            case .nowPlaying, .downloads:
+                print("⚠️ SC.loadTracksForPlaylist has no effect. Playlist type reloads automatically")
+                break
+            }
+        } else {
+            let page = try await getTracksForPlaylist(id)
+            loadedPlaylists[id]?.tracks = page.items
+            loadedPlaylists[id]?.nextPageUrl = page.nextPage
+        }
     }
 }
 

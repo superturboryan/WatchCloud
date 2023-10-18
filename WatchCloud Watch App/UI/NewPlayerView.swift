@@ -11,7 +11,7 @@ import SwiftUI
 @available(watchOS 10, *)
 struct NewPlayerView: View {
     
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var audioStore: AudioStore
     @EnvironmentObject private var player: AudioPlayer
     @Environment(\.isLuminanceReduced) var isLuminanceReduced
     
@@ -40,7 +40,7 @@ struct NewPlayerView: View {
             playbackButtons
         }
         .sheet(isPresented: $showOptions) {
-            if let currentTrackBinding = Binding($sc.loadedTrack) {
+            if let currentTrackBinding = Binding($audioStore.loadedTrack) {
                 PlayerOptionsView(track: currentTrackBinding)
             }
         }
@@ -64,7 +64,7 @@ struct NewPlayerView: View {
     @ViewBuilder
     private var artwork: some View {
         GeometryReader { geo in
-            CachedImageView(url: sc.loadedTrack?.largerArtworkUrl)
+            CachedImageView(url: audioStore.loadedTrack?.largerArtworkUrl)
                 .frame(width: geo.size.width / 2, height: geo.size.width / 2)
                 .fixedSize()
                 .fullWidthAndHeight()
@@ -89,7 +89,7 @@ struct NewPlayerView: View {
     
     private var trackInfoLabels: some View {
         VStack(alignment: .leading, spacing: -2) {
-            if let currentTrack = sc.loadedTrack {
+            if let currentTrack = audioStore.loadedTrack {
                 MarqueeText(
                     text: currentTrack.title,
                     startDelay: 2.5
@@ -100,7 +100,7 @@ struct NewPlayerView: View {
                     .foregroundColor(.secondary)
                     .font(.system(size: 14, weight: .semibold, design: .rounded))
                     .padding(.trailing, 4)
-                    .animation(.default, value: sc.loadedTrack)
+                    .animation(.default, value: audioStore.loadedTrack)
             }
         }
         .lineLimit(1)
@@ -108,11 +108,11 @@ struct NewPlayerView: View {
     
     private var trackExtraInfo: some View {
         HStack(spacing: 2) {
-            if sc.loadedTrack?.userFavorite ?? false {
+            if audioStore.loadedTrack?.userFavorite ?? false {
                 Image(systemName: "heart.fill")
                     .foregroundColor(.pink)
             }
-            if sc.isLoadedTrackDownloaded {
+            if audioStore.isLoadedTrackDownloaded {
                 Image(systemName: "arrow.down.circle.fill")
                     .foregroundColor(.green)
             }
@@ -157,7 +157,7 @@ struct NewPlayerView: View {
     
     private var playbackCircleOverlay: some View {
         Circle()
-            .trim(from: 0, to: CGFloat(player.progress / Double(sc.loadedTrack?.durationInSeconds ?? 1)))
+            .trim(from: 0, to: CGFloat(player.progress / Double(audioStore.loadedTrack?.durationInSeconds ?? 1)))
             .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
             .foregroundStyle(LinearGradient.scOrange(.vertical, reversed: true))
             .rotationEffect(.degrees(-90))
@@ -188,16 +188,9 @@ struct NewPlayerView: View {
 @available(watchOS 10, *)
 #Preview {
     NewPlayerView()
-        .environmentObject({ () -> SoundCloud in
-            testSC.loadedPlaylists = testDefaultLoadedPlaylists
-            var track = testTrack()
-            track.userFavorite = true
-            testSC.loadedTrack = track
-            testSC.downloadedTracks = [track]
-            return testSC
-        }())
+        .environmentObject(AudioStore(testSC2))
         .environmentObject({ () -> AudioPlayer in
-            let player = AudioPlayer(testSC)
+            let player = AudioPlayer(AudioStore(testSC2))
             player.progress = 2500
             player.isPlaying = true
             return player

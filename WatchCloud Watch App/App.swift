@@ -12,8 +12,9 @@ import TipKit
 @main
 struct WatchCloud_Watch_AppApp: App {
     
-    @StateObject var sc = CompositionRoot.sc
-    @StateObject var player = CompositionRoot.scAudioPlayer
+    @StateObject var audioStore = CompositionRoot.audioStore
+    @StateObject var userStore = CompositionRoot.userStore
+    @StateObject var player = CompositionRoot.audioPlayer
     
     @State var isLaunched = false // Used to determine first launch
     @Environment(\.scenePhase) var scenePhase
@@ -26,8 +27,9 @@ struct WatchCloud_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
             CompositionRoot.rootView
-                .environmentObject(sc)
                 .environmentObject(player)
+                .environmentObject(audioStore)
+                .environmentObject(userStore)
                 .onChange(of: scenePhase) { log($0) }
         }
     }

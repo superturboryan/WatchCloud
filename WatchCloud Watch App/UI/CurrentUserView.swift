@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CurrentUserView: View {
     
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var player: AudioPlayer
     @Environment(\.dismiss) var dismiss
     
@@ -35,7 +35,7 @@ struct CurrentUserView: View {
     
     private func tappedLogout() {
         Haptics.click()
-        sc.logout()
+        userStore.logout()
         player.stop()
         AnalyticsManager.shared.log(.logout)
         dismiss()
@@ -44,15 +44,15 @@ struct CurrentUserView: View {
     private var userView: some View {
         GeometryReader { geo in
             VStack(spacing: 12) {
-                CachedImageView(url: sc.myUser!.largerAvatarUrl)
+                CachedImageView(url: userStore.myUser!.largerAvatarUrl)
                     .frame(width: geo.size.width * 0.6)
                     .clipShape(Circle())
                     
-                ShareLink(item: URL(string: sc.myUser!.permalinkUrl)!, label: {
+                ShareLink(item: URL(string: userStore.myUser!.permalinkUrl)!, label: {
                     HStack {
                         Image(systemName: "square.and.arrow.up")
                             .foregroundColor(.blue)
-                        Text(verbatim: sc.myUser!.username)
+                        Text(verbatim: userStore.myUser!.username)
                             .lineLimit(2)
                     }
                     .font(.headline)
@@ -68,10 +68,7 @@ struct CurrentUserView: View {
 #Preview {
     NavigationStack {
         CurrentUserView()
-        .environmentObject({ () -> SoundCloud in
-            testSC.myUser = testUser()
-            return testSC
-        }())
-        .environmentObject(AudioPlayer(testSC))
+        .environmentObject(UserStore(testSC2))
+        .environmentObject(AudioPlayer(AudioStore(testSC2)))
     }
 }

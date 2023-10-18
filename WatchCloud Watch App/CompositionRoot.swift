@@ -19,7 +19,10 @@ enum CompositionRoot {
     static let rootView = RootView()
     
     // Stores
+    @MainActor
     static let audioStore = AudioStore(soundCloudService)
+    
+    @MainActor
     static let userStore = UserStore(soundCloudService)
     
     // Services
@@ -34,8 +37,5 @@ enum CompositionRoot {
     )
     
     @MainActor
-    static let scAudioPlayer = AudioPlayer(sc)
-    
-    @MainActor
-    static let sc = SoundCloud(config)
+    static let audioPlayer = AudioPlayer(audioStore)
 }

@@ -10,7 +10,8 @@ import SwiftUI
 
 struct LibraryView: View {
 
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var audioStore: AudioStore
+    @EnvironmentObject var userStore: UserStore
 
     let 👆 = "👆"
     
@@ -20,30 +21,30 @@ struct LibraryView: View {
                 let scrollToTop = { sv.scrollTo(👆, anchor: .top) }
                 ScrollView {
                     VStack {
-                        if let nowPlayingBinding = Binding($sc.loadedPlaylists[PlaylistType.nowPlaying.rawValue]),
+                        if let nowPlayingBinding = Binding($audioStore.loadedPlaylists[PlaylistType.nowPlaying.rawValue]),
                            !(nowPlayingBinding.wrappedValue.tracks?.isEmpty ?? true) {
                             nowPlayingCell(nowPlayingBinding).id(👆)
                             searchCell
-                            if Config.isDownloadingEnabled(for: sc.myUser?.id) {
+                            if Config.isDownloadingEnabled(for: userStore.myUser?.id) {
                                 downloadsCell
                             }
                         } else {
                             searchCell.id(👆)
-                            if Config.isDownloadingEnabled(for: sc.myUser?.id) {
+                            if Config.isDownloadingEnabled(for: userStore.myUser?.id) {
                                 downloadsCell
                             }
                         }
 
-                        systemPlaylistCell(Binding($sc.loadedPlaylists[PlaylistType.likes.rawValue])!)
+                        systemPlaylistCell(Binding($audioStore.loadedPlaylists[PlaylistType.likes.rawValue])!)
 
-                        systemPlaylistCell(Binding($sc.loadedPlaylists[PlaylistType.recentlyPosted.rawValue])!)
+                        systemPlaylistCell(Binding($audioStore.loadedPlaylists[PlaylistType.recentlyPosted.rawValue])!)
 
                         followingCell
 
-                        if !sc.myPlaylistIds.isEmpty {
+                        if !audioStore.myPlaylistIds.isEmpty {
                             Section(header: sectionHeaderView(String(localized:"My Playlists"))) {
-                                ForEach($sc.loadedPlaylists.values
-                                    .filter { sc.myPlaylistIds.contains($0.wrappedValue.id) }
+                                ForEach($audioStore.loadedPlaylists.values
+                                    .filter { audioStore.myPlaylistIds.contains($0.wrappedValue.id) }
                                     .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
                                 ) {
                                     userPlaylistCell($0)
@@ -51,10 +52,10 @@ struct LibraryView: View {
                             }
                         }
                         
-                        if !sc.myLikedPlaylistIds.isEmpty {
+                        if !audioStore.myLikedPlaylistIds.isEmpty {
                             Section(header: sectionHeaderView(String(localized: "Liked Playlists"))) {
-                                ForEach($sc.loadedPlaylists.values
-                                    .filter { sc.myLikedPlaylistIds.contains($0.wrappedValue.id) }
+                                ForEach($audioStore.loadedPlaylists.values
+                                    .filter { audioStore.myLikedPlaylistIds.contains($0.wrappedValue.id) }
                                     .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
                                 ) {
                                     userPlaylistCell($0)
@@ -73,7 +74,7 @@ struct LibraryView: View {
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle(String(localized:"Library"))
-                .onChange(of: sc.isLoggedIn) { if $0 { scrollToTop() } } 
+                .onChange(of: userStore.isLoggedIn) { if $0 { scrollToTop() } }
                 // Don't need to scroll if not logged in? 🤔
             }
         }
@@ -84,7 +85,7 @@ struct LibraryView: View {
         navigationCell(
             id: PlaylistType.nowPlaying.rawValue,
             title: PlaylistType.nowPlaying.title,
-            subtitle: sc.loadedTrack?.title ?? "...",
+            subtitle: audioStore.loadedTrack?.title ?? "...",
             bgColor: .orange) {
                 PlaylistView(
                     playlist: playlist,
@@ -110,7 +111,7 @@ struct LibraryView: View {
                 playlist: playlist,
                 onFirstLoad: {
                     AnalyticsManager.shared.log(.tappedSystemPlaylist)
-                    try await sc.loadTracksForPlaylist(with: playlist.id)
+                    try await audioStore.loadTracksForPlaylist(with: playlist.id)
                 }
             )
         }
@@ -122,7 +123,7 @@ struct LibraryView: View {
                 playlist: playlist,
                 onFirstLoad: {
                     AnalyticsManager.shared.log(.tappedUserPlaylist)
-                    try await sc.loadTracksForPlaylist(with: playlist.id)
+                    try await audioStore.loadTracksForPlaylist(with: playlist.id)
                 }
             )
         } label: {
@@ -132,7 +133,7 @@ struct LibraryView: View {
     }
     
     var currentUserCell: some View {
-        navigationCell(id: -1, title: sc.myUser?.username ?? "User") {
+        navigationCell(id: -1, title: userStore.myUser?.username ?? "User") {
             CurrentUserView()
         }
     }
@@ -147,7 +148,7 @@ struct LibraryView: View {
     @ViewBuilder
     var followingCell: some View {
         let title = String(localized: "Following")
-        if let usersImFollowingBinding = Binding($sc.usersImFollowing) {
+        if let usersImFollowingBinding = Binding($userStore.usersImFollowing) {
             navigationCell(id: -3, title: title) {
                 UserListView(
                     users: usersImFollowingBinding.items,
@@ -156,7 +157,7 @@ struct LibraryView: View {
                     sortedAlphabetically: true,
                     reachedBottomOfList: {
                     Task {
-                        try? await sc.loadUsersImFollowing()
+                        try? await userStore.loadUsersImFollowing()
                     }
                 })
             }
@@ -256,14 +257,6 @@ struct LibraryView: View {
 
 #Preview {
     LibraryView()
-        .environmentObject({() -> SoundCloud in
-            let sc = SoundCloud(testSCConfig)
-            sc.loadedPlaylists = testDefaultLoadedPlaylists
-            let testPlaylist = testPlaylist(empty: true)
-            let testPlaylistId = testPlaylist.id
-            sc.myPlaylistIds = [testPlaylistId]
-            sc.myLikedPlaylistIds = [testPlaylistId]
-            sc.loadedPlaylists[testPlaylistId] = testPlaylist
-            return sc
-        }())
+        .environmentObject(AudioStore(testSC2))
+        .environmentObject(AudioPlayer(AudioStore(testSC2)))
 }
