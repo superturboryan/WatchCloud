@@ -55,6 +55,7 @@
 		946F38E02AB07F81008CE9D1 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CB2AB07F81008CE9D1 /* AudioPlayer.swift */; };
 		946F38E12AB07F81008CE9D1 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CC2AB07F81008CE9D1 /* App.swift */; };
 		9488EE612AE013D40009EC54 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE602AE013D40009EC54 /* UserStore.swift */; };
+		9488EE652AE026140009EC54 /* AudioStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE642AE026140009EC54 /* AudioStore.swift */; };
 		94923C6B2ABDB5A300A67EBE /* PoweredBySCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */; };
 		94923C6D2ABDBB2C00A67EBE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6C2ABDBB2C00A67EBE /* String.swift */; };
 		94923C6F2ABDBBD500A67EBE /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6E2ABDBBD500A67EBE /* Int.swift */; };
@@ -180,6 +181,7 @@
 		946F38E72AB08470008CE9D1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		946F38E92AB08470008CE9D1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		9488EE602AE013D40009EC54 /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
+		9488EE642AE026140009EC54 /* AudioStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStore.swift; sourceTree = "<group>"; };
 		94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoweredBySCView.swift; sourceTree = "<group>"; };
 		94923C6C2ABDBB2C00A67EBE /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		94923C6E2ABDBBD500A67EBE /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 		9488EE5F2AE012020009EC54 /* Stores */ = {
 			isa = PBXGroup;
 			children = (
+				9488EE642AE026140009EC54 /* AudioStore.swift */,
 				9488EE602AE013D40009EC54 /* UserStore.swift */,
 			);
 			path = Stores;
@@ -620,6 +623,7 @@
 				943477BF2AD421E200A6DED6 /* CaptchaNotAppearingTip.swift in Sources */,
 				94FAA18A2ACB319600EF97CE /* UserListView.swift in Sources */,
 				9421D2A12ACED420005FE857 /* Device.swift in Sources */,
+				9488EE652AE026140009EC54 /* AudioStore.swift in Sources */,
 				94923C6F2ABDBBD500A67EBE /* Int.swift in Sources */,
 				946F38D12AB07F81008CE9D1 /* Image.swift in Sources */,
 				946F38CF2AB07F81008CE9D1 /* Delete.swift in Sources */,
