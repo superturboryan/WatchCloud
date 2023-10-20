@@ -16,7 +16,7 @@ final class UserStore: ObservableObject {
     @Published public var usersImFollowing: Page<User>? = nil
     
     // MARK: - Dependencies
-    private let userPersistenceService = UserDefaultsService<User>("\(User.self)")
+    private let myUserDAO = UserDefaultsDAO<User>("\(User.self)")
     private let service: SoundCloudService
     init(_ service: SoundCloudService) {
         self.service = service
@@ -38,7 +38,7 @@ extension UserStore {
     func logout() {
         service.logout()
         isLoggedIn = false
-        userPersistenceService.delete()
+        try? myUserDAO.delete()
     }
 }
 
@@ -49,12 +49,12 @@ extension UserStore {
     }
     
     func loadMyProfile() async throws {
-        if let savedUser = userPersistenceService.get() {
+        if let savedUser = try? myUserDAO.get() {
             myUser = savedUser
         } else {
             let loadedUser = try await service.getMyUser()
             myUser = loadedUser
-            userPersistenceService.save(loadedUser)
+            try myUserDAO.save(loadedUser)
         }
     }
     
