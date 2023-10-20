@@ -85,8 +85,11 @@ struct PlayerOptionsView: View {
     func tappedDownload() {
         Haptics.click()
         Task {
-            if isTrackDownloaded { try audioStore.removeDownload(track) }
-            else { try await audioStore.download(track) }
+            if isTrackDownloaded {
+                try audioStore.removeDownload(track)
+            } else {
+                try await audioStore.download(track)
+            }
         }
     }
     

@@ -10,7 +10,7 @@ import Foundation
 import SoundCloud
 
 @MainActor
-final class AudioStore: ObservableObject {
+final class AudioStore: NSObject, ObservableObject {
     
     @Published public var loadedPlaylists: [Int : Playlist] = [:]
     @Published public private(set) var loadedTrackNowPlayingQueueIndex: Int = -1
@@ -29,6 +29,7 @@ final class AudioStore: ObservableObject {
             loadedPlaylists[PlaylistType.downloads.rawValue]!.tracks = downloadedTracks
         }
     }
+    private var downloadTasks: [Track : URLSessionTask] = [:]
     
     // Use id to filter loadedPlaylists dictionary for my + liked playlists
     @Published public var myPlaylistIds: [Int] = []
@@ -43,30 +44,19 @@ final class AudioStore: ObservableObject {
         try await service.authHeader
     }}
     
+    private let decoder = JSONDecoder()
     private var subscriptions = Set<AnyCancellable>()
     
     // MARK: - Dependencies
     private let service: SoundCloudService
     init(_ service: SoundCloudService) {
         self.service = service
+        super.init()
         loadDefaultPlaylists()
-        observeDownloads()
-    }
-    
-    private func observeDownloads() {
-        service.downloadedTracks.publisher.collect().receive(on: DispatchQueue.main).sink {
-            self.downloadedTracks = $0
-        }.store(in: &subscriptions)
-        
-        service.downloadsInProgress.publisher.collect().receive(on: DispatchQueue.main).sink { downloads in
-            for download in downloads {
-                self.downloadsInProgress[download.key] = download.value
-            }
-        }.store(in: &subscriptions)
     }
     
     func load() async throws {
-        try service.loadDownloadedTracks()
+        try loadDownloadedTracks()
         try await loadMyPlaylistsWithoutTracks()
         try await loadMyLikedPlaylistsWithoutTracks()
         try await loadMyLikedTracksPlaylistWithTracks()
@@ -180,17 +170,117 @@ extension AudioStore {
     }
 }
 
+// MARK: - Downloads
 extension AudioStore {
     func download(_ track: Track) async throws {
-        try await service.download(track)
+        let streamInfo = try await service.getStreamInfoForTrack(with: track.id)
+        try await downloadTrack(track, from: streamInfo.httpMp3128Url)
     }
     
     func removeDownload(_ trackToRemove: Track) throws {
-        try service.removeDownload(trackToRemove)
+        let trackMp3Url = trackToRemove.localFileUrl(withExtension: Track.FileExtension.mp3)
+        let trackJsonUrl = trackToRemove.localFileUrl(withExtension: Track.FileExtension.json)
+        do {
+            try FileManager.default.removeItem(at: trackMp3Url)
+            try FileManager.default.removeItem(at: trackJsonUrl)
+            downloadedTracks.removeAll(where: { $0.id == trackToRemove.id })
+        } catch {
+            throw Error.removingDownloadedTrack
+        }
     }
     
     func cancelDownloadInProgress(for track: Track) throws {
-        try service.cancelDownloadInProgress(for: track)
+        guard downloadsInProgress.keys.contains(track), let task = downloadTasks[track] else {
+            throw Error.trackDownloadNotInProgress
+        }
+        task.cancel()
+        downloadTasks.removeValue(forKey: track)
+        downloadsInProgress.removeValue(forKey: track)
+    }
+}
+
+extension AudioStore: URLSessionTaskDelegate {
+    private func downloadTrack(_ track: Track, from url: String) async throws {
+        // Checks before starting download
+        let localMp3Url = track.localFileUrl(withExtension: Track.FileExtension.mp3)
+        let localFileDoesNotExist = !FileManager.default.fileExists(atPath: localMp3Url.path)
+        let downloadNotAlreadyInProgress = !downloadsInProgress.keys.contains(track)
+        guard localFileDoesNotExist, downloadNotAlreadyInProgress else {
+            throw Error.downloadAlreadyExists
+        }
+        // Set empty progress for track so didCreateTask can know which track it's starting download for
+        downloadsInProgress[track] = Progress(totalUnitCount: 0)
+        // Setup request
+        var request = URLRequest(url: URL(string: url)!)
+        request.allHTTPHeaderFields = try await authHeader
+        // ‼️ Response does not contain ID for track (only encrypted ID)
+        // Add track ID to request header to know which track is being downloaded in delegate
+        request.addValue("\(track.id)", forHTTPHeaderField: "track_id")
+        // Make request for track data
+        guard let (trackData, response) = try? await URLSession.shared.data(for: request, delegate: self) else {
+            throw Error.noInternet
+        }
+        let statusCodeInt = (response as! HTTPURLResponse).statusCode
+        let statusCode = SoundCloud.StatusCode(rawValue: statusCodeInt) ?? .unknown
+        guard statusCode != SoundCloud.StatusCode.unauthorized else {
+            throw Error.userNotAuthorized
+        }
+        guard !statusCode.errorOccurred else {
+            throw Error.network(statusCode)
+        }
+        downloadsInProgress.removeValue(forKey: track)
+        // Save track data as mp3
+        try trackData.write(to: localMp3Url)
+        // Save track metadata as track json object
+        let trackJsonData = try JSONEncoder().encode(track)
+        let localJsonUrl = track.localFileUrl(withExtension: Track.FileExtension.json)
+        try trackJsonData.write(to: localJsonUrl)
+        // Create copy of track with local file url added
+        var trackWithLocalFileUrl = track
+        trackWithLocalFileUrl.localFileUrl = localMp3Url.absoluteString
+        downloadedTracks.append(trackWithLocalFileUrl)
+    }
+    
+    public func urlSession(_ session: URLSession, didCreateTask task: URLSessionTask) {
+        // ‼️ Get track id being downloaded from request header field
+        guard
+            let trackId = Int(task.originalRequest?.value(forHTTPHeaderField: "track_id") ?? ""),
+            let trackBeingDownloaded = downloadsInProgress.keys.first(where: { $0.id == trackId })
+        else { return }
+        // Keep reference to task in case we need to cancel
+        downloadTasks[trackBeingDownloaded] = task
+        // Assign task's progress to track being downloaded
+        task.publisher(for: \.progress)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] progress in
+                DispatchQueue.main.async { // Not sure if this works better than .receive(on:) alone
+                    print("\n⬇️🎵 Download progress for \(trackBeingDownloaded.title): \(progress.fractionCompleted)")
+                    self?.downloadsInProgress[trackBeingDownloaded] = progress
+                }
+            }
+            .store(in: &subscriptions)
+    }
+    
+    private func loadDownloadedTracks() throws {
+        // Get id of downloaded tracks from device's documents directory
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let downloadedTrackIds = try FileManager.default.contentsOfDirectory(atPath: documentsURL.path)
+            .filter { $0.lowercased().contains(Track.FileExtension.mp3) } // Get all mp3 files
+            .map { $0.replacingOccurrences(of: ".\(Track.FileExtension.mp3)", with: "") } // Remove mp3 extension so only id remains
+        
+        // Load track for each id, set local mp3 file url for track
+        var loadedTracks = [Track]()
+        for id in downloadedTrackIds {
+            let trackJsonURL = documentsURL.appendingPathComponent("\(id).\(Track.FileExtension.json)")
+            let trackJsonData = try Data(contentsOf: trackJsonURL)
+            var downloadedTrack = try decoder.decode(Track.self, from: trackJsonData)
+            
+            let downloadedTrackLocalMp3Url = downloadedTrack.localFileUrl(withExtension: Track.FileExtension.mp3).absoluteString
+            downloadedTrack.localFileUrl = downloadedTrackLocalMp3Url
+            
+            loadedTracks.append(downloadedTrack)
+        }
+        downloadedTracks = loadedTracks
     }
 }
 
@@ -252,5 +342,25 @@ private extension AudioStore {
     func loadRecentlyPostedPlaylistWithTracks() async throws {
         loadedPlaylists[PlaylistType.recentlyPosted.rawValue]?.tracks =
         try await service.getMyFollowingsRecentlyPosted()
+    }
+}
+
+internal extension Track {
+    struct FileExtension {
+        private init() {}
+        public static let mp3 = "mp3"
+        public static let json = "json"
+    }
+}
+
+extension AudioStore {
+    enum Error: LocalizedError {
+        case trackDownloadNotInProgress
+        case downloadAlreadyExists
+        case userNotAuthorized
+        case network(SoundCloud.StatusCode)
+        case invalidURL
+        case noInternet
+        case removingDownloadedTrack
     }
 }
