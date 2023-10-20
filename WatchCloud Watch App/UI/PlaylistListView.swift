@@ -82,6 +82,6 @@ struct PlaylistListView: View {
             canLoadMore: .constant(false),
             title: "Following"
         )
-        .environmentObject(AudioStore(testSC2))
+        .environmentObject(AudioStore(testSC))
     }
 }

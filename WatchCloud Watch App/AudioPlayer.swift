@@ -170,7 +170,7 @@ extension AudioPlayer {
     func skipToPreviousTrack() {
         let skipToPreviousTrackThreshold: Double = 3
         let isBeginningOfTrack = progress < skipToPreviousTrackThreshold
-        let isBeginningOfQueue = audioStore.loadedTrackNowPlayingQueueIndex == 0
+        let isBeginningOfQueue = audioStore.loadedTrackPlaylistIndex == 0
         let shouldSkipToPreviousTrack = isBeginningOfTrack && !isBeginningOfQueue
         
         if shouldSkipToPreviousTrack, let previousTrack = audioStore.previousTrackInNowPlayingQueue {
@@ -225,7 +225,7 @@ extension AudioPlayer {
         center.nextTrackCommand.addTarget { [weak self] _ in
             guard
                 let queue = self?.audioStore.nowPlayingQueue, // Queue exists
-                let nowPlayingQueueIndex = self?.audioStore.loadedTrackNowPlayingQueueIndex,
+                let nowPlayingQueueIndex = self?.audioStore.loadedTrackPlaylistIndex,
                 nowPlayingQueueIndex < queue.count - 1 // Not at end of queue
             else {  return .commandFailed }
             

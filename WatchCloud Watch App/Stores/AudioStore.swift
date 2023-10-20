@@ -12,19 +12,17 @@ import SoundCloud
 @MainActor
 final class AudioStore: NSObject, ObservableObject {
     
-    @Published public var loadedPlaylists: [Int : Playlist] = [:]
-    @Published public private(set) var loadedTrackNowPlayingQueueIndex: Int = -1
-    
-    @Published public var loadedTrack: Track? {
+    @Published var loadedPlaylists: [Int : Playlist] = [:]
+    @Published private(set) var loadedTrackPlaylistIndex: Int = -1
+    @Published var loadedTrack: Track? {
         didSet {
-            loadedTrackNowPlayingQueueIndex = loadedPlaylists[PlaylistType.nowPlaying.rawValue]?
-                .tracks?
+            loadedTrackPlaylistIndex = loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks?
                 .firstIndex(where: { $0 == loadedTrack }) ?? -1
         }
     }
     
-    @Published public var downloadsInProgress: [Track : Progress] = [:]
-    @Published public var downloadedTracks: [Track] = [] { // Tracks with streamURL set to local mp3 url
+    @Published var downloadsInProgress: [Track : Progress] = [:]
+    @Published var downloadedTracks: [Track] = [] { // Tracks with streamURL set to local mp3 url
         didSet {
             loadedPlaylists[PlaylistType.downloads.rawValue]!.tracks = downloadedTracks
         }
@@ -32,38 +30,24 @@ final class AudioStore: NSObject, ObservableObject {
     private var downloadTasks: [Track : URLSessionTask] = [:]
     
     // Use id to filter loadedPlaylists dictionary for my + liked playlists
-    @Published public var myPlaylistIds: [Int] = []
-    @Published public var myLikedPlaylistIds: [Int] = []
+    @Published var myPlaylistIds: [Int] = []
+    @Published var myLikedPlaylistIds: [Int] = []
     
-    public var isLoadedTrackDownloaded: Bool {
-        guard let loadedTrack else { return false }
-        return downloadedTracks.contains(loadedTrack)
-    }
-    
-    public var authHeader: [String : String] { get async throws {
+    var authHeader: [String : String] { get async throws {
         try await service.authHeader
     }}
     
     private let decoder = JSONDecoder()
     private var subscriptions = Set<AnyCancellable>()
-    
-    // MARK: - Dependencies
-    private let service: SoundCloudService
-    init(_ service: SoundCloudService) {
+    private let service: SoundCloud
+    init(_ service: SoundCloud) {
         self.service = service
         super.init()
         loadDefaultPlaylists()
     }
-    
-    func load() async throws {
-        try loadDownloadedTracks()
-        try await loadMyPlaylistsWithoutTracks()
-        try await loadMyLikedPlaylistsWithoutTracks()
-        try await loadMyLikedTracksPlaylistWithTracks()
-        try await loadRecentlyPostedPlaylistWithTracks()
-    }
 }
 
+// MARK: - Tracks + Playlists 💿
 extension AudioStore {
     func getTracksForUser(_ id: Int, _ limit: Int = 20) async throws -> Page<Track> {
         try await service.getTracksForUser(id, limit)
@@ -113,7 +97,7 @@ extension AudioStore {
     }
 }
 
-// MARK: - Like + Follow
+// MARK: - Like + Follow 🧡
 extension AudioStore {
     func likeTrack(_ track: Track) async throws {
         try await service.likeTrack(track)
@@ -141,8 +125,13 @@ extension AudioStore {
     }
 }
 
-// MARK: - Queue Helpers
+// MARK: - Queue Helpers 📜
 extension AudioStore {
+    var isLoadedTrackDownloaded: Bool {
+        guard let loadedTrack else { return false }
+        return downloadedTracks.contains(loadedTrack)
+    }
+    
     func setNowPlayingQueue(with tracks: [Track]) {
         loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks = tracks
     }
@@ -155,22 +144,92 @@ extension AudioStore {
         guard let queue = nowPlayingQueue
         else { return nil }
         
-        let isEndOfQueue = loadedTrackNowPlayingQueueIndex == queue.count - 1
-        let nextTrackIndex = isEndOfQueue ? 0 : loadedTrackNowPlayingQueueIndex + 1
+        let isEndOfQueue = loadedTrackPlaylistIndex == queue.count - 1
+        let nextTrackIndex = isEndOfQueue ? 0 : loadedTrackPlaylistIndex + 1
         return queue[nextTrackIndex]
     }
     
     var previousTrackInNowPlayingQueue: Track? {
         guard let queue = nowPlayingQueue,
-              loadedTrackNowPlayingQueueIndex > 0
+              loadedTrackPlaylistIndex > 0
         else { return nil }
         
-        let previousTrackIndex = loadedTrackNowPlayingQueueIndex - 1
+        let previousTrackIndex = loadedTrackPlaylistIndex - 1
         return queue[previousTrackIndex]
     }
 }
 
-// MARK: - Downloads
+// MARK: - My user 💁
+extension AudioStore {
+    func load() async throws {
+        try loadDownloadedTracks()
+        try await loadMyPlaylistsWithoutTracks()
+        try await loadMyLikedPlaylistsWithoutTracks()
+        try await loadMyLikedTracksPlaylistWithTracks()
+        try await loadRecentlyPostedPlaylistWithTracks()
+    }
+    
+    private func loadDefaultPlaylists() {
+        loadedPlaylists.removeAll()
+        let myUser = User(id: -1)
+        
+        loadedPlaylists[PlaylistType.nowPlaying.rawValue] = Playlist(
+            id: PlaylistType.nowPlaying.rawValue,
+            user: myUser,
+            title: PlaylistType.nowPlaying.title,
+            tracks: []
+        )
+        loadedPlaylists[PlaylistType.downloads.rawValue] = Playlist(
+            id: PlaylistType.downloads.rawValue,
+            user: myUser,
+            title: PlaylistType.downloads.title,
+            tracks: []
+        )
+        loadedPlaylists[PlaylistType.likes.rawValue] = Playlist(
+            id: PlaylistType.likes.rawValue,
+            permalinkUrl: myUser.permalinkUrl + "/likes",
+            user: myUser,
+            title: PlaylistType.likes.title,
+            tracks: []
+        )
+        loadedPlaylists[PlaylistType.recentlyPosted.rawValue] = Playlist(
+            id: PlaylistType.recentlyPosted.rawValue,
+            permalinkUrl: myUser.permalinkUrl + "/following",
+            user: myUser,
+            title: PlaylistType.recentlyPosted.title,
+            tracks: []
+        )
+    }
+    
+    private func loadMyPlaylistsWithoutTracks() async throws {
+        let myPlaylists = try await service.getMyPlaylistsWithoutTracks()
+        myPlaylistIds = myPlaylists.map(\.id)
+        for playlist in myPlaylists {
+            loadedPlaylists[playlist.id] = playlist
+        }
+    }
+    
+    private func loadMyLikedPlaylistsWithoutTracks() async throws {
+        let myLikedPlaylists = try await service.getMyLikedPlaylistsWithoutTracks()
+        myLikedPlaylistIds = myLikedPlaylists.map(\.id)
+        for playlist in myLikedPlaylists {
+            loadedPlaylists[playlist.id] = playlist
+        }
+    }
+    
+    private func loadMyLikedTracksPlaylistWithTracks() async throws {
+        let page = try await service.getMyLikedTracks()
+        loadedPlaylists[PlaylistType.likes.rawValue]?.tracks = page.items
+        loadedPlaylists[PlaylistType.likes.rawValue]?.nextPageUrl = page.nextPage
+    }
+    
+    private func loadRecentlyPostedPlaylistWithTracks() async throws {
+        loadedPlaylists[PlaylistType.recentlyPosted.rawValue]?.tracks =
+        try await service.getMyFollowingsRecentlyPosted()
+    }
+}
+
+// MARK: - Downloads 📲
 extension AudioStore {
     func download(_ track: Track) async throws {
         let streamInfo = try await service.getStreamInfoForTrack(with: track.id)
@@ -199,8 +258,9 @@ extension AudioStore {
     }
 }
 
-extension AudioStore: URLSessionTaskDelegate {
-    private func downloadTrack(_ track: Track, from url: String) async throws {
+// MARK: - Private Downloads 🙈
+private extension AudioStore {
+    func downloadTrack(_ track: Track, from url: String) async throws {
         // Checks before starting download
         let localMp3Url = track.localFileUrl(withExtension: Track.FileExtension.mp3)
         let localFileDoesNotExist = !FileManager.default.fileExists(atPath: localMp3Url.path)
@@ -241,27 +301,7 @@ extension AudioStore: URLSessionTaskDelegate {
         downloadedTracks.append(trackWithLocalFileUrl)
     }
     
-    public func urlSession(_ session: URLSession, didCreateTask task: URLSessionTask) {
-        // ‼️ Get track id being downloaded from request header field
-        guard
-            let trackId = Int(task.originalRequest?.value(forHTTPHeaderField: "track_id") ?? ""),
-            let trackBeingDownloaded = downloadsInProgress.keys.first(where: { $0.id == trackId })
-        else { return }
-        // Keep reference to task in case we need to cancel
-        downloadTasks[trackBeingDownloaded] = task
-        // Assign task's progress to track being downloaded
-        task.publisher(for: \.progress)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] progress in
-                DispatchQueue.main.async { // Not sure if this works better than .receive(on:) alone
-                    print("\n⬇️🎵 Download progress for \(trackBeingDownloaded.title): \(progress.fractionCompleted)")
-                    self?.downloadsInProgress[trackBeingDownloaded] = progress
-                }
-            }
-            .store(in: &subscriptions)
-    }
-    
-    private func loadDownloadedTracks() throws {
+    func loadDownloadedTracks() throws {
         // Get id of downloaded tracks from device's documents directory
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let downloadedTrackIds = try FileManager.default.contentsOfDirectory(atPath: documentsURL.path)
@@ -284,72 +324,25 @@ extension AudioStore: URLSessionTaskDelegate {
     }
 }
 
-private extension AudioStore {
-    func loadDefaultPlaylists() {
-        loadedPlaylists.removeAll()
-        let myUser = User(id: -1)
-        
-        loadedPlaylists[PlaylistType.nowPlaying.rawValue] = Playlist(
-            id: PlaylistType.nowPlaying.rawValue,
-            user: myUser,
-            title: PlaylistType.nowPlaying.title,
-            tracks: []
-        )
-        loadedPlaylists[PlaylistType.downloads.rawValue] = Playlist(
-            id: PlaylistType.downloads.rawValue,
-            user: myUser,
-            title: PlaylistType.downloads.title,
-            tracks: []
-        )
-        loadedPlaylists[PlaylistType.likes.rawValue] = Playlist(
-            id: PlaylistType.likes.rawValue,
-            permalinkUrl: myUser.permalinkUrl + "/likes",
-            user: myUser,
-            title: PlaylistType.likes.title,
-            tracks: []
-        )
-        loadedPlaylists[PlaylistType.recentlyPosted.rawValue] = Playlist(
-            id: PlaylistType.recentlyPosted.rawValue,
-            permalinkUrl: myUser.permalinkUrl + "/following",
-            user: myUser,
-            title: PlaylistType.recentlyPosted.title,
-            tracks: []
-        )
-    }
-    
-    func loadMyPlaylistsWithoutTracks() async throws {
-        let myPlaylists = try await service.getMyPlaylistsWithoutTracks()
-        myPlaylistIds = myPlaylists.map(\.id)
-        for playlist in myPlaylists {
-            loadedPlaylists[playlist.id] = playlist
-        }
-    }
-    
-    func loadMyLikedPlaylistsWithoutTracks() async throws {
-        let myLikedPlaylists = try await service.getMyLikedPlaylistsWithoutTracks()
-        myLikedPlaylistIds = myLikedPlaylists.map(\.id)
-        for playlist in myLikedPlaylists {
-            loadedPlaylists[playlist.id] = playlist
-        }
-    }
-    
-    func loadMyLikedTracksPlaylistWithTracks() async throws {
-        let page = try await service.getMyLikedTracks()
-        loadedPlaylists[PlaylistType.likes.rawValue]?.tracks = page.items
-        loadedPlaylists[PlaylistType.likes.rawValue]?.nextPageUrl = page.nextPage
-    }
-    
-    func loadRecentlyPostedPlaylistWithTracks() async throws {
-        loadedPlaylists[PlaylistType.recentlyPosted.rawValue]?.tracks =
-        try await service.getMyFollowingsRecentlyPosted()
-    }
-}
-
-internal extension Track {
-    struct FileExtension {
-        private init() {}
-        public static let mp3 = "mp3"
-        public static let json = "json"
+extension AudioStore: URLSessionTaskDelegate {
+    func urlSession(_ session: URLSession, didCreateTask task: URLSessionTask) {
+        // ‼️ Get track id being downloaded from request header field
+        guard
+            let trackId = Int(task.originalRequest?.value(forHTTPHeaderField: "track_id") ?? ""),
+            let trackBeingDownloaded = downloadsInProgress.keys.first(where: { $0.id == trackId })
+        else { return }
+        // Keep reference to task in case we need to cancel
+        downloadTasks[trackBeingDownloaded] = task
+        // Assign task's progress to track being downloaded
+        task.publisher(for: \.progress)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] progress in
+                DispatchQueue.main.async { // Not sure if this works better than .receive(on:) alone
+                    print("\n⬇️🎵 Download progress for \(trackBeingDownloaded.title): \(progress.fractionCompleted)")
+                    self?.downloadsInProgress[trackBeingDownloaded] = progress
+                }
+            }
+            .store(in: &subscriptions)
     }
 }
 
@@ -362,5 +355,12 @@ extension AudioStore {
         case invalidURL
         case noInternet
         case removingDownloadedTrack
+    }
+}
+
+fileprivate extension Track {
+    enum FileExtension {
+        public static let mp3 = "mp3"
+        public static let json = "json"
     }
 }

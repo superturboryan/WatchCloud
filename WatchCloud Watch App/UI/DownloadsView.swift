@@ -156,7 +156,7 @@ struct DownloadsView: View {
 #Preview {
     return NavigationStack {
         DownloadsView()
-            .environmentObject(AudioStore(testSC2))
-            .environmentObject(AudioPlayer(AudioStore(testSC2)))
+            .environmentObject(AudioStore(testSC))
+            .environmentObject(AudioPlayer(AudioStore(testSC)))
     }
 }

@@ -191,7 +191,7 @@ extension SearchView {
 #Preview {
     NavigationStack {
         SearchView()
-            .environmentObject(AudioStore(testSC2))
-            .environmentObject(UserStore(testSC2))
+            .environmentObject(AudioStore(testSC))
+            .environmentObject(UserStore(testSC))
     }
 }

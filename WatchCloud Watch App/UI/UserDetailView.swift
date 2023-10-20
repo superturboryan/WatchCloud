@@ -235,7 +235,8 @@ struct UserDetailView: View {
 #Preview {
     NavigationStack {
         UserDetailView(user: testUser(27127117))
-            .environmentObject(testSC)
-            .environmentObject(AudioPlayer(AudioStore(testSC2)))
+            .environmentObject(AudioStore(testSC))
+            .environmentObject(UserStore(testSC))
+            .environmentObject(AudioPlayer(AudioStore(testSC)))
     }
 }

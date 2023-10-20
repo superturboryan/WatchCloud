@@ -110,7 +110,7 @@ struct RootView: View {
 }
 
 #Preview {
-    RootView().environmentObject(AudioStore(testSC2))
+    RootView().environmentObject(AudioStore(testSC))
 }
 
 extension Notification.Name {

@@ -196,10 +196,7 @@ extension PlaybackSpeed {
     let trackBinding = Binding(get: { track }, set: { _ in })
     
     return PlayerOptionsView(track: trackBinding)
-        .environmentObject(AudioStore(testSC2))
-        .environmentObject({ () -> AudioPlayer in
-            let player = AudioPlayer(AudioStore(testSC2))
-            player.playbackSpeed = .OneAndAQuarter
-            return player
-        }())
+        .environmentObject(AudioStore(testSC))
+        .environmentObject(UserStore(testSC))
+        .environmentObject(AudioPlayer(AudioStore(testSC)))
 }

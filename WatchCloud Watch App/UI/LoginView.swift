@@ -94,5 +94,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView().environmentObject(UserStore(testSC2))
+    LoginView().environmentObject(UserStore(testSC))
 }

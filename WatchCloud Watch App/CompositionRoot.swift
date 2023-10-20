@@ -20,16 +20,16 @@ enum CompositionRoot {
     
     // Stores
     @MainActor
-    static let audioStore = AudioStore(soundCloudService)
+    static let audioStore = AudioStore(sc)
     
     @MainActor
-    static let userStore = UserStore(soundCloudService)
+    static let userStore = UserStore(sc)
     
     // Services
-    private static let soundCloudService = SoundCloudService(config)
+    private static let sc = SoundCloud(config)
     
     // Config
-    private static let config = SoundCloudConfig(
+    private static let config = SoundCloud.Config(
         apiURL: Config.apiUrl,
         clientId: Config.clientId,
         clientSecret: Config.clientSecret,

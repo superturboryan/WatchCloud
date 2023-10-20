@@ -191,9 +191,9 @@ struct PlayerView: View {
 
 #Preview {
     PlayerView()
-        .environmentObject(AudioStore(testSC2))
+        .environmentObject(AudioStore(testSC))
         .environmentObject({ () -> AudioPlayer in
-            let player = AudioPlayer(AudioStore(testSC2))
+            let player = AudioPlayer(AudioStore(testSC))
             player.progress = 3015
             player.isPlaying = true
             return player

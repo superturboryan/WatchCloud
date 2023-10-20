@@ -257,6 +257,6 @@ struct LibraryView: View {
 
 #Preview {
     LibraryView()
-        .environmentObject(AudioStore(testSC2))
-        .environmentObject(AudioPlayer(AudioStore(testSC2)))
+        .environmentObject(AudioStore(testSC))
+        .environmentObject(AudioPlayer(AudioStore(testSC)))
 }

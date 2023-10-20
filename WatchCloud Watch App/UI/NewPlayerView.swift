@@ -188,11 +188,7 @@ struct NewPlayerView: View {
 @available(watchOS 10, *)
 #Preview {
     NewPlayerView()
-        .environmentObject(AudioStore(testSC2))
-        .environmentObject({ () -> AudioPlayer in
-            let player = AudioPlayer(AudioStore(testSC2))
-            player.progress = 2500
-            player.isPlaying = true
-            return player
-        }() )
+        .environmentObject(AudioStore(testSC))
+        .environmentObject(UserStore(testSC))
+        .environmentObject(AudioPlayer(AudioStore(testSC)))
 }

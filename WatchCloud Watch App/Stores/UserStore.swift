@@ -17,8 +17,8 @@ final class UserStore: ObservableObject {
     
     // MARK: - Dependencies
     private let myUserDAO = UserDefaultsDAO<User>("\(User.self)")
-    private let service: SoundCloudService
-    init(_ service: SoundCloudService) {
+    private let service: SoundCloud
+    init(_ service: SoundCloud) {
         self.service = service
     }
 }
