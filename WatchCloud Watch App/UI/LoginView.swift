@@ -24,6 +24,7 @@ struct LoginView: View {
             loginButton
         }
         .fullWidthAndHeight()
+        .background(.black)
         .overlay(alignment: .bottom) {
             if !showingTip {
                 PoweredBySCView()

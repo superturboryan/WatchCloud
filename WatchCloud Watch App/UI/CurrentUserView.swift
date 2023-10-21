@@ -43,26 +43,28 @@ struct CurrentUserView: View {
         dismiss()
     }
     
+    @ViewBuilder
     private var userView: some View {
-        GeometryReader { geo in
-            VStack(spacing: 12) {
-                CachedImageView(url: userStore.myUser!.largerAvatarUrl)
-                    .frame(width: geo.size.width * 0.6)
-                    .clipShape(Circle())
-                    
-                ShareLink(item: URL(string: userStore.myUser!.permalinkUrl)!, label: {
-                    HStack {
-                        Image(systemName: "square.and.arrow.up")
-                            .foregroundColor(.blue)
-                        Text(verbatim: userStore.myUser!.username)
-                            .lineLimit(2)
-                    }
-                    .font(.headline)
-                })
-                .buttonStyle(.plain)
+        if let myUser = userStore.myUser {
+            GeometryReader { geo in
+                VStack(spacing: 12) {
+                    CachedImageView(url: myUser.largerAvatarUrl)
+                        .frame(width: geo.size.width * 0.6)
+                        .clipShape(Circle())
+                    ShareLink(item: URL(string: myUser.permalinkUrl)!, label: {
+                        HStack {
+                            Image(systemName: "square.and.arrow.up")
+                                .foregroundColor(.blue)
+                            Text(verbatim: myUser.username)
+                                .lineLimit(2)
+                        }
+                        .font(.headline)
+                    })
+                    .buttonStyle(.plain)
+                }
+                .padding(4)
+                .fullWidthAndHeight()
             }
-            .padding(4)
-            .fullWidthAndHeight()
         }
     }
 }
