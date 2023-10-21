@@ -13,6 +13,7 @@ enum RootTab { case library, player }
 struct RootView: View {
     
     @EnvironmentObject var audioStore: AudioStore
+    @EnvironmentObject var authStore: AuthStore
     @EnvironmentObject var userStore: UserStore
     
     @State var loaded = false
@@ -30,10 +31,10 @@ struct RootView: View {
             }
         }
         .animation(.default, value: loaded)
-        .fullScreenCover(isPresented: Binding(get: { !userStore.isLoggedIn }) { _ in }) {
+        .fullScreenCover(isPresented: Binding(get: { !authStore.isLoggedIn }) { _ in }) {
             LoginView()
         }
-        .onChange(of: userStore.isLoggedIn) { isLoggedIn in
+        .onChange(of: authStore.isLoggedIn) { isLoggedIn in
             if isLoggedIn {
                 Task { await load() }
             }
@@ -95,7 +96,8 @@ struct RootView: View {
             loaded = true
         } catch SoundCloud.Error.userNotAuthorized {
             print("❌ AuthTokens don't exist or API denied access. Performing logout, presenting login screen...")
-            userStore.logout()
+            authStore.logout()
+            userStore.reset()
             return
         } catch SoundCloud.Error.tooManyRequests {
             AnalyticsManager.shared.log(.tooManyRequests)
@@ -110,7 +112,10 @@ struct RootView: View {
 }
 
 #Preview {
-    RootView().environmentObject(AudioStore(testSC))
+    RootView()
+        .environmentObject(AudioStore(testSC))
+        .environmentObject(AuthStore(testSC))
+        .environmentObject(UserStore(testSC))
 }
 
 extension Notification.Name {

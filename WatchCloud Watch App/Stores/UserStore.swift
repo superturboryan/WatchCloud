@@ -11,7 +11,6 @@ import SoundCloud
 @MainActor
 final class UserStore: ObservableObject {
     
-    @Published public private(set) var isLoggedIn: Bool = true
     @Published public var myUser: User? = nil
     @Published public var usersImFollowing: Page<User>? = nil
     
@@ -23,29 +22,16 @@ final class UserStore: ObservableObject {
     }
 }
 
-// MARK: - Auth
-extension UserStore {
-    func login() async throws {
-        do {
-            try await service.login()
-            isLoggedIn = true
-        } catch {
-            isLoggedIn = false
-            throw error
-        }
-    }
-    
-    func logout() {
-        service.logout()
-        isLoggedIn = false
-        try? myUserDAO.delete()
-    }
-}
-
 extension UserStore {
     func load() async throws {
         try await loadMyProfile()
         try await loadUsersImFollowing()
+    }
+    
+    func reset() {
+        myUser = nil
+        try? myUserDAO.delete()
+        usersImFollowing = nil
     }
     
     func loadMyProfile() async throws {

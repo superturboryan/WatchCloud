@@ -11,6 +11,7 @@ import SwiftUI
 struct LibraryView: View {
 
     @EnvironmentObject var audioStore: AudioStore
+    @EnvironmentObject var authStore: AuthStore
     @EnvironmentObject var userStore: UserStore
 
     let 👆 = "👆"
@@ -74,7 +75,7 @@ struct LibraryView: View {
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle(String(localized:"Library"))
-                .onChange(of: userStore.isLoggedIn) { if $0 { scrollToTop() } }
+                .onChange(of: authStore.isLoggedIn) { if $0 { scrollToTop() } }
                 // Don't need to scroll if not logged in? 🤔
             }
         }
@@ -258,5 +259,6 @@ struct LibraryView: View {
 #Preview {
     LibraryView()
         .environmentObject(AudioStore(testSC))
+        .environmentObject(AuthStore(testSC))
         .environmentObject(AudioPlayer(AudioStore(testSC)))
 }

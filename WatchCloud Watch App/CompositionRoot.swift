@@ -25,6 +25,8 @@ enum CompositionRoot {
     @MainActor
     static let userStore = UserStore(sc)
     
+    static let authStore = AuthStore(sc)
+    
     // Services
     private static let sc = SoundCloud(config)
     

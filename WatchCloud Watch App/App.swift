@@ -13,6 +13,7 @@ import TipKit
 struct WatchCloud_Watch_AppApp: App {
     
     @StateObject var audioStore = CompositionRoot.audioStore
+    @StateObject var authStore = CompositionRoot.authStore
     @StateObject var userStore = CompositionRoot.userStore
     @StateObject var player = CompositionRoot.audioPlayer
     
@@ -27,9 +28,10 @@ struct WatchCloud_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
             CompositionRoot.rootView
-                .environmentObject(player)
                 .environmentObject(audioStore)
+                .environmentObject(authStore)
                 .environmentObject(userStore)
+                .environmentObject(player)
                 .onChange(of: scenePhase) { log($0) }
         }
     }
@@ -44,8 +46,7 @@ private extension WatchCloud_Watch_AppApp {
     
     func configureTipKit() {
         if #available(watchOS 10, *) {
-            #warning("💡 Always showing tips")
-            try? Tips.resetDatastore()
+            try? Tips.resetDatastore() // ⚠️ Always showing tips
             try? Tips.configure([
                 .displayFrequency(.immediate),
                 .datastoreLocation(.applicationDefault)

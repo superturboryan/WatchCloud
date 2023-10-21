@@ -57,6 +57,8 @@
 		9488EE612AE013D40009EC54 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE602AE013D40009EC54 /* UserStore.swift */; };
 		9488EE652AE026140009EC54 /* AudioStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE642AE026140009EC54 /* AudioStore.swift */; };
 		9488EE672AE33C260009EC54 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE662AE33C260009EC54 /* Logger.swift */; };
+		9488EE692AE3E2380009EC54 /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE682AE3E2380009EC54 /* AuthStore.swift */; };
+		9488EE6C2AE3E5D00009EC54 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE6B2AE3E5D00009EC54 /* LoginService.swift */; };
 		94923C6B2ABDB5A300A67EBE /* PoweredBySCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */; };
 		94923C6D2ABDBB2C00A67EBE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6C2ABDBB2C00A67EBE /* String.swift */; };
 		94923C6F2ABDBBD500A67EBE /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6E2ABDBBD500A67EBE /* Int.swift */; };
@@ -184,6 +186,8 @@
 		9488EE602AE013D40009EC54 /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		9488EE642AE026140009EC54 /* AudioStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStore.swift; sourceTree = "<group>"; };
 		9488EE662AE33C260009EC54 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		9488EE682AE3E2380009EC54 /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
+		9488EE6B2AE3E5D00009EC54 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoweredBySCView.swift; sourceTree = "<group>"; };
 		94923C6C2ABDBB2C00A67EBE /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		94923C6E2ABDBBD500A67EBE /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
@@ -317,6 +321,7 @@
 				9421D2B62AD34C0E005FE857 /* Analytics */,
 				946F38B32AB07CB1008CE9D1 /* Config */,
 				946F38B62AB07F81008CE9D1 /* Extension */,
+				9488EE6A2AE3E5BD0009EC54 /* Protocols */,
 				9488EE5F2AE012020009EC54 /* Stores */,
 				946F38C02AB07F81008CE9D1 /* UI */,
 				943477BD2AD421AE00A6DED6 /* Tips */,
@@ -418,8 +423,17 @@
 			children = (
 				9488EE642AE026140009EC54 /* AudioStore.swift */,
 				9488EE602AE013D40009EC54 /* UserStore.swift */,
+				9488EE682AE3E2380009EC54 /* AuthStore.swift */,
 			);
 			path = Stores;
+			sourceTree = "<group>";
+		};
+		9488EE6A2AE3E5BD0009EC54 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9488EE6B2AE3E5D00009EC54 /* LoginService.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		94B6343D2ABDFAF900E6FCDA /* Complication */ = {
@@ -651,9 +665,11 @@
 				94923C6B2ABDB5A300A67EBE /* PoweredBySCView.swift in Sources */,
 				9421D2AF2AD2D151005FE857 /* Optional.swift in Sources */,
 				9488EE612AE013D40009EC54 /* UserStore.swift in Sources */,
+				9488EE6C2AE3E5D00009EC54 /* LoginService.swift in Sources */,
 				946F38DA2AB07F81008CE9D1 /* SettingsView.swift in Sources */,
 				941A00F82AC70CEE000F4693 /* CachedImageView.swift in Sources */,
 				94923C6D2ABDBB2C00A67EBE /* String.swift in Sources */,
+				9488EE692AE3E2380009EC54 /* AuthStore.swift in Sources */,
 				946F38DB2AB07F81008CE9D1 /* LoginView.swift in Sources */,
 				9421D2A32ACED4FE005FE857 /* CGRect.swift in Sources */,
 				943477BC2AD3E1CA00A6DED6 /* DebugAnalyticsService.swift in Sources */,

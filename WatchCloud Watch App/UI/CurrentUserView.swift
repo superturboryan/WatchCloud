@@ -11,6 +11,7 @@ import SwiftUI
 struct CurrentUserView: View {
     
     @EnvironmentObject var userStore: UserStore
+    @EnvironmentObject var authStore: AuthStore
     @EnvironmentObject var player: AudioPlayer
     @Environment(\.dismiss) var dismiss
     
@@ -35,7 +36,8 @@ struct CurrentUserView: View {
     
     private func tappedLogout() {
         Haptics.click()
-        userStore.logout()
+        authStore.logout()
+        userStore.reset()
         player.stop()
         AnalyticsManager.shared.log(.logout)
         dismiss()
