@@ -130,7 +130,7 @@ struct SearchView: View {
                     sortedAlphabetically: false
                 ) {
                     Task {
-                        if let nextPage = results.wrappedValue.nextPage, 
+                        if let nextPage = results.wrappedValue.nextPage,
                             let nextResult: Page<User> = try? await userStore.pageOfUsers(nextPage) {
                             artistResults?.update(with: nextResult)
                         }
@@ -147,7 +147,7 @@ struct SearchView: View {
                 .scaledToFit()
                 .frame(width: 24, height: 24)
                 .foregroundStyle(LinearGradient.scOrange(.vertical))
-                
+            
             Text(verbatim: type.localized.capitalized)
                 .font(.footnote)
                 .fontWeight(.medium)
@@ -169,27 +169,28 @@ struct SearchView: View {
     }
 }
 
-extension SearchView {
-    enum SearchType: String {
-        case tracks, playlists, artists
-        
-        var localized: String {
-            switch self {
-            case .tracks: return String(localized: "tracks", comment: "Plural noun")
-            case .playlists: return String(localized: "playlists", comment: "Plural noun")
-            case .artists: return String(localized: "artists", comment: "Plural noun")
-            }
+enum SearchType: String, Codable {
+    case tracks, playlists, artists
+}
+
+extension SearchType {
+    var localized: String {
+        switch self {
+        case .tracks: return String(localized: "tracks", comment: "Plural noun")
+        case .playlists: return String(localized: "playlists", comment: "Plural noun")
+        case .artists: return String(localized: "artists", comment: "Plural noun")
         }
+    }
     
-        var icon: String {
-            switch self {
-            case .tracks: return "music.note"
-            case .playlists: return "music.note.list"
-            case .artists: return "person.crop.circle.fill"
-            }
+    var icon: String {
+        switch self {
+        case .tracks: return "music.note"
+        case .playlists: return "music.note.list"
+        case .artists: return "person.crop.circle.fill"
         }
     }
 }
+
 
 #Preview {
     NavigationStack {

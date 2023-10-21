@@ -31,9 +31,9 @@ struct NewPlayerView: View {
     private var playerView: some View {
         VStack(spacing: 14) {
             if isLuminanceReduced, let track = audioStore.loadedTrack {
-                QRCodeImageView(url: track.permalinkUrl)
+                QRCodeImageView(url: track.permalinkUrl).scaleEffect(x: 1.2, y: 1.2)
             } else {
-                artwork
+                artwork.opacity(isLuminanceReduced ? 0 : 1)
             }
             trackInfoLabels
         }
