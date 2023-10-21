@@ -79,7 +79,7 @@ struct SearchView: View {
         Task {
             switch searchType {
             case .tracks:
-                trackResults = try await audioStore.searchForTracks(query)
+                trackResults = try await audioStore.searchForTracks(query, 100)
             case .playlists:
                 playlistResults = try await audioStore.searchForPlaylists(query)
             case .artists:
@@ -95,10 +95,13 @@ struct SearchView: View {
     private var searchResultsView: some View {
         switch searchType {
         case .tracks:
-            if let tracks = trackResults?.items {
-                let playlist = Playlist(id: 0, user: userStore.myUser!, title: query, tracks: tracks)
+            if var playlist = trackResults?.playlist(id: 0, title: query, user: userStore.myUser!) {
                 PlaylistView(
-                    playlist: .constant(playlist),
+                    playlist: Binding(get: {
+                        playlist
+                    }, set: { updated in
+                        playlist = updated
+                    }),
                     showSummary: false,
                     showShuffleButton: false
                 )

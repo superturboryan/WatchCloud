@@ -61,8 +61,8 @@ extension AudioStore {
         try await service.getTracksForPlaylist(id)
     }
     
-    func searchForTracks(_ query: String) async throws -> Page<Track> {
-        try await service.searchTracks(query)
+    func searchForTracks(_ query: String, _ limit: Int = 20) async throws -> Page<Track> {
+        try await service.searchTracks(query, limit)
     }
     
     func searchForPlaylists(_ query: String) async throws -> Page<Playlist> {

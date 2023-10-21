@@ -141,10 +141,12 @@ struct PlaylistView: View {
     }
     
     private func loadNextPageOfTracks() {
-        Task {
-            let page: Page<Track> = try await audioStore.pageOfTracks(playlist.nextPageUrl!)
-            playlist.tracks! += page.items
-            playlist.nextPageUrl = page.nextPage
+        if let nextPageUrl = playlist.nextPageUrl {
+            Task {
+                let page: Page<Track> = try await audioStore.pageOfTracks(playlist.nextPageUrl!)
+                playlist.tracks! += page.items
+                playlist.nextPageUrl = page.nextPage
+            }
         }
     }
     
