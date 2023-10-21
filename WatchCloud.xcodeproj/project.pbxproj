@@ -61,6 +61,8 @@
 		9488EE6C2AE3E5D00009EC54 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE6B2AE3E5D00009EC54 /* LoginService.swift */; };
 		9488EE6E2AE40EA80009EC54 /* QRCodeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE6D2AE40EA80009EC54 /* QRCodeImageView.swift */; };
 		9488EE732AE410AE0009EC54 /* QRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 9488EE722AE410AE0009EC54 /* QRCode */; };
+		9488EE7A2AE42FBE0009EC54 /* SearchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE792AE42FBE0009EC54 /* SearchStore.swift */; };
+		9488EE7F2AE43C970009EC54 /* SearchEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE7E2AE43C970009EC54 /* SearchEntry.swift */; };
 		94923C6B2ABDB5A300A67EBE /* PoweredBySCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */; };
 		94923C6D2ABDBB2C00A67EBE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6C2ABDBB2C00A67EBE /* String.swift */; };
 		94923C6F2ABDBBD500A67EBE /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6E2ABDBBD500A67EBE /* Int.swift */; };
@@ -191,6 +193,8 @@
 		9488EE682AE3E2380009EC54 /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		9488EE6B2AE3E5D00009EC54 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		9488EE6D2AE40EA80009EC54 /* QRCodeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeImageView.swift; sourceTree = "<group>"; };
+		9488EE792AE42FBE0009EC54 /* SearchStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStore.swift; sourceTree = "<group>"; };
+		9488EE7E2AE43C970009EC54 /* SearchEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEntry.swift; sourceTree = "<group>"; };
 		94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoweredBySCView.swift; sourceTree = "<group>"; };
 		94923C6C2ABDBB2C00A67EBE /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		94923C6E2ABDBBD500A67EBE /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
@@ -325,6 +329,7 @@
 				9421D2B62AD34C0E005FE857 /* Analytics */,
 				946F38B32AB07CB1008CE9D1 /* Config */,
 				946F38B62AB07F81008CE9D1 /* Extension */,
+				9488EE7D2AE43C860009EC54 /* Models */,
 				9488EE6A2AE3E5BD0009EC54 /* Protocols */,
 				9488EE5F2AE012020009EC54 /* Stores */,
 				946F38C02AB07F81008CE9D1 /* UI */,
@@ -428,6 +433,7 @@
 			children = (
 				9488EE642AE026140009EC54 /* AudioStore.swift */,
 				9488EE682AE3E2380009EC54 /* AuthStore.swift */,
+				9488EE792AE42FBE0009EC54 /* SearchStore.swift */,
 				9488EE602AE013D40009EC54 /* UserStore.swift */,
 			);
 			path = Stores;
@@ -439,6 +445,14 @@
 				9488EE6B2AE3E5D00009EC54 /* LoginService.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		9488EE7D2AE43C860009EC54 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9488EE7E2AE43C970009EC54 /* SearchEntry.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		94B6343D2ABDFAF900E6FCDA /* Complication */ = {
@@ -648,7 +662,9 @@
 				94FAA18A2ACB319600EF97CE /* UserListView.swift in Sources */,
 				9421D2A12ACED420005FE857 /* Device.swift in Sources */,
 				9488EE652AE026140009EC54 /* AudioStore.swift in Sources */,
+				9488EE7A2AE42FBE0009EC54 /* SearchStore.swift in Sources */,
 				94923C6F2ABDBBD500A67EBE /* Int.swift in Sources */,
+				9488EE7F2AE43C970009EC54 /* SearchEntry.swift in Sources */,
 				946F38D12AB07F81008CE9D1 /* Image.swift in Sources */,
 				946F38CF2AB07F81008CE9D1 /* Delete.swift in Sources */,
 				9421D29F2ACE2A90005FE857 /* PlaylistListView.swift in Sources */,

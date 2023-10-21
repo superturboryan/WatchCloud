@@ -15,6 +15,7 @@ struct RootView: View {
     @EnvironmentObject var audioStore: AudioStore
     @EnvironmentObject var authStore: AuthStore
     @EnvironmentObject var userStore: UserStore
+    @EnvironmentObject var searchStore: SearchStore
     
     @State var loaded = false
     @State var loading = false
@@ -93,6 +94,7 @@ struct RootView: View {
         do {
             try await userStore.load()
             try await audioStore.load()
+            searchStore.load()
             loaded = true
         } catch SoundCloud.Error.userNotAuthorized {
             print("❌ AuthTokens don't exist or API denied access. Performing logout, presenting login screen...")

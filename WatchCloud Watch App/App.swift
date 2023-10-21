@@ -15,6 +15,7 @@ struct WatchCloud_Watch_AppApp: App {
     @StateObject var audioStore = CompositionRoot.audioStore
     @StateObject var authStore = CompositionRoot.authStore
     @StateObject var userStore = CompositionRoot.userStore
+    @StateObject var searchStore = CompositionRoot.searchStore
     @StateObject var player = CompositionRoot.audioPlayer
     
     @State var isLaunched = false // Used to determine first launch
@@ -31,6 +32,7 @@ struct WatchCloud_Watch_AppApp: App {
                 .environmentObject(audioStore)
                 .environmentObject(authStore)
                 .environmentObject(userStore)
+                .environmentObject(searchStore)
                 .environmentObject(player)
                 .onChange(of: scenePhase) { log($0) }
         }

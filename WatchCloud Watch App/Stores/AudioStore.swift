@@ -38,6 +38,7 @@ final class AudioStore: NSObject, ObservableObject {
     }}
     
     private let decoder = JSONDecoder()
+    private let encoder = JSONEncoder()
     private var subscriptions = Set<AnyCancellable>()
     private let service: SoundCloud
     init(_ service: SoundCloud) {
@@ -59,14 +60,6 @@ extension AudioStore {
     
     func getTracksForPlaylist(_ id: Int) async throws -> Page<Track> {
         try await service.getTracksForPlaylist(id)
-    }
-    
-    func searchForTracks(_ query: String, _ limit: Int = 20) async throws -> Page<Track> {
-        try await service.searchTracks(query, limit)
-    }
-    
-    func searchForPlaylists(_ query: String) async throws -> Page<Playlist> {
-        try await service.searchPlaylists(query)
     }
     
     func pageOfTracks(_ pageURL: String) async throws -> Page<Track> {
@@ -292,7 +285,7 @@ private extension AudioStore {
         // Save track data as mp3
         try trackData.write(to: localMp3Url)
         // Save track metadata as track json object
-        let trackJsonData = try JSONEncoder().encode(track)
+        let trackJsonData = try encoder.encode(track)
         let localJsonUrl = track.localFileUrl(withExtension: Track.FileExtension.json)
         try trackJsonData.write(to: localJsonUrl)
         // Create copy of track with local file url added

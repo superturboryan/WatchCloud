@@ -12,6 +12,7 @@ struct SearchView: View {
     
     @EnvironmentObject var audioStore: AudioStore
     @EnvironmentObject var userStore: UserStore
+    @EnvironmentObject var searchStore: SearchStore
     
     @State var showSearchResults = false
     @State var query = ""
@@ -79,14 +80,13 @@ struct SearchView: View {
         Task {
             switch searchType {
             case .tracks:
-                trackResults = try await audioStore.searchForTracks(query, 100)
+                trackResults = try await searchStore.searchForTracks(query, 100)
             case .playlists:
-                playlistResults = try await audioStore.searchForPlaylists(query)
+                playlistResults = try await searchStore.searchForPlaylists(query)
             case .artists:
-                artistResults = try await userStore.searchForUsers(query)
+                artistResults = try await searchStore.searchForUsers(query)
             }
             
-            AnalyticsManager.shared.log(.search(type: searchType.rawValue))
             showSearchResults = true
         }
     }
@@ -197,5 +197,6 @@ extension SearchType {
         SearchView()
             .environmentObject(AudioStore(testSC))
             .environmentObject(UserStore(testSC))
+            .environmentObject(SearchStore(testSC))
     }
 }
