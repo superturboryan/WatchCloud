@@ -25,34 +25,42 @@ struct SearchView: View {
     @FocusState var isSearchFocused: Bool
     
     var body: some View {
-        VStack {
-            TextField(
-                String(localized: "Search for \(searchType.localized)", comment: "Prompt"),
-                text: $query
-            )
-            .autocorrectionDisabled()
-            .focused($isSearchFocused)
-            .submitLabel(.search)
-            .onSubmit { performSearch(with: query) }
-            
-            searchOptionButtons
+        ScrollView {
+            VStack(spacing: 4) {
+                searchTextField
+                searchOptionButtons
+                if !searchStore.searchHistory.isEmpty {
+                    searchHistoryList
+                }
+            }
+            .animation(.default, value: searchStore.searchHistory)
+            .fullWidthAndHeight()
+            .toolbar {
+                toolbarSearchButton
+            }
+            .navigationDestination(isPresented: $showSearchResults) {
+                searchResultsView
+            }
+            .padding(.top, -4)
+            .fontDesign(.rounded)
+            .animation(.default, value: searchType)
         }
-        .fullWidthAndHeight()
-        .toolbar {
-            searchButton
-        }
-        .navigationDestination(isPresented: $showSearchResults) {
-            searchResultsView
-        }
-        .fontDesign(.rounded)
-        .animation(.default, value: searchType)
-        .navigationTitle("Search")
-        .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private var searchTextField: some View {
+        TextField(
+            String(localized: "Search for \(searchType.localized)", comment: "Prompt"),
+            text: $query
+        )
+        .autocorrectionDisabled()
+        .focused($isSearchFocused)
+        .submitLabel(.search)
+        .onSubmit { performSearch(with: query) }
     }
     
     @ViewBuilder
     private var searchOptionButtons: some View {
-        let width = (Device.screenSize.width - 10) / 3
+        let width = (Device.screenSize.width - 18) / 3
         HStack {
             searchCell(.tracks, width: width)
             searchCell(.playlists, width: width)
@@ -60,7 +68,7 @@ struct SearchView: View {
         }
     }
     
-    private var searchButton: some ToolbarContent {
+    private var toolbarSearchButton: some ToolbarContent {
         ToolbarItem(placement: .confirmationAction) {
             Button {
                 performSearch(with: query)
@@ -157,7 +165,7 @@ struct SearchView: View {
                 .padding(.horizontal, 6)
                 .frame(width: width, height: 18)
         }
-        .padding(.vertical, 10)
+        .padding(.vertical, 8)
         .background(searchType == type ? Color.scOrange.opacity(0.3) : .secondary.opacity(0.2))
         .cornerRadius(10)
         .onTapGesture {
@@ -166,6 +174,40 @@ struct SearchView: View {
                 isSearchFocused = true
             }
         }
+    }
+    
+    private var searchHistoryList: some View {
+        LazyVStack {
+            Section(header: sectionHeaderView(String(localized: "History"))) {
+                ForEach(searchStore.searchHistory, id: \.query) { entry in
+                    searchHistoryCell(entry).onTapGesture {
+                        query = entry.query
+                        searchType = entry.type
+                        performSearch(with: query)
+                    }
+                }
+                Button(String(localized: "Clear History"), role: .destructive) {
+                    searchStore.reset()
+                    query = ""
+                }
+            }
+        }
+    }
+    
+    private func searchHistoryCell(_ entry: SearchEntry) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: entry.type.icon)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 18, height: 18)
+                .foregroundStyle(LinearGradient.scOrange(.vertical))
+            Text(verbatim: entry.query)
+                .fontWeight(.medium)
+                .fullWidth(.leading)
+        }
+        .padding(14)
+        .background(.secondary.opacity(0.2))
+        .cornerRadius(10)
     }
 }
 
@@ -197,6 +239,14 @@ extension SearchType {
         SearchView()
             .environmentObject(AudioStore(testSC))
             .environmentObject(UserStore(testSC))
-            .environmentObject(SearchStore(testSC))
+            .environmentObject({ () -> SearchStore in
+                var store = SearchStore(testSC)
+                store.searchHistory = [
+                    SearchEntry(.artists, "Rinse FM"),
+                    SearchEntry(.playlists, "Jungle"),
+                    SearchEntry(.tracks, "Drake"),
+                ]
+                return store
+            }())
     }
 }

@@ -561,6 +561,9 @@
         }
       }
     },
+    "Clear History" : {
+
+    },
     "Connect" : {
       "comment" : "Verb",
       "localizations" : {
@@ -1024,6 +1027,9 @@
           }
         }
       }
+    },
+    "History" : {
+
     },
     "If captcha is not appearing, try using" : {
       "localizations" : {

@@ -39,16 +39,19 @@ extension SearchStore {
 // MARK: - Search History 🔍
 extension SearchStore {
     func addToSearchHistory(_ searchType: SearchType, _ query: String) {
-        AnalyticsManager.shared.log(.search(type: searchType.localized))
+        AnalyticsManager.shared.log(.search(type: searchType.rawValue))
         let capacity = 5
-        if searchHistory.count == capacity {
-            searchHistory.removeLast() // removeLast() is safe here since we check count
-        }
-        Task {
-            await MainActor.run { searchHistory.insert(SearchEntry(searchType, query), at: 0) }
-            saveSearchHistory()
-        }
+        Task { await MainActor.run {
+            if let existingIndex = searchHistory.firstIndex(where: { $0.query == query }) {
+                searchHistory.remove(at: existingIndex)
+            } else if searchHistory.count == capacity {
+                searchHistory.removeLast() // removeLast() is safe here since we check count
+            }
+            searchHistory.insert(SearchEntry(searchType, query), at: 0)
+            try? searchHistoryDAO.save(searchHistory)
+        }}
     }
+    
     
     func load() {
         if let savedHistory = try? searchHistoryDAO.get() {
@@ -59,9 +62,5 @@ extension SearchStore {
     func reset() {
         searchHistory.removeAll()
         try? searchHistoryDAO.delete()
-    }
-    
-    func saveSearchHistory() {
-        try? searchHistoryDAO.save(searchHistory)
     }
 }
