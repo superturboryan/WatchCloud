@@ -59,6 +59,8 @@
 		9488EE672AE33C260009EC54 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE662AE33C260009EC54 /* Logger.swift */; };
 		9488EE692AE3E2380009EC54 /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE682AE3E2380009EC54 /* AuthStore.swift */; };
 		9488EE6C2AE3E5D00009EC54 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE6B2AE3E5D00009EC54 /* LoginService.swift */; };
+		9488EE6E2AE40EA80009EC54 /* QRCodeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE6D2AE40EA80009EC54 /* QRCodeImageView.swift */; };
+		9488EE732AE410AE0009EC54 /* QRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 9488EE722AE410AE0009EC54 /* QRCode */; };
 		94923C6B2ABDB5A300A67EBE /* PoweredBySCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */; };
 		94923C6D2ABDBB2C00A67EBE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6C2ABDBB2C00A67EBE /* String.swift */; };
 		94923C6F2ABDBBD500A67EBE /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6E2ABDBBD500A67EBE /* Int.swift */; };
@@ -188,6 +190,7 @@
 		9488EE662AE33C260009EC54 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		9488EE682AE3E2380009EC54 /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		9488EE6B2AE3E5D00009EC54 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		9488EE6D2AE40EA80009EC54 /* QRCodeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeImageView.swift; sourceTree = "<group>"; };
 		94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoweredBySCView.swift; sourceTree = "<group>"; };
 		94923C6C2ABDBB2C00A67EBE /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		94923C6E2ABDBBD500A67EBE /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
@@ -219,6 +222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9488EE732AE410AE0009EC54 /* QRCode in Frameworks */,
 				94C169A22AB474EE00570B4F /* NukeUI in Frameworks */,
 				946F38B12AB07A2E008CE9D1 /* SoundCloud in Frameworks */,
 				9421D2B52AD2FB67005FE857 /* Mixpanel in Frameworks */,
@@ -406,6 +410,7 @@
 				9421D2AC2AD17834005FE857 /* PlaylistSummaryView.swift */,
 				946F38C42AB07F81008CE9D1 /* PlaylistView.swift */,
 				94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */,
+				9488EE6D2AE40EA80009EC54 /* QRCodeImageView.swift */,
 				946F38C82AB07F81008CE9D1 /* RootView.swift */,
 				943756CE2ACDA02500C84006 /* SearchView.swift */,
 				946F38C52AB07F81008CE9D1 /* SettingsView.swift */,
@@ -422,8 +427,8 @@
 			isa = PBXGroup;
 			children = (
 				9488EE642AE026140009EC54 /* AudioStore.swift */,
-				9488EE602AE013D40009EC54 /* UserStore.swift */,
 				9488EE682AE3E2380009EC54 /* AuthStore.swift */,
+				9488EE602AE013D40009EC54 /* UserStore.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -522,6 +527,7 @@
 				94C1699F2AB474EE00570B4F /* Nuke */,
 				94C169A12AB474EE00570B4F /* NukeUI */,
 				9421D2B42AD2FB67005FE857 /* Mixpanel */,
+				9488EE722AE410AE0009EC54 /* QRCode */,
 			);
 			productName = "WatchCloud Watch App";
 			productReference = 946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */;
@@ -584,6 +590,7 @@
 			packageReferences = (
 				94C1699E2AB474EE00570B4F /* XCRemoteSwiftPackageReference "Nuke" */,
 				9421D2B32AD2FB67005FE857 /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
+				9488EE712AE410AE0009EC54 /* XCRemoteSwiftPackageReference "QRCode" */,
 			);
 			productRefGroup = 946F38912AB079C9008CE9D1 /* Products */;
 			projectDirPath = "";
@@ -647,6 +654,7 @@
 				9421D29F2ACE2A90005FE857 /* PlaylistListView.swift in Sources */,
 				943756CF2ACDA02500C84006 /* SearchView.swift in Sources */,
 				9421D2BC2AD34E88005FE857 /* AnalyticsEvent.swift in Sources */,
+				9488EE6E2AE40EA80009EC54 /* QRCodeImageView.swift in Sources */,
 				9421D2BA2AD34CC9005FE857 /* MixpanelAnalyticsService.swift in Sources */,
 				94A31B352AB517410052A922 /* CaseIterable.swift in Sources */,
 				9421D2A92ACF5B59005FE857 /* PlaylistCellView.swift in Sources */,
@@ -1044,6 +1052,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		9488EE712AE410AE0009EC54 /* XCRemoteSwiftPackageReference "QRCode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dagronf/QRCode";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 16.1.1;
+			};
+		};
 		94C1699E2AB474EE00570B4F /* XCRemoteSwiftPackageReference "Nuke" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Nuke";
@@ -1063,6 +1079,11 @@
 		946F38B02AB07A2E008CE9D1 /* SoundCloud */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SoundCloud;
+		};
+		9488EE722AE410AE0009EC54 /* QRCode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9488EE712AE410AE0009EC54 /* XCRemoteSwiftPackageReference "QRCode" */;
+			productName = QRCode;
 		};
 		94C1699F2AB474EE00570B4F /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;

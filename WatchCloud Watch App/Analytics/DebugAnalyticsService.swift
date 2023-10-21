@@ -9,8 +9,8 @@ import Foundation
 import OSLog
 
 final class DebugAnalyticsService {
-    private var eventsLogged: [(String, [String: String]?)] = []
-    public var shouldPrint = true
+    var eventsLogged: [(String, [String: String]?)] = []
+    var shouldPrint = true
     
     init(shouldPrint: Bool = true) {
         self.shouldPrint = shouldPrint
