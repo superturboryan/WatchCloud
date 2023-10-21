@@ -216,7 +216,7 @@ struct LibraryView: View {
             colour = .pink
         case PlaylistType.recentlyPosted.rawValue:
             imageName = "dot.radiowaves.up.forward"
-            colour = .green
+            colour = .mint
         case PlaylistType.nowPlaying.rawValue:
             imageName = "speaker.wave.2.fill"
             gradient = LinearGradient.scOrange(.horizontal)
