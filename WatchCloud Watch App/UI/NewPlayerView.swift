@@ -30,9 +30,14 @@ struct NewPlayerView: View {
     
     private var playerView: some View {
         VStack(spacing: 14) {
-            artwork
+            if isLuminanceReduced, let track = audioStore.loadedTrack {
+                QRCodeImageView(url: track.permalinkUrl)
+            } else {
+                artwork
+            }
             trackInfoLabels
         }
+        .animation(.default, value: isLuminanceReduced)
         .padding(.bottom, 6)
         .padding(.top, -6)
         .toolbar {
@@ -57,7 +62,6 @@ struct NewPlayerView: View {
                 volumeCircleVisibleTime = 0
             }
         }
-        .opacity(isLuminanceReduced ? 0.5 : 1)
     }
     
     
@@ -130,6 +134,7 @@ struct NewPlayerView: View {
             } label: {
                 Image(systemName:"backward.fill")
             }
+            
             Button { // ⏯️
                 player.togglePlayback()
                 AnalyticsManager.shared.log(.tappedTogglePlayback)
@@ -146,6 +151,7 @@ struct NewPlayerView: View {
                 }
             }
             .disabled(player.isLoading)
+            
             Button { // ⏭️
                 player.skipToNextTrack()
                 AnalyticsManager.shared.log(.tappedSkipToNextTrack)
@@ -188,7 +194,12 @@ struct NewPlayerView: View {
 @available(watchOS 10, *)
 #Preview {
     NewPlayerView()
-        .environmentObject(AudioStore(testSC))
+        .environmentObject({ () -> AudioStore in
+            var audioStore = AudioStore(testSC)
+            audioStore.loadedTrack = testTrack()
+            return audioStore
+        }())
         .environmentObject(UserStore(testSC))
         .environmentObject(AudioPlayer(AudioStore(testSC)))
+        .environment(\.isLuminanceReduced, true)
 }
