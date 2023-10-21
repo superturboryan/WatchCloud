@@ -233,8 +233,8 @@ struct LibraryView: View {
             imageName = "person.2.fill"
             gradient = .scOrange(.horizontal, reversed: true)
         case -4: // Search
-            imageName = "magnifyingglass"
-            colour = .blue
+            imageName = "magnifyingglass.circle.fill"
+            gradient = LinearGradient.scOrange(.vertical)
         
         default:
             imageName = "music.note.list"
