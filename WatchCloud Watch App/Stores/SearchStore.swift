@@ -12,9 +12,11 @@ final class SearchStore: ObservableObject {
     @Published public var searchHistory: [SearchEntry] = []
     
     private let searchHistoryDAO = UserDefaultsDAO<[SearchEntry]>("SearchHistory")
+    private let searchHistoryCapacity: Int
     private let service: SoundCloud
-    init(_ service: SoundCloud) {
+    init(_ service: SoundCloud, searchHistoryCapacity: Int = 5) {
         self.service = service
+        self.searchHistoryCapacity = searchHistoryCapacity
     }
 }
 
@@ -40,11 +42,10 @@ extension SearchStore {
 extension SearchStore {
     func addToSearchHistory(_ entry: SearchEntry) {
         AnalyticsManager.shared.log(.search(type: entry.type.rawValue))
-        let capacity = 5
         Task {
             if let existingIndex = searchHistory.firstIndex(of: entry) {
                 _ = await MainActor.run { searchHistory.remove(at: existingIndex) }
-            } else if searchHistory.count == capacity {
+            } else if searchHistory.count == searchHistoryCapacity {
                 _ = await MainActor.run { searchHistory.removeLast() } // removeLast() is safe here since we check count
             }
             await MainActor.run { searchHistory.insert(entry, at: 0) }
