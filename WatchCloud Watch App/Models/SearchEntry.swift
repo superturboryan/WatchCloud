@@ -16,3 +16,9 @@ struct SearchEntry: Codable, Equatable {
         self.query = query
     }
 }
+
+extension SearchEntry: Identifiable {
+    var id: String {
+        type.rawValue + query
+    }
+}

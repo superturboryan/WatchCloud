@@ -21,37 +21,36 @@ final class SearchStore: ObservableObject {
 // MARK: - Searching 🕵️
 extension SearchStore {
     func searchForTracks(_ query: String, _ limit: Int = 20) async throws -> Page<Track> {
-        addToSearchHistory(.tracks, query)
+        addToSearchHistory(SearchEntry(.tracks, query))
         return try await service.searchTracks(query, limit)
     }
     
     func searchForUsers(_ query: String) async throws -> Page<User> {
-        addToSearchHistory(.artists, query)
+        addToSearchHistory(SearchEntry(.artists, query))
         return try await service.searchUsers(query)
     }
     
     func searchForPlaylists(_ query: String) async throws -> Page<Playlist> {
-        addToSearchHistory(.playlists, query)
+        addToSearchHistory(SearchEntry(.playlists, query))
         return try await service.searchPlaylists(query)
     }
 }
 
 // MARK: - Search History 🔍
 extension SearchStore {
-    func addToSearchHistory(_ searchType: SearchType, _ query: String) {
-        AnalyticsManager.shared.log(.search(type: searchType.rawValue))
+    func addToSearchHistory(_ entry: SearchEntry) {
+        AnalyticsManager.shared.log(.search(type: entry.type.rawValue))
         let capacity = 5
-        Task { await MainActor.run {
-            if let existingIndex = searchHistory.firstIndex(where: { $0.query == query }) {
-                searchHistory.remove(at: existingIndex)
+        Task {
+            if let existingIndex = searchHistory.firstIndex(of: entry) {
+                _ = await MainActor.run { searchHistory.remove(at: existingIndex) }
             } else if searchHistory.count == capacity {
-                searchHistory.removeLast() // removeLast() is safe here since we check count
+                _ = await MainActor.run { searchHistory.removeLast() } // removeLast() is safe here since we check count
             }
-            searchHistory.insert(SearchEntry(searchType, query), at: 0)
+            await MainActor.run { searchHistory.insert(entry, at: 0) }
             try? searchHistoryDAO.save(searchHistory)
-        }}
+        }
     }
-    
     
     func load() {
         if let savedHistory = try? searchHistoryDAO.get() {

@@ -33,7 +33,7 @@ final class AudioStore: NSObject, ObservableObject {
     @Published var myPlaylistIds: [Int] = []
     @Published var myLikedPlaylistIds: [Int] = []
     
-    var authHeader: [String : String] { get async throws { // Can this go elsewhere?
+    var authHeader: [String : String] { get async throws { 
         try await service.authHeader
     }}
     

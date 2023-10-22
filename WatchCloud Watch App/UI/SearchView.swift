@@ -179,7 +179,7 @@ struct SearchView: View {
     private var searchHistoryList: some View {
         LazyVStack {
             Section(header: sectionHeaderView(String(localized: "History"))) {
-                ForEach(searchStore.searchHistory, id: \.query) { entry in
+                ForEach(searchStore.searchHistory) { entry in
                     searchHistoryCell(entry).onTapGesture {
                         query = entry.query
                         searchType = entry.type
