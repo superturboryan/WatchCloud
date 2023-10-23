@@ -195,7 +195,7 @@ struct NewPlayerView: View {
 #Preview {
     NewPlayerView()
         .environmentObject({ () -> AudioStore in
-            var audioStore = AudioStore(testSC)
+            let audioStore = AudioStore(testSC)
             audioStore.loadedTrack = testTrack()
             return audioStore
         }())

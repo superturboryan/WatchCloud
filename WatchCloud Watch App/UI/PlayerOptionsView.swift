@@ -82,11 +82,11 @@ struct PlayerOptionsView: View {
         }
     }
     
-    #warning("Errors not handled")
     func tappedDownload() {
         Haptics.click()
         Task {
             if isTrackDownloaded {
+                #warning("Errors not handled")
                 try audioStore.removeDownload(track)
             } else {
                 try await audioStore.download(track)

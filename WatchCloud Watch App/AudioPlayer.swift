@@ -199,7 +199,6 @@ extension AudioPlayer {
         }
     }
     
-    #warning("Errors not handled")
     private func showBluetoothOptionsIfBluetoothAudioOutputNotDetected() {
         audioSession.activate(options: []) { [weak self] success, error in
             if let error { print("Session activation error: \(error.localizedDescription)") }
@@ -292,11 +291,11 @@ extension AudioPlayer {
         center.nowPlayingInfo = info
     }
     
-    #warning("Error, response not handled")
     private func fetchArtwork(_ url: String) async -> MPMediaItemArtwork {
         let largerImageUrl = url.replacingOccurrences(of: "large.jpg", with: "t500x500.jpg")
         guard
             let url = URL(string: largerImageUrl),
+            // Error, response not handled
             let (data, _) = try? await URLSession.shared.data(for: URLRequest(url: url))
         else {
             let fallbackImage = UIImage(systemName: "xmark.icloud.fill")!

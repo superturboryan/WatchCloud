@@ -94,7 +94,6 @@ struct DownloadsView: View {
                 )
                 .onTapGesture { tapped(displayedTrack.wrappedValue) }
                 .onLongPressGesture {
-                    #warning("Handle error")
                     do {
                         try audioStore.removeDownload(displayedTrack.wrappedValue)
                         Haptics.click()

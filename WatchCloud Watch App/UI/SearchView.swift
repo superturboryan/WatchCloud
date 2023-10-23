@@ -240,7 +240,7 @@ extension SearchType {
             .environmentObject(AudioStore(testSC))
             .environmentObject(UserStore(testSC))
             .environmentObject({ () -> SearchStore in
-                var store = SearchStore(testSC)
+                let store = SearchStore(testSC)
                 store.searchHistory = [
                     SearchEntry(.artists, "Rinse FM"),
                     SearchEntry(.playlists, "Jungle"),
