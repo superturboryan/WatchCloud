@@ -182,12 +182,12 @@ struct PlayerOptionsView: View {
 extension PlaybackSpeed {
     var numDecimalToDisplay: Int {
         switch self {
-        case .ThreeQuarters: return 2
-        case .One: return 0
-        case .OneAndAQuarter: return 2
-        case .OnePointFive: return 1
-        case .OneAndThreeQuarters: return 2
-        case .Double: return 0
+        case .ThreeQuarters: 2
+        case .One: 0
+        case .OneAndAQuarter: 2
+        case .OnePointFive: 1
+        case .OneAndThreeQuarters: 2
+        case .Double: 0
         }
     }
 }

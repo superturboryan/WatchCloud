@@ -26,7 +26,7 @@ struct SearchView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 4) {
+            VStack {
                 searchTextField
                 searchOptionButtons
                 if !searchStore.searchHistory.isEmpty {
@@ -167,7 +167,7 @@ struct SearchView: View {
         }
         .padding(.vertical, 8)
         .background(searchType == type ? Color.scOrange.opacity(0.3) : .secondary.opacity(0.2))
-        .cornerRadius(10)
+        .cornerRadius(8)
         .onTapGesture {
             searchType = type
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -220,17 +220,17 @@ enum SearchType: String, Codable {
 extension SearchType {
     var localized: String {
         switch self {
-        case .tracks: return String(localized: "tracks", comment: "Plural noun")
-        case .playlists: return String(localized: "playlists", comment: "Plural noun")
-        case .artists: return String(localized: "artists", comment: "Plural noun")
+        case .tracks: String(localized: "tracks", comment: "Plural noun")
+        case .playlists: String(localized: "playlists", comment: "Plural noun")
+        case .artists: String(localized: "artists", comment: "Plural noun")
         }
     }
     
     var icon: String {
         switch self {
-        case .tracks: return "music.note"
-        case .playlists: return "music.note.list"
-        case .artists: return "person.crop.circle.fill"
+        case .tracks: "music.note"
+        case .playlists: "music.note.list"
+        case .artists: "person.crop.circle.fill"
         }
     }
 }
