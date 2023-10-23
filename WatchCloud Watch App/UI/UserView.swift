@@ -22,10 +22,6 @@ struct UserView: View {
     
     @State var showFullDescriptionView = false
 
-    var isFollowed: Bool {
-        (userStore.usersImFollowing?.items.map(\.id) ?? []).contains(user.id)
-    }
-    
     var body: some View {
         ScrollView {
             VStack(spacing: 10) {
@@ -65,7 +61,7 @@ struct UserView: View {
             }
         }
         .toolbar {
-            followButton
+            toolbarFollowButton
         }
     }
     
@@ -147,15 +143,10 @@ struct UserView: View {
         }
     }
 
-    private var followButton: some ToolbarContent {
+    private var toolbarFollowButton: some ToolbarContent {
         ToolbarItem(placement: .confirmationAction) {
-            Button {
-                AnalyticsManager.shared.log(.tappedFollowUser)
-                Task {
-                    try await (isFollowed ? userStore.unfollowUser(user) : userStore.followUser(user))
-                }
-            } label: {
-                Image(systemName: isFollowed ? "checkmark" : "plus")
+            Button { tappedFollowButton() } label: {
+                Image(systemName: userStore.isUserFollowed(user) ? "checkmark" : "plus")
                     .symbolReplaceEffect()
                     .foregroundStyle(Color.scOrange)
                     .fontWeight(.bold)
@@ -229,6 +220,17 @@ struct UserView: View {
             player.continuePlayback()
         }
         NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
+    }
+    
+    private func tappedFollowButton() {
+        AnalyticsManager.shared.log(.tappedFollowUser)
+        Task {
+            if userStore.isUserFollowed(user) {
+                try await userStore.unfollowUser(user)
+            } else {
+                try await userStore.followUser(user)
+            }
+        }
     }
 }
 

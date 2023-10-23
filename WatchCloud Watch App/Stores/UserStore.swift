@@ -11,7 +11,7 @@ import SoundCloud
 @MainActor
 final class UserStore: ObservableObject {
     @Published public var myUser: User? = nil
-    @Published public var usersImFollowing: Page<User>? = nil
+    @Published public var usersImFollowing: Page<User> = .emptyPage
     
     // MARK: - Dependencies
     private let myUserDAO = UserDefaultsDAO<User>("\(User.self)")
@@ -31,7 +31,7 @@ extension UserStore {
     func reset() {
         try? myUserDAO.delete()
         myUser = nil
-        usersImFollowing = nil
+        usersImFollowing = .emptyPage
     }
     
     func loadMyProfile() async throws {
@@ -45,23 +45,40 @@ extension UserStore {
     }
     
     func loadUsersImFollowing() async throws {
-        if usersImFollowing == nil {
+        if usersImFollowing.items.isEmpty {
             let response = try await service.getUsersImFollowing()
             usersImFollowing = response
-        } else if let nextPageUrl = usersImFollowing?.nextPage {
+        } else if let nextPageUrl = usersImFollowing.nextPage {
             let nextPage: Page<User> = try await pageOfUsers(nextPageUrl)
-            usersImFollowing?.update(with: nextPage)
+            usersImFollowing.update(with: nextPage)
         }
     }
     
     func followUser(_ user: User) async throws {
-        try await service.followUser(user)
-        usersImFollowing?.items.insert(user, at: 0)
+        guard !usersImFollowing.items.contains(user) else {
+            return // throw?
+        }
+        usersImFollowing.items.insert(user, at: 0)
+        do {
+            try await service.followUser(user)
+        } catch {
+            usersImFollowing.items.removeAll { $0 == user }
+            throw error
+        }
     }
     
     func unfollowUser(_ user: User) async throws {
-        try await service.unfollowUser(user)
-        usersImFollowing?.items.removeAll(where: { $0 == user })
+        guard usersImFollowing.items.contains(user) else {
+            return // throw?
+        }
+        let indexToRemove = usersImFollowing.items.firstIndex(of: user)!
+        usersImFollowing.items.remove(at: indexToRemove)
+        do {
+            try await service.unfollowUser(user)
+        } catch {
+            usersImFollowing.items.insert(user, at: indexToRemove)
+            throw error
+        }
     }
         
     func pageOfUsers(_ pageURL: String) async throws -> Page<User> {
@@ -69,4 +86,9 @@ extension UserStore {
     }
 }
 
-
+// MARK: - Helpers
+extension UserStore {
+    func isUserFollowed(_ user: User) -> Bool {
+        usersImFollowing.items.map(\.id).contains(user.id)
+    }
+}

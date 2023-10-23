@@ -149,19 +149,18 @@ struct LibraryView: View {
     @ViewBuilder
     var followingCell: some View {
         let title = String(localized: "Following")
-        if let usersImFollowingBinding = Binding($userStore.usersImFollowing) {
-            navigationCell(id: -3, title: title) {
-                UserListView(
-                    users: usersImFollowingBinding.items,
-                    canLoadMore: Binding(get: { usersImFollowingBinding.wrappedValue.hasNextPage }, set: { _ in }),
-                    title: title,
-                    sortedAlphabetically: true,
-                    reachedBottomOfList: {
-                    Task {
-                        try? await userStore.loadUsersImFollowing()
-                    }
-                })
-            }
+
+        navigationCell(id: -3, title: title) {
+            UserListView(
+                users: $userStore.usersImFollowing.items,
+                canLoadMore: Binding(get: { $userStore.usersImFollowing.wrappedValue.hasNextPage }, set: { _ in }),
+                title: title,
+                sortedAlphabetically: true,
+                reachedBottomOfList: {
+                Task {
+                    try? await userStore.loadUsersImFollowing()
+                }
+            })
         }
     }
 
