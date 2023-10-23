@@ -20,13 +20,15 @@ enum PlaybackSpeed: Float, CaseIterable {
     case Double = 2.0
 }
 
-@MainActor
 final class AudioPlayer: ObservableObject {
     
     private weak var audioStore: AudioStore!
     
     @Published var isPlaying = false // Should be private(set)
     @Published private(set) var isLoading = false
+    @Published var playbackSpeed: PlaybackSpeed = .One
+    
+    @MainActor
     @Published var progress: TimeInterval = 0.0 {
         didSet {
             if shouldSeek, let nowPlaying = audioStore.loadedTrack {
@@ -39,7 +41,6 @@ final class AudioPlayer: ObservableObject {
             }
         }
     }
-    @Published var playbackSpeed: PlaybackSpeed = .One
     
     let systemVolumePublisher = AVAudioSession.sharedInstance().publisher(for: \.outputVolume).eraseToAnyPublisher()
     
@@ -53,14 +54,13 @@ final class AudioPlayer: ObservableObject {
     
     init(_ audioStore: AudioStore) {
         self.audioStore = audioStore
-        setupDeviceMediaControls()
+        Task { await setupDeviceMediaControls() }
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
-    #warning("Errors not handled")
     func setupPlayer() {
         try? audioSession.setCategory(
             .playback,
@@ -71,48 +71,52 @@ final class AudioPlayer: ObservableObject {
         
         player.addPeriodicTimeObserver(forInterval: .oneSecond, queue: .main) { [weak self] time in
             self?.shouldSeek = false
-            self?.progress = time.seconds
             self?.shouldSeek = true
+            DispatchQueue.main.async {
+                self?.progress = time.seconds
+            }
         }
         player.publisher(for: \.timeControlStatus)
         .receive(on: DispatchQueue.main)
         .sink { [weak self] status in
             self?.isPlaying = status == .playing || status == .waitingToPlayAtSpecifiedRate
             self?.isLoading = status == .waitingToPlayAtSpecifiedRate
-            if self?.audioStore.loadedTrack != nil {
-                self?.updateNowPlayingInfo()
+            DispatchQueue.main.async {
+                if self?.audioStore.loadedTrack != nil {
+                    self?.updateNowPlayingInfo()
+                }
             }
         }
         .store(in: &subscriptions)
     }
 }
 
-// MARK: - Play audio
-#warning("Errors not handled")
+// MARK: - Play audio 🎧
 extension AudioPlayer {
     private func loadTrack(_ track: Track) async throws {
-        if !isPlayerLoaded {
+        if !isPlayerLoaded { // Only setup player when first track is played after launching
             setupPlayer()
             isPlayerLoaded = true
         }
-        let header = try await audioStore.authHeader
         let avUrlAsset = AVURLAsset(
             url: URL(string: track.playbackUrl!)!,
-            options: ["AVURLAssetHTTPHeaderFieldsKey" : header]
+            options: ["AVURLAssetHTTPHeaderFieldsKey" : try await audioStore.authHeader]
         )
         let avItem = AVPlayerItem(asset: avUrlAsset)
+        // Set up notification for track ending
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.skipToNextTrack),
             name: Notification.Name.AVPlayerItemDidPlayToEndTime,
             object: avItem
         )
-        
         // Set AVAudioPlayer item
         player.replaceCurrentItem(with: avItem)
         // Set loaded track in SC
-        audioStore.loadedTrack = track
-        progress = 0
+        DispatchQueue.main.async {
+            self.audioStore.loadedTrack = track
+            self.progress = 0
+        }
     }
     
     func loadAndPlayTrack(_ track: Track) {
@@ -125,6 +129,7 @@ extension AudioPlayer {
         }
     }
     
+    @MainActor
     func togglePlayback() {
         if let queue = audioStore.nowPlayingQueue, !queue.isEmpty, audioStore.loadedTrack == nil {
             //What was this case for again?
@@ -154,6 +159,7 @@ extension AudioPlayer {
         player.replaceCurrentItem(with: nil)
     }
     
+    @MainActor
     @objc // Called by AVPlayerItemDidPlayToEndTime Notification
     func skipToNextTrack() {
         guard let nextTrack = audioStore.nextTrackInNowPlayingQueue
@@ -167,6 +173,7 @@ extension AudioPlayer {
         }
     }
     
+    @MainActor
     func skipToPreviousTrack() {
         let skipToPreviousTrackThreshold: Double = 3
         let isBeginningOfTrack = progress < skipToPreviousTrackThreshold
@@ -204,6 +211,7 @@ extension AudioPlayer {
 // MARK: - MPNowPlayingInfoCenter
 extension AudioPlayer {
     
+    @MainActor
     private func setupDeviceMediaControls() {
         let center = MPRemoteCommandCenter.shared()
         
@@ -247,6 +255,7 @@ extension AudioPlayer {
         }
     }
     
+    @MainActor
     private func updateNowPlayingInfo(with time: CMTime? = nil) {
         let center = MPNowPlayingInfoCenter.default()
         guard let loadedTrack = audioStore.loadedTrack else {
