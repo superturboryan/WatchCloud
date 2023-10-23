@@ -195,7 +195,7 @@ struct SearchView: View {
     }
     
     private func searchHistoryCell(_ entry: SearchEntry) -> some View {
-        HStack(spacing: 8) {
+        HStack(spacing: 10) {
             Image(systemName: entry.type.icon)
                 .resizable()
                 .scaledToFit()
@@ -204,8 +204,10 @@ struct SearchView: View {
             Text(verbatim: entry.query)
                 .fontWeight(.medium)
                 .fullWidth(.leading)
+                .lineLimit(1)
         }
-        .padding(14)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 14)
         .background(.secondary.opacity(0.2))
         .cornerRadius(10)
     }
@@ -242,7 +244,7 @@ extension SearchType {
             .environmentObject({ () -> SearchStore in
                 let store = SearchStore(testSC)
                 store.searchHistory = [
-                    SearchEntry(.artists, "Rinse FM"),
+                    SearchEntry(.artists, "Rinse FM Rinse FM Rinse FM"),
                     SearchEntry(.playlists, "Jungle"),
                     SearchEntry(.tracks, "Drake"),
                 ]
