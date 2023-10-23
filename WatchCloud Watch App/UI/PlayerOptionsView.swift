@@ -12,28 +12,30 @@ struct PlayerOptionsView: View {
     
     @EnvironmentObject var audioStore: AudioStore
     @EnvironmentObject var userStore: UserStore
-    
     @EnvironmentObject var player: AudioPlayer
+    
     @Environment(\.dismiss) var dismiss
     
     @Binding var track: Track
     
-    let hSpacing: CGFloat = 12
-    
-    let buttonSize = CGSize(width: 76, height: 45)
-    let labelYOffset: CGFloat = 36
+    private let hSpacing: CGFloat = 12
+    private let buttonSize = CGSize(width: 76, height: 45)
+    private let labelYOffset: CGFloat = 36
     
     var body: some View {
         VStack(spacing: 32) {
             HStack(spacing: hSpacing) {
-                likeButton.disabled(false)
+                likeButton
+                    .disabled(false)
                 downloadButton
                     .disabled(!Config.isDownloadingEnabled(for: userStore.myUser?.id))
                     .opacity(Config.isDownloadingEnabled(for: userStore.myUser?.id) ? 1 : 0)
             }
             HStack(spacing: hSpacing) {
-                playbackSpeedButton.disabled(false)
-                shareButton.disabled(false)
+                playbackSpeedButton
+                    .disabled(false)
+                shareButton
+                    .disabled(false)
             }
         }
         .padding(.bottom, 10)
@@ -46,9 +48,9 @@ struct PlayerOptionsView: View {
     var likeButton: some View {
         Button { tappedLike() } label: {
             buttonView(
-                track.userFavorite ? "heart.fill" : "heart",
+                audioStore.isLiked(track) ? "heart.fill" : "heart",
                 .pink,
-                track.userFavorite ? String(localized: "Liked", comment: "Adjective") : String(localized: "Like", comment: "Verb")
+                audioStore.isLiked(track) ? String(localized: "Liked", comment: "Adjective") : String(localized: "Like", comment: "Verb")
             )
         }
     }
@@ -73,11 +75,10 @@ struct PlayerOptionsView: View {
     
     func tappedLike() {
         Haptics.click()
+        AnalyticsManager.shared.log(.tappedLikeTrack)
+        
         Task {
-            if track.userFavorite { try await audioStore.unlikeTrack(track) }
-            else { try await audioStore.likeTrack(track) }
-            track.userFavorite.toggle()
-            AnalyticsManager.shared.log(.tappedLikeTrack)
+            try await audioStore.toggleLikedTrack(track)
         }
     }
     

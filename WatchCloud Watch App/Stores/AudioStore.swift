@@ -92,29 +92,84 @@ extension AudioStore {
 
 // MARK: - Like + Follow 🧡
 extension AudioStore {
-    func likeTrack(_ track: Track) async throws {
-        try await service.likeTrack(track)
-        // 🚨 Hack for SC API cached responses -> Update loaded playlist manually
-        loadedPlaylists[PlaylistType.likes.rawValue]?.tracks?.insert(track, at: 0)
+    func isLiked(_ track: Track) -> Bool {
+        (loadedPlaylists[PlaylistType.likes.rawValue]?.tracks ?? []).contains(track)
     }
     
-    func unlikeTrack(_ track: Track) async throws {
-        try await service.unlikeTrack(track)
-        // 🚨 Hack for SC API cached responses -> Update loaded playlist manually
-        loadedPlaylists[PlaylistType.likes.rawValue]?.tracks?
-            .removeAll(where: { $0.id == track.id })
+    func isLiked(_ playlist: Playlist) -> Bool {
+        myLikedPlaylistIds.contains(playlist.id)
     }
     
-    func likePlaylist(_ playlist: Playlist) async throws {
-        try await service.likePlaylist(playlist)
-        if !myLikedPlaylistIds.contains(playlist.id) {
-            myLikedPlaylistIds.insert(playlist.id, at: 0)
+    func toggleLikedTrack(_ track: Track) async throws {
+        if isLiked(track) {
+            try await unlikeTrack(track)
+        } else {
+            try await likeTrack(track)
         }
     }
     
-    func unlikePlaylist(_ playlist: Playlist) async throws {
-        try await service.unlikePlaylist(playlist)
-        myLikedPlaylistIds.removeAll(where: { $0 == playlist.id })
+    func toggleLikedPlaylist(_ playlist: Playlist) async throws {
+        if isLiked(playlist) {
+            try await unlikePlaylist(playlist)
+        } else {
+            try await likePlaylist(playlist)
+        }
+    }
+    
+    private func likeTrack(_ track: Track) async throws {
+        guard !(loadedPlaylists[PlaylistType.likes.rawValue]?.tracks ?? []).contains(track) else {
+            return // throw?
+        }
+        loadedPlaylists[PlaylistType.likes.rawValue]?.tracks?.insert(track, at: 0)
+        do {
+            try await service.likeTrack(track)
+        } catch {
+            // Undo local operation if network operation fails
+            loadedPlaylists[PlaylistType.likes.rawValue]?.tracks?.removeFirst()
+            throw error
+        }
+    }
+    
+    private func unlikeTrack(_ track: Track) async throws {
+        guard let index = (loadedPlaylists[PlaylistType.likes.rawValue]?.tracks ?? []).firstIndex(of: track) else {
+            return // throw?
+        }
+        loadedPlaylists[PlaylistType.likes.rawValue]?.tracks?.remove(at: index)
+        do {
+            try await service.unlikeTrack(track)
+        } catch {
+            // Undo local operation if network operation fails
+            loadedPlaylists[PlaylistType.likes.rawValue]?.tracks?.insert(track, at: index)
+            throw error
+        }
+    }
+    
+    private func likePlaylist(_ playlist: Playlist) async throws {
+        guard !myLikedPlaylistIds.contains(playlist.id) else {
+            return // throw?
+        }
+        myLikedPlaylistIds.insert(playlist.id, at: 0)
+        do {
+            try await service.likePlaylist(playlist)
+        } catch {
+            // Undo local operation if network operation fails
+            myLikedPlaylistIds.removeFirst()
+            throw error
+        }
+    }
+    
+    private func unlikePlaylist(_ playlist: Playlist) async throws {
+        guard let index = myLikedPlaylistIds.firstIndex(of: playlist.id) else {
+            return // throw?
+        }
+        myLikedPlaylistIds.remove(at: index)
+        do {
+            try await service.unlikePlaylist(playlist)
+        } catch {
+            // Undo local operation if network operation fails
+            myLikedPlaylistIds.insert(playlist.id, at: index)
+            throw error
+        }
     }
 }
 

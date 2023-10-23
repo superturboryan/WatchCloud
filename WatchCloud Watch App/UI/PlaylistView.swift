@@ -178,9 +178,7 @@ struct PlaylistView: View {
     
     func tappedLike() {
         Task {
-            try await isLiked ?
-            audioStore.unlikePlaylist(playlist) :
-            audioStore.likePlaylist(playlist)
+            try await audioStore.toggleLikedPlaylist(playlist)
             AnalyticsManager.shared.log(.tappedLikePlaylist)
         }
     }
@@ -189,7 +187,6 @@ struct PlaylistView: View {
         audioStore.loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks = playlist.tracks?.shuffled()
         if let firstTrack = audioStore.loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks?.first {
             player.loadAndPlayTrack(firstTrack)
-            
             AnalyticsManager.shared.log(.tappedShuffle)
             NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
         }
