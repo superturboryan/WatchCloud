@@ -1,3 +1,17 @@
+# 1.1.2
+🌎 Published x October
+🔨 Xcode 15.0
+⌚️ watchOS 10.0
+☁️📦 **SoundCloud Swift Package 1.0.0**
+
+### ✨ Features
+- Display QR code instead of artwork when lumininance is reduced
+- Display search history
+- Improve like + follow performance
+
+### 🐞 Bug fixes
+- Small UI tweaks
+
 # 1.1.1
 🌎 Published 16 October
 🔨 Xcode 15.0
