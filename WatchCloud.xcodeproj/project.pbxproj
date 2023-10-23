@@ -195,6 +195,8 @@
 		9488EE6D2AE40EA80009EC54 /* QRCodeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeImageView.swift; sourceTree = "<group>"; };
 		9488EE792AE42FBE0009EC54 /* SearchStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStore.swift; sourceTree = "<group>"; };
 		9488EE7E2AE43C970009EC54 /* SearchEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEntry.swift; sourceTree = "<group>"; };
+		9488EE812AE70DF90009EC54 /* LibraryView - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LibraryView - S945.png"; sourceTree = "<group>"; };
+		9488EE822AE70EBD0009EC54 /* SearchView - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SearchView - S945.png"; sourceTree = "<group>"; };
 		94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoweredBySCView.swift; sourceTree = "<group>"; };
 		94923C6C2ABDBB2C00A67EBE /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		94923C6E2ABDBBD500A67EBE /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
@@ -455,6 +457,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		9488EE802AE70DDD0009EC54 /* 1.1.2 */ = {
+			isa = PBXGroup;
+			children = (
+				9488EE812AE70DF90009EC54 /* LibraryView - S945.png */,
+				9488EE822AE70EBD0009EC54 /* SearchView - S945.png */,
+			);
+			path = 1.1.2;
+			sourceTree = "<group>";
+		};
 		94B6343D2ABDFAF900E6FCDA /* Complication */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,6 +508,7 @@
 				94B6344F2ABE5B7700E6FCDA /* 1.0.1 */,
 				941A00EC2AC4474C000F4693 /* 1.0.2 */,
 				943477C12AD5FC5700A6DED6 /* 1.1.0 */,
+				9488EE802AE70DDD0009EC54 /* 1.1.2 */,
 			);
 			path = Screenshots;
 			sourceTree = "<group>";
