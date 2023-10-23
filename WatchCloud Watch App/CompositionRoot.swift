@@ -5,7 +5,6 @@
 //  Created by Ryan Forsyth on 2023-09-14.
 //
 
-import Foundation
 import SoundCloud
 
 /// Simplified dependency injection container
@@ -14,17 +13,11 @@ import SoundCloud
 ///
 /// Use private for dependencies that should be injected inside CompositionRoot, not accessed directly
 enum CompositionRoot {
-    
-    // UI
-    static let rootView = RootView()
-    
+
     // Stores
     @MainActor static let audioStore = AudioStore(sc)
-    
     @MainActor static let userStore = UserStore(sc)
-    
     static let authStore = AuthStore(sc)
-    
     static let searchStore = SearchStore(sc)
     
     // Services

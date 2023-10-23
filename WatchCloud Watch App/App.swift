@@ -28,7 +28,7 @@ struct WatchCloud_Watch_AppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            CompositionRoot.rootView
+           RootView()
                 .environmentObject(audioStore)
                 .environmentObject(authStore)
                 .environmentObject(userStore)
