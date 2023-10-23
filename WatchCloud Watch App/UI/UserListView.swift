@@ -22,7 +22,7 @@ struct UserListView: View {
             LazyVStack {
                 ForEach( $users.sorted(by: { sortedAlphabetically ? $0.wrappedValue.username < $1.wrappedValue.username : false }), id: \.wrappedValue.id) { user in
                     NavigationLink {
-                        UserDetailView(user: user.wrappedValue).onAppear {
+                        UserView(user: user.wrappedValue).onAppear {
                             AnalyticsManager.shared.log(.tappedUser)
                         }
                     } label: {
