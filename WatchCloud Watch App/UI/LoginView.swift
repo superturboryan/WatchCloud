@@ -40,7 +40,6 @@ struct LoginView: View {
         .toolbar(.hidden, for: .navigationBar)
         .buttonStyle(.plain)
         .ignoresSafeArea()
-        .navigationTitle(String.empty)
         .interactiveDismissDisabled()
     }
     

@@ -24,3 +24,4 @@ watchOS client for SoundCloud
 📦 [SoundCloud](https://github.com/superturboryan/SoundCloud-api)  
 📦 [Nuke](https://github.com/kean/Nuke)  
 📦 [KeychainSwift](https://github.com/evgenyneu/keychain-swift/)
+📦 [QRCode](https://github.com/dagronf/QRCode)

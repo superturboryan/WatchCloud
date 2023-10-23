@@ -224,7 +224,7 @@ struct LibraryView: View {
             colour = .green
             
         case -1: // Current User View
-            imageName = "figure.dance"
+            imageName = "person.circle.fill"
             gradient = LinearGradient.scOrange(.vertical)
         case -2: // Settings
             imageName = "gearshape.fill"
