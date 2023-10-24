@@ -11,7 +11,7 @@ import WatchKit
 
 struct PlayerView: View {
     
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var audioStore: AudioStore
     @EnvironmentObject var player: AudioPlayer
     @Environment(\.isLuminanceReduced) var isLuminanceReduced
     
@@ -43,7 +43,7 @@ struct PlayerView: View {
             .edgesIgnoringSafeArea([.horizontal, .bottom])
             .toolbarBackground(.hidden, for: .navigationBar)
             .sheet(isPresented: $showOptions) {
-                if let currentTrackBinding = Binding($sc.loadedTrack) {
+                if let currentTrackBinding = Binding($audioStore.loadedTrack) {
                     PlayerOptionsView(track: currentTrackBinding)
                         .background(.black.opacity(0.5))
                 }
@@ -54,7 +54,7 @@ struct PlayerView: View {
     
     var info: some View {
         VStack(alignment: .leading, spacing: 2) {
-            if let currentTrack = sc.loadedTrack {
+            if let currentTrack = audioStore.loadedTrack {
                 MarqueeText(
                     text: currentTrack.title,
                     startDelay: 2.5
@@ -66,18 +66,18 @@ struct PlayerView: View {
                         .font(.subheadline)
                     Spacer(minLength: 4)
                     HStack(spacing: 2) {
-                        if sc.loadedTrack?.userFavorite ?? false {
+                        if audioStore.loadedTrack?.userFavorite ?? false {
                             Image(systemName: "heart.fill")
                                 .foregroundColor(.pink)
                         }
-                        if sc.isLoadedTrackDownloaded {
+                        if audioStore.isLoadedTrackDownloaded {
                             Image(systemName: "arrow.down.circle.fill")
                                 .foregroundColor(.green)
                         }
                     }
                 }
                 .padding(.trailing, 4)
-                .animation(.default, value: sc.loadedTrack)
+                .animation(.default, value: audioStore.loadedTrack)
             }
         }
         .lineLimit(1)
@@ -150,7 +150,7 @@ struct PlayerView: View {
     @ViewBuilder
     var progressBar: some View {
         VStack(spacing: 4) {
-            ProgressView(value: player.progress, total: TimeInterval(sc.loadedTrack?.durationInSeconds ?? 1))
+            ProgressView(value: player.progress, total: TimeInterval(audioStore.loadedTrack?.durationInSeconds ?? 1))
                 .progressViewStyle(LinearGradientProgressViewStyle(
                     fill: LinearGradient.scOrange(.horizontal),
                     height: 6,
@@ -160,7 +160,7 @@ struct PlayerView: View {
             HStack {
                 Text(verbatim: Int(player.progress).timeStringFromSeconds)
                 Spacer()
-                Text(verbatim: "-\((sc.loadedTrack!.durationInSeconds - Int(player.progress)).timeStringFromSeconds)") // Time remaining
+                Text(verbatim: "-\((audioStore.loadedTrack!.durationInSeconds - Int(player.progress)).timeStringFromSeconds)") // Time remaining
             }
             .font(.footnote)
             .padding(.horizontal, 4)
@@ -191,16 +191,9 @@ struct PlayerView: View {
 
 #Preview {
     PlayerView()
-        .environmentObject({ () -> SoundCloud in
-            testSC.loadedPlaylists = testDefaultLoadedPlaylists
-            var track = testTrack()
-            track.userFavorite = true
-            testSC.loadedTrack = track
-            testSC.downloadedTracks = [track]
-            return testSC
-        }())
+        .environmentObject(AudioStore(testSC))
         .environmentObject({ () -> AudioPlayer in
-            let player = AudioPlayer(testSC)
+            let player = AudioPlayer(AudioStore(testSC))
             player.progress = 3015
             player.isPlaying = true
             return player

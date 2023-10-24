@@ -54,6 +54,15 @@
 		946F38DF2AB07F81008CE9D1 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CA2AB07F81008CE9D1 /* PlayerView.swift */; };
 		946F38E02AB07F81008CE9D1 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CB2AB07F81008CE9D1 /* AudioPlayer.swift */; };
 		946F38E12AB07F81008CE9D1 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CC2AB07F81008CE9D1 /* App.swift */; };
+		9488EE612AE013D40009EC54 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE602AE013D40009EC54 /* UserStore.swift */; };
+		9488EE652AE026140009EC54 /* AudioStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE642AE026140009EC54 /* AudioStore.swift */; };
+		9488EE672AE33C260009EC54 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE662AE33C260009EC54 /* Logger.swift */; };
+		9488EE692AE3E2380009EC54 /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE682AE3E2380009EC54 /* AuthStore.swift */; };
+		9488EE6C2AE3E5D00009EC54 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE6B2AE3E5D00009EC54 /* LoginService.swift */; };
+		9488EE6E2AE40EA80009EC54 /* QRCodeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE6D2AE40EA80009EC54 /* QRCodeImageView.swift */; };
+		9488EE732AE410AE0009EC54 /* QRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 9488EE722AE410AE0009EC54 /* QRCode */; };
+		9488EE7A2AE42FBE0009EC54 /* SearchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE792AE42FBE0009EC54 /* SearchStore.swift */; };
+		9488EE7F2AE43C970009EC54 /* SearchEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE7E2AE43C970009EC54 /* SearchEntry.swift */; };
 		94923C6B2ABDB5A300A67EBE /* PoweredBySCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */; };
 		94923C6D2ABDBB2C00A67EBE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6C2ABDBB2C00A67EBE /* String.swift */; };
 		94923C6F2ABDBBD500A67EBE /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6E2ABDBBD500A67EBE /* Int.swift */; };
@@ -67,7 +76,7 @@
 		94C169A22AB474EE00570B4F /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 94C169A12AB474EE00570B4F /* NukeUI */; };
 		94FAA18A2ACB319600EF97CE /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1892ACB319600EF97CE /* UserListView.swift */; };
 		94FAA18C2ACB3B4200EF97CE /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */; };
-		94FAA1D02ACC273600EF97CE /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1CF2ACC273600EF97CE /* UserDetailView.swift */; };
+		94FAA1D02ACC273600EF97CE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1CF2ACC273600EF97CE /* UserView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +187,18 @@
 		946F38CC2AB07F81008CE9D1 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		946F38E72AB08470008CE9D1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		946F38E92AB08470008CE9D1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		9488EE602AE013D40009EC54 /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
+		9488EE642AE026140009EC54 /* AudioStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStore.swift; sourceTree = "<group>"; };
+		9488EE662AE33C260009EC54 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		9488EE682AE3E2380009EC54 /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
+		9488EE6B2AE3E5D00009EC54 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		9488EE6D2AE40EA80009EC54 /* QRCodeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeImageView.swift; sourceTree = "<group>"; };
+		9488EE792AE42FBE0009EC54 /* SearchStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStore.swift; sourceTree = "<group>"; };
+		9488EE7E2AE43C970009EC54 /* SearchEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEntry.swift; sourceTree = "<group>"; };
+		9488EE812AE70DF90009EC54 /* LibraryView - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LibraryView - S945.png"; sourceTree = "<group>"; };
+		9488EE822AE70EBD0009EC54 /* SearchView - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SearchView - S945.png"; sourceTree = "<group>"; };
+		9488EE832AE7B22A0009EC54 /* PlayerView - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayerView - S945.png"; sourceTree = "<group>"; };
+		9488EE842AE7B2CA0009EC54 /* LibraryView Bottom - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LibraryView Bottom - S945.png"; sourceTree = "<group>"; };
 		94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoweredBySCView.swift; sourceTree = "<group>"; };
 		94923C6C2ABDBB2C00A67EBE /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		94923C6E2ABDBBD500A67EBE /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
@@ -201,7 +222,7 @@
 		94F3FCD22AB9A3B5005D03DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		94FAA1892ACB319600EF97CE /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
 		94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellView.swift; sourceTree = "<group>"; };
-		94FAA1CF2ACC273600EF97CE /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
+		94FAA1CF2ACC273600EF97CE /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +230,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9488EE732AE410AE0009EC54 /* QRCode in Frameworks */,
 				94C169A22AB474EE00570B4F /* NukeUI in Frameworks */,
 				946F38B12AB07A2E008CE9D1 /* SoundCloud in Frameworks */,
 				9421D2B52AD2FB67005FE857 /* Mixpanel in Frameworks */,
@@ -311,6 +333,9 @@
 				9421D2B62AD34C0E005FE857 /* Analytics */,
 				946F38B32AB07CB1008CE9D1 /* Config */,
 				946F38B62AB07F81008CE9D1 /* Extension */,
+				9488EE7D2AE43C860009EC54 /* Models */,
+				9488EE6A2AE3E5BD0009EC54 /* Protocols */,
+				9488EE5F2AE012020009EC54 /* Stores */,
 				946F38C02AB07F81008CE9D1 /* UI */,
 				943477BD2AD421AE00A6DED6 /* Tips */,
 			);
@@ -365,6 +390,7 @@
 				946F38BB2AB07F81008CE9D1 /* Image.swift */,
 				94923C6E2ABDBBD500A67EBE /* Int.swift */,
 				946F38BF2AB07F81008CE9D1 /* LinearGradientProgressViewStyle.swift */,
+				9488EE662AE33C260009EC54 /* Logger.swift */,
 				946F38BE2AB07F81008CE9D1 /* MarqueeText.swift */,
 				9421D2AE2AD2D151005FE857 /* Optional.swift */,
 				946F38B82AB07F81008CE9D1 /* Progress.swift */,
@@ -393,16 +419,55 @@
 				9421D2AC2AD17834005FE857 /* PlaylistSummaryView.swift */,
 				946F38C42AB07F81008CE9D1 /* PlaylistView.swift */,
 				94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */,
+				9488EE6D2AE40EA80009EC54 /* QRCodeImageView.swift */,
 				946F38C82AB07F81008CE9D1 /* RootView.swift */,
 				943756CE2ACDA02500C84006 /* SearchView.swift */,
 				946F38C52AB07F81008CE9D1 /* SettingsView.swift */,
 				946F38C72AB07F81008CE9D1 /* TrackCellView.swift */,
 				94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */,
-				94FAA1CF2ACC273600EF97CE /* UserDetailView.swift */,
+				94FAA1CF2ACC273600EF97CE /* UserView.swift */,
 				94FAA1892ACB319600EF97CE /* UserListView.swift */,
 				9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		9488EE5F2AE012020009EC54 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				9488EE642AE026140009EC54 /* AudioStore.swift */,
+				9488EE682AE3E2380009EC54 /* AuthStore.swift */,
+				9488EE792AE42FBE0009EC54 /* SearchStore.swift */,
+				9488EE602AE013D40009EC54 /* UserStore.swift */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		9488EE6A2AE3E5BD0009EC54 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9488EE6B2AE3E5D00009EC54 /* LoginService.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		9488EE7D2AE43C860009EC54 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9488EE7E2AE43C970009EC54 /* SearchEntry.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9488EE802AE70DDD0009EC54 /* 1.1.2 */ = {
+			isa = PBXGroup;
+			children = (
+				9488EE812AE70DF90009EC54 /* LibraryView - S945.png */,
+				9488EE842AE7B2CA0009EC54 /* LibraryView Bottom - S945.png */,
+				9488EE832AE7B22A0009EC54 /* PlayerView - S945.png */,
+				9488EE822AE70EBD0009EC54 /* SearchView - S945.png */,
+			);
+			path = 1.1.2;
 			sourceTree = "<group>";
 		};
 		94B6343D2ABDFAF900E6FCDA /* Complication */ = {
@@ -447,6 +512,7 @@
 				94B6344F2ABE5B7700E6FCDA /* 1.0.1 */,
 				941A00EC2AC4474C000F4693 /* 1.0.2 */,
 				943477C12AD5FC5700A6DED6 /* 1.1.0 */,
+				9488EE802AE70DDD0009EC54 /* 1.1.2 */,
 			);
 			path = Screenshots;
 			sourceTree = "<group>";
@@ -491,6 +557,7 @@
 				94C1699F2AB474EE00570B4F /* Nuke */,
 				94C169A12AB474EE00570B4F /* NukeUI */,
 				9421D2B42AD2FB67005FE857 /* Mixpanel */,
+				9488EE722AE410AE0009EC54 /* QRCode */,
 			);
 			productName = "WatchCloud Watch App";
 			productReference = 946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */;
@@ -553,6 +620,7 @@
 			packageReferences = (
 				94C1699E2AB474EE00570B4F /* XCRemoteSwiftPackageReference "Nuke" */,
 				9421D2B32AD2FB67005FE857 /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
+				9488EE712AE410AE0009EC54 /* XCRemoteSwiftPackageReference "QRCode" */,
 			);
 			productRefGroup = 946F38912AB079C9008CE9D1 /* Products */;
 			projectDirPath = "";
@@ -604,17 +672,21 @@
 				946F38D52AB07F81008CE9D1 /* LinearGradientProgressViewStyle.swift in Sources */,
 				941A00EB2AC304B6000F4693 /* NewPlayerView.swift in Sources */,
 				946F38D72AB07F81008CE9D1 /* CurrentUserView.swift in Sources */,
-				94FAA1D02ACC273600EF97CE /* UserDetailView.swift in Sources */,
+				94FAA1D02ACC273600EF97CE /* UserView.swift in Sources */,
 				94FAA18C2ACB3B4200EF97CE /* UserCellView.swift in Sources */,
 				943477BF2AD421E200A6DED6 /* CaptchaNotAppearingTip.swift in Sources */,
 				94FAA18A2ACB319600EF97CE /* UserListView.swift in Sources */,
 				9421D2A12ACED420005FE857 /* Device.swift in Sources */,
+				9488EE652AE026140009EC54 /* AudioStore.swift in Sources */,
+				9488EE7A2AE42FBE0009EC54 /* SearchStore.swift in Sources */,
 				94923C6F2ABDBBD500A67EBE /* Int.swift in Sources */,
+				9488EE7F2AE43C970009EC54 /* SearchEntry.swift in Sources */,
 				946F38D12AB07F81008CE9D1 /* Image.swift in Sources */,
 				946F38CF2AB07F81008CE9D1 /* Delete.swift in Sources */,
 				9421D29F2ACE2A90005FE857 /* PlaylistListView.swift in Sources */,
 				943756CF2ACDA02500C84006 /* SearchView.swift in Sources */,
 				9421D2BC2AD34E88005FE857 /* AnalyticsEvent.swift in Sources */,
+				9488EE6E2AE40EA80009EC54 /* QRCodeImageView.swift in Sources */,
 				9421D2BA2AD34CC9005FE857 /* MixpanelAnalyticsService.swift in Sources */,
 				94A31B352AB517410052A922 /* CaseIterable.swift in Sources */,
 				9421D2A92ACF5B59005FE857 /* PlaylistCellView.swift in Sources */,
@@ -624,6 +696,7 @@
 				946F38DE2AB07F81008CE9D1 /* LibraryView.swift in Sources */,
 				946F38E02AB07F81008CE9D1 /* AudioPlayer.swift in Sources */,
 				946F38E12AB07F81008CE9D1 /* App.swift in Sources */,
+				9488EE672AE33C260009EC54 /* Logger.swift in Sources */,
 				946F38DF2AB07F81008CE9D1 /* PlayerView.swift in Sources */,
 				9448FF4D2AB343D7003D63F1 /* WatchKit.swift in Sources */,
 				946F38D22AB07F81008CE9D1 /* Haptics.swift in Sources */,
@@ -631,9 +704,12 @@
 				9421D2BE2AD34FFC005FE857 /* AnalyticsManager.swift in Sources */,
 				94923C6B2ABDB5A300A67EBE /* PoweredBySCView.swift in Sources */,
 				9421D2AF2AD2D151005FE857 /* Optional.swift in Sources */,
+				9488EE612AE013D40009EC54 /* UserStore.swift in Sources */,
+				9488EE6C2AE3E5D00009EC54 /* LoginService.swift in Sources */,
 				946F38DA2AB07F81008CE9D1 /* SettingsView.swift in Sources */,
 				941A00F82AC70CEE000F4693 /* CachedImageView.swift in Sources */,
 				94923C6D2ABDBB2C00A67EBE /* String.swift in Sources */,
+				9488EE692AE3E2380009EC54 /* AuthStore.swift in Sources */,
 				946F38DB2AB07F81008CE9D1 /* LoginView.swift in Sources */,
 				9421D2A32ACED4FE005FE857 /* CGRect.swift in Sources */,
 				943477BC2AD3E1CA00A6DED6 /* DebugAnalyticsService.swift in Sources */,
@@ -810,7 +886,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -842,7 +918,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -863,7 +939,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T6MXF72738;
 				INFOPLIST_KEY_CFBundleDisplayName = WatchCloud;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -879,7 +955,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T6MXF72738;
 				INFOPLIST_KEY_CFBundleDisplayName = WatchCloud;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -910,7 +986,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp.Comp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -945,7 +1021,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp.Comp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1008,6 +1084,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		9488EE712AE410AE0009EC54 /* XCRemoteSwiftPackageReference "QRCode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dagronf/QRCode";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 16.1.1;
+			};
+		};
 		94C1699E2AB474EE00570B4F /* XCRemoteSwiftPackageReference "Nuke" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Nuke";
@@ -1027,6 +1111,11 @@
 		946F38B02AB07A2E008CE9D1 /* SoundCloud */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SoundCloud;
+		};
+		9488EE722AE410AE0009EC54 /* QRCode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9488EE712AE410AE0009EC54 /* XCRemoteSwiftPackageReference "QRCode" */;
+			productName = QRCode;
 		};
 		94C1699F2AB474EE00570B4F /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;

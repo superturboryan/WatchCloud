@@ -1,3 +1,4 @@
 *.xcworkspacedata
 *package.resolved
 *.xcconfig
+*.xcuserdatad

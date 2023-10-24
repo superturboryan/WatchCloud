@@ -10,7 +10,9 @@ import SwiftUI
 
 struct SearchView: View {
     
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var audioStore: AudioStore
+    @EnvironmentObject var userStore: UserStore
+    @EnvironmentObject var searchStore: SearchStore
     
     @State var showSearchResults = false
     @State var query = ""
@@ -23,34 +25,42 @@ struct SearchView: View {
     @FocusState var isSearchFocused: Bool
     
     var body: some View {
-        VStack {
-            TextField(
-                String(localized: "Search for \(searchType.localized)", comment: "Prompt"),
-                text: $query
-            )
-            .autocorrectionDisabled()
-            .focused($isSearchFocused)
-            .submitLabel(.search)
-            .onSubmit { performSearch(with: query) }
-            
-            searchOptionButtons
+        ScrollView {
+            VStack {
+                searchTextField
+                searchOptionButtons
+                if !searchStore.searchHistory.isEmpty {
+                    searchHistoryList
+                }
+            }
+            .animation(.default, value: searchStore.searchHistory)
+            .fullWidthAndHeight()
+            .toolbar {
+                toolbarSearchButton
+            }
+            .navigationDestination(isPresented: $showSearchResults) {
+                searchResultsView
+            }
+            .padding(.top, -4)
+            .fontDesign(.rounded)
+            .animation(.default, value: searchType)
         }
-        .fullWidthAndHeight()
-        .toolbar {
-            searchButton
-        }
-        .navigationDestination(isPresented: $showSearchResults) {
-            searchResultsView
-        }
-        .fontDesign(.rounded)
-        .animation(.default, value: searchType)
-        .navigationTitle("Search")
-        .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private var searchTextField: some View {
+        TextField(
+            String(localized: "Search for \(searchType.localized)", comment: "Prompt"),
+            text: $query
+        )
+        .autocorrectionDisabled()
+        .focused($isSearchFocused)
+        .submitLabel(.search)
+        .onSubmit { performSearch(with: query) }
     }
     
     @ViewBuilder
     private var searchOptionButtons: some View {
-        let width = (Device.screenSize.width - 10) / 3
+        let width = (Device.screenSize.width - 18) / 3
         HStack {
             searchCell(.tracks, width: width)
             searchCell(.playlists, width: width)
@@ -58,7 +68,7 @@ struct SearchView: View {
         }
     }
     
-    private var searchButton: some ToolbarContent {
+    private var toolbarSearchButton: some ToolbarContent {
         ToolbarItem(placement: .confirmationAction) {
             Button {
                 performSearch(with: query)
@@ -78,14 +88,13 @@ struct SearchView: View {
         Task {
             switch searchType {
             case .tracks:
-                trackResults = try await sc.searchTracks(query)
+                trackResults = try await searchStore.searchForTracks(query, 100)
             case .playlists:
-                playlistResults = try await sc.searchPlaylists(query)
+                playlistResults = try await searchStore.searchForPlaylists(query)
             case .artists:
-                artistResults = try await sc.searchUsers(query)
+                artistResults = try await searchStore.searchForUsers(query)
             }
             
-            AnalyticsManager.shared.log(.search(type: searchType.rawValue))
             showSearchResults = true
         }
     }
@@ -94,10 +103,13 @@ struct SearchView: View {
     private var searchResultsView: some View {
         switch searchType {
         case .tracks:
-            if let tracks = trackResults?.items {
-                let playlist = Playlist(id: 0, user: sc.myUser!, title: query, tracks: tracks)
+            if var playlist = trackResults?.playlist(id: 0, title: query, user: userStore.myUser!) {
                 PlaylistView(
-                    playlist: .constant(playlist),
+                    playlist: Binding(get: {
+                        playlist
+                    }, set: { updated in
+                        playlist = updated
+                    }),
                     showSummary: false,
                     showShuffleButton: false
                 )
@@ -111,7 +123,7 @@ struct SearchView: View {
                 ) {
                     Task {
                         if let nextPage = results.wrappedValue.nextPage,
-                            let nextResult: Page<Playlist> = try? await sc.pageOfItems(for: nextPage) {
+                           let nextResult: Page<Playlist> = try? await audioStore.pageOfPlaylists(nextPage) {
                             playlistResults?.update(with: nextResult)
                         }
                     }
@@ -126,8 +138,8 @@ struct SearchView: View {
                     sortedAlphabetically: false
                 ) {
                     Task {
-                        if let nextPage = results.wrappedValue.nextPage, 
-                            let nextResult: Page<User> = try? await sc.pageOfItems(for: nextPage) {
+                        if let nextPage = results.wrappedValue.nextPage,
+                            let nextResult: Page<User> = try? await userStore.pageOfUsers(nextPage) {
                             artistResults?.update(with: nextResult)
                         }
                     }
@@ -143,7 +155,7 @@ struct SearchView: View {
                 .scaledToFit()
                 .frame(width: 24, height: 24)
                 .foregroundStyle(LinearGradient.scOrange(.vertical))
-                
+            
             Text(verbatim: type.localized.capitalized)
                 .font(.footnote)
                 .fontWeight(.medium)
@@ -153,9 +165,9 @@ struct SearchView: View {
                 .padding(.horizontal, 6)
                 .frame(width: width, height: 18)
         }
-        .padding(.vertical, 10)
+        .padding(.vertical, 8)
         .background(searchType == type ? Color.scOrange.opacity(0.3) : .secondary.opacity(0.2))
-        .cornerRadius(10)
+        .cornerRadius(8)
         .onTapGesture {
             searchType = type
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -163,33 +175,80 @@ struct SearchView: View {
             }
         }
     }
-}
-
-extension SearchView {
-    enum SearchType: String {
-        case tracks, playlists, artists
-        
-        var localized: String {
-            switch self {
-            case .tracks: return String(localized: "tracks", comment: "Plural noun")
-            case .playlists: return String(localized: "playlists", comment: "Plural noun")
-            case .artists: return String(localized: "artists", comment: "Plural noun")
+    
+    private var searchHistoryList: some View {
+        LazyVStack {
+            Section(header: sectionHeaderView(String(localized: "History"))) {
+                ForEach(searchStore.searchHistory) { entry in
+                    searchHistoryCell(entry).onTapGesture {
+                        query = entry.query
+                        searchType = entry.type
+                        performSearch(with: query)
+                    }
+                }
+                Button(String(localized: "Clear History"), role: .destructive) {
+                    searchStore.reset()
+                    query = ""
+                }
             }
         }
+    }
     
-        var icon: String {
-            switch self {
-            case .tracks: return "music.note"
-            case .playlists: return "music.note.list"
-            case .artists: return "person.crop.circle.fill"
-            }
+    private func searchHistoryCell(_ entry: SearchEntry) -> some View {
+        HStack(spacing: 10) {
+            Image(systemName: entry.type.icon)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 18, height: 18)
+                .foregroundStyle(LinearGradient.scOrange(.vertical))
+            Text(verbatim: entry.query)
+                .fontWeight(.medium)
+                .fullWidth(.leading)
+                .lineLimit(1)
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 14)
+        .background(.secondary.opacity(0.2))
+        .cornerRadius(10)
+    }
+}
+
+enum SearchType: String, Codable {
+    case tracks, playlists, artists
+}
+
+extension SearchType {
+    var localized: String {
+        switch self {
+        case .tracks: String(localized: "tracks", comment: "Plural noun")
+        case .playlists: String(localized: "playlists", comment: "Plural noun")
+        case .artists: String(localized: "artists", comment: "Plural noun")
+        }
+    }
+    
+    var icon: String {
+        switch self {
+        case .tracks: "music.note"
+        case .playlists: "music.note.list"
+        case .artists: "person.crop.circle.fill"
         }
     }
 }
 
+
 #Preview {
     NavigationStack {
         SearchView()
-            .environmentObject(testSC)
+            .environmentObject(AudioStore(testSC))
+            .environmentObject(UserStore(testSC))
+            .environmentObject({ () -> SearchStore in
+                let store = SearchStore(testSC)
+                store.searchHistory = [
+                    SearchEntry(.artists, "Rinse FM Rinse FM Rinse FM"),
+                    SearchEntry(.playlists, "Jungle"),
+                    SearchEntry(.tracks, "Drake"),
+                ]
+                return store
+            }())
     }
 }

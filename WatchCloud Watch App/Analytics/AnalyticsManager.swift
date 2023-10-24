@@ -18,7 +18,6 @@ final class AnalyticsManager {
     #endif
     
     private let service: AnalyticsService
-    
     init(_ service: AnalyticsService) {
         self.service = service
     }

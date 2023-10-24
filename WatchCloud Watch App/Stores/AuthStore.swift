@@ -1,0 +1,40 @@
+//
+//  AuthStore.swift
+//  WatchCloud Watch App
+//
+//  Created by Ryan Forsyth on 2023-10-21.
+//
+
+import Foundation
+
+final class AuthStore: ObservableObject {
+    
+    /// Initial state is `true` to prevent `LoginView` from appearing on every app launch
+    @Published public private(set) var isLoggedIn: Bool = true
+    
+    private let service: LoginService
+    init(_ service: LoginService) {
+        self.service = service
+    }
+}
+
+extension AuthStore {
+    func login() async throws {
+        do {
+            try await service.login()
+            await MainActor.run {
+                isLoggedIn = true
+            }
+        } catch {
+            await MainActor.run {
+                isLoggedIn = false
+            }
+            throw error
+        }
+    }
+    
+    func logout() {
+        service.logout()
+        isLoggedIn = false
+    }
+}

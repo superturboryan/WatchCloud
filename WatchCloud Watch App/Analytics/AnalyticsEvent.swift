@@ -50,10 +50,10 @@ extension AnalyticsEvent {
     
     var metadata: [String : String]? {
         switch self {
-        case .search(let type): return [
+        case .search(let type): [
             "searchType" : type
         ]
-        default: return nil
+        default: nil
         }
     }
 }

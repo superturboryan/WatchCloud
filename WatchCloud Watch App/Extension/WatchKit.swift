@@ -40,7 +40,11 @@ struct VolumeControlView: WKInterfaceObjectRepresentable {
         view.setHidden(hidden)
         return view
     }
-    func updateWKInterfaceObject(_ wkInterfaceObject: WKInterfaceVolumeControl, context: WKInterfaceObjectRepresentableContext<VolumeControlView>) { }
+    
+    func updateWKInterfaceObject(
+        _ wkInterfaceObject: WKInterfaceVolumeControl,
+        context: WKInterfaceObjectRepresentableContext<VolumeControlView>
+    ) { }
 }
 
 #endif

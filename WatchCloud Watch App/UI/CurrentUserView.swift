@@ -10,7 +10,8 @@ import SwiftUI
 
 struct CurrentUserView: View {
     
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var userStore: UserStore
+    @EnvironmentObject var authStore: AuthStore
     @EnvironmentObject var player: AudioPlayer
     @Environment(\.dismiss) var dismiss
     
@@ -35,32 +36,35 @@ struct CurrentUserView: View {
     
     private func tappedLogout() {
         Haptics.click()
-        sc.logout()
+        authStore.logout()
+        userStore.reset()
         player.stop()
         AnalyticsManager.shared.log(.logout)
         dismiss()
     }
     
+    @ViewBuilder
     private var userView: some View {
-        GeometryReader { geo in
-            VStack(spacing: 12) {
-                CachedImageView(url: sc.myUser!.largerAvatarUrl)
-                    .frame(width: geo.size.width * 0.6)
-                    .clipShape(Circle())
-                    
-                ShareLink(item: URL(string: sc.myUser!.permalinkUrl)!, label: {
-                    HStack {
-                        Image(systemName: "square.and.arrow.up")
-                            .foregroundColor(.blue)
-                        Text(verbatim: sc.myUser!.username)
-                            .lineLimit(2)
-                    }
-                    .font(.headline)
-                })
-                .buttonStyle(.plain)
+        if let myUser = userStore.myUser {
+            GeometryReader { geo in
+                VStack(spacing: 12) {
+                    CachedImageView(url: myUser.largerAvatarUrl)
+                        .frame(width: geo.size.width * 0.6)
+                        .clipShape(Circle())
+                    ShareLink(item: URL(string: myUser.permalinkUrl)!, label: {
+                        HStack {
+                            Image(systemName: "square.and.arrow.up")
+                                .foregroundColor(.blue)
+                            Text(verbatim: myUser.username)
+                                .lineLimit(2)
+                        }
+                        .font(.headline)
+                    })
+                    .buttonStyle(.plain)
+                }
+                .padding(4)
+                .fullWidthAndHeight()
             }
-            .padding(4)
-            .fullWidthAndHeight()
         }
     }
 }
@@ -68,10 +72,7 @@ struct CurrentUserView: View {
 #Preview {
     NavigationStack {
         CurrentUserView()
-        .environmentObject({ () -> SoundCloud in
-            testSC.myUser = testUser()
-            return testSC
-        }())
-        .environmentObject(AudioPlayer(testSC))
+        .environmentObject(UserStore(testSC))
+        .environmentObject(AudioPlayer(AudioStore(testSC)))
     }
 }

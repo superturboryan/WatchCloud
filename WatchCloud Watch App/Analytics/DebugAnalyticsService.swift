@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import OSLog
 
 final class DebugAnalyticsService {
-    private var eventsLogged: [(String, [String: String]?)] = []
-    public var shouldPrint = true
+    var eventsLogged: [(String, [String: String]?)] = []
+    var shouldPrint = true
     
     init(shouldPrint: Bool = true) {
         self.shouldPrint = shouldPrint
@@ -20,7 +21,7 @@ extension DebugAnalyticsService: AnalyticsService {
     func sendEvent(_ name: String, with properties: [String : String]?) {
         eventsLogged.append((name, properties))
         if shouldPrint {
-            print("🎯 logged \(name)")
+            Logger.analytics.notice("📊 \(name) - \(Date().description)")
         }
         if shouldPrint && name == "\(AnalyticsEvent.appBackground)" {
             dumpEvents()
@@ -28,9 +29,13 @@ extension DebugAnalyticsService: AnalyticsService {
     }
     
     func dumpEvents() {
-        print("\n🧐 analytics events since launch:")
+        Logger.analytics.log("📊 All analytics events since launch:")
         for event in eventsLogged {
-            print("\(event.0) \(event.1 != nil ? ": \(event.1!)" : "")")
+            Logger.analytics.notice("\(event.0) \(event.1 != nil ? ": \(event.1!)" : "")")
         }
     }
+}
+
+fileprivate extension Logger {
+    static let analytics = Logger(subsystem: subsystem, category: "Debug Analytics")
 }

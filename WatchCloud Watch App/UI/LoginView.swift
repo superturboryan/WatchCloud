@@ -11,7 +11,7 @@ import TipKit
 
 struct LoginView: View {
 
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var authStore: AuthStore
     @State var showErrorAlert = false
     @State var showingTip = false
     
@@ -24,6 +24,7 @@ struct LoginView: View {
             loginButton
         }
         .fullWidthAndHeight()
+        .background(.black)
         .overlay(alignment: .bottom) {
             if !showingTip {
                 PoweredBySCView()
@@ -39,7 +40,6 @@ struct LoginView: View {
         .toolbar(.hidden, for: .navigationBar)
         .buttonStyle(.plain)
         .ignoresSafeArea()
-        .navigationTitle(String.empty)
         .interactiveDismissDisabled()
     }
     
@@ -65,7 +65,7 @@ struct LoginView: View {
     private func tappedLogin() {
         Task {
             do {
-                try await sc.login()
+                try await authStore.login()
                 AnalyticsManager.shared.log(.loginSuccess)
             } catch(SoundCloud.Error.cancelledLogin) {
                 AnalyticsManager.shared.log(.loginCancelled)
@@ -94,5 +94,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView().environmentObject(testSC)
+    LoginView().environmentObject(AuthStore(testSC))
 }

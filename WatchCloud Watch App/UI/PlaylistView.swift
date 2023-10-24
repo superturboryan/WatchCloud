@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PlaylistView: View {
     
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var audioStore: AudioStore
     @EnvironmentObject var player: AudioPlayer
     
     @State private var isFirstLoad = true
@@ -25,11 +25,11 @@ struct PlaylistView: View {
     var showShuffleButton = true
     
     var isLiked: Bool {
-        sc.myLikedPlaylistIds.contains(playlist.id)
+        audioStore.myLikedPlaylistIds.contains(playlist.id)
     }
     
     var isUserPlaylist: Bool {
-        PlaylistType(rawValue: playlist.id) != nil || sc.myPlaylistIds.contains(playlist.id)
+        PlaylistType(rawValue: playlist.id) != nil || audioStore.myPlaylistIds.contains(playlist.id)
     }
     
     var body: some View {
@@ -62,7 +62,7 @@ struct PlaylistView: View {
                 }
                 
                 if scrollToNowPlaying,
-                let nowPlaying = sc.loadedTrack,
+                let nowPlaying = audioStore.loadedTrack,
                 (playlist.tracks ?? []).contains(nowPlaying) {
                     withAnimation { sv.scrollTo(nowPlaying.id, anchor: .top) }
                 }
@@ -100,8 +100,8 @@ struct PlaylistView: View {
                 ForEach(tracksBinding) { track in
                     TrackCellView(
                         track: track,
-                        isPlaying: sc.loadedTrack == track.wrappedValue,
-                        isDownloaded: sc.downloadedTracks.contains(track.wrappedValue)
+                        isPlaying: audioStore.loadedTrack == track.wrappedValue,
+                        isDownloaded: audioStore.downloadedTracks.contains(track.wrappedValue)
                     )
                     // .id() automatically applied when using ForEach(Identifiable) 🤓
                     .onTapGesture { tapped(track.wrappedValue) }
@@ -141,10 +141,12 @@ struct PlaylistView: View {
     }
     
     private func loadNextPageOfTracks() {
-        Task {
-            let page: Page<Track> = try await sc.pageOfItems(for: playlist.nextPageUrl!)
-            playlist.tracks! += page.items
-            playlist.nextPageUrl = page.nextPage
+        if let nextPageUrl = playlist.nextPageUrl {
+            Task {
+                let page: Page<Track> = try await audioStore.pageOfTracks(nextPageUrl)
+                playlist.tracks! += page.items
+                playlist.nextPageUrl = page.nextPage
+            }
         }
     }
     
@@ -158,11 +160,11 @@ struct PlaylistView: View {
     
     func tapped(_ track: Track) {
         // Set queue
-        if let tracks = playlist.tracks, sc.nowPlayingQueue != tracks, updateNowPlayingPlaylist {
-            sc.setNowPlayingQueue(with: tracks)
+        if let tracks = playlist.tracks, audioStore.nowPlayingQueue != tracks, updateNowPlayingPlaylist {
+            audioStore.setNowPlayingQueue(with: tracks)
         }
         
-        if sc.loadedTrack != track {
+        if audioStore.loadedTrack != track {
             // Start new track from beginning
             player.loadAndPlayTrack(track)
         } else  {
@@ -176,18 +178,15 @@ struct PlaylistView: View {
     
     func tappedLike() {
         Task {
-            try await isLiked ?
-            sc.unlikePlaylist(playlist) :
-            sc.likePlaylist(playlist)
+            try await audioStore.toggleLikedPlaylist(playlist)
             AnalyticsManager.shared.log(.tappedLikePlaylist)
         }
     }
     
     func tappedShuffle() {
-        sc.loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks = playlist.tracks?.shuffled()
-        if let firstTrack = sc.loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks?.first {
+        audioStore.loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks = playlist.tracks?.shuffled()
+        if let firstTrack = audioStore.loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks?.first {
             player.loadAndPlayTrack(firstTrack)
-            
             AnalyticsManager.shared.log(.tappedShuffle)
             NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
         }
@@ -200,7 +199,7 @@ struct PlaylistView: View {
             playlist: .constant(testPlaylist()),
             showSummary: true
         )
-        .environmentObject(testSC)
-        .environmentObject(AudioPlayer(testSC))
+        .environmentObject(AudioStore(testSC))
+        .environmentObject(AudioPlayer(AudioStore(testSC)))
     }
 }

@@ -10,28 +10,32 @@ import SwiftUI
 
 struct PlayerOptionsView: View {
     
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var audioStore: AudioStore
+    @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var player: AudioPlayer
+    
     @Environment(\.dismiss) var dismiss
     
     @Binding var track: Track
     
-    let hSpacing: CGFloat = 12
-    
-    let buttonSize = CGSize(width: 76, height: 45)
-    let labelYOffset: CGFloat = 36
+    private let hSpacing: CGFloat = 12
+    private let buttonSize = CGSize(width: 76, height: 45)
+    private let labelYOffset: CGFloat = 36
     
     var body: some View {
         VStack(spacing: 32) {
             HStack(spacing: hSpacing) {
-                likeButton.disabled(false)
+                likeButton
+                    .disabled(false)
                 downloadButton
-                    .disabled(!Config.isDownloadingEnabled(for: sc.myUser?.id))
-                    .opacity(Config.isDownloadingEnabled(for: sc.myUser?.id) ? 1 : 0)
+                    .disabled(!Config.isDownloadingEnabled(for: userStore.myUser?.id))
+                    .opacity(Config.isDownloadingEnabled(for: userStore.myUser?.id) ? 1 : 0)
             }
             HStack(spacing: hSpacing) {
-                playbackSpeedButton.disabled(false)
-                shareButton.disabled(false)
+                playbackSpeedButton
+                    .disabled(false)
+                shareButton
+                    .disabled(false)
             }
         }
         .padding(.bottom, 10)
@@ -44,9 +48,9 @@ struct PlayerOptionsView: View {
     var likeButton: some View {
         Button { tappedLike() } label: {
             buttonView(
-                track.userFavorite ? "heart.fill" : "heart",
+                audioStore.isLiked(track) ? "heart.fill" : "heart",
                 .pink,
-                track.userFavorite ? String(localized: "Liked", comment: "Adjective") : String(localized: "Like", comment: "Verb")
+                audioStore.isLiked(track) ? String(localized: "Liked", comment: "Adjective") : String(localized: "Like", comment: "Verb")
             )
         }
     }
@@ -71,29 +75,31 @@ struct PlayerOptionsView: View {
     
     func tappedLike() {
         Haptics.click()
+        AnalyticsManager.shared.log(.tappedLikeTrack)
+        
         Task {
-            if track.userFavorite { try await sc.unlikeTrack(track) }
-            else { try await sc.likeTrack(track) }
-            track.userFavorite.toggle()
-            AnalyticsManager.shared.log(.tappedLikeTrack)
+            try await audioStore.toggleLikedTrack(track)
         }
     }
     
-    #warning("Errors not handled")
     func tappedDownload() {
         Haptics.click()
         Task {
-            if isTrackDownloaded { try sc.removeDownload(track) }
-            else { try await sc.download(track) }
+            if isTrackDownloaded {
+                #warning("Errors not handled")
+                try audioStore.removeDownload(track)
+            } else {
+                try await audioStore.download(track)
+            }
         }
     }
     
     var isTrackDownloaded: Bool {
-        sc.downloadedTracks.contains(where: { $0.id == track.id })
+        audioStore.downloadedTracks.contains(where: { $0.id == track.id })
     }
     
     var isTrackDownloading: Bool {
-        sc.downloadsInProgress.keys.contains(track)
+        audioStore.downloadsInProgress.keys.contains(track)
     }
     
     // MARK: - UI Helpers
@@ -176,12 +182,12 @@ struct PlayerOptionsView: View {
 extension PlaybackSpeed {
     var numDecimalToDisplay: Int {
         switch self {
-        case .ThreeQuarters: return 2
-        case .One: return 0
-        case .OneAndAQuarter: return 2
-        case .OnePointFive: return 1
-        case .OneAndThreeQuarters: return 2
-        case .Double: return 0
+        case .ThreeQuarters: 2
+        case .One: 0
+        case .OneAndAQuarter: 2
+        case .OnePointFive: 1
+        case .OneAndThreeQuarters: 2
+        case .Double: 0
         }
     }
 }
@@ -191,13 +197,7 @@ extension PlaybackSpeed {
     let trackBinding = Binding(get: { track }, set: { _ in })
     
     return PlayerOptionsView(track: trackBinding)
-        .environmentObject({ () -> SoundCloud in
-            testSC.downloadsInProgress = [track : Progress.with(0.69)]
-            return testSC
-        }())
-        .environmentObject({ () -> AudioPlayer in
-            let player = AudioPlayer(testSC)
-            player.playbackSpeed = .OneAndAQuarter
-            return player
-        }())
+        .environmentObject(AudioStore(testSC))
+        .environmentObject(UserStore(testSC))
+        .environmentObject(AudioPlayer(AudioStore(testSC)))
 }

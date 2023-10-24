@@ -1,5 +1,5 @@
 //
-//  UserDetailView.swift
+//  UserView.swift
 //  WatchCloud Watch App
 //
 //  Created by Ryan Forsyth on 2023-10-03.
@@ -8,9 +8,10 @@
 import SoundCloud
 import SwiftUI
 
-struct UserDetailView: View {
+struct UserView: View {
     
-    @EnvironmentObject var sc: SoundCloud
+    @EnvironmentObject var audioStore: AudioStore
+    @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var player: AudioPlayer
     
     var user: User
@@ -21,10 +22,6 @@ struct UserDetailView: View {
     
     @State var showFullDescriptionView = false
 
-    var isFollowed: Bool {
-        (sc.usersImFollowing?.items.map(\.id) ?? []).contains(user.id)
-    }
-    
     var body: some View {
         ScrollView {
             VStack(spacing: 10) {
@@ -64,7 +61,7 @@ struct UserDetailView: View {
             }
         }
         .toolbar {
-            followButton
+            toolbarFollowButton
         }
     }
     
@@ -73,8 +70,8 @@ struct UserDetailView: View {
         let numberOfTracksToLoad = 1000
         isLoading = true
         do {
-            tracks = try await sc.getTracksForUser(user.id, numberOfTracksToLoad).items
-            likedTracks = try await sc.getLikedTracksForUser(user.id, numberOfTracksToLoad).items
+            tracks = try await audioStore.getTracksForUser(user.id, numberOfTracksToLoad).items
+            likedTracks = try await audioStore.getLikedTracksForUser(user.id, numberOfTracksToLoad).items
         } catch {
             print("❌ Failed to load tracks for user")
         }
@@ -146,15 +143,10 @@ struct UserDetailView: View {
         }
     }
 
-    private var followButton: some ToolbarContent {
+    private var toolbarFollowButton: some ToolbarContent {
         ToolbarItem(placement: .confirmationAction) {
-            Button {
-                AnalyticsManager.shared.log(.tappedFollowUser)
-                Task {
-                    try await (isFollowed ? sc.unfollowUser(user) : sc.followUser(user))
-                }
-            } label: {
-                Image(systemName: isFollowed ? "checkmark" : "plus")
+            Button { tappedFollowButton() } label: {
+                Image(systemName: userStore.isUserFollowed(user) ? "checkmark" : "plus")
                     .symbolReplaceEffect()
                     .foregroundStyle(Color.scOrange)
                     .fontWeight(.bold)
@@ -204,8 +196,8 @@ struct UserDetailView: View {
                 ForEach(Array(tracks.prefix(trackLimit))) { track in
                     TrackCellView(
                         track: .constant(track),
-                        isPlaying: sc.loadedTrack == track,
-                        isDownloaded: sc.downloadedTracks.contains(track)
+                        isPlaying: audioStore.loadedTrack == track,
+                        isDownloaded: audioStore.downloadedTracks.contains(track)
                     ).onTapGesture {
                         tapped(track, in: tracks)
                     }
@@ -217,10 +209,10 @@ struct UserDetailView: View {
     private func tapped(_ track: Track, in trackList: [Track]) {
         // Copied from PlaylistView
         // Set queue
-        if sc.nowPlayingQueue != trackList {
-            sc.setNowPlayingQueue(with: trackList)
+        if audioStore.nowPlayingQueue != trackList {
+            audioStore.setNowPlayingQueue(with: trackList)
         }
-        if sc.loadedTrack != track {
+        if audioStore.loadedTrack != track {
             // Start new track from beginning
             player.loadAndPlayTrack(track)
         } else  {
@@ -229,12 +221,24 @@ struct UserDetailView: View {
         }
         NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
     }
+    
+    private func tappedFollowButton() {
+        AnalyticsManager.shared.log(.tappedFollowUser)
+        Task {
+            if userStore.isUserFollowed(user) {
+                try await userStore.unfollowUser(user)
+            } else {
+                try await userStore.followUser(user)
+            }
+        }
+    }
 }
 
 #Preview {
     NavigationStack {
-        UserDetailView(user: testUser(27127117))
-            .environmentObject(testSC)
-            .environmentObject(AudioPlayer(testSC))
+        UserView(user: testUser(27127117))
+            .environmentObject(AudioStore(testSC))
+            .environmentObject(UserStore(testSC))
+            .environmentObject(AudioPlayer(AudioStore(testSC)))
     }
 }
