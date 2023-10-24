@@ -200,6 +200,6 @@ struct PlaylistView: View {
             showSummary: true
         )
         .environmentObject(AudioStore(testSC))
-        .environmentObject(AudioPlayer(AudioStore(testSC)))
+        .environmentObject(testAudioPlayer)
     }
 }

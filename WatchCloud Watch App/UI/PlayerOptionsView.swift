@@ -199,5 +199,5 @@ extension PlaybackSpeed {
     return PlayerOptionsView(track: trackBinding)
         .environmentObject(AudioStore(testSC))
         .environmentObject(UserStore(testSC))
-        .environmentObject(AudioPlayer(AudioStore(testSC)))
+        .environmentObject(testAudioPlayer)
 }

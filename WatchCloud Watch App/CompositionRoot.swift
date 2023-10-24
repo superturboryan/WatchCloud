@@ -32,5 +32,5 @@ enum CompositionRoot {
     )
     
     @MainActor
-    static let audioPlayer = AudioPlayer(audioStore)
+    static let audioPlayer = AudioPlayer(audioStore, authStore)
 }

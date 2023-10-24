@@ -22,8 +22,6 @@ enum PlaybackSpeed: Float, CaseIterable {
 
 final class AudioPlayer: ObservableObject {
     
-    private weak var audioStore: AudioStore!
-    
     @Published var isPlaying = false // Should be private(set)
     @Published private(set) var isLoading = false
     @Published var playbackSpeed: PlaybackSpeed = .One
@@ -52,8 +50,11 @@ final class AudioPlayer: ObservableObject {
     private let decoder = JSONDecoder()
     private var subscriptions = Set<AnyCancellable>()
     
-    init(_ audioStore: AudioStore) {
+    private let audioStore: AudioStore
+    private let authStore: AuthStore
+    init(_ audioStore: AudioStore, _ authStore: AuthStore) {
         self.audioStore = audioStore
+        self.authStore = authStore
         Task { await setupDeviceMediaControls() }
     }
     
@@ -100,7 +101,7 @@ extension AudioPlayer {
         }
         let avUrlAsset = AVURLAsset(
             url: URL(string: track.playbackUrl!)!,
-            options: ["AVURLAssetHTTPHeaderFieldsKey" : try await audioStore.authHeader]
+            options: ["AVURLAssetHTTPHeaderFieldsKey" : try await authStore.authHeader]
         )
         let avItem = AVPlayerItem(asset: avUrlAsset)
         // Set up notification for track ending
@@ -309,3 +310,6 @@ extension AudioPlayer {
 extension CMTime {
     static var oneSecond: CMTime { .init(value: 1, timescale: 1) }
 }
+
+@MainActor
+let testAudioPlayer = AudioPlayer(AudioStore(testSC), AuthStore(testSC))
