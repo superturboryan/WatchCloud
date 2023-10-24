@@ -1032,6 +1032,7 @@
 
     },
     "If captcha is not appearing, try using" : {
+      "comment" : "Tip message",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -2097,6 +2098,7 @@
       }
     },
     "Sign in with Google" : {
+      "comment" : "Tip message",
       "localizations" : {
         "ar" : {
           "stringUnit" : {

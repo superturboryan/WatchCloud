@@ -9,8 +9,8 @@
 <p float="center">
     <img src="Screenshots/1.1.0/LoginView%20-%20S945.png" width=200 alt="Login screen"/>
     <img src="Screenshots/1.1.2/LibraryView%20-%20S945.png" width=200 alt="Library screen"/>
-    <img src="Screenshots/1.1.0/PlaylistView%20-%20S945.png" width=200 alt="Playlist screen"/>
     <img src="Screenshots/1.1.0/Liked%20Playlists%20-%20S945.png" width=200 alt="Liked playlists screen"/>
+    <img src="Screenshots/1.1.0/PlaylistView%20-%20S945.png" width=200 alt="Playlist screen"/>
 </p>
 
 <br />
