@@ -11,13 +11,13 @@ import MediaPlayer
 import SoundCloud
 import SwiftUI
 
+@MainActor
 final class AudioPlayer: ObservableObject {
     
     @Published var isPlaying = false // Should be private(set)
     @Published private(set) var isLoading = false
     @Published var playbackSpeed: PlaybackSpeed = .One
     
-    @MainActor
     @Published var progress: TimeInterval = 0.0 { didSet { updatePlayerProgress() }}
     
     private var shouldSeek = true
@@ -33,7 +33,7 @@ final class AudioPlayer: ObservableObject {
     init(_ audioStore: AudioStore, _ authStore: AuthStore) {
         self.audioStore = audioStore
         self.authStore = authStore
-        Task { await setupDeviceMediaControls() }
+        setupDeviceMediaControls()
     }
     
     deinit {
@@ -51,26 +51,21 @@ final class AudioPlayer: ObservableObject {
         let oneSecond = CMTime(value: 1, timescale: 1)
         player.addPeriodicTimeObserver(forInterval: oneSecond, queue: .main) { [weak self] time in
             self?.shouldSeek = false
+            self?.progress = time.seconds
             self?.shouldSeek = true
-            DispatchQueue.main.async {
-                self?.progress = time.seconds
-            }
         }
         player.publisher(for: \.timeControlStatus)
         .receive(on: DispatchQueue.main)
         .sink { [weak self] status in
             self?.isPlaying = status == .playing || status == .waitingToPlayAtSpecifiedRate
             self?.isLoading = status == .waitingToPlayAtSpecifiedRate
-            DispatchQueue.main.async {
-                if self?.audioStore.loadedTrack != nil {
-                    self?.updateNowPlayingInfo()
-                }
+            if self?.audioStore.loadedTrack != nil {
+                self?.updateNowPlayingInfo()
             }
         }
         .store(in: &subscriptions)
     }
     
-    @MainActor
     private func updatePlayerProgress() {
         guard shouldSeek, let nowPlaying = audioStore.loadedTrack else {
             return
@@ -84,10 +79,10 @@ final class AudioPlayer: ObservableObject {
     }
 }
 
-// MARK: - Play audio 🎧
+// MARK: - Play audio
 extension AudioPlayer {
     private func loadTrack(_ track: Track) async throws {
-        if !isPlayerLoaded { // Only setup player when first track is played after launching
+        if !isPlayerLoaded {
             setupPlayer()
             isPlayerLoaded = true
         }
@@ -96,7 +91,6 @@ extension AudioPlayer {
             options: ["AVURLAssetHTTPHeaderFieldsKey" : try await authStore.authHeader]
         )
         let avItem = AVPlayerItem(asset: avUrlAsset)
-        // Set up notification for track ending
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.skipToNextTrack),
@@ -104,11 +98,11 @@ extension AudioPlayer {
             object: avItem
         )
         
-        DispatchQueue.main.async { [weak self] in
-            self?.player.replaceCurrentItem(with: avItem)
-            self?.audioStore.loadedTrack = track
-            self?.progress = 0
-        }
+        // Set AVAudioPlayer item
+        player.replaceCurrentItem(with: avItem)
+        // Set loaded track in SC
+        audioStore.loadedTrack = track
+        progress = 0
     }
     
     func loadAndPlayTrack(_ track: Track) {
@@ -123,7 +117,6 @@ extension AudioPlayer {
         }
     }
     
-    @MainActor
     func togglePlayback() {
         if let queue = audioStore.nowPlayingQueue, !queue.isEmpty, audioStore.loadedTrack == nil {
             //What was this case for again?
@@ -139,24 +132,20 @@ extension AudioPlayer {
         }
     }
     
-    @MainActor
     func continuePlayback() {
         player.play()
         player.rate = playbackSpeed.rawValue
     }
     
-    @MainActor
     func pausePlayback() {
         player.pause()
     }
     
-    @MainActor
     func stop() {
         player.pause()
         player.replaceCurrentItem(with: nil)
     }
     
-    @MainActor
     @objc // Called by AVPlayerItemDidPlayToEndTime Notification
     func skipToNextTrack() {
         guard let nextTrack = audioStore.nextTrackInNowPlayingQueue
@@ -170,7 +159,6 @@ extension AudioPlayer {
         }
     }
     
-    @MainActor
     func skipToPreviousTrack() {
         let skipToPreviousTrackThreshold: Double = 3
         let isBeginningOfTrack = progress < skipToPreviousTrackThreshold
@@ -207,7 +195,6 @@ extension AudioPlayer {
 // MARK: - MPNowPlayingInfoCenter
 extension AudioPlayer {
     
-    @MainActor
     private func setupDeviceMediaControls() {
         let center = MPRemoteCommandCenter.shared()
         
@@ -251,7 +238,6 @@ extension AudioPlayer {
         }
     }
     
-    @MainActor
     private func updateNowPlayingInfo(with time: CMTime? = nil) {
         let center = MPNowPlayingInfoCenter.default()
         guard let loadedTrack = audioStore.loadedTrack else {
