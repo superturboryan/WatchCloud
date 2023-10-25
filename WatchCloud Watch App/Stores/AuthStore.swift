@@ -20,7 +20,7 @@ final class AuthStore: ObservableObject {
 
 extension AuthStore {
     var authHeader: [String : String] { get async throws {
-        try await service.authHeader
+        try await service.authenticatedHeader
     }}
     
     func login() async throws {

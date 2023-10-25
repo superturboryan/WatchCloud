@@ -316,7 +316,7 @@ private extension AudioStore {
         downloadsInProgress[track] = Progress(totalUnitCount: 0)
         // Setup request
         var request = URLRequest(url: URL(string: url)!)
-        request.allHTTPHeaderFields = try await service.authHeader
+        request.allHTTPHeaderFields = try await service.authenticatedHeader
         // ‼️ Response does not contain ID for track (only encrypted ID)
         // Add track ID to request header to know which track is being downloaded in delegate
         request.addValue("\(track.id)", forHTTPHeaderField: "track_id")
