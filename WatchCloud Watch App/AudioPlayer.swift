@@ -111,12 +111,11 @@ extension AudioPlayer {
             name: Notification.Name.AVPlayerItemDidPlayToEndTime,
             object: avItem
         )
-        // Set AVAudioPlayer item
-        player.replaceCurrentItem(with: avItem)
-        // Set loaded track in SC
-        DispatchQueue.main.async {
-            self.audioStore.loadedTrack = track
-            self.progress = 0
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.player.replaceCurrentItem(with: avItem)
+            self?.audioStore.loadedTrack = track
+            self?.progress = 0
         }
     }
     
@@ -125,8 +124,10 @@ extension AudioPlayer {
         print("🎧 Load and play new track: \(track.title)")
         Task { [weak self] in
             try await self?.loadTrack(track)
-            self?.player.play()
-            self?.player.rate = self?.playbackSpeed.rawValue ?? 1
+            DispatchQueue.main.async { [weak self] in
+                self?.player.play()
+                self?.player.rate = self?.playbackSpeed.rawValue ?? 1
+            }
         }
     }
     
@@ -146,15 +147,18 @@ extension AudioPlayer {
         }
     }
     
+    @MainActor
     func continuePlayback() {
         player.play()
         player.rate = playbackSpeed.rawValue
     }
     
+    @MainActor
     func pausePlayback() {
         player.pause()
     }
     
+    @MainActor
     func stop() {
         player.pause()
         player.replaceCurrentItem(with: nil)
