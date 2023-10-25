@@ -22,8 +22,6 @@ struct SearchView: View {
     @State var playlistResults: Page<Playlist>? = nil
     @State var artistResults: Page<User>? = nil
     
-    @FocusState var isSearchFocused: Bool
-    
     var body: some View {
         ScrollView {
             VStack {
@@ -53,7 +51,6 @@ struct SearchView: View {
             text: $query
         )
         .autocorrectionDisabled()
-        .focused($isSearchFocused)
         .submitLabel(.search)
         .onSubmit { performSearch(with: query) }
     }
@@ -170,9 +167,6 @@ struct SearchView: View {
         .cornerRadius(8)
         .onTapGesture {
             searchType = type
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                isSearchFocused = true
-            }
         }
     }
     
