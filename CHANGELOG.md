@@ -1,3 +1,14 @@
+# 1.1.3
+🌎 Published 26 October
+🔨 Xcode 15.0
+⌚️ watchOS 10.0
+☁️📦 SoundCloud Swift Package 1.0.0
+
+### 🐞 Bug fixes
+- Add @MainActor back to AudioPlayer class declaration
+- Localized search history strings
+
+
 # 1.1.2
 🌎 Published 24 October
 🔨 Xcode 15.0
@@ -11,6 +22,7 @@
 
 ### 🐞 Bug fixes
 - Small UI tweaks
+
 
 # 1.1.1
 🌎 Published 16 October
