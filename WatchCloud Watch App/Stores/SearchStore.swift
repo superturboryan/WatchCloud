@@ -9,13 +9,20 @@ import Foundation
 import SoundCloud
 
 final class SearchStore: ObservableObject {
+    
     @Published public var searchHistory: [SearchEntry] = []
     
-    private let searchHistoryDAO = UserDefaultsDAO<[SearchEntry]>("SearchHistory")
-    private let searchHistoryCapacity: Int
     private let service: SoundCloud
-    init(_ service: SoundCloud, searchHistoryCapacity: Int = 5) {
+    private let searchHistoryDAO: any DAO<[SearchEntry]>
+    private let searchHistoryCapacity: Int
+    
+    init(
+        _ service: SoundCloud,
+        _ searchHistoryDAO: any DAO<[SearchEntry]> = UserDefaultsDAO<[SearchEntry]>("SearchHistory"),
+        searchHistoryCapacity: Int = 5
+    ) {
         self.service = service
+        self.searchHistoryDAO = searchHistoryDAO
         self.searchHistoryCapacity = searchHistoryCapacity
     }
 }

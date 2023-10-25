@@ -10,15 +10,20 @@ import SoundCloud
 
 @MainActor
 final class UserStore: ObservableObject {
+    
     @Published public var myUser: User? = nil
     @Published public var usersImFollowing: Page<User> = .emptyPage
     
     // MARK: - Dependencies
-    private let myUserDAO = UserDefaultsDAO<User>("\(User.self)")
-    private let searchHistoryDAO = UserDefaultsDAO<Data>("SearchHistory")
     private let service: SoundCloud
-    init(_ service: SoundCloud) {
+    private let myUserDAO: any DAO<User>
+    
+    init(
+        _ service: SoundCloud,
+        _ myUserDAO: any DAO<User> = UserDefaultsDAO<User>("\(User.self)")
+    ) {
         self.service = service
+        self.myUserDAO = myUserDAO
     }
 }
 
