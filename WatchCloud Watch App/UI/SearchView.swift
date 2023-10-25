@@ -161,7 +161,7 @@ struct SearchView: View {
                 .fontWeight(.medium)
                 .foregroundColor(searchType == type ? .primary : .secondary)
                 .lineLimit(1)
-                .minimumScaleFactor(0.8)
+                .minimumScaleFactor(0.6)
                 .padding(.horizontal, 6)
                 .frame(width: width, height: 18)
         }
