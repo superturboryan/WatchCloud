@@ -11,15 +11,6 @@ import MediaPlayer
 import SoundCloud
 import SwiftUI
 
-enum PlaybackSpeed: Float, CaseIterable {
-    case ThreeQuarters = 0.75
-    case One = 1.0
-    case OneAndAQuarter = 1.25
-    case OnePointFive = 1.5
-    case OneAndThreeQuarters = 1.75
-    case Double = 2.0
-}
-
 final class AudioPlayer: ObservableObject {
     
     @Published var isPlaying = false // Should be private(set)
@@ -27,20 +18,7 @@ final class AudioPlayer: ObservableObject {
     @Published var playbackSpeed: PlaybackSpeed = .One
     
     @MainActor
-    @Published var progress: TimeInterval = 0.0 {
-        didSet {
-            if shouldSeek, let nowPlaying = audioStore.loadedTrack {
-                let time = CMTime(
-                    seconds: progress,
-                    preferredTimescale: CMTimeScale(nowPlaying.durationInSeconds / 30)
-                )
-                player.seek(to: time)
-                updateNowPlayingInfo(with: time)
-            }
-        }
-    }
-    
-    let systemVolumePublisher = AVAudioSession.sharedInstance().publisher(for: \.outputVolume).eraseToAnyPublisher()
+    @Published var progress: TimeInterval = 0.0 { didSet { updatePlayerProgress() }}
     
     private var shouldSeek = true
     private var isPlayerLoaded = false
@@ -62,7 +40,7 @@ final class AudioPlayer: ObservableObject {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func setupPlayer() {
+    private func setupPlayer() {
         try? audioSession.setCategory(
             .playback,
             mode: .default,
@@ -70,7 +48,8 @@ final class AudioPlayer: ObservableObject {
         )
         try? audioSession.setActive(true)
         
-        player.addPeriodicTimeObserver(forInterval: .oneSecond, queue: .main) { [weak self] time in
+        let oneSecond = CMTime(value: 1, timescale: 1)
+        player.addPeriodicTimeObserver(forInterval: oneSecond, queue: .main) { [weak self] time in
             self?.shouldSeek = false
             self?.shouldSeek = true
             DispatchQueue.main.async {
@@ -89,6 +68,19 @@ final class AudioPlayer: ObservableObject {
             }
         }
         .store(in: &subscriptions)
+    }
+    
+    @MainActor
+    private func updatePlayerProgress() {
+        guard shouldSeek, let nowPlaying = audioStore.loadedTrack else {
+            return
+        }
+        let time = CMTime(
+            seconds: progress,
+            preferredTimescale: CMTimeScale(nowPlaying.durationInSeconds / 30)
+        )
+        player.seek(to: time)
+        updateNowPlayingInfo(with: time)
     }
 }
 
@@ -311,8 +303,19 @@ extension AudioPlayer {
     }
 }
 
-extension CMTime {
-    static var oneSecond: CMTime { .init(value: 1, timescale: 1) }
+extension AudioPlayer {
+    enum PlaybackSpeed: Float, CaseIterable {
+        case ThreeQuarters = 0.75
+        case One = 1.0
+        case OneAndAQuarter = 1.25
+        case OnePointFive = 1.5
+        case OneAndThreeQuarters = 1.75
+        case Double = 2.0
+    }
+}
+
+extension AudioPlayer {
+    static let systemVolumePublisher = AVAudioSession.sharedInstance().publisher(for: \.outputVolume).eraseToAnyPublisher()
 }
 
 @MainActor

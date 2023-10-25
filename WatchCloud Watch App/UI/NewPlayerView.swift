@@ -50,7 +50,7 @@ struct NewPlayerView: View {
             }
         }
         .background { volumeControlView } // Hack to control volume with crown
-        .onReceive(player.systemVolumePublisher) {
+        .onReceive(AudioPlayer.systemVolumePublisher) {
             handleVolumeUpdate($0)
         }
         .onReceive(volumeTimer) { _ in

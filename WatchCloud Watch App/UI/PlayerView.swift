@@ -133,7 +133,7 @@ struct PlayerView: View {
             }
         }
         .background { VolumeControlView().opacity(0) } // Hack to control volume with crown
-        .onReceive(player.systemVolumePublisher) {
+        .onReceive(AudioPlayer.systemVolumePublisher) {
             handleVolumeUpdate($0)
         }
         .onReceive(volumeTimer) { _ in

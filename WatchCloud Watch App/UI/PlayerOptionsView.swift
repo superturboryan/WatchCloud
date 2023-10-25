@@ -179,7 +179,7 @@ struct PlayerOptionsView: View {
     }
 }
 
-extension PlaybackSpeed {
+extension AudioPlayer.PlaybackSpeed {
     var numDecimalToDisplay: Int {
         switch self {
         case .ThreeQuarters: 2
