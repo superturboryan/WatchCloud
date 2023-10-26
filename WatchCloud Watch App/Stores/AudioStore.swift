@@ -32,11 +32,7 @@ final class AudioStore: NSObject, ObservableObject {
     // Use id to filter loadedPlaylists dictionary for my + liked playlists
     @Published var myPlaylistIds: [Int] = []
     @Published var myLikedPlaylistIds: [Int] = []
-    
-    var authHeader: [String : String] { get async throws { 
-        try await service.authHeader
-    }}
-    
+        
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
     private var subscriptions = Set<AnyCancellable>()
@@ -320,7 +316,7 @@ private extension AudioStore {
         downloadsInProgress[track] = Progress(totalUnitCount: 0)
         // Setup request
         var request = URLRequest(url: URL(string: url)!)
-        request.allHTTPHeaderFields = try await authHeader
+        request.allHTTPHeaderFields = try await service.authenticatedHeader
         // ‼️ Response does not contain ID for track (only encrypted ID)
         // Add track ID to request header to know which track is being downloaded in delegate
         request.addValue("\(track.id)", forHTTPHeaderField: "track_id")

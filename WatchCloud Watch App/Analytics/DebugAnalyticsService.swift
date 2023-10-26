@@ -9,6 +9,7 @@ import Foundation
 import OSLog
 
 final class DebugAnalyticsService {
+    
     var eventsLogged: [(String, [String: String]?)] = []
     var shouldPrint = true
     

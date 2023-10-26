@@ -133,7 +133,7 @@ struct PlayerView: View {
             }
         }
         .background { VolumeControlView().opacity(0) } // Hack to control volume with crown
-        .onReceive(player.systemVolumePublisher) {
+        .onReceive(AudioPlayer.systemVolumePublisher) {
             handleVolumeUpdate($0)
         }
         .onReceive(volumeTimer) { _ in
@@ -193,7 +193,7 @@ struct PlayerView: View {
     PlayerView()
         .environmentObject(AudioStore(testSC))
         .environmentObject({ () -> AudioPlayer in
-            let player = AudioPlayer(AudioStore(testSC))
+            let player = testAudioPlayer
             player.progress = 3015
             player.isPlaying = true
             return player

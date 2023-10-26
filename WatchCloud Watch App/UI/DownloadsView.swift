@@ -156,6 +156,6 @@ struct DownloadsView: View {
     return NavigationStack {
         DownloadsView()
             .environmentObject(AudioStore(testSC))
-            .environmentObject(AudioPlayer(AudioStore(testSC)))
+            .environmentObject(testAudioPlayer)
     }
 }

@@ -49,8 +49,8 @@ struct NewPlayerView: View {
                 PlayerOptionsView(track: currentTrackBinding)
             }
         }
-        .background { VolumeControlView(hidden: true) } // Hack to control volume with crown
-        .onReceive(player.systemVolumePublisher) {
+        .background { volumeControlView } // Hack to control volume with crown
+        .onReceive(AudioPlayer.systemVolumePublisher) {
             handleVolumeUpdate($0)
         }
         .onReceive(volumeTimer) { _ in
@@ -63,7 +63,6 @@ struct NewPlayerView: View {
             }
         }
     }
-    
     
     @ViewBuilder
     private var artwork: some View {
@@ -189,6 +188,14 @@ struct NewPlayerView: View {
         volumeCircleVisibleTime = 0
         volume = newVolume
     }
+    
+    private var volumeControlView: some View {
+        #if targetEnvironment(simulator)
+        EmptyView()
+        #else
+        VolumeControlView(hidden: true)
+        #endif
+    }
 }
 
 @available(watchOS 10, *)
@@ -200,6 +207,6 @@ struct NewPlayerView: View {
             return audioStore
         }())
         .environmentObject(UserStore(testSC))
-        .environmentObject(AudioPlayer(AudioStore(testSC)))
+        .environmentObject(testAudioPlayer)
         .environment(\.isLuminanceReduced, true)
 }

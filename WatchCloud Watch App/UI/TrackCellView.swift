@@ -40,7 +40,7 @@ struct TrackCellView: View {
 @available(watchOS 10, *)
 #Preview(traits: .sizeThatFitsLayout) {
     TrackCellView(
-        track: testTrackBinding(),
+        track: .constant(testTrack()),
         isPlaying: false,
         isDownloaded: true
     )

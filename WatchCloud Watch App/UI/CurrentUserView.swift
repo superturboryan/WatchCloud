@@ -73,6 +73,6 @@ struct CurrentUserView: View {
     NavigationStack {
         CurrentUserView()
         .environmentObject(UserStore(testSC))
-        .environmentObject(AudioPlayer(AudioStore(testSC)))
+        .environmentObject(testAudioPlayer)
     }
 }

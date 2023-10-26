@@ -239,6 +239,6 @@ struct UserView: View {
         UserView(user: testUser(27127117))
             .environmentObject(AudioStore(testSC))
             .environmentObject(UserStore(testSC))
-            .environmentObject(AudioPlayer(AudioStore(testSC)))
+            .environmentObject(testAudioPlayer)
     }
 }

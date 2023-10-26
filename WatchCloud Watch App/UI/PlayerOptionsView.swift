@@ -179,7 +179,7 @@ struct PlayerOptionsView: View {
     }
 }
 
-extension PlaybackSpeed {
+extension AudioPlayer.PlaybackSpeed {
     var numDecimalToDisplay: Int {
         switch self {
         case .ThreeQuarters: 2
@@ -199,5 +199,5 @@ extension PlaybackSpeed {
     return PlayerOptionsView(track: trackBinding)
         .environmentObject(AudioStore(testSC))
         .environmentObject(UserStore(testSC))
-        .environmentObject(AudioPlayer(AudioStore(testSC)))
+        .environmentObject(testAudioPlayer)
 }

@@ -12,13 +12,17 @@ final class AuthStore: ObservableObject {
     /// Initial state is `true` to prevent `LoginView` from appearing on every app launch
     @Published public private(set) var isLoggedIn: Bool = true
     
-    private let service: LoginService
-    init(_ service: LoginService) {
+    private let service: AuthService
+    init(_ service: AuthService) {
         self.service = service
     }
 }
 
 extension AuthStore {
+    var authHeader: [String : String] { get async throws {
+        try await service.authenticatedHeader
+    }}
+    
     func login() async throws {
         do {
             try await service.login()
