@@ -26,6 +26,8 @@
 		943670C72AEBE13D007E4973 /* SoundCloudAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943670C62AEBE13D007E4973 /* SoundCloudAPI.swift */; };
 		943756CF2ACDA02500C84006 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943756CE2ACDA02500C84006 /* SearchView.swift */; };
 		9446C5FB2ABDA57E00BCE5DF /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9446C5FA2ABDA57E00BCE5DF /* Localizable.xcstrings */; };
+		94474B612AF273B800BEA5F0 /* SearchStore_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94474B602AF273B800BEA5F0 /* SearchStore_Tests.swift */; };
+		94474B642AF2779100BEA5F0 /* MockSoundCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94474B632AF2779100BEA5F0 /* MockSoundCloud.swift */; };
 		9448FF4B2AB31308003D63F1 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */; };
 		9448FF4D2AB343D7003D63F1 /* WatchKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4C2AB343D7003D63F1 /* WatchKit.swift */; };
 		9448FF4F2AB34F0A003D63F1 /* VolumeCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */; };
@@ -81,6 +83,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		94474B5A2AF2723E00BEA5F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 946F388A2AB079C9008CE9D1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 946F38952AB079C9008CE9D1;
+			remoteInfo = "WatchCloud Watch App";
+		};
 		946F38982AB079C9008CE9D1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 946F388A2AB079C9008CE9D1 /* Project object */;
@@ -155,6 +164,9 @@
 		943670C62AEBE13D007E4973 /* SoundCloudAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundCloudAPI.swift; sourceTree = "<group>"; };
 		943756CE2ACDA02500C84006 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		9446C5FA2ABDA57E00BCE5DF /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		94474B562AF2723E00BEA5F0 /* Unit Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		94474B602AF273B800BEA5F0 /* SearchStore_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStore_Tests.swift; sourceTree = "<group>"; };
+		94474B632AF2779100BEA5F0 /* MockSoundCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSoundCloud.swift; sourceTree = "<group>"; };
 		9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		9448FF4C2AB343D7003D63F1 /* WatchKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchKit.swift; sourceTree = "<group>"; };
 		9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeCircleView.swift; sourceTree = "<group>"; };
@@ -228,6 +240,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		94474B532AF2723E00BEA5F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		946F38932AB079C9008CE9D1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -301,11 +320,37 @@
 			path = 1.1.0;
 			sourceTree = "<group>";
 		};
+		94474B572AF2723E00BEA5F0 /* Unit Tests */ = {
+			isa = PBXGroup;
+			children = (
+				94474B622AF2777600BEA5F0 /* Mocks */,
+				94474B5F2AF2738900BEA5F0 /* Stores */,
+			);
+			path = "Unit Tests";
+			sourceTree = "<group>";
+		};
+		94474B5F2AF2738900BEA5F0 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				94474B602AF273B800BEA5F0 /* SearchStore_Tests.swift */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		94474B622AF2777600BEA5F0 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				94474B632AF2779100BEA5F0 /* MockSoundCloud.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		946F38892AB079C9008CE9D1 = {
 			isa = PBXGroup;
 			children = (
 				946F389A2AB079C9008CE9D1 /* WatchCloud Watch App */,
 				94B6343D2ABDFAF900E6FCDA /* Complication */,
+				94474B572AF2723E00BEA5F0 /* Unit Tests */,
 				946F38912AB079C9008CE9D1 /* Products */,
 				946F38AF2AB07A2E008CE9D1 /* Frameworks */,
 				946F38AD2AB079FE008CE9D1 /* Packages */,
@@ -321,6 +366,7 @@
 				946F38902AB079C9008CE9D1 /* WatchCloud.app */,
 				946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */,
 				94B6343A2ABDFAF900E6FCDA /* ComplicationExtension.appex */,
+				94474B562AF2723E00BEA5F0 /* Unit Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -523,6 +569,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		94474B552AF2723E00BEA5F0 /* Unit Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 94474B5E2AF2723E00BEA5F0 /* Build configuration list for PBXNativeTarget "Unit Tests" */;
+			buildPhases = (
+				94474B522AF2723E00BEA5F0 /* Sources */,
+				94474B532AF2723E00BEA5F0 /* Frameworks */,
+				94474B542AF2723E00BEA5F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				94474B5B2AF2723E00BEA5F0 /* PBXTargetDependency */,
+			);
+			name = "Unit Tests";
+			productName = "Unit Tests";
+			productReference = 94474B562AF2723E00BEA5F0 /* Unit Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		946F388F2AB079C9008CE9D1 /* WatchCloud */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 946F38AA2AB079CA008CE9D1 /* Build configuration list for PBXNativeTarget "WatchCloud" */;
@@ -593,6 +657,10 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					94474B552AF2723E00BEA5F0 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 946F38952AB079C9008CE9D1;
+					};
 					946F388F2AB079C9008CE9D1 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -632,11 +700,19 @@
 				946F388F2AB079C9008CE9D1 /* WatchCloud */,
 				946F38952AB079C9008CE9D1 /* WatchCloud Watch App */,
 				94B634392ABDFAF900E6FCDA /* ComplicationExtension */,
+				94474B552AF2723E00BEA5F0 /* Unit Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		94474B542AF2723E00BEA5F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		946F388E2AB079C9008CE9D1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -667,6 +743,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		94474B522AF2723E00BEA5F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94474B612AF273B800BEA5F0 /* SearchStore_Tests.swift in Sources */,
+				94474B642AF2779100BEA5F0 /* MockSoundCloud.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		946F38922AB079C9008CE9D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -740,6 +825,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		94474B5B2AF2723E00BEA5F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 946F38952AB079C9008CE9D1 /* WatchCloud Watch App */;
+			targetProxy = 94474B5A2AF2723E00BEA5F0 /* PBXContainerItemProxy */;
+		};
 		946F38992AB079C9008CE9D1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 946F38952AB079C9008CE9D1 /* WatchCloud Watch App */;
@@ -753,6 +843,56 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		94474B5C2AF2723E00BEA5F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T6MXF72738;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "RyanDF.Unit-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WatchCloud Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WatchCloud Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		94474B5D2AF2723E00BEA5F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T6MXF72738;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "RyanDF.Unit-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WatchCloud Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WatchCloud Watch App";
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 		946F38A42AB079CA008CE9D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 946F38B42AB07D74008CE9D1 /* Config.xcconfig */;
@@ -1041,6 +1181,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		94474B5E2AF2723E00BEA5F0 /* Build configuration list for PBXNativeTarget "Unit Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				94474B5C2AF2723E00BEA5F0 /* Debug */,
+				94474B5D2AF2723E00BEA5F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		946F388D2AB079C9008CE9D1 /* Build configuration list for PBXProject "WatchCloud" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
