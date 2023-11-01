@@ -30,34 +30,32 @@ final class SearchStore: ObservableObject {
 // MARK: - Searching 🕵️
 extension SearchStore {
     func searchForTracks(_ query: String, _ limit: Int = 20) async throws -> Page<Track> {
-        addToSearchHistory(SearchEntry(.tracks, query))
+        try await addToSearchHistory(SearchEntry(.tracks, query))
         return try await service.searchTracks(query, limit)
     }
     
     func searchForUsers(_ query: String, _ limit: Int = 20) async throws -> Page<User> {
-        addToSearchHistory(SearchEntry(.artists, query))
+        try await addToSearchHistory(SearchEntry(.artists, query))
         return try await service.searchUsers(query, limit)
     }
     
     func searchForPlaylists(_ query: String, _ limit: Int = 20) async throws -> Page<Playlist> {
-        addToSearchHistory(SearchEntry(.playlists, query))
+        try await addToSearchHistory(SearchEntry(.playlists, query))
         return try await service.searchPlaylists(query, limit)
     }
 }
 
 // MARK: - Search History 🔍
 extension SearchStore {
-    func addToSearchHistory(_ entry: SearchEntry) {
+    func addToSearchHistory(_ entry: SearchEntry) async throws {
         AnalyticsManager.shared.log(.search(type: entry.type.rawValue))
-        Task {
-            if let existingIndex = searchHistory.firstIndex(of: entry) {
-                _ = await MainActor.run { searchHistory.remove(at: existingIndex) }
-            } else if searchHistory.count == searchHistoryCapacity {
-                _ = await MainActor.run { searchHistory.removeLast() } // removeLast() is safe here since we check count
-            }
-            await MainActor.run { searchHistory.insert(entry, at: 0) }
-            try? searchHistoryDAO.save(searchHistory)
+        if let existingIndex = searchHistory.firstIndex(of: entry) {
+            searchHistory.remove(at: existingIndex)
+        } else if searchHistory.count == searchHistoryCapacity {
+            searchHistory.removeLast() // removeLast() is safe here since we check count
         }
+        searchHistory.insert(entry, at: 0)
+        try searchHistoryDAO.save(searchHistory)
     }
     
     func load() {
