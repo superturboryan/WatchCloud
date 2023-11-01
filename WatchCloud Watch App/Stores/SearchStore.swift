@@ -12,12 +12,12 @@ final class SearchStore: ObservableObject {
     
     @Published public var searchHistory: [SearchEntry] = []
     
-    private let service: SoundCloud
+    private let service: SoundCloudAPI
     private let searchHistoryDAO: any DAO<[SearchEntry]>
     private let searchHistoryCapacity: Int
     
     init(
-        _ service: SoundCloud,
+        _ service: SoundCloudAPI,
         _ searchHistoryDAO: any DAO<[SearchEntry]> = UserDefaultsDAO<[SearchEntry]>("SearchHistory"),
         searchHistoryCapacity: Int = 5
     ) {
@@ -34,14 +34,14 @@ extension SearchStore {
         return try await service.searchTracks(query, limit)
     }
     
-    func searchForUsers(_ query: String) async throws -> Page<User> {
+    func searchForUsers(_ query: String, _ limit: Int = 20) async throws -> Page<User> {
         addToSearchHistory(SearchEntry(.artists, query))
-        return try await service.searchUsers(query)
+        return try await service.searchUsers(query, limit)
     }
     
-    func searchForPlaylists(_ query: String) async throws -> Page<Playlist> {
+    func searchForPlaylists(_ query: String, _ limit: Int = 20) async throws -> Page<Playlist> {
         addToSearchHistory(SearchEntry(.playlists, query))
-        return try await service.searchPlaylists(query)
+        return try await service.searchPlaylists(query, limit)
     }
 }
 

@@ -15,11 +15,11 @@ final class UserStore: ObservableObject {
     @Published public var usersImFollowing: Page<User> = .emptyPage
     
     // MARK: - Dependencies
-    private let service: SoundCloud
+    private let service: SoundCloudAPI
     private let myUserDAO: any DAO<User>
     
     init(
-        _ service: SoundCloud,
+        _ service: SoundCloudAPI,
         _ myUserDAO: any DAO<User> = UserDefaultsDAO<User>("\(User.self)")
     ) {
         self.service = service

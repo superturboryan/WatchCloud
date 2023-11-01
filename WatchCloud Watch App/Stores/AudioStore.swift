@@ -36,8 +36,8 @@ final class AudioStore: NSObject, ObservableObject {
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
     private var subscriptions = Set<AnyCancellable>()
-    private let service: SoundCloud
-    init(_ service: SoundCloud) {
+    private let service: SoundCloudAPI
+    init(_ service: SoundCloudAPI) {
         self.service = service
         super.init()
         loadDefaultPlaylists()
