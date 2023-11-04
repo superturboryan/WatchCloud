@@ -47,7 +47,7 @@ extension SearchStore {
 
 // MARK: - Search History 🔍
 extension SearchStore {
-    func addToSearchHistory(_ entry: SearchEntry) async throws {
+    private func addToSearchHistory(_ entry: SearchEntry) async throws {
         AnalyticsManager.shared.log(.search(type: entry.type.rawValue))
         if let existingIndex = searchHistory.firstIndex(of: entry) {
             searchHistory.remove(at: existingIndex)

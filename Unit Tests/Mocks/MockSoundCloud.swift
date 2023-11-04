@@ -118,8 +118,6 @@ final class MockSoundCloud: SoundCloudAPI {
     }
 }
 
-extension MockSoundCloud {
-    enum MockError: Error {
-        case mock
-    }
+enum MockError: Error {
+    case mock
 }
