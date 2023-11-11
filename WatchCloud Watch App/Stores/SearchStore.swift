@@ -29,19 +29,32 @@ final class SearchStore: ObservableObject {
 
 // MARK: - Searching 🕵️
 extension SearchStore {
+    
     func searchForTracks(_ query: String, _ limit: Int = 20) async throws -> Page<Track> {
+        guard !query.isEmpty else {
+            throw Error.emptyQuery
+        }
         try await addToSearchHistory(SearchEntry(.tracks, query))
-        return try await service.searchTracks(query, limit)
+        do { return try await service.searchTracks(query, limit) }
+        catch { throw Error.searching }
     }
     
     func searchForUsers(_ query: String, _ limit: Int = 20) async throws -> Page<User> {
+        guard !query.isEmpty else {
+            throw Error.emptyQuery
+        }
         try await addToSearchHistory(SearchEntry(.artists, query))
-        return try await service.searchUsers(query, limit)
+        do { return try await service.searchUsers(query, limit) }
+        catch { throw Error.searching }
     }
     
     func searchForPlaylists(_ query: String, _ limit: Int = 20) async throws -> Page<Playlist> {
+        guard !query.isEmpty else {
+            throw Error.emptyQuery
+        }
         try await addToSearchHistory(SearchEntry(.playlists, query))
-        return try await service.searchPlaylists(query, limit)
+        do { return try await service.searchPlaylists(query, limit) }
+        catch { throw Error.searching }
     }
 }
 
@@ -55,7 +68,8 @@ extension SearchStore {
             searchHistory.removeLast() // removeLast() is safe here since we check count
         }
         searchHistory.insert(entry, at: 0)
-        try searchHistoryDAO.save(searchHistory)
+        do { try searchHistoryDAO.save(searchHistory) }
+        catch { throw Error.updatingSearchHistory }
     }
     
     func load() {
@@ -67,5 +81,13 @@ extension SearchStore {
     func reset() {
         searchHistory.removeAll()
         try? searchHistoryDAO.delete()
+    }
+}
+
+extension SearchStore {
+    enum Error: LocalizedError {
+        case emptyQuery
+        case updatingSearchHistory
+        case searching
     }
 }
