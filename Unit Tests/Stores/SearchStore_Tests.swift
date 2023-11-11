@@ -12,15 +12,16 @@ import XCTest
 final class SearchStore_Tests: XCTestCase {
 
     var sut: SearchStore!
-    var sc = MockSoundCloud()
+    var mockService = MockSoundCloud()
+    var mockDAO = MockDAO<[SearchEntry]>()
     
     func test_searchForTracks_updatesSearchHistory() async throws {
         // Given
         let query = "123"
         let expectedTracks = [testTrack()]
         let expectedSearchEntry = SearchEntry(.tracks, query)
-        sc.tracksToReturn = expectedTracks
-        sut = SearchStore(sc)
+        mockService.tracksToReturn = expectedTracks
+        sut = SearchStore(mockService)
         // When
         let searchResults = try await sut.searchForTracks(query)
         // Then
@@ -34,8 +35,8 @@ final class SearchStore_Tests: XCTestCase {
         let query = "123"
         let expectedPlaylists = [testPlaylist()]
         let expectedSearchEntry = SearchEntry(.playlists, query)
-        sc.playlistsToReturn = expectedPlaylists
-        sut = SearchStore(sc)
+        mockService.playlistsToReturn = expectedPlaylists
+        sut = SearchStore(mockService)
         // When
         let searchResults = try await sut.searchForPlaylists(query)
         // Then
@@ -49,8 +50,8 @@ final class SearchStore_Tests: XCTestCase {
         let query = "123"
         let expectedUsers = [testUser()]
         let expectedSearchEntry = SearchEntry(.artists, query)
-        sc.usersToReturn = expectedUsers
-        sut = SearchStore(sc)
+        mockService.usersToReturn = expectedUsers
+        sut = SearchStore(mockService)
         // When
         let searchResults = try await sut.searchForUsers(query)
         // Then
@@ -59,17 +60,114 @@ final class SearchStore_Tests: XCTestCase {
         XCTAssertEqual(sut.searchHistory.first!, expectedSearchEntry)
     }
     
+    func test_search_whenServiceThrowsError() async {
+        // Given
+        let expectedError = SearchStore.Error.searching
+        mockService.shouldThrowError = true
+        sut = SearchStore(mockService)
+        do { // When
+            _ = try await sut.searchForUsers("123")
+            XCTFail("Should have thrown error")
+        } catch { // Then
+            XCTAssertEqual(error as! SearchStore.Error, expectedError)
+        }
+        
+        do { // When
+            _ = try await sut.searchForTracks("123")
+            XCTFail("Should have thrown error")
+        } catch { // Then
+            XCTAssertEqual(error as! SearchStore.Error, expectedError)
+        }
+        
+        do { // When
+            _ = try await sut.searchForPlaylists("123")
+            XCTFail("Should have thrown error")
+        } catch { // Then
+            XCTAssertEqual(error as! SearchStore.Error, expectedError)
+        }
+    }
+    
+    func test_search_whenDAOThrowsError() async {
+        // Given
+        let expectedError = SearchStore.Error.updatingSearchHistory
+        mockDAO.shouldThrowError = true
+        sut = SearchStore(mockService, mockDAO)
+        
+        do { // When
+            _ = try await sut.searchForTracks("123")
+            XCTFail("Should have thrown error")
+        } catch { // Then
+            XCTAssertEqual(error as! SearchStore.Error, expectedError)
+        }
+        
+        do { // When
+            _ = try await sut.searchForPlaylists("123")
+            XCTFail("Should have thrown error")
+        } catch { // Then
+            XCTAssertEqual(error as! SearchStore.Error, expectedError)
+        }
+        
+        do { // When
+            _ = try await sut.searchForUsers("123")
+            XCTFail("Should have thrown error")
+        } catch { // Then
+            XCTAssertEqual(error as! SearchStore.Error, expectedError)
+        }
+    }
+    
+    func test_searchWithEmptyQuery_throwsExpectedError() async {
+        // Given
+        let emptyQuery = ""
+        let expectedError = SearchStore.Error.emptyQuery
+        sut = SearchStore(mockService)
+        
+        do { // When
+            _ = try await sut.searchForTracks(emptyQuery)
+            XCTFail("Should have throw error")
+        } catch { // Then
+            XCTAssertEqual(error as! SearchStore.Error, expectedError)
+        }
+        
+        do { // When
+            _ = try await sut.searchForPlaylists(emptyQuery)
+            XCTFail("Should have throw error")
+        } catch { // Then
+            XCTAssertEqual(error as! SearchStore.Error, expectedError)
+        }
+        
+        do { // When
+            _ = try await sut.searchForUsers(emptyQuery)
+            XCTFail("Should have throw error")
+        } catch { // Then
+            XCTAssertEqual(error as! SearchStore.Error, expectedError)
+        }
+    }
+    
+    func test_searchWithDuplicateQuery_doesntDuplicateSearchHistory() async throws {
+        // Given
+        let duplicateQuery = "123"
+        let otherQuery = "456"
+        sut = SearchStore(mockService)
+        // When
+        _ = try await sut.searchForUsers(duplicateQuery)
+        _ = try await sut.searchForUsers(otherQuery)
+        _ = try await sut.searchForUsers(duplicateQuery)
+        // Then
+        let searchHistoryMatchingQuery = sut.searchHistory.filter { $0.query == duplicateQuery }
+        XCTAssertEqual(searchHistoryMatchingQuery.count, 1)
+    }
+    
     func test_searchHistoryCapacity() async throws {
         // Given
         let searchCapacity = 2
         let query1 = "123"
         let query2 = "456"
         let query3 = "789"
-        sut = SearchStore(sc, searchHistoryCapacity: searchCapacity)
+        sut = SearchStore(mockService, searchHistoryCapacity: searchCapacity)
         // When
         _ = try await sut.searchForUsers(query1)
-        _ = try await sut.searchForUsers(query2)
-        _ = try await sut.searchForUsers(query3)
+        _ = try await sut.searchForTracks(query2)
+        _ = try await sut.searchForPlaylists(query3)
         _ = try await sut.searchForUsers(query2) // Search again using already used query
         // Then
         XCTAssertEqual(sut.searchHistory.count, searchCapacity)
@@ -82,7 +180,7 @@ final class SearchStore_Tests: XCTestCase {
         let expectedSearchEntries = [SearchEntry(.tracks, "123"), SearchEntry(.playlists, "456")]
         let historyDAO = MockDAO<[SearchEntry]>()
         try historyDAO.save(expectedSearchEntries)
-        sut = SearchStore(sc, historyDAO)
+        sut = SearchStore(mockService, historyDAO)
         // When
         XCTAssertTrue(sut.searchHistory.isEmpty)
         sut.load()
