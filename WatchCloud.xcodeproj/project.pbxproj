@@ -29,6 +29,7 @@
 		94474B612AF273B800BEA5F0 /* SearchStore_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94474B602AF273B800BEA5F0 /* SearchStore_Tests.swift */; };
 		94474B642AF2779100BEA5F0 /* MockSoundCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94474B632AF2779100BEA5F0 /* MockSoundCloud.swift */; };
 		94474B662AF280E300BEA5F0 /* MockDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94474B652AF280E200BEA5F0 /* MockDAO.swift */; };
+		94474B6D2AFF9FC200BEA5F0 /* AuthStore_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94474B6C2AFF9FC200BEA5F0 /* AuthStore_Tests.swift */; };
 		9448FF4B2AB31308003D63F1 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */; };
 		9448FF4D2AB343D7003D63F1 /* WatchKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4C2AB343D7003D63F1 /* WatchKit.swift */; };
 		9448FF4F2AB34F0A003D63F1 /* VolumeCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */; };
@@ -169,6 +170,7 @@
 		94474B602AF273B800BEA5F0 /* SearchStore_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStore_Tests.swift; sourceTree = "<group>"; };
 		94474B632AF2779100BEA5F0 /* MockSoundCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSoundCloud.swift; sourceTree = "<group>"; };
 		94474B652AF280E200BEA5F0 /* MockDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDAO.swift; sourceTree = "<group>"; };
+		94474B6C2AFF9FC200BEA5F0 /* AuthStore_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore_Tests.swift; sourceTree = "<group>"; };
 		9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		9448FF4C2AB343D7003D63F1 /* WatchKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchKit.swift; sourceTree = "<group>"; };
 		9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeCircleView.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				94474B602AF273B800BEA5F0 /* SearchStore_Tests.swift */,
+				94474B6C2AFF9FC200BEA5F0 /* AuthStore_Tests.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -751,6 +754,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94474B662AF280E300BEA5F0 /* MockDAO.swift in Sources */,
+				94474B6D2AFF9FC200BEA5F0 /* AuthStore_Tests.swift in Sources */,
 				94474B612AF273B800BEA5F0 /* SearchStore_Tests.swift in Sources */,
 				94474B642AF2779100BEA5F0 /* MockSoundCloud.swift in Sources */,
 			);

@@ -33,12 +33,18 @@ extension AuthStore {
             await MainActor.run {
                 isLoggedIn = false
             }
-            throw error
+            throw Error.loggingIn
         }
     }
     
     func logout() {
         service.logout()
         isLoggedIn = false
+    }
+}
+
+extension AuthStore {
+    enum Error: LocalizedError {
+        case loggingIn
     }
 }

@@ -8,7 +8,7 @@
 import SoundCloud
 @testable import WatchCloud_Watch_App
 
-final class MockSoundCloud: SoundCloudAPI {
+final class MockSoundCloud: SoundCloudAPI, AuthService {
     var shouldThrowError = false
     var myUser: User = testUser()
     var tracksToReturn: [Track] = []
