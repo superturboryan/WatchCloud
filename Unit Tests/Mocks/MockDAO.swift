@@ -10,28 +10,28 @@ import Foundation
 
 final class MockDAO<T: Codable>: DAO {
 
-    var valueToReturn: T?
+    var persistedValue: T?
     var shouldThrowError = false
     var codingKey = "123"
     
     func get() throws -> T {
-        guard let valueToReturn, !shouldThrowError else {
+        guard let persistedValue, !shouldThrowError else {
             throw MockError.mock
         }
-        return valueToReturn
+        return persistedValue
     }
     
     func save(_ value: T) throws {
         if shouldThrowError {
             throw MockError.mock
         }
-        valueToReturn = value
+        persistedValue = value
     }
     
     func delete() throws {
         if shouldThrowError {
             throw MockError.mock
         }
-        valueToReturn = nil
+        persistedValue = nil
     }
 }

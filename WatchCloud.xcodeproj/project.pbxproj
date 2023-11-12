@@ -33,6 +33,7 @@
 		9448FF4B2AB31308003D63F1 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */; };
 		9448FF4D2AB343D7003D63F1 /* WatchKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4C2AB343D7003D63F1 /* WatchKit.swift */; };
 		9448FF4F2AB34F0A003D63F1 /* VolumeCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */; };
+		945C22662B00EBE7008A5E39 /* UserStore_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C22652B00EBE7008A5E39 /* UserStore_Tests.swift */; };
 		945CCB5F2AB383D500C47E55 /* SwiftUI Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CCB5E2AB383D500C47E55 /* SwiftUI Preview.swift */; };
 		946F38972AB079C9008CE9D1 /* WatchCloud Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		946F38A02AB079CA008CE9D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946F389F2AB079CA008CE9D1 /* Assets.xcassets */; };
@@ -174,6 +175,8 @@
 		9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		9448FF4C2AB343D7003D63F1 /* WatchKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchKit.swift; sourceTree = "<group>"; };
 		9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeCircleView.swift; sourceTree = "<group>"; };
+		945C22652B00EBE7008A5E39 /* UserStore_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore_Tests.swift; sourceTree = "<group>"; };
+		945C22672B010198008A5E39 /* Test Plan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Test Plan.xctestplan"; sourceTree = "<group>"; };
 		945CCB5E2AB383D500C47E55 /* SwiftUI Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI Preview.swift"; sourceTree = "<group>"; };
 		946F38902AB079C9008CE9D1 /* WatchCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchCloud Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -336,8 +339,9 @@
 		94474B5F2AF2738900BEA5F0 /* Stores */ = {
 			isa = PBXGroup;
 			children = (
-				94474B602AF273B800BEA5F0 /* SearchStore_Tests.swift */,
 				94474B6C2AFF9FC200BEA5F0 /* AuthStore_Tests.swift */,
+				94474B602AF273B800BEA5F0 /* SearchStore_Tests.swift */,
+				945C22652B00EBE7008A5E39 /* UserStore_Tests.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -345,8 +349,8 @@
 		94474B622AF2777600BEA5F0 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				94474B632AF2779100BEA5F0 /* MockSoundCloud.swift */,
 				94474B652AF280E200BEA5F0 /* MockDAO.swift */,
+				94474B632AF2779100BEA5F0 /* MockSoundCloud.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -361,6 +365,7 @@
 				946F38AF2AB07A2E008CE9D1 /* Frameworks */,
 				946F38AD2AB079FE008CE9D1 /* Packages */,
 				94F3FCD02AB9A3B5005D03DF /* Screenshots */,
+				945C22672B010198008A5E39 /* Test Plan.xctestplan */,
 				94F3FCD22AB9A3B5005D03DF /* README.md */,
 				94F3FCD12AB9A3B5005D03DF /* CHANGELOG.md */,
 			);
@@ -756,6 +761,7 @@
 				94474B662AF280E300BEA5F0 /* MockDAO.swift in Sources */,
 				94474B6D2AFF9FC200BEA5F0 /* AuthStore_Tests.swift in Sources */,
 				94474B612AF273B800BEA5F0 /* SearchStore_Tests.swift in Sources */,
+				945C22662B00EBE7008A5E39 /* UserStore_Tests.swift in Sources */,
 				94474B642AF2779100BEA5F0 /* MockSoundCloud.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

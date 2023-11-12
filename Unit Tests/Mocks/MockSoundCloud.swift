@@ -30,12 +30,12 @@ final class MockSoundCloud: SoundCloudAPI, AuthService {
     
     func getUsersImFollowing() async throws -> Page<User> {
         if shouldThrowError { throw MockError.mock }
-        return Page<User>(items: usersToReturn)
+        return Page<User>(items: usersToReturn, nextPage: "mock")
     }
     
     func getMyLikedTracks() async throws -> Page<Track> {
         if shouldThrowError { throw MockError.mock }
-        return Page<Track>(items: tracksToReturn)
+        return Page<Track>(items: tracksToReturn, nextPage: "mock")
     }
     
     func getMyFollowingsRecentlyPosted() async throws -> [Track] {
@@ -55,32 +55,32 @@ final class MockSoundCloud: SoundCloudAPI, AuthService {
     
     func getTracksForPlaylist(_ id: Int) async throws -> Page<Track> {
         if shouldThrowError { throw MockError.mock }
-        return Page<Track>(items: tracksToReturn)
+        return Page<Track>(items: tracksToReturn, nextPage: "mock")
     }
     
     func getTracksForUser(_ id: Int, _ limit: Int) async throws -> Page<Track> {
         if shouldThrowError { throw MockError.mock }
-        return Page<Track>(items: tracksToReturn)
+        return Page<Track>(items: tracksToReturn, nextPage: "mock")
     }
     
     func getLikedTracksForUser(_ id: Int, _ limit: Int) async throws -> Page<Track> {
         if shouldThrowError { throw MockError.mock }
-        return Page<Track>(items: tracksToReturn)
+        return Page<Track>(items: tracksToReturn, nextPage: "mock")
     }
     
     func searchTracks(_ query: String, _ limit: Int) async throws -> Page<Track> {
         if shouldThrowError { throw MockError.mock }
-        return Page<Track>(items: tracksToReturn)
+        return Page<Track>(items: tracksToReturn, nextPage: "mock")
     }
     
     func searchPlaylists(_ query: String, _ limit: Int) async throws -> Page<Playlist> {
         if shouldThrowError { throw MockError.mock }
-        return Page<Playlist>(items: playlistsToReturn)
+        return Page<Playlist>(items: playlistsToReturn, nextPage: "mock")
     }
     
     func searchUsers(_ query: String, _ limit: Int) async throws -> Page<User> {
         if shouldThrowError { throw MockError.mock }
-        return Page<User>(items: usersToReturn)
+        return Page<User>(items: usersToReturn, nextPage: "mock")
     }
     
     func likeTrack(_ likedTrack: Track) async throws {
@@ -109,7 +109,16 @@ final class MockSoundCloud: SoundCloudAPI, AuthService {
     
     func pageOfItems<ItemType>(for href: String) async throws -> Page<ItemType> where ItemType : Decodable {
         if shouldThrowError { throw MockError.mock }
-        return Page<ItemType>(items: [])
+        
+        if ItemType.self == Track.self {
+            return Page<ItemType>(items: tracksToReturn as! [ItemType], nextPage: "mock")
+        } else if ItemType.self == User.self {
+            return Page<ItemType>(items: usersToReturn as! [ItemType], nextPage: "mock")
+        } else if ItemType.self == Playlist.self {
+            return Page<ItemType>(items: playlistsToReturn as! [ItemType], nextPage: "mock")
+        }
+        
+        return Page<ItemType>(items: [], nextPage: "mock")
     }
     
     func getStreamInfoForTrack(with id: Int) async throws -> StreamInfo {

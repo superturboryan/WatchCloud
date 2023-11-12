@@ -13,6 +13,7 @@ final class AuthStore: ObservableObject {
     @Published public private(set) var isLoggedIn: Bool = true
     
     private let service: AuthService
+    
     init(_ service: AuthService) {
         self.service = service
     }

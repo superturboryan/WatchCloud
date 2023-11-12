@@ -190,6 +190,6 @@ final class SearchStore_Tests: XCTestCase {
         sut.reset()
         // Then
         XCTAssertTrue(sut.searchHistory.isEmpty)
-        XCTAssertNil(historyDAO.valueToReturn)
+        XCTAssertNil(historyDAO.persistedValue)
     }
 }
