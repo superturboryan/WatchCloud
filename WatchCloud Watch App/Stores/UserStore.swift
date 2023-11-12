@@ -94,11 +94,8 @@ extension UserStore {
     }
         
     func pageOfUsers(_ pageURL: String) async throws -> Page<User> {
-        do {
-            return try await service.pageOfItems(for: pageURL)
-        } catch {
-            throw Error.loadingPageOfUsers
-        }
+        do { return try await service.pageOfItems(for: pageURL) }
+        catch { throw Error.loadingPageOfUsers }
     }
 }
 

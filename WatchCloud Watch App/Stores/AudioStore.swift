@@ -45,26 +45,109 @@ final class AudioStore: NSObject, ObservableObject {
     }
 }
 
+// MARK: - My user 💁
+extension AudioStore {
+    func load() async throws {
+        try loadDownloadedTracks()
+        try await loadMyPlaylistsWithoutTracks()
+        try await loadMyLikedPlaylistsWithoutTracks()
+        try await loadMyLikedTracksPlaylistWithTracks()
+        try await loadRecentlyPostedPlaylistWithTracks()
+    }
+    
+    private func loadDefaultPlaylists() {
+        loadedPlaylists.removeAll()
+        let myUser = User(id: -1)
+        
+        loadedPlaylists[PlaylistType.nowPlaying.rawValue] = Playlist(
+            id: PlaylistType.nowPlaying.rawValue,
+            user: myUser,
+            title: PlaylistType.nowPlaying.title,
+            tracks: []
+        )
+        loadedPlaylists[PlaylistType.downloads.rawValue] = Playlist(
+            id: PlaylistType.downloads.rawValue,
+            user: myUser,
+            title: PlaylistType.downloads.title,
+            tracks: []
+        )
+        loadedPlaylists[PlaylistType.likes.rawValue] = Playlist(
+            id: PlaylistType.likes.rawValue,
+            permalinkUrl: myUser.permalinkUrl + "/likes",
+            user: myUser,
+            title: PlaylistType.likes.title,
+            tracks: []
+        )
+        loadedPlaylists[PlaylistType.recentlyPosted.rawValue] = Playlist(
+            id: PlaylistType.recentlyPosted.rawValue,
+            permalinkUrl: myUser.permalinkUrl + "/following",
+            user: myUser,
+            title: PlaylistType.recentlyPosted.title,
+            tracks: []
+        )
+    }
+    
+    private func loadMyPlaylistsWithoutTracks() async throws {
+        do {
+            let myPlaylists = try await service.getMyPlaylistsWithoutTracks()
+            myPlaylistIds = myPlaylists.map(\.id)
+            for playlist in myPlaylists {
+                loadedPlaylists[playlist.id] = playlist
+            }
+        } catch {
+            throw Error.loadingMyPlaylists
+        }
+    }
+    
+    private func loadMyLikedPlaylistsWithoutTracks() async throws {
+        do {
+            let myLikedPlaylists = try await service.getMyLikedPlaylistsWithoutTracks()
+            myLikedPlaylistIds = myLikedPlaylists.map(\.id)
+            for playlist in myLikedPlaylists {
+                loadedPlaylists[playlist.id] = playlist
+            }
+        } catch {
+            throw Error.loadingMyLikedPlaylists
+        }
+    }
+    
+    private func loadMyLikedTracksPlaylistWithTracks() async throws {
+        let page = try await service.getMyLikedTracks()
+        loadedPlaylists[PlaylistType.likes.rawValue]?.tracks = page.items
+        loadedPlaylists[PlaylistType.likes.rawValue]?.nextPageUrl = page.nextPage
+    }
+    
+    private func loadRecentlyPostedPlaylistWithTracks() async throws {
+        loadedPlaylists[PlaylistType.recentlyPosted.rawValue]?.tracks =
+        try await service.getMyFollowingsRecentlyPosted()
+    }
+}
+
 // MARK: - Tracks + Playlists 💿
 extension AudioStore {
     func getTracksForUser(_ id: Int, _ limit: Int = 20) async throws -> Page<Track> {
-        try await service.getTracksForUser(id, limit)
+        do { return try await service.getTracksForUser(id, limit) }
+        catch { throw Error.gettingTracksForUser }
     }
     
     func getLikedTracksForUser(_ id: Int, _ limit: Int = 20) async throws -> Page<Track> {
-        try await service.getLikedTracksForUser(id, limit)
+        do { return try await service.getLikedTracksForUser(id, limit) }
+        catch { throw Error.gettingLikedTracksForUser }
     }
     
     func getTracksForPlaylist(_ id: Int) async throws -> Page<Track> {
-        try await service.getTracksForPlaylist(id)
+        do { return try await service.getTracksForPlaylist(id) }
+        catch { throw Error.gettingTracksForPlaylist }
     }
     
     func pageOfTracks(_ pageURL: String) async throws -> Page<Track> {
-        try await service.pageOfItems(for: pageURL)
+        do { return try await service.pageOfItems(for: pageURL) }
+        catch { throw Error.gettingPageOfTracks }
     }
     
     func pageOfPlaylists(_ pageURL: String) async throws -> Page<Playlist> {
-        try await service.pageOfItems(for: pageURL)
+        do { return try await service.pageOfItems(for: pageURL) }
+        catch { throw Error.gettingPageOfPlaylists }
     }
     
     func loadTracksForPlaylist(with id: Int) async throws {
@@ -98,18 +181,20 @@ extension AudioStore {
     }
     
     func toggleLikedTrack(_ track: Track) async throws {
-        if isLiked(track) {
-            try await unlikeTrack(track)
-        } else {
-            try await likeTrack(track)
+        do {
+            if isLiked(track) { try await unlikeTrack(track) }
+            else { try await likeTrack(track) }
+        } catch {
+            throw Error.togglingLikedTrack
         }
     }
     
     func toggleLikedPlaylist(_ playlist: Playlist) async throws {
-        if isLiked(playlist) {
-            try await unlikePlaylist(playlist)
-        } else {
-            try await likePlaylist(playlist)
+        do {
+            if isLiked(playlist) { try await unlikePlaylist(playlist) }
+            else { try await likePlaylist(playlist) }
+        } catch {
+            throw Error.togglingLikedPlaylist
         }
     }
     
@@ -201,76 +286,6 @@ extension AudioStore {
         
         let previousTrackIndex = loadedTrackPlaylistIndex - 1
         return queue[previousTrackIndex]
-    }
-}
-
-// MARK: - My user 💁
-extension AudioStore {
-    func load() async throws {
-        try loadDownloadedTracks()
-        try await loadMyPlaylistsWithoutTracks()
-        try await loadMyLikedPlaylistsWithoutTracks()
-        try await loadMyLikedTracksPlaylistWithTracks()
-        try await loadRecentlyPostedPlaylistWithTracks()
-    }
-    
-    private func loadDefaultPlaylists() {
-        loadedPlaylists.removeAll()
-        let myUser = User(id: -1)
-        
-        loadedPlaylists[PlaylistType.nowPlaying.rawValue] = Playlist(
-            id: PlaylistType.nowPlaying.rawValue,
-            user: myUser,
-            title: PlaylistType.nowPlaying.title,
-            tracks: []
-        )
-        loadedPlaylists[PlaylistType.downloads.rawValue] = Playlist(
-            id: PlaylistType.downloads.rawValue,
-            user: myUser,
-            title: PlaylistType.downloads.title,
-            tracks: []
-        )
-        loadedPlaylists[PlaylistType.likes.rawValue] = Playlist(
-            id: PlaylistType.likes.rawValue,
-            permalinkUrl: myUser.permalinkUrl + "/likes",
-            user: myUser,
-            title: PlaylistType.likes.title,
-            tracks: []
-        )
-        loadedPlaylists[PlaylistType.recentlyPosted.rawValue] = Playlist(
-            id: PlaylistType.recentlyPosted.rawValue,
-            permalinkUrl: myUser.permalinkUrl + "/following",
-            user: myUser,
-            title: PlaylistType.recentlyPosted.title,
-            tracks: []
-        )
-    }
-    
-    private func loadMyPlaylistsWithoutTracks() async throws {
-        let myPlaylists = try await service.getMyPlaylistsWithoutTracks()
-        myPlaylistIds = myPlaylists.map(\.id)
-        for playlist in myPlaylists {
-            loadedPlaylists[playlist.id] = playlist
-        }
-    }
-    
-    private func loadMyLikedPlaylistsWithoutTracks() async throws {
-        let myLikedPlaylists = try await service.getMyLikedPlaylistsWithoutTracks()
-        myLikedPlaylistIds = myLikedPlaylists.map(\.id)
-        for playlist in myLikedPlaylists {
-            loadedPlaylists[playlist.id] = playlist
-        }
-    }
-    
-    private func loadMyLikedTracksPlaylistWithTracks() async throws {
-        let page = try await service.getMyLikedTracks()
-        loadedPlaylists[PlaylistType.likes.rawValue]?.tracks = page.items
-        loadedPlaylists[PlaylistType.likes.rawValue]?.nextPageUrl = page.nextPage
-    }
-    
-    private func loadRecentlyPostedPlaylistWithTracks() async throws {
-        loadedPlaylists[PlaylistType.recentlyPosted.rawValue]?.tracks =
-        try await service.getMyFollowingsRecentlyPosted()
     }
 }
 
@@ -392,7 +407,19 @@ extension AudioStore: URLSessionTaskDelegate {
 }
 
 extension AudioStore {
-    enum Error: LocalizedError {
+    enum Error: LocalizedError, Equatable {
+        case gettingTracksForUser
+        case gettingLikedTracksForUser
+        case gettingTracksForPlaylist
+        case gettingPageOfTracks
+        case gettingPageOfPlaylists
+        
+        case loadingMyPlaylists
+        case loadingMyLikedPlaylists
+        
+        case togglingLikedTrack
+        case togglingLikedPlaylist
+        
         case trackDownloadNotInProgress
         case downloadAlreadyExists
         case userNotAuthorized
