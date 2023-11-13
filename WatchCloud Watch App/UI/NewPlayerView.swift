@@ -167,7 +167,8 @@ struct NewPlayerView: View {
             .foregroundStyle(LinearGradient.scOrange(.vertical, reversed: true))
             .rotationEffect(.degrees(-90))
             .opacity(player.isLoading ? 0.7 : 1)
-            .animation(.default, value: player.progress)
+            // Only animate if not setting to 0
+            .animation(.linear(duration: player.progress != 0 ? 1 : 0), value: player.progress)
             .animation(.default, value: player.isLoading)
     }
     
