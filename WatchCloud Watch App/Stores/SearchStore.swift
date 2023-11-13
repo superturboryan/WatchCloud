@@ -60,6 +60,8 @@ extension SearchStore {
 
 // MARK: - Search History 🔍
 extension SearchStore {
+    
+    @MainActor
     private func addToSearchHistory(_ entry: SearchEntry) async throws {
         AnalyticsManager.shared.log(.search(type: entry.type.rawValue))
         if let existingIndex = searchHistory.firstIndex(of: entry) {
@@ -72,12 +74,14 @@ extension SearchStore {
         catch { throw Error.updatingSearchHistory }
     }
     
+    @MainActor
     func load() {
         if let savedHistory = try? searchHistoryDAO.get() {
             searchHistory = savedHistory
         }
     }
     
+    @MainActor
     func reset() {
         searchHistory.removeAll()
         try? searchHistoryDAO.delete()
