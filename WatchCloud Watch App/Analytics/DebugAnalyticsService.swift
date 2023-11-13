@@ -22,7 +22,7 @@ extension DebugAnalyticsService: AnalyticsService {
     func sendEvent(_ name: String, with properties: [String : String]?) {
         eventsLogged.append((name, properties))
         if shouldPrint {
-            Logger.analytics.notice("📊 \(name) - \(Date().description)")
+            Logger.analytics.notice("📊 \(name)")
         }
         if shouldPrint && name == "\(AnalyticsEvent.appBackground)" {
             dumpEvents()
