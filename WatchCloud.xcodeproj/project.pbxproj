@@ -35,6 +35,7 @@
 		9448FF4F2AB34F0A003D63F1 /* VolumeCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */; };
 		945C22662B00EBE7008A5E39 /* UserStore_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C22652B00EBE7008A5E39 /* UserStore_Tests.swift */; };
 		945C22692B010F33008A5E39 /* AudioStore_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C22682B010F33008A5E39 /* AudioStore_Tests.swift */; };
+		945C226B2B025F49008A5E39 /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C226A2B025F49008A5E39 /* AppLauncher.swift */; };
 		945CCB5F2AB383D500C47E55 /* SwiftUI Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CCB5E2AB383D500C47E55 /* SwiftUI Preview.swift */; };
 		946F38972AB079C9008CE9D1 /* WatchCloud Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		946F38A02AB079CA008CE9D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946F389F2AB079CA008CE9D1 /* Assets.xcassets */; };
@@ -179,6 +180,7 @@
 		945C22652B00EBE7008A5E39 /* UserStore_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore_Tests.swift; sourceTree = "<group>"; };
 		945C22672B010198008A5E39 /* Test Plan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Test Plan.xctestplan"; sourceTree = "<group>"; };
 		945C22682B010F33008A5E39 /* AudioStore_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStore_Tests.swift; sourceTree = "<group>"; };
+		945C226A2B025F49008A5E39 /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
 		945CCB5E2AB383D500C47E55 /* SwiftUI Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI Preview.swift"; sourceTree = "<group>"; };
 		946F38902AB079C9008CE9D1 /* WatchCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchCloud Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -433,6 +435,7 @@
 			isa = PBXGroup;
 			children = (
 				946F389F2AB079CA008CE9D1 /* Assets.xcassets */,
+				945C226A2B025F49008A5E39 /* AppLauncher.swift */,
 				946F38BA2AB07F81008CE9D1 /* Config.swift */,
 				946F38B42AB07D74008CE9D1 /* Config.xcconfig */,
 				946F38A12AB079CA008CE9D1 /* Preview Content */,
@@ -789,6 +792,7 @@
 				9488EE7F2AE43C970009EC54 /* SearchEntry.swift in Sources */,
 				946F38D12AB07F81008CE9D1 /* Image.swift in Sources */,
 				946F38CF2AB07F81008CE9D1 /* Delete.swift in Sources */,
+				945C226B2B025F49008A5E39 /* AppLauncher.swift in Sources */,
 				9421D29F2ACE2A90005FE857 /* PlaylistListView.swift in Sources */,
 				943756CF2ACDA02500C84006 /* SearchView.swift in Sources */,
 				9421D2BC2AD34E88005FE857 /* AnalyticsEvent.swift in Sources */,

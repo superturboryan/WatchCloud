@@ -9,7 +9,6 @@ import Combine
 import Foundation
 import SoundCloud
 
-@MainActor
 final class AudioStore: NSObject, ObservableObject {
     
     @Published var loadedPlaylists: [Int : Playlist] = [:]
@@ -41,20 +40,21 @@ final class AudioStore: NSObject, ObservableObject {
     init(_ service: SoundCloudAPI) {
         self.service = service
         super.init()
-        loadDefaultPlaylists()
     }
 }
 
 // MARK: - My user 💁
 extension AudioStore {
     func load() async throws {
-        try loadDownloadedTracks()
+        await loadDefaultPlaylists()
+        try await loadDownloadedTracks()
         try await loadMyPlaylistsWithoutTracks()
         try await loadMyLikedPlaylistsWithoutTracks()
         try await loadMyLikedTracksPlaylistWithTracks()
         try await loadRecentlyPostedPlaylistWithTracks()
     }
     
+    @MainActor
     private func loadDefaultPlaylists() {
         loadedPlaylists.removeAll()
         let myUser = User(id: -1)
@@ -87,6 +87,7 @@ extension AudioStore {
         )
     }
     
+    @MainActor
     private func loadMyPlaylistsWithoutTracks() async throws {
         do {
             let myPlaylists = try await service.getMyPlaylistsWithoutTracks()
@@ -99,6 +100,7 @@ extension AudioStore {
         }
     }
     
+    @MainActor
     private func loadMyLikedPlaylistsWithoutTracks() async throws {
         do {
             let myLikedPlaylists = try await service.getMyLikedPlaylistsWithoutTracks()
@@ -111,12 +113,14 @@ extension AudioStore {
         }
     }
     
+    @MainActor
     private func loadMyLikedTracksPlaylistWithTracks() async throws {
         let page = try await service.getMyLikedTracks()
         loadedPlaylists[PlaylistType.likes.rawValue]?.tracks = page.items
         loadedPlaylists[PlaylistType.likes.rawValue]?.nextPageUrl = page.nextPage
     }
     
+    @MainActor
     private func loadRecentlyPostedPlaylistWithTracks() async throws {
         loadedPlaylists[PlaylistType.recentlyPosted.rawValue]?.tracks =
         try await service.getMyFollowingsRecentlyPosted()
@@ -150,6 +154,7 @@ extension AudioStore {
         catch { throw Error.gettingPageOfPlaylists }
     }
     
+    @MainActor
     func loadTracksForPlaylist(with id: Int) async throws {
         if let userPlaylistType = PlaylistType(rawValue: id) {
             switch userPlaylistType {
@@ -172,6 +177,7 @@ extension AudioStore {
 
 // MARK: - Like + Follow 🧡
 extension AudioStore {
+    
     func isLiked(_ track: Track) -> Bool {
         (loadedPlaylists[PlaylistType.likes.rawValue]?.tracks ?? []).contains(track)
     }
@@ -198,6 +204,7 @@ extension AudioStore {
         }
     }
     
+    @MainActor
     private func likeTrack(_ track: Track) async throws {
         guard !(loadedPlaylists[PlaylistType.likes.rawValue]?.tracks ?? []).contains(track) else {
             return // throw?
@@ -212,6 +219,7 @@ extension AudioStore {
         }
     }
     
+    @MainActor
     private func unlikeTrack(_ track: Track) async throws {
         guard let index = (loadedPlaylists[PlaylistType.likes.rawValue]?.tracks ?? []).firstIndex(of: track) else {
             return // throw?
@@ -226,6 +234,7 @@ extension AudioStore {
         }
     }
     
+    @MainActor
     private func likePlaylist(_ playlist: Playlist) async throws {
         guard !myLikedPlaylistIds.contains(playlist.id) else {
             return // throw?
@@ -240,6 +249,7 @@ extension AudioStore {
         }
     }
     
+    @MainActor
     private func unlikePlaylist(_ playlist: Playlist) async throws {
         guard let index = myLikedPlaylistIds.firstIndex(of: playlist.id) else {
             return // throw?
@@ -262,6 +272,7 @@ extension AudioStore {
         return downloadedTracks.contains(loadedTrack)
     }
     
+    @MainActor
     func setNowPlayingQueue(with tracks: [Track]) {
         loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks = tracks
     }
@@ -296,6 +307,7 @@ extension AudioStore {
         try await downloadTrack(track, from: streamInfo.httpMp3128Url)
     }
     
+    @MainActor
     func removeDownload(_ trackToRemove: Track) throws {
         let trackMp3Url = trackToRemove.localFileUrl(withExtension: Track.FileExtension.mp3)
         let trackJsonUrl = trackToRemove.localFileUrl(withExtension: Track.FileExtension.json)
@@ -308,6 +320,7 @@ extension AudioStore {
         }
     }
     
+    @MainActor
     func cancelDownloadInProgress(for track: Track) throws {
         guard downloadsInProgress.keys.contains(track), let task = downloadTasks[track] else {
             throw Error.trackDownloadNotInProgress
@@ -320,6 +333,8 @@ extension AudioStore {
 
 // MARK: - Private Downloads 🙈
 private extension AudioStore {
+    
+    @MainActor
     func downloadTrack(_ track: Track, from url: String) async throws {
         // Checks before starting download
         let localMp3Url = track.localFileUrl(withExtension: Track.FileExtension.mp3)
@@ -361,6 +376,7 @@ private extension AudioStore {
         downloadedTracks.append(trackWithLocalFileUrl)
     }
     
+    @MainActor
     func loadDownloadedTracks() throws {
         // Get id of downloaded tracks from device's documents directory
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -385,6 +401,8 @@ private extension AudioStore {
 }
 
 extension AudioStore: URLSessionTaskDelegate {
+    
+    @MainActor
     func urlSession(_ session: URLSession, didCreateTask task: URLSessionTask) {
         // ‼️ Get track id being downloaded from request header field
         guard

@@ -175,7 +175,7 @@ final class SearchStore_Tests: XCTestCase {
         XCTAssertTrue(sut.searchHistory.map(\.query).contains([query2, query3]))
     }
     
-    func test_load_and_reset() throws {
+    func test_load_and_reset() async throws {
         // Given
         let expectedSearchEntries = [SearchEntry(.tracks, "123"), SearchEntry(.playlists, "456")]
         let historyDAO = MockDAO<[SearchEntry]>()
@@ -183,11 +183,11 @@ final class SearchStore_Tests: XCTestCase {
         sut = SearchStore(mockService, historyDAO)
         // When
         XCTAssertTrue(sut.searchHistory.isEmpty)
-        sut.load()
+        await sut.load()
         // Then
         XCTAssertEqual(sut.searchHistory, expectedSearchEntries)
         // When
-        sut.reset()
+        await sut.reset()
         // Then
         XCTAssertTrue(sut.searchHistory.isEmpty)
         XCTAssertNil(historyDAO.persistedValue)

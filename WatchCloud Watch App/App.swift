@@ -9,7 +9,6 @@ import SoundCloud
 import SwiftUI
 import TipKit
 
-@main
 struct WatchCloud_Watch_AppApp: App {
     
     @StateObject var audioStore = CompositionRoot.audioStore

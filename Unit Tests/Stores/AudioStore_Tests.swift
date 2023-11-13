@@ -17,11 +17,11 @@ final class AudioStore_Tests: XCTestCase {
     func test_load_loadsAllSystemPlaylistTypes() async throws {
         // Given
         mockService.playlistsToReturn = [testPlaylist(), testPlaylist()]
-        sut = await AudioStore(mockService)
+        sut = AudioStore(mockService)
         // When
         try await sut.load()
         // Then
-        let loadedPlaylistIds = await sut.loadedPlaylists.keys
+        let loadedPlaylistIds = sut.loadedPlaylists.keys
         for type in PlaylistType.allCases {
             XCTAssertTrue(loadedPlaylistIds.contains(type.rawValue))
         }
@@ -31,7 +31,7 @@ final class AudioStore_Tests: XCTestCase {
         // Given
         let expectedError = AudioStore.Error.loadingMyPlaylists
         mockService.shouldThrowError = true
-        sut = await AudioStore(mockService)
+        sut = AudioStore(mockService)
         do { // When
             try await sut.load()
         } catch { // Then
@@ -43,7 +43,7 @@ final class AudioStore_Tests: XCTestCase {
         // Given
         let expectedTracks = [testTrack(), testTrack()]
         mockService.tracksToReturn = expectedTracks
-        sut = await AudioStore(mockService)
+        sut = AudioStore(mockService)
         // When
         let tracksForUser = try await sut.getTracksForUser(123).items
         // Then
@@ -54,7 +54,7 @@ final class AudioStore_Tests: XCTestCase {
         // Given
         let expectedError = AudioStore.Error.gettingTracksForUser
         mockService.shouldThrowError = true
-        sut = await AudioStore(mockService)
+        sut = AudioStore(mockService)
         do { // When
             _ = try await sut.getTracksForUser(123)
             XCTFail("Should have thrown error")
@@ -67,7 +67,7 @@ final class AudioStore_Tests: XCTestCase {
         // Given
         let expectedTracks = [testTrack(), testTrack()]
         mockService.tracksToReturn = expectedTracks
-        sut = await AudioStore(mockService)
+        sut = AudioStore(mockService)
         // When
         let likedTracksForUser = try await sut.getLikedTracksForUser(123).items
         // Then
@@ -78,7 +78,7 @@ final class AudioStore_Tests: XCTestCase {
         // Given
         let expectedError = AudioStore.Error.gettingLikedTracksForUser
         mockService.shouldThrowError = true
-        sut = await AudioStore(mockService)
+        sut = AudioStore(mockService)
         do { // When
             _ = try await sut.getLikedTracksForUser(123)
             XCTFail("Should have thrown error")
@@ -91,7 +91,7 @@ final class AudioStore_Tests: XCTestCase {
         // Given
         let expectedTracks = [testTrack(), testTrack()]
         mockService.tracksToReturn = expectedTracks
-        sut = await AudioStore(mockService)
+        sut = AudioStore(mockService)
         // When
         let tracksForPlaylist = try await sut.getTracksForPlaylist(123).items
         // Then
@@ -102,7 +102,7 @@ final class AudioStore_Tests: XCTestCase {
         // Given
         let expectedError = AudioStore.Error.gettingTracksForPlaylist
         mockService.shouldThrowError = true
-        sut = await AudioStore(mockService)
+        sut = AudioStore(mockService)
         do { // When
             _ = try await sut.getTracksForPlaylist(123)
             XCTFail("Should have thrown error")
@@ -115,7 +115,7 @@ final class AudioStore_Tests: XCTestCase {
         // Given
         let expectedTracks = [testTrack(), testTrack()]
         mockService.tracksToReturn = expectedTracks
-        sut = await AudioStore(mockService)
+        sut = AudioStore(mockService)
         // When
         let tracksForPage = try await sut.pageOfTracks("123").items
         // Then
@@ -126,7 +126,7 @@ final class AudioStore_Tests: XCTestCase {
         // Given
         let expectedError = AudioStore.Error.gettingPageOfTracks
         mockService.shouldThrowError = true
-        sut = await AudioStore(mockService)
+        sut = AudioStore(mockService)
         do { // When
             _ = try await sut.pageOfTracks("123")
             XCTFail("Should have thrown error")
@@ -139,7 +139,7 @@ final class AudioStore_Tests: XCTestCase {
         // Given
         let expectedPlaylists = [testPlaylist(), testPlaylist()]
         mockService.playlistsToReturn = expectedPlaylists
-        sut = await AudioStore(mockService)
+        sut = AudioStore(mockService)
         // When
         let playlistsForPage = try await sut.pageOfPlaylists("123").items
         // Then
@@ -150,7 +150,7 @@ final class AudioStore_Tests: XCTestCase {
         // Given
         let expectedError = AudioStore.Error.gettingPageOfPlaylists
         mockService.shouldThrowError = true
-        sut = await AudioStore(mockService)
+        sut = AudioStore(mockService)
         do { // When
             _ = try await sut.pageOfPlaylists("123")
             XCTFail("Should have thrown error")
@@ -162,16 +162,17 @@ final class AudioStore_Tests: XCTestCase {
     func test_toggleLikedTrack_likesAndUnlikesTrack() async throws {
         // Given
         let trackToLike = testTrack(isLiked: false)
-        sut = await AudioStore(mockService)
+        sut = AudioStore(mockService)
+        try await sut.load()
         // When
         try await sut.toggleLikedTrack(trackToLike)
         // Then
-        var isLiked = await sut.isLiked(trackToLike)
+        var isLiked = sut.isLiked(trackToLike)
         XCTAssertTrue(isLiked)
         // When
         try await sut.toggleLikedTrack(trackToLike)
         // Then
-        isLiked = await sut.isLiked(trackToLike)
+        isLiked = sut.isLiked(trackToLike)
         XCTAssertFalse(isLiked)
     }
     
@@ -180,15 +181,15 @@ final class AudioStore_Tests: XCTestCase {
         let trackToLike = testTrack(isLiked: false)
         let expectedError = AudioStore.Error.togglingLikedTrack
         mockService.shouldThrowError = true
-        sut = await AudioStore(mockService)
-        var isLiked = await sut.isLiked(trackToLike)
+        sut = AudioStore(mockService)
+        var isLiked = sut.isLiked(trackToLike)
         XCTAssertFalse(isLiked)
         do { // When
             try await sut.toggleLikedTrack(trackToLike)
             XCTFail("Should have thrown error")
         } catch { // Then
             XCTAssertEqual(expectedError, error as! AudioStore.Error)
-            isLiked = await sut.isLiked(trackToLike)
+            isLiked = sut.isLiked(trackToLike)
             XCTAssertFalse(isLiked, "Track should not be liked if service threw error")
         }
     }
@@ -196,16 +197,16 @@ final class AudioStore_Tests: XCTestCase {
     func test_toggleLikedPlaylist_likesAndUnlikesPlaylist() async throws {
         // Given
         let playlistToLike = testPlaylist()
-        sut = await AudioStore(mockService)
+        sut = AudioStore(mockService)
         // When
         try await sut.toggleLikedPlaylist(playlistToLike)
         // Then
-        var isLiked = await sut.isLiked(playlistToLike)
+        var isLiked = sut.isLiked(playlistToLike)
         XCTAssertTrue(isLiked)
         // When
         try await sut.toggleLikedPlaylist(playlistToLike)
         // Then
-        isLiked = await sut.isLiked(playlistToLike)
+        isLiked = sut.isLiked(playlistToLike)
         XCTAssertFalse(isLiked)
     }
     
@@ -214,15 +215,15 @@ final class AudioStore_Tests: XCTestCase {
         let playlistToLike = testPlaylist()
         let expectedError = AudioStore.Error.togglingLikedPlaylist
         mockService.shouldThrowError = true
-        sut = await AudioStore(mockService)
-        var isLiked = await sut.isLiked(playlistToLike)
+        sut = AudioStore(mockService)
+        var isLiked = sut.isLiked(playlistToLike)
         XCTAssertFalse(isLiked)
         do { // When
             try await sut.toggleLikedPlaylist(playlistToLike)
             XCTFail("Should have thrown error")
         } catch { // Then
             XCTAssertEqual(expectedError, error as! AudioStore.Error)
-            isLiked = await sut.isLiked(playlistToLike)
+            isLiked = sut.isLiked(playlistToLike)
             XCTAssertFalse(isLiked, "Playlist should not be liked if service threw error")
         }
     }
