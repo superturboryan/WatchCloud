@@ -24,16 +24,13 @@ extension AuthStore {
         try await service.authenticatedHeader
     }}
     
+    @MainActor
     func login() async throws {
         do {
             try await service.login()
-            await MainActor.run {
-                isLoggedIn = true
-            }
+            isLoggedIn = true
         } catch {
-            await MainActor.run {
-                isLoggedIn = false
-            }
+            isLoggedIn = false
             throw Error.loggingIn
         }
     }
