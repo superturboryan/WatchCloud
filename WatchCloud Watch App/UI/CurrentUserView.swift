@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CurrentUserView: View {
     
+    @EnvironmentObject var player: AudioPlayer
     @EnvironmentObject var userStore: UserStore
     @Environment(\.dismiss) var dismiss
     
@@ -34,6 +35,7 @@ struct CurrentUserView: View {
     
     private func tappedLogout() {
         Haptics.click()
+        player.stop()
         NotificationCenter.default.post(name: .performLogout, object: nil)
         dismiss()
     }
@@ -67,6 +69,7 @@ struct CurrentUserView: View {
 #Preview {
     NavigationStack {
         CurrentUserView()
-        .environmentObject(UserStore(testSC))
+            .environmentObject(UserStore(testSC))
+            .environmentObject(testAudioPlayer)
     }
 }

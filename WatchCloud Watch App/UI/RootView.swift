@@ -12,7 +12,6 @@ enum RootTab { case library, player }
 
 struct RootView: View {
     
-    @EnvironmentObject var player: AudioPlayer
     @EnvironmentObject var audioStore: AudioStore
     @EnvironmentObject var authStore: AuthStore
     @EnvironmentObject var userStore: UserStore
@@ -116,7 +115,6 @@ struct RootView: View {
     }
     
     private func performLogout() {
-        player.stop()
         authStore.logout()
         userStore.reset()
         searchStore.reset()
