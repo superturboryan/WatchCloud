@@ -103,11 +103,13 @@ extension AudioPlayer {
             object: avItem
         )
         
-        // Set AVAudioPlayer item
-        player.replaceCurrentItem(with: avItem)
-        // Set loaded track in SC
-        audioStore.loadedTrack = track
-        progress = 0
+        DispatchQueue.main.async { [weak self] in
+            // Set AVAudioPlayer item
+            self?.player.replaceCurrentItem(with: avItem)
+            // Set loaded track in SC
+            self?.audioStore.loadedTrack = track
+            self?.progress = 0
+        }
     }
     
     func loadAndPlayTrack(_ track: Track) {
@@ -208,7 +210,6 @@ extension AudioPlayer {
                 self?.seekForwardCommand()
         }
     }
-    
     
     func endSeeking() {
         seekTimer?.invalidate()
