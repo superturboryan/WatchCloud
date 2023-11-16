@@ -254,4 +254,19 @@ final class AudioStore_Tests: XCTestCase {
         sut.loadedTrack = firstTrack
         XCTAssertNil(sut.previousTrackInNowPlayingQueue)
     }
+    
+    func test_loadTracksForPlaylist_withUserPlaylistTypes() async throws {
+        // Given
+        let playlistIdList = PlaylistType.allCases.map(\.rawValue)
+        sut = AudioStore(mockService)
+        try await sut.load()
+        // When
+        for id in playlistIdList {
+            try await sut.loadTracksForPlaylist(with: id)
+        }
+        // Then
+        for id in playlistIdList {
+            XCTAssertNotNil(sut.loadedPlaylists[id])
+        }
+    }
 }
