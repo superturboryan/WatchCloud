@@ -363,6 +363,7 @@ private extension AudioStore {
         guard !statusCode.errorOccurred else {
             throw Error.network(statusCode)
         }
+        // Download completed successfully...
         downloadsInProgress.removeValue(forKey: track)
         // Save track data as mp3
         try trackData.write(to: localMp3Url)
@@ -380,13 +381,13 @@ private extension AudioStore {
     func loadDownloadedTracks() throws {
         // Get id of downloaded tracks from device's documents directory
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let downloadedTrackIds = try FileManager.default.contentsOfDirectory(atPath: documentsURL.path)
+        let downloadedTrackIdList = try FileManager.default.contentsOfDirectory(atPath: documentsURL.path)
             .filter { $0.lowercased().contains(Track.FileExtension.mp3) } // Get all mp3 files
             .map { $0.replacingOccurrences(of: ".\(Track.FileExtension.mp3)", with: "") } // Remove mp3 extension so only id remains
         
         // Load track for each id, set local mp3 file url for track
         var loadedTracks = [Track]()
-        for id in downloadedTrackIds {
+        for id in downloadedTrackIdList {
             let trackJsonURL = documentsURL.appendingPathComponent("\(id).\(Track.FileExtension.json)")
             let trackJsonData = try Data(contentsOf: trackJsonURL)
             var downloadedTrack = try decoder.decode(Track.self, from: trackJsonData)

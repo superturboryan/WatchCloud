@@ -227,4 +227,31 @@ final class AudioStore_Tests: XCTestCase {
             XCTAssertFalse(isLiked, "Playlist should not be liked if service threw error")
         }
     }
+    
+    func test_nowPlayingQueueNextAndPreviousTracks() async throws {
+        // Given
+        let firstTrack = testTrack()
+        let secondTrack = testTrack()
+        let lastTrack = testTrack()
+        let queueWithThreeTracks = [firstTrack, secondTrack, lastTrack]
+        
+        sut = AudioStore(mockService)
+        try await sut.load()
+        
+        // When
+        await sut.setNowPlayingQueue(with: queueWithThreeTracks)
+        sut.loadedTrack = secondTrack
+        // Then
+        XCTAssertEqual(sut.previousTrackInNowPlayingQueue, firstTrack)
+        XCTAssertEqual(sut.nextTrackInNowPlayingQueue, lastTrack)
+        
+        // When
+        sut.loadedTrack = lastTrack
+        // Then next track should be first in queue
+        XCTAssertEqual(sut.nextTrackInNowPlayingQueue, firstTrack)
+        
+        // When
+        sut.loadedTrack = firstTrack
+        XCTAssertNil(sut.previousTrackInNowPlayingQueue)
+    }
 }
