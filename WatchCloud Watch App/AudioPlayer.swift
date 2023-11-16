@@ -17,15 +17,15 @@ final class AudioPlayer: ObservableObject {
     @Published var isPlaying = false // Should be private(set)
     @Published private(set) var isLoading = false
     @Published var playbackSpeed: PlaybackSpeed = .One
-    
     @Published var progress: TimeInterval = 0.0 { didSet { updatePlayerProgress() }}
     
     private var shouldSeek = true
-    private var seekAmount = 15.0 // Seconds
-    
-    private var isPlayerLoaded = false
+    private var seekTimer: Timer? = nil
+    private var seekAmount: TimeInterval { (player.currentItem?.duration.seconds ?? 0) / 30.0 }
     
     private let player = AVPlayer()
+    private var isPlayerLoaded = false
+    
     private let commandCenter = MPRemoteCommandCenter.shared()
     private let audioSession = AVAudioSession.sharedInstance()
     private let decoder = JSONDecoder()
@@ -201,6 +201,19 @@ extension AudioPlayer {
         }
     }
     
+    func beginSeeking(_ direction: SeekDirection) {
+        seekTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+            direction == .backward ?
+                self?.seekBackwardCommand() :
+                self?.seekForwardCommand()
+        }
+    }
+    
+    
+    func endSeeking() {
+        seekTimer?.invalidate()
+    }
+    
     func cyclePlaybackSpeed() {
         playbackSpeed = playbackSpeed.next()
         if isPlaying {
@@ -246,22 +259,40 @@ extension AudioPlayer {
             self?.previousTrackCommand()
             return .success
         }
-        commandCenter.seekForwardCommand.addTarget { [weak self] _ in
+        commandCenter.seekForwardCommand.addTarget { [weak self] event in
+            guard let event = event as? MPSeekCommandEvent else { 
+                return .commandFailed
+            }
+            
             guard // Not at end of track
                 let duration = self?.player.currentItem?.duration,
                 let progress = self?.progress,
                 progress < duration.seconds
             else { return .commandFailed }
             
-            self?.seekForwardCommand()
+            switch event.type {
+            case .beginSeeking: self?.beginSeeking(.forward)
+            case .endSeeking: self?.endSeeking()
+            @unknown default: print("Unknown seek event type?!")
+            }
+            
             return .success
         }
-        commandCenter.seekBackwardCommand.addTarget { [weak self] _ in
+        commandCenter.seekBackwardCommand.addTarget { [weak self] event in
+            guard let event = event as? MPSeekCommandEvent else {
+                return .commandFailed
+            }
+            
             guard // Not at beginning of track
                 let progress = self?.progress, progress > 0
             else { return .commandFailed }
     
-            self?.seekBackwardCommand()
+            switch event.type {
+            case .beginSeeking: self?.beginSeeking(.backward)
+            case .endSeeking: self?.endSeeking()
+            @unknown default: print("Unknown seek event type?!")
+            }
+            
             return .success
         }
         commandCenter.changePlaybackPositionCommand.addTarget { [weak self] event in
@@ -332,6 +363,13 @@ extension AudioPlayer {
         case OnePointFive = 1.5
         case OneAndThreeQuarters = 1.75
         case Double = 2.0
+    }
+    
+    enum SeekDirection {
+        case backward
+        case forward
+        
+        var isBackward: Bool { self == .backward }
     }
 }
 

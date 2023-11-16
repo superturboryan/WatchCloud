@@ -22,6 +22,8 @@ struct NewPlayerView: View {
     @State var volumeCircleVisibleTime = 0
     let volumeTimer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     
+    @State var isSeekButtonLongPressed = false
+    
     var body: some View {
         NavigationStack { // Needed for toolbar
             playerView
@@ -127,18 +129,9 @@ struct NewPlayerView: View {
     private var yOffset: CGFloat = 2
     private var playbackButtons: some ToolbarContent {
         ToolbarItemGroup(placement: .bottomBar) {
-            previousTrackAndSeekBackwardButton
+            skipAndSeekButton(.backward)
             togglePlaybackButton
-            nextTrackAndSeekForwardButton
-        }
-    }
-    
-    private var previousTrackAndSeekBackwardButton: some View {
-        Button { // ⏮️
-            player.previousTrackCommand()
-            AnalyticsManager.shared.log(.tappedSkipToPreviousTrack)
-        } label: {
-            Image(systemName:"backward.fill")
+            skipAndSeekButton(.forward)
         }
     }
     
@@ -161,13 +154,24 @@ struct NewPlayerView: View {
         .disabled(player.isLoading)
     }
     
-    private var nextTrackAndSeekForwardButton: some View {
-        Button { // ⏭️
-            player.nextTrackCommand()
-            AnalyticsManager.shared.log(.tappedSkipToNextTrack)
+    private func skipAndSeekButton(_ direction: AudioPlayer.SeekDirection) -> some View {
+        Button { // ⏮️ ⏭️
+            if isSeekButtonLongPressed {
+                player.endSeeking()
+                isSeekButtonLongPressed.toggle()
+            } else {
+                direction.isBackward ?
+                    player.previousTrackCommand() :
+                    player.nextTrackCommand()
+                AnalyticsManager.shared.log(.tappedSkipToNextTrack)
+            }
         } label: {
-            Image(systemName:"forward.fill")
+            Image(systemName: direction.isBackward ? "backward.fill" : "forward.fill")
         }
+        .simultaneousGesture(LongPressGesture(minimumDuration: 0.3).onEnded { _ in
+            isSeekButtonLongPressed = true
+            player.beginSeeking(direction)
+        })
     }
     
     private var playbackCircleOverlay: some View {
