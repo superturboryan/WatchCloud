@@ -21,9 +21,12 @@ final class AudioPlayer: ObservableObject {
     @Published var progress: TimeInterval = 0.0 { didSet { updatePlayerProgress() }}
     
     private var shouldSeek = true
+    private var seekAmount = 15.0 // Seconds
+    
     private var isPlayerLoaded = false
     
     private let player = AVPlayer()
+    private let commandCenter = MPRemoteCommandCenter.shared()
     private let audioSession = AVAudioSession.sharedInstance()
     private let decoder = JSONDecoder()
     private var subscriptions = Set<AnyCancellable>()
@@ -50,9 +53,11 @@ final class AudioPlayer: ObservableObject {
         
         let oneSecond = CMTime(value: 1, timescale: 1)
         player.addPeriodicTimeObserver(forInterval: oneSecond, queue: .main) { [weak self] time in
-            self?.shouldSeek = false
-            self?.progress = time.seconds
-            self?.shouldSeek = true
+            DispatchQueue.main.async { [weak self] in
+                self?.shouldSeek = false
+                self?.progress = time.seconds
+                self?.shouldSeek = true
+            }
         }
         player.publisher(for: \.timeControlStatus)
         .receive(on: DispatchQueue.main)
@@ -93,7 +98,7 @@ extension AudioPlayer {
         let avItem = AVPlayerItem(asset: avUrlAsset)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.skipToNextTrack),
+            selector: #selector(self.nextTrackCommand),
             name: Notification.Name.AVPlayerItemDidPlayToEndTime,
             object: avItem
         )
@@ -146,8 +151,8 @@ extension AudioPlayer {
         player.replaceCurrentItem(with: nil)
     }
     
-    @objc // Called by AVPlayerItemDidPlayToEndTime Notification
-    func skipToNextTrack() {
+    @objc // Also called by AVPlayerItemDidPlayToEndTime Notification
+    func nextTrackCommand() {
         guard let nextTrack = audioStore.nextTrackInNowPlayingQueue
         else { return }
         
@@ -159,7 +164,7 @@ extension AudioPlayer {
         }
     }
     
-    func skipToPreviousTrack() {
+    func previousTrackCommand() {
         let skipToPreviousTrackThreshold: Double = 3
         let isBeginningOfTrack = progress < skipToPreviousTrackThreshold
         let isBeginningOfQueue = audioStore.loadedTrackPlaylistIndex == 0
@@ -174,6 +179,25 @@ extension AudioPlayer {
             }
         } else { // Just go to beginning
             progress = 0
+        }
+    }
+    
+    func seekForwardCommand() {
+        guard let duration = player.currentItem?.duration.seconds else {
+            return
+        }
+        if progress + seekAmount > duration {
+            progress = duration
+        } else {
+            progress += seekAmount
+        }
+    }
+    
+    func seekBackwardCommand() {
+        if progress - seekAmount < 0 {
+            progress = 0
+        } else {
+            progress -= seekAmount
         }
     }
     
@@ -196,40 +220,51 @@ extension AudioPlayer {
 extension AudioPlayer {
     
     private func setupDeviceMediaControls() {
-        let center = MPRemoteCommandCenter.shared()
-        
-        center.togglePlayPauseCommand.addTarget { [weak self] _ in
+        commandCenter.togglePlayPauseCommand.addTarget { [weak self] _ in
             self?.togglePlayback()
             return .success
         }
-        
-        center.playCommand.addTarget { [weak self] _ in
-            self?.togglePlayback()
+        commandCenter.playCommand.addTarget { [weak self] _ in
+            self?.continuePlayback()
             return .success
         }
-
-        center.pauseCommand.addTarget { [weak self] _ in
-            self?.togglePlayback()
+        commandCenter.pauseCommand.addTarget { [weak self] _ in
+            self?.pausePlayback()
             return .success
         }
-
-        center.nextTrackCommand.addTarget { [weak self] _ in
+        commandCenter.nextTrackCommand.addTarget { [weak self] _ in
             guard
                 let queue = self?.audioStore.nowPlayingQueue, // Queue exists
                 let nowPlayingQueueIndex = self?.audioStore.loadedTrackPlaylistIndex,
                 nowPlayingQueueIndex < queue.count - 1 // Not at end of queue
             else {  return .commandFailed }
             
-            self?.skipToNextTrack()
+            self?.nextTrackCommand()
             return .success
         }
-
-        center.previousTrackCommand.addTarget { [weak self] _ in
-            self?.skipToPreviousTrack()
+        commandCenter.previousTrackCommand.addTarget { [weak self] _ in
+            self?.previousTrackCommand()
             return .success
         }
-        
-        center.changePlaybackPositionCommand.addTarget { [weak self] event in
+        commandCenter.seekForwardCommand.addTarget { [weak self] _ in
+            guard // Not at end of track
+                let duration = self?.player.currentItem?.duration,
+                let progress = self?.progress,
+                progress < duration.seconds
+            else { return .commandFailed }
+            
+            self?.seekForwardCommand()
+            return .success
+        }
+        commandCenter.seekBackwardCommand.addTarget { [weak self] _ in
+            guard // Not at beginning of track
+                let progress = self?.progress, progress > 0
+            else { return .commandFailed }
+    
+            self?.seekBackwardCommand()
+            return .success
+        }
+        commandCenter.changePlaybackPositionCommand.addTarget { [weak self] event in
             guard let event = event as? MPChangePlaybackPositionCommandEvent else {
                 return .commandFailed
             }

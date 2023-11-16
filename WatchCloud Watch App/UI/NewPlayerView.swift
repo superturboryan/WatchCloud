@@ -127,36 +127,46 @@ struct NewPlayerView: View {
     private var yOffset: CGFloat = 2
     private var playbackButtons: some ToolbarContent {
         ToolbarItemGroup(placement: .bottomBar) {
-            Button { // ⏮️
-                player.skipToPreviousTrack()
-                AnalyticsManager.shared.log(.tappedSkipToPreviousTrack)
-            } label: {
-                Image(systemName:"backward.fill")
-            }
-            
-            Button { // ⏯️
+            previousTrackAndSeekBackwardButton
+            togglePlaybackButton
+            nextTrackAndSeekForwardButton
+        }
+    }
+    
+    private var previousTrackAndSeekBackwardButton: some View {
+        Button { // ⏮️
+            player.previousTrackCommand()
+            AnalyticsManager.shared.log(.tappedSkipToPreviousTrack)
+        } label: {
+            Image(systemName:"backward.fill")
+        }
+    }
+    
+    private var togglePlaybackButton: some View {
+        Button { // ⏯️
+            player.togglePlayback()
+            AnalyticsManager.shared.log(.tappedTogglePlayback)
+        } label: {
+            Image(systemName:player.isPlaying ? "pause.fill" : "play.fill")
+                .symbolReplaceEffect(2.0)
+        }
+        .controlSize(.large)
+        .overlay { playbackCircleOverlay }
+        .contentShape(.focusEffect, Circle())
+        .accessibilityQuickAction(style: .outline) { // ♿️
+            Button(String(player.isPlaying ? "Pause" : "Play")) {
                 player.togglePlayback()
-                AnalyticsManager.shared.log(.tappedTogglePlayback)
-            } label: {
-                Image(systemName:player.isPlaying ? "pause.fill" : "play.fill")
-                    .symbolReplaceEffect(2.0)
             }
-            .controlSize(.large)
-            .overlay { playbackCircleOverlay }
-            .contentShape(.focusEffect, Circle())
-            .accessibilityQuickAction(style: .outline) { // ♿️
-                Button(String(player.isPlaying ? "Pause" : "Play")) {
-                    player.togglePlayback()
-                }
-            }
-            .disabled(player.isLoading)
-            
-            Button { // ⏭️
-                player.skipToNextTrack()
-                AnalyticsManager.shared.log(.tappedSkipToNextTrack)
-            } label: {
-                Image(systemName:"forward.fill")
-            }
+        }
+        .disabled(player.isLoading)
+    }
+    
+    private var nextTrackAndSeekForwardButton: some View {
+        Button { // ⏭️
+            player.nextTrackCommand()
+            AnalyticsManager.shared.log(.tappedSkipToNextTrack)
+        } label: {
+            Image(systemName:"forward.fill")
         }
     }
     
