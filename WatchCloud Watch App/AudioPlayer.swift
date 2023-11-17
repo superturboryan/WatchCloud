@@ -201,7 +201,9 @@ extension AudioPlayer {
     }
     
     func seekBackwardCommand() {
-        if progress - seekAmount < 0 {
+        if progress == 0 {
+            return
+        } else if progress - seekAmount < 0 {
             progress = 0
         } else {
             progress -= seekAmount
@@ -210,7 +212,7 @@ extension AudioPlayer {
     
     func beginSeeking(_ direction: SeekDirection) {
         seekTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
-            direction == .backward ?
+            direction.isBackward ?
                 self?.seekBackwardCommand() :
                 self?.seekForwardCommand()
         }
