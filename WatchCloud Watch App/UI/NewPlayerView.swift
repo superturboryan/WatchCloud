@@ -22,6 +22,8 @@ struct NewPlayerView: View {
     @State var volumeCircleVisibleTime = 0
     let volumeTimer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     
+    @State var isSeekButtonLongPressed = false
+    
     var body: some View {
         NavigationStack { // Needed for toolbar
             playerView
@@ -127,37 +129,49 @@ struct NewPlayerView: View {
     private var yOffset: CGFloat = 2
     private var playbackButtons: some ToolbarContent {
         ToolbarItemGroup(placement: .bottomBar) {
-            Button { // ⏮️
-                player.skipToPreviousTrack()
-                AnalyticsManager.shared.log(.tappedSkipToPreviousTrack)
-            } label: {
-                Image(systemName:"backward.fill")
-            }
-            
-            Button { // ⏯️
+            skipAndSeekButton(.backward)
+            togglePlaybackButton
+            skipAndSeekButton(.forward)
+        }
+    }
+    
+    private var togglePlaybackButton: some View {
+        Button { // ⏯️
+            player.togglePlayback()
+            AnalyticsManager.shared.log(.tappedTogglePlayback)
+        } label: {
+            Image(systemName:player.isPlaying ? "pause.fill" : "play.fill")
+                .symbolReplaceEffect(2.0)
+        }
+        .controlSize(.large)
+        .overlay { playbackCircleOverlay }
+        .contentShape(.focusEffect, Circle())
+        .accessibilityQuickAction(style: .outline) { // ♿️
+            Button(String(player.isPlaying ? "Pause" : "Play")) {
                 player.togglePlayback()
-                AnalyticsManager.shared.log(.tappedTogglePlayback)
-            } label: {
-                Image(systemName:player.isPlaying ? "pause.fill" : "play.fill")
-                    .symbolReplaceEffect(2.0)
-            }
-            .controlSize(.large)
-            .overlay { playbackCircleOverlay }
-            .contentShape(.focusEffect, Circle())
-            .accessibilityQuickAction(style: .outline) { // ♿️
-                Button(String(player.isPlaying ? "Pause" : "Play")) {
-                    player.togglePlayback()
-                }
-            }
-            .disabled(player.isLoading)
-            
-            Button { // ⏭️
-                player.skipToNextTrack()
-                AnalyticsManager.shared.log(.tappedSkipToNextTrack)
-            } label: {
-                Image(systemName:"forward.fill")
             }
         }
+        .disabled(player.isLoading)
+    }
+    
+    private func skipAndSeekButton(_ direction: AudioPlayer.SeekDirection) -> some View {
+        Button { // ⏮️ ⏭️
+            if isSeekButtonLongPressed {
+                player.endSeeking()
+                isSeekButtonLongPressed.toggle()
+            } else {
+                direction.isBackward ?
+                    player.previousTrackCommand() :
+                    player.nextTrackCommand()
+                AnalyticsManager.shared.log(.tappedSkipToNextTrack)
+            }
+        } label: {
+            Image(systemName: direction.isBackward ? "backward.fill" : "forward.fill")
+        }
+        .simultaneousGesture(LongPressGesture(minimumDuration: 0.3).onEnded { _ in
+            isSeekButtonLongPressed = true
+            player.beginSeeking(direction)
+        })
     }
     
     private var playbackCircleOverlay: some View {
@@ -167,7 +181,8 @@ struct NewPlayerView: View {
             .foregroundStyle(LinearGradient.scOrange(.vertical, reversed: true))
             .rotationEffect(.degrees(-90))
             .opacity(player.isLoading ? 0.7 : 1)
-            .animation(.default, value: player.progress)
+            // Only animate if not setting to 0
+            .animation(.linear(duration: player.progress != 0 ? 1 : 0), value: player.progress)
             .animation(.default, value: player.isLoading)
     }
     

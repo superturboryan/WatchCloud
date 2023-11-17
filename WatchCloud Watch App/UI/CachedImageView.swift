@@ -28,6 +28,7 @@ struct CachedImageView: View {
                     if let image = state.image {
                         image.resizable()
                             .aspectRatio(contentMode: ratio == .fit ? .fit : .fill)
+                            .animation(.default, value: image)
                     } else if state.error != nil {
                         Image(systemName: fallbackSystemImageName).resizable()
                             .aspectRatio(contentMode: ratio == .fit ? .fit : .fill)

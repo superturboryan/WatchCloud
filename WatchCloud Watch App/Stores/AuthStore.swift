@@ -13,6 +13,7 @@ final class AuthStore: ObservableObject {
     @Published public private(set) var isLoggedIn: Bool = true
     
     private let service: AuthService
+    
     init(_ service: AuthService) {
         self.service = service
     }
@@ -23,22 +24,25 @@ extension AuthStore {
         try await service.authenticatedHeader
     }}
     
+    @MainActor
     func login() async throws {
         do {
             try await service.login()
-            await MainActor.run {
-                isLoggedIn = true
-            }
+            isLoggedIn = true
         } catch {
-            await MainActor.run {
-                isLoggedIn = false
-            }
-            throw error
+            isLoggedIn = false
+            throw Error.loggingIn
         }
     }
     
     func logout() {
         service.logout()
         isLoggedIn = false
+    }
+}
+
+extension AuthStore {
+    enum Error: LocalizedError {
+        case loggingIn
     }
 }

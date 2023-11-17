@@ -86,7 +86,7 @@ struct PlayerView: View {
     var playbackButtons: some View {
         HStack(spacing: 28) {
             // Previous
-            Button { player.skipToPreviousTrack() } label: {
+            Button { player.previousTrackCommand() } label: {
                 Image(systemName: "backward.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -122,9 +122,7 @@ struct PlayerView: View {
             .frame(width: 55, height: 55)
             
             // Next
-            Button {
-                player.skipToNextTrack()
-            } label: {
+            Button { player.nextTrackCommand() } label: {
                 Image(systemName: "forward.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fill)

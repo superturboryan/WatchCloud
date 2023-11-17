@@ -2,7 +2,7 @@
 
 *watchOS client for SoundCloud*
 
-### App Store pages: [🇺🇸](https://apps.apple.com/us/app/watchcloud/id6466678799) [🇬🇧](https://apps.apple.com/gb/app/watchcloud/id6466678799) [🇫🇷](https://apps.apple.com/fr/app/watchcloud/id6466678799) [🇩🇪](https://apps.apple.com/de/app/watchcloud/id6466678799)
+### App Store pages: [🇺🇸](https://apps.apple.com/us/app/watchcloud/id6466678799) [🇨🇦](https://apps.apple.com/ca/app/watchcloud/id6466678799) [🇬🇧](https://apps.apple.com/gb/app/watchcloud/id6466678799) [🇫🇷](https://apps.apple.com/fr/app/watchcloud/id6466678799) [🇩🇪](https://apps.apple.com/de/app/watchcloud/id6466678799)
 
 ## Screenshots (v1.1.2)
 
@@ -32,7 +32,8 @@
 </p>
 
 ## Dependencies
-📦 [SoundCloud-Swift](https://github.com/superturboryan/SoundCloud-api)  
-📦 [Nuke](https://github.com/kean/Nuke)  
 📦 [KeychainSwift](https://github.com/evgenyneu/keychain-swift/)  
-📦 [QRCode](https://github.com/dagronf/QRCode)
+📦 [Mixpanel](https://github.com/mixpanel/mixpanel-swift)    
+📦 [Nuke](https://github.com/kean/Nuke)  
+📦 [QRCode](https://github.com/dagronf/QRCode)  
+📦 [SoundCloud-Swift](https://github.com/superturboryan/SoundCloud-api)    

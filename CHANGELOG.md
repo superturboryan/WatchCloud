@@ -1,8 +1,22 @@
+# 1.1.4
+🌎 Published 17 November  
+🔨 Xcode 15.0  
+⌚️ watchOS 10.0  
+📦 **SoundCloud Swift Package 1.0.1 ⭐️**  
+
+### ✨ Features
+- Fast-forward + rewind tracks
+- Unit tests
+
+### 🐞 Bug fixes
+- Number formatting for 1000s doesn't show decimal (123.4k -> 123k)
+
+
 # 1.1.3
-🌎 Published 26 October
-🔨 Xcode 15.0
-⌚️ watchOS 10.0
-☁️📦 SoundCloud Swift Package 1.0.0
+🌎 Published 26 October  
+🔨 Xcode 15.0  
+⌚️ watchOS 10.0  
+📦 SoundCloud Swift Package 1.0.0  
 
 ### 🐞 Bug fixes
 - Add @MainActor back to AudioPlayer class declaration
@@ -10,10 +24,10 @@
 
 
 # 1.1.2
-🌎 Published 24 October
-🔨 Xcode 15.0
-⌚️ watchOS 10.0
-☁️📦 **SoundCloud Swift Package 1.0.0 ⭐️**
+🌎 Published 24 October  
+🔨 Xcode 15.0  
+⌚️ watchOS 10.0  
+📦 **SoundCloud Swift Package 1.0.0 ⭐️**  
 
 ### ✨ Features
 - Display QR code instead of artwork when lumininance is reduced
@@ -25,10 +39,10 @@
 
 
 # 1.1.1
-🌎 Published 16 October
-🔨 Xcode 15.0
-⌚️ watchOS 10.0
-☁️📦 SoundCloud Swift Package 0.0.3
+🌎 Published 16 October  
+🔨 Xcode 15.0  
+⌚️ watchOS 10.0  
+📦 SoundCloud Swift Package 0.0.3  
 
 ### ✨ Features
 - Italian, Japanese localizations
@@ -40,10 +54,10 @@
 
 
 # 1.1.0
-🌎 Published 11 October
+🌎 Published 11 October  
 🔨 Xcode 15.0  
-⌚️ watchOS 10.0  
-☁️📦 SoundCloud Swift Package 0.0.3
+⌚️ watchOS 10.0      
+📦 SoundCloud Swift Package 0.0.3  
 
 ### ✨ Features
 - View followed artists
@@ -60,10 +74,10 @@
 
 
 # 1.0.3
-🌎 Published 2 October 
+🌎 Published 2 October  
 🔨 Xcode 15.0  
 ⌚️ watchOS 10.0  
-☁️📦 SoundCloud Swift Package 0.0.3
+📦 SoundCloud Swift Package 0.0.3
 
 ### ✨ Features
 - Use new .contentTransition(.symbolEffect(.replace)) for icon transitions
@@ -80,7 +94,7 @@
 🌎 Published 27 September  
 🔨 Xcode 15.0  
 ⌚️ watchOS 10.0  
-☁️📦 **SoundCloud Swift Package 0.0.3 ⭐️**
+📦 **SoundCloud Swift Package 0.0.3 ⭐️**
 
 ### ✨ Features
 - Redesigned PlayerView for watchOS 10: bottom toolbar, show track artwork
@@ -96,7 +110,7 @@
 🌎 Published 23 September  
 🔨 **Xcode 15.0 ⭐️**  
 ⌚️ **watchOS 10.0 ⭐️**  
-☁️📦 **SoundCloud Swift Package 0.0.2 ⭐️**
+📦 **SoundCloud Swift Package 0.0.2 ⭐️**
 
 ### ✨ Features
 - Watch complication: open app (circular, corner)
@@ -116,7 +130,7 @@
 🌎 Published 19 September  
 🔨 Xcode 14.3.1  
 ⌚️ watchOS 9.4  
-☁️📦 SoundCloud Swift Package 0.0.1
+📦 SoundCloud Swift Package 0.0.1
   
 ### ✨ Features
 - Sign in with SoundCloud account, refresh OAuth access token

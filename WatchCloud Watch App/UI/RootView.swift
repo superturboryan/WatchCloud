@@ -40,6 +40,9 @@ struct RootView: View {
                 Task { await load() }
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .performLogout)) { _ in
+            performLogout()
+        }
     }
     
     @ViewBuilder
@@ -98,8 +101,7 @@ struct RootView: View {
             loaded = true
         } catch SoundCloud.Error.userNotAuthorized {
             print("❌ AuthTokens don't exist or API denied access. Performing logout, presenting login screen...")
-            authStore.logout()
-            userStore.reset()
+            performLogout()
             return
         } catch SoundCloud.Error.tooManyRequests {
             AnalyticsManager.shared.log(.tooManyRequests)
@@ -111,10 +113,18 @@ struct RootView: View {
         AnalyticsManager.shared.log(.loadLibrarySuccess)
         loading = false
     }
+    
+    private func performLogout() {
+        authStore.logout()
+        userStore.reset()
+        searchStore.reset()
+        AnalyticsManager.shared.log(.logout)
+    }
 }
 
 #Preview {
     RootView()
+        .environmentObject(testAudioPlayer)
         .environmentObject(AudioStore(testSC))
         .environmentObject(AuthStore(testSC))
         .environmentObject(UserStore(testSC))
@@ -122,4 +132,5 @@ struct RootView: View {
 
 extension Notification.Name {
     static let switchToPlayerTab = Notification.Name("switchToPlayerTab")
+    static let performLogout = Notification.Name("performLogout")
 }

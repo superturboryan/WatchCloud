@@ -9,6 +9,10 @@ import Foundation
 
 struct Config {
     private init() {}
+    
+    static let isTestEnvironment = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+    // NSClassFromString("XCTestCase") != nil
+    
     static let apiUrl = "https://api.soundcloud.com/"
     static let clientId = Bundle.main.object(forInfoDictionaryKey: "SC_CLIENT_ID") as! String
     static let clientSecret = Bundle.main.object(forInfoDictionaryKey: "SC_CLIENT_SECRET") as! String

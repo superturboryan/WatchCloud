@@ -36,7 +36,7 @@ public extension Int {
             return "\(self)"
         }
         if self < 1_000_000 {
-            return String(format: "%.1fk", Double(self) / Double(1_000))
+            return String(format: "%.0fk", Double(self) / Double(1_000))
         }
         return String(format: "%.1fM", Double(self) / Double(1_000_000))
     }

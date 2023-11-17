@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "4E3E6E41-11B1-44B4-A7BF-7102A3B79986",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:WatchCloud.xcodeproj",
+          "identifier" : "946F38952AB079C9008CE9D1",
+          "name" : "WatchCloud Watch App"
+        }
+      ]
+    },
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:WatchCloud.xcodeproj",
+      "identifier" : "946F38952AB079C9008CE9D1",
+      "name" : "WatchCloud Watch App"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:WatchCloud.xcodeproj",
+        "identifier" : "94474B552AF2723E00BEA5F0",
+        "name" : "Unit Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -9,7 +9,6 @@ import Combine
 import Foundation
 import SoundCloud
 
-@MainActor
 final class AudioStore: NSObject, ObservableObject {
     
     @Published var loadedPlaylists: [Int : Playlist] = [:]
@@ -36,183 +35,26 @@ final class AudioStore: NSObject, ObservableObject {
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
     private var subscriptions = Set<AnyCancellable>()
-    private let service: SoundCloud
-    init(_ service: SoundCloud) {
+    private let service: SoundCloudAPI
+    
+    init(_ service: SoundCloudAPI) {
         self.service = service
         super.init()
-        loadDefaultPlaylists()
-    }
-}
-
-// MARK: - Tracks + Playlists 💿
-extension AudioStore {
-    func getTracksForUser(_ id: Int, _ limit: Int = 20) async throws -> Page<Track> {
-        try await service.getTracksForUser(id, limit)
-    }
-    
-    func getLikedTracksForUser(_ id: Int, _ limit: Int = 20) async throws -> Page<Track> {
-        try await service.getLikedTracksForUser(id, limit)
-    }
-    
-    func getTracksForPlaylist(_ id: Int) async throws -> Page<Track> {
-        try await service.getTracksForPlaylist(id)
-    }
-    
-    func pageOfTracks(_ pageURL: String) async throws -> Page<Track> {
-        try await service.pageOfItems(for: pageURL)
-    }
-    
-    func pageOfPlaylists(_ pageURL: String) async throws -> Page<Playlist> {
-        try await service.pageOfItems(for: pageURL)
-    }
-    
-    func loadTracksForPlaylist(with id: Int) async throws {
-        if let userPlaylistType = PlaylistType(rawValue: id) {
-            switch userPlaylistType {
-            case .likes:
-                try await loadMyLikedTracksPlaylistWithTracks()
-            case .recentlyPosted:
-                try await loadRecentlyPostedPlaylistWithTracks()
-            // These playlists are not reloaded here
-            case .nowPlaying, .downloads:
-                print("⚠️ SC.loadTracksForPlaylist has no effect. Playlist type reloads automatically")
-                break
-            }
-        } else {
-            let page = try await getTracksForPlaylist(id)
-            loadedPlaylists[id]?.tracks = page.items
-            loadedPlaylists[id]?.nextPageUrl = page.nextPage
-        }
-    }
-}
-
-// MARK: - Like + Follow 🧡
-extension AudioStore {
-    func isLiked(_ track: Track) -> Bool {
-        (loadedPlaylists[PlaylistType.likes.rawValue]?.tracks ?? []).contains(track)
-    }
-    
-    func isLiked(_ playlist: Playlist) -> Bool {
-        myLikedPlaylistIds.contains(playlist.id)
-    }
-    
-    func toggleLikedTrack(_ track: Track) async throws {
-        if isLiked(track) {
-            try await unlikeTrack(track)
-        } else {
-            try await likeTrack(track)
-        }
-    }
-    
-    func toggleLikedPlaylist(_ playlist: Playlist) async throws {
-        if isLiked(playlist) {
-            try await unlikePlaylist(playlist)
-        } else {
-            try await likePlaylist(playlist)
-        }
-    }
-    
-    private func likeTrack(_ track: Track) async throws {
-        guard !(loadedPlaylists[PlaylistType.likes.rawValue]?.tracks ?? []).contains(track) else {
-            return // throw?
-        }
-        loadedPlaylists[PlaylistType.likes.rawValue]?.tracks?.insert(track, at: 0)
-        do {
-            try await service.likeTrack(track)
-        } catch {
-            // Undo local operation if network operation fails
-            loadedPlaylists[PlaylistType.likes.rawValue]?.tracks?.removeFirst()
-            throw error
-        }
-    }
-    
-    private func unlikeTrack(_ track: Track) async throws {
-        guard let index = (loadedPlaylists[PlaylistType.likes.rawValue]?.tracks ?? []).firstIndex(of: track) else {
-            return // throw?
-        }
-        loadedPlaylists[PlaylistType.likes.rawValue]?.tracks?.remove(at: index)
-        do {
-            try await service.unlikeTrack(track)
-        } catch {
-            // Undo local operation if network operation fails
-            loadedPlaylists[PlaylistType.likes.rawValue]?.tracks?.insert(track, at: index)
-            throw error
-        }
-    }
-    
-    private func likePlaylist(_ playlist: Playlist) async throws {
-        guard !myLikedPlaylistIds.contains(playlist.id) else {
-            return // throw?
-        }
-        myLikedPlaylistIds.insert(playlist.id, at: 0)
-        do {
-            try await service.likePlaylist(playlist)
-        } catch {
-            // Undo local operation if network operation fails
-            myLikedPlaylistIds.removeFirst()
-            throw error
-        }
-    }
-    
-    private func unlikePlaylist(_ playlist: Playlist) async throws {
-        guard let index = myLikedPlaylistIds.firstIndex(of: playlist.id) else {
-            return // throw?
-        }
-        myLikedPlaylistIds.remove(at: index)
-        do {
-            try await service.unlikePlaylist(playlist)
-        } catch {
-            // Undo local operation if network operation fails
-            myLikedPlaylistIds.insert(playlist.id, at: index)
-            throw error
-        }
-    }
-}
-
-// MARK: - Queue Helpers 📜
-extension AudioStore {
-    var isLoadedTrackDownloaded: Bool {
-        guard let loadedTrack else { return false }
-        return downloadedTracks.contains(loadedTrack)
-    }
-    
-    func setNowPlayingQueue(with tracks: [Track]) {
-        loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks = tracks
-    }
-    
-    var nowPlayingQueue: [Track]? {
-        loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks
-    }
-    
-    var nextTrackInNowPlayingQueue: Track? {
-        guard let queue = nowPlayingQueue
-        else { return nil }
-        
-        let isEndOfQueue = loadedTrackPlaylistIndex == queue.count - 1
-        let nextTrackIndex = isEndOfQueue ? 0 : loadedTrackPlaylistIndex + 1
-        return queue[nextTrackIndex]
-    }
-    
-    var previousTrackInNowPlayingQueue: Track? {
-        guard let queue = nowPlayingQueue,
-              loadedTrackPlaylistIndex > 0
-        else { return nil }
-        
-        let previousTrackIndex = loadedTrackPlaylistIndex - 1
-        return queue[previousTrackIndex]
     }
 }
 
 // MARK: - My user 💁
 extension AudioStore {
     func load() async throws {
-        try loadDownloadedTracks()
+        await loadDefaultPlaylists()
+        try await loadDownloadedTracks()
         try await loadMyPlaylistsWithoutTracks()
         try await loadMyLikedPlaylistsWithoutTracks()
         try await loadMyLikedTracksPlaylistWithTracks()
         try await loadRecentlyPostedPlaylistWithTracks()
     }
     
+    @MainActor
     private func loadDefaultPlaylists() {
         loadedPlaylists.removeAll()
         let myUser = User(id: -1)
@@ -245,31 +87,216 @@ extension AudioStore {
         )
     }
     
+    @MainActor
     private func loadMyPlaylistsWithoutTracks() async throws {
-        let myPlaylists = try await service.getMyPlaylistsWithoutTracks()
-        myPlaylistIds = myPlaylists.map(\.id)
-        for playlist in myPlaylists {
-            loadedPlaylists[playlist.id] = playlist
+        do {
+            let myPlaylists = try await service.getMyPlaylistsWithoutTracks()
+            myPlaylistIds = myPlaylists.map(\.id)
+            for playlist in myPlaylists {
+                loadedPlaylists[playlist.id] = playlist
+            }
+        } catch {
+            throw Error.loadingMyPlaylists
         }
     }
     
+    @MainActor
     private func loadMyLikedPlaylistsWithoutTracks() async throws {
-        let myLikedPlaylists = try await service.getMyLikedPlaylistsWithoutTracks()
-        myLikedPlaylistIds = myLikedPlaylists.map(\.id)
-        for playlist in myLikedPlaylists {
-            loadedPlaylists[playlist.id] = playlist
+        do {
+            let myLikedPlaylists = try await service.getMyLikedPlaylistsWithoutTracks()
+            myLikedPlaylistIds = myLikedPlaylists.map(\.id)
+            for playlist in myLikedPlaylists {
+                loadedPlaylists[playlist.id] = playlist
+            }
+        } catch {
+            throw Error.loadingMyLikedPlaylists
         }
     }
     
+    @MainActor
     private func loadMyLikedTracksPlaylistWithTracks() async throws {
         let page = try await service.getMyLikedTracks()
         loadedPlaylists[PlaylistType.likes.rawValue]?.tracks = page.items
         loadedPlaylists[PlaylistType.likes.rawValue]?.nextPageUrl = page.nextPage
     }
     
+    @MainActor
     private func loadRecentlyPostedPlaylistWithTracks() async throws {
         loadedPlaylists[PlaylistType.recentlyPosted.rawValue]?.tracks =
         try await service.getMyFollowingsRecentlyPosted()
+    }
+}
+
+// MARK: - Tracks + Playlists 💿
+extension AudioStore {
+    func getTracksForUser(_ id: Int, _ limit: Int = 20) async throws -> Page<Track> {
+        do { return try await service.getTracksForUser(id, limit) }
+        catch { throw Error.gettingTracksForUser }
+    }
+    
+    func getLikedTracksForUser(_ id: Int, _ limit: Int = 20) async throws -> Page<Track> {
+        do { return try await service.getLikedTracksForUser(id, limit) }
+        catch { throw Error.gettingLikedTracksForUser }
+    }
+    
+    func getTracksForPlaylist(_ id: Int) async throws -> Page<Track> {
+        do { return try await service.getTracksForPlaylist(id) }
+        catch { throw Error.gettingTracksForPlaylist }
+    }
+    
+    func pageOfTracks(_ pageURL: String) async throws -> Page<Track> {
+        do { return try await service.pageOfItems(for: pageURL) }
+        catch { throw Error.gettingPageOfTracks }
+    }
+    
+    func pageOfPlaylists(_ pageURL: String) async throws -> Page<Playlist> {
+        do { return try await service.pageOfItems(for: pageURL) }
+        catch { throw Error.gettingPageOfPlaylists }
+    }
+    
+    @MainActor
+    func loadTracksForPlaylist(with id: Int) async throws {
+        if let userPlaylistType = PlaylistType(rawValue: id) {
+            switch userPlaylistType {
+            case .likes:
+                try await loadMyLikedTracksPlaylistWithTracks()
+            case .recentlyPosted:
+                try await loadRecentlyPostedPlaylistWithTracks()
+            // These playlists are not reloaded here
+            case .nowPlaying, .downloads:
+                print("⚠️ SC.loadTracksForPlaylist has no effect. Playlist type reloads automatically")
+                break
+            }
+        } else {
+            let page = try await getTracksForPlaylist(id)
+            loadedPlaylists[id]?.tracks = page.items
+            loadedPlaylists[id]?.nextPageUrl = page.nextPage
+        }
+    }
+}
+
+// MARK: - Like + Follow 🧡
+extension AudioStore {
+    
+    func isLiked(_ track: Track) -> Bool {
+        (loadedPlaylists[PlaylistType.likes.rawValue]?.tracks ?? []).contains(track)
+    }
+    
+    func isLiked(_ playlist: Playlist) -> Bool {
+        myLikedPlaylistIds.contains(playlist.id)
+    }
+    
+    func toggleLikedTrack(_ track: Track) async throws {
+        do {
+            if isLiked(track) { try await unlikeTrack(track) }
+            else { try await likeTrack(track) }
+        } catch {
+            throw Error.togglingLikedTrack
+        }
+    }
+    
+    func toggleLikedPlaylist(_ playlist: Playlist) async throws {
+        do {
+            if isLiked(playlist) { try await unlikePlaylist(playlist) }
+            else { try await likePlaylist(playlist) }
+        } catch {
+            throw Error.togglingLikedPlaylist
+        }
+    }
+    
+    @MainActor
+    private func likeTrack(_ track: Track) async throws {
+        guard !(loadedPlaylists[PlaylistType.likes.rawValue]?.tracks ?? []).contains(track) else {
+            return // throw?
+        }
+        loadedPlaylists[PlaylistType.likes.rawValue]?.tracks?.insert(track, at: 0)
+        do {
+            try await service.likeTrack(track)
+        } catch {
+            // Undo local operation if network operation fails
+            loadedPlaylists[PlaylistType.likes.rawValue]?.tracks?.removeFirst()
+            throw error
+        }
+    }
+    
+    @MainActor
+    private func unlikeTrack(_ track: Track) async throws {
+        guard let index = (loadedPlaylists[PlaylistType.likes.rawValue]?.tracks ?? []).firstIndex(of: track) else {
+            return // throw?
+        }
+        loadedPlaylists[PlaylistType.likes.rawValue]?.tracks?.remove(at: index)
+        do {
+            try await service.unlikeTrack(track)
+        } catch {
+            // Undo local operation if network operation fails
+            loadedPlaylists[PlaylistType.likes.rawValue]?.tracks?.insert(track, at: index)
+            throw error
+        }
+    }
+    
+    @MainActor
+    private func likePlaylist(_ playlist: Playlist) async throws {
+        guard !myLikedPlaylistIds.contains(playlist.id) else {
+            return // throw?
+        }
+        myLikedPlaylistIds.insert(playlist.id, at: 0)
+        do {
+            try await service.likePlaylist(playlist)
+        } catch {
+            // Undo local operation if network operation fails
+            myLikedPlaylistIds.removeFirst()
+            throw error
+        }
+    }
+    
+    @MainActor
+    private func unlikePlaylist(_ playlist: Playlist) async throws {
+        guard let index = myLikedPlaylistIds.firstIndex(of: playlist.id) else {
+            return // throw?
+        }
+        myLikedPlaylistIds.remove(at: index)
+        do {
+            try await service.unlikePlaylist(playlist)
+        } catch {
+            // Undo local operation if network operation fails
+            myLikedPlaylistIds.insert(playlist.id, at: index)
+            throw error
+        }
+    }
+}
+
+// MARK: - Queue Helpers 📜
+extension AudioStore {
+    var isLoadedTrackDownloaded: Bool {
+        guard let loadedTrack else { return false }
+        return downloadedTracks.contains(loadedTrack)
+    }
+    
+    @MainActor
+    func setNowPlayingQueue(with tracks: [Track]) {
+        loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks = tracks
+    }
+    
+    var nowPlayingQueue: [Track]? {
+        loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks
+    }
+    
+    var nextTrackInNowPlayingQueue: Track? {
+        guard let queue = nowPlayingQueue
+        else { return nil }
+        
+        let isEndOfQueue = loadedTrackPlaylistIndex == queue.count - 1
+        let nextTrackIndex = isEndOfQueue ? 0 : loadedTrackPlaylistIndex + 1
+        return queue[nextTrackIndex]
+    }
+    
+    var previousTrackInNowPlayingQueue: Track? {
+        guard let queue = nowPlayingQueue,
+              loadedTrackPlaylistIndex > 0
+        else { return nil }
+        
+        let previousTrackIndex = loadedTrackPlaylistIndex - 1
+        return queue[previousTrackIndex]
     }
 }
 
@@ -280,6 +307,7 @@ extension AudioStore {
         try await downloadTrack(track, from: streamInfo.httpMp3128Url)
     }
     
+    @MainActor
     func removeDownload(_ trackToRemove: Track) throws {
         let trackMp3Url = trackToRemove.localFileUrl(withExtension: Track.FileExtension.mp3)
         let trackJsonUrl = trackToRemove.localFileUrl(withExtension: Track.FileExtension.json)
@@ -292,6 +320,7 @@ extension AudioStore {
         }
     }
     
+    @MainActor
     func cancelDownloadInProgress(for track: Track) throws {
         guard downloadsInProgress.keys.contains(track), let task = downloadTasks[track] else {
             throw Error.trackDownloadNotInProgress
@@ -304,6 +333,8 @@ extension AudioStore {
 
 // MARK: - Private Downloads 🙈
 private extension AudioStore {
+    
+    @MainActor
     func downloadTrack(_ track: Track, from url: String) async throws {
         // Checks before starting download
         let localMp3Url = track.localFileUrl(withExtension: Track.FileExtension.mp3)
@@ -332,6 +363,7 @@ private extension AudioStore {
         guard !statusCode.errorOccurred else {
             throw Error.network(statusCode)
         }
+        // Download completed successfully...
         downloadsInProgress.removeValue(forKey: track)
         // Save track data as mp3
         try trackData.write(to: localMp3Url)
@@ -345,16 +377,17 @@ private extension AudioStore {
         downloadedTracks.append(trackWithLocalFileUrl)
     }
     
+    @MainActor
     func loadDownloadedTracks() throws {
         // Get id of downloaded tracks from device's documents directory
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let downloadedTrackIds = try FileManager.default.contentsOfDirectory(atPath: documentsURL.path)
+        let downloadedTrackIdList = try FileManager.default.contentsOfDirectory(atPath: documentsURL.path)
             .filter { $0.lowercased().contains(Track.FileExtension.mp3) } // Get all mp3 files
             .map { $0.replacingOccurrences(of: ".\(Track.FileExtension.mp3)", with: "") } // Remove mp3 extension so only id remains
         
         // Load track for each id, set local mp3 file url for track
         var loadedTracks = [Track]()
-        for id in downloadedTrackIds {
+        for id in downloadedTrackIdList {
             let trackJsonURL = documentsURL.appendingPathComponent("\(id).\(Track.FileExtension.json)")
             let trackJsonData = try Data(contentsOf: trackJsonURL)
             var downloadedTrack = try decoder.decode(Track.self, from: trackJsonData)
@@ -369,6 +402,8 @@ private extension AudioStore {
 }
 
 extension AudioStore: URLSessionTaskDelegate {
+    
+    @MainActor
     func urlSession(_ session: URLSession, didCreateTask task: URLSessionTask) {
         // ‼️ Get track id being downloaded from request header field
         guard
@@ -391,7 +426,19 @@ extension AudioStore: URLSessionTaskDelegate {
 }
 
 extension AudioStore {
-    enum Error: LocalizedError {
+    enum Error: LocalizedError, Equatable {
+        case gettingTracksForUser
+        case gettingLikedTracksForUser
+        case gettingTracksForPlaylist
+        case gettingPageOfTracks
+        case gettingPageOfPlaylists
+        
+        case loadingMyPlaylists
+        case loadingMyLikedPlaylists
+        
+        case togglingLikedTrack
+        case togglingLikedPlaylist
+        
         case trackDownloadNotInProgress
         case downloadAlreadyExists
         case userNotAuthorized

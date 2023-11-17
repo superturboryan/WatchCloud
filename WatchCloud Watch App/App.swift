@@ -9,7 +9,6 @@ import SoundCloud
 import SwiftUI
 import TipKit
 
-@main
 struct WatchCloud_Watch_AppApp: App {
     
     @StateObject var audioStore = CompositionRoot.audioStore
@@ -23,7 +22,7 @@ struct WatchCloud_Watch_AppApp: App {
     
     init() {
         _ = AnalyticsManager.shared // Calls init on shared instance
-        configureTipKit()
+        configureTips()
     }
     
     var body: some Scene {
@@ -46,7 +45,7 @@ private extension WatchCloud_Watch_AppApp {
         isFirstLaunch = false
     }
     
-    func configureTipKit() {
+    func configureTips() {
         if #available(watchOS 10, *) {
 //            try? Tips.resetDatastore() // ⚠️ Always showing tips
             try? Tips.configure([

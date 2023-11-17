@@ -82,16 +82,13 @@ struct SearchView: View {
     }
     
     private func performSearch(with query: String) {
+        guard !query.isEmpty else { return }
         Task {
             switch searchType {
-            case .tracks:
-                trackResults = try await searchStore.searchForTracks(query, 100)
-            case .playlists:
-                playlistResults = try await searchStore.searchForPlaylists(query)
-            case .artists:
-                artistResults = try await searchStore.searchForUsers(query)
+            case .tracks: trackResults = try await searchStore.searchForTracks(query, 100)
+            case .playlists: playlistResults = try await searchStore.searchForPlaylists(query)
+            case .artists: artistResults = try await searchStore.searchForUsers(query)
             }
-            
             showSearchResults = true
         }
     }
