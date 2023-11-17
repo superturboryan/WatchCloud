@@ -26,42 +26,38 @@ struct NewPlayerView: View {
     
     var body: some View {
         NavigationStack { // Needed for toolbar
-            playerView
-        }
-    }
-    
-    private var playerView: some View {
-        VStack(spacing: 14) {
-            if isLuminanceReduced, let track = audioStore.loadedTrack {
-                QRCodeImageView(url: track.permalinkUrl).scaleEffect(x: 1.2, y: 1.2)
-            } else {
-                artwork.opacity(isLuminanceReduced ? 0 : 1)
+            VStack(spacing: 14) {
+                if isLuminanceReduced, let track = audioStore.loadedTrack {
+                    QRCodeImageView(url: track.permalinkUrl).scaleEffect(x: 1.2, y: 1.2)
+                } else {
+                    artwork.opacity(isLuminanceReduced ? 0 : 1)
+                }
+                trackInfoLabels
             }
-            trackInfoLabels
-        }
-        .animation(.default, value: isLuminanceReduced)
-        .padding(.bottom, 6)
-        .padding(.top, -6)
-        .toolbar {
-            optionsButton
-            playbackButtons
-        }
-        .sheet(isPresented: $showOptions) {
-            if let currentTrackBinding = Binding($audioStore.loadedTrack) {
-                PlayerOptionsView(track: currentTrackBinding)
+            .animation(.default, value: isLuminanceReduced)
+            .padding(.bottom, 6)
+            .padding(.top, -6)
+            .toolbar {
+                optionsButton
+                playbackButtons
             }
-        }
-        .background { volumeControlView } // Hack to control volume with crown
-        .onReceive(AudioPlayer.systemVolumePublisher) {
-            handleVolumeUpdate($0)
-        }
-        .onReceive(volumeTimer) { _ in
-            volumeCircleVisibleTime += 1
-        }
-        .onChange(of: volumeCircleVisibleTime) { visibleTime in
-            if visibleTime > 1 {
-                showVolumeCircle = false
-                volumeCircleVisibleTime = 0
+            .sheet(isPresented: $showOptions) {
+                if let currentTrackBinding = Binding($audioStore.loadedTrack) {
+                    PlayerOptionsView(track: currentTrackBinding)
+                }
+            }
+            .background { volumeControlView } // Hack to control volume with crown
+            .onReceive(AudioPlayer.systemVolumePublisher) {
+                handleVolumeUpdate($0)
+            }
+            .onReceive(volumeTimer) { _ in
+                volumeCircleVisibleTime += 1
+            }
+            .onChange(of: volumeCircleVisibleTime) { visibleTime in
+                if visibleTime > 1 {
+                    showVolumeCircle = false
+                    volumeCircleVisibleTime = 0
+                }
             }
         }
     }
@@ -126,7 +122,6 @@ struct NewPlayerView: View {
         .padding(1)
     }
     
-    private var yOffset: CGFloat = 2
     private var playbackButtons: some ToolbarContent {
         ToolbarItemGroup(placement: .bottomBar) {
             skipAndSeekButton(.backward)
@@ -156,14 +151,15 @@ struct NewPlayerView: View {
     
     private func skipAndSeekButton(_ direction: AudioPlayer.SeekDirection) -> some View {
         Button { // ⏮️ ⏭️
+            // 💡 After simultaneous `LongPressGesture` ends, this gesture is called a single time
+            //    as well. Check if this closure is called as a result of the long press gesture
+            //    (as opposed to a regular tap gesture) and the cancel the seeking
             if isSeekButtonLongPressed {
                 player.endSeeking()
                 isSeekButtonLongPressed.toggle()
             } else {
-                direction.isBackward ?
-                    player.previousTrackCommand() :
-                    player.nextTrackCommand()
-                AnalyticsManager.shared.log(.tappedSkipToNextTrack)
+                direction.isBackward ? player.previousTrackCommand() : player.nextTrackCommand()
+                AnalyticsManager.shared.log(direction.isBackward ? .tappedSkipToPreviousTrack : .tappedSkipToNextTrack)
             }
         } label: {
             Image(systemName: direction.isBackward ? "backward.fill" : "forward.fill")
