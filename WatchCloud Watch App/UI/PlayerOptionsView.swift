@@ -129,15 +129,14 @@ struct PlayerOptionsView: View {
     
     @ViewBuilder
     var playbackSpeedView: some View {
-        let speedString = "\(String(format: "%.\(player.playbackSpeed.numDecimalToDisplay)f", player.playbackSpeed.rawValue))x"
         ZStack {
             Color.scOrange.opacity(0.2)
-            Text(verbatim: speedString)
+            Text(verbatim: player.selectedPlaybackSpeed.displayable)
                 .font(.system(size: 28, weight: .semibold))
                 .minimumScaleFactor(0.8)
                 .padding(.horizontal, 9)
                 .foregroundStyle(LinearGradient.scOrange(.vertical))
-                .animation(.default, value: speedString)
+                .animation(.default, value: player.selectedPlaybackSpeed)
         }
         .size(buttonSize)
         .fixedSize()
@@ -189,6 +188,10 @@ extension AudioPlayer.PlaybackSpeed {
         case .OneAndThreeQuarters: 2
         case .Double: 0
         }
+    }
+    
+    var displayable: String {
+        "\(String(format: "%.\(numDecimalToDisplay)f", rawValue))x"
     }
 }
 
