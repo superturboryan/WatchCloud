@@ -546,7 +546,7 @@
 			path = Complication;
 			sourceTree = "<group>";
 		};
-		94B634492ABE5B7700E6FCDA /* 1.0 */ = {
+		94B634492ABE5B7700E6FCDA /* 1.0.0 */ = {
 			isa = PBXGroup;
 			children = (
 				94B6344D2ABE5B7700E6FCDA /* Demo.gif */,
@@ -555,7 +555,7 @@
 				94B6344A2ABE5B7700E6FCDA /* Playlist Summary - S845.png */,
 				94B6344E2ABE5B7700E6FCDA /* Playlist tracks - S845.png */,
 			);
-			path = 1.0;
+			path = 1.0.0;
 			sourceTree = "<group>";
 		};
 		94B6344F2ABE5B7700E6FCDA /* 1.0.1 */ = {
@@ -574,7 +574,7 @@
 		94F3FCD02AB9A3B5005D03DF /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
-				94B634492ABE5B7700E6FCDA /* 1.0 */,
+				94B634492ABE5B7700E6FCDA /* 1.0.0 */,
 				94B6344F2ABE5B7700E6FCDA /* 1.0.1 */,
 				941A00EC2AC4474C000F4693 /* 1.0.2 */,
 				943477C12AD5FC5700A6DED6 /* 1.1.0 */,
