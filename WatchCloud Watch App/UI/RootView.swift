@@ -18,7 +18,7 @@ struct RootView: View {
     @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var searchStore: SearchStore
     
-    @State var loaded = false
+    @State var loaded = false // Rename/refactor these loading variables...
     @State var loading = false
     @State private var selectedTab: RootTab = .library
     

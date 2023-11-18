@@ -5,7 +5,7 @@
 📦 SoundCloud Swift Package 1.0.1   
 
 ### 🐞 Bug fixes
-- New installs weren't being shown loging screen! 
+- New installs weren't being shown login screen! 
     - Check if UserStore throws error when loading, perform logout
 
 
