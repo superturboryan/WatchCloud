@@ -5,6 +5,7 @@
 //  Created by Ryan Forsyth on 2023-08-19.
 //
 
+import OSLog
 import SoundCloud
 import SwiftUI
 
@@ -94,24 +95,27 @@ struct RootView: View {
     
     func load() async {
         loading = true
+        defer {
+            loading = false
+        }
         do {
             try await userStore.load()
             try await audioStore.load()
             searchStore.load()
             loaded = true
-        } catch SoundCloud.Error.userNotAuthorized {
-            print("❌ AuthTokens don't exist or API denied access. Performing logout, presenting login screen...")
+            AnalyticsManager.shared.log(.loadLibrarySuccess)
+        } catch UserStore.Error.loadingMyProfile,
+                SoundCloud.Error.userNotAuthorized {
+            Logger.rootView.info("❌ Profile doesn't exist or API denied access. Performing logout, presenting login screen...")
             performLogout()
             return
-        } catch SoundCloud.Error.tooManyRequests {
+        } catch SoundCloud.Error.tooManyRequests { // Review if this error is actually thrown
             AnalyticsManager.shared.log(.tooManyRequests)
             loaded = true
         } catch {
-            print("Failed to load library but AuthTokens exist, going into offline mode...")
+            Logger.rootView.info("Failed to load library but profile exists, going into offline mode...")
             loaded = true
         }
-        AnalyticsManager.shared.log(.loadLibrarySuccess)
-        loading = false
     }
     
     private func performLogout() {

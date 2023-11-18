@@ -1,3 +1,14 @@
+# 1.1.5
+🌎 Published 18 November  
+🔨 Xcode 15.0  
+⌚️ watchOS 10.0  
+📦 SoundCloud Swift Package 1.0.1   
+
+### 🐞 Bug fixes
+- New installs weren't being shown loging screen! 
+    - Check if UserStore throws error when loading, perform logout
+
+
 # 1.1.4
 🌎 Published 17 November  
 🔨 Xcode 15.0  

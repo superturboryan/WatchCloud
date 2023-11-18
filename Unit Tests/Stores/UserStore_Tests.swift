@@ -142,7 +142,7 @@ final class UserStore_Tests: XCTestCase {
         XCTAssertEqual(followedUsers.count, 1)
     }
     
-    func test_followUser_throwsErrorAndUpdatesLocalState_whenServiceThrowsError() async {
+    func test_followUser_throwsErrorAndRemovesLikedUser_whenServiceThrowsError() async {
         // Given
         let expectedError = UserStore.Error.followingUser
         mockService.shouldThrowError = true
@@ -178,7 +178,7 @@ final class UserStore_Tests: XCTestCase {
         XCTAssertTrue(followedUsers.isEmpty)
     }
     
-    func test_unfollowUser_throwsErrorAndReinsertsUser_whenServiceThrowsError() async {
+    func test_unfollowUser_throwsErrorAndReinsertsLikedUser_whenServiceThrowsError() async {
         // Given
         let expectedError = UserStore.Error.unfollowingUser
         let userToUnfollow = testUser()
