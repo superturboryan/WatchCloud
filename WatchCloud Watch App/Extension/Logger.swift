@@ -12,4 +12,6 @@ extension Logger {
     static let subsystem = Bundle.main.bundleIdentifier!
     
     static let audioPlayer = Logger(subsystem: subsystem, category: "AudioPlayer")
+    
+    static let rootView = Logger(subsystem: subsystem, category: "RootView")
 }
