@@ -31,22 +31,22 @@ Country pages: [🇺🇸](https://apps.apple.com/us/app/watchcloud/id6466678799)
 📚 [Localized App Store page copy](https://docs.google.com/spreadsheets/d/1X5ar5NwSw0vT7UX9HCABxrts76Y-qbuUrhhyNw4LlDM/edit?usp=sharing)
 
 
-## Screenshots (v1.1.2)
+## Screenshots (1.1.5)
 
 <p float="center">
     <img src="Screenshots/1.1.0/LoginView%20-%20S945.png" width=200 alt="Login screen"/>
     <img src="Screenshots/1.1.2/LibraryView%20-%20S945.png" width=200 alt="Library screen"/>
     <img src="Screenshots/1.1.0/Liked%20Playlists%20-%20S945.png" width=200 alt="Liked playlists screen"/>
-    <img src="Screenshots/1.1.0/PlaylistView%20-%20S945.png" width=200 alt="Playlist screen"/>
+    <img src="Screenshots/1.1.5/PlaylistView%20-%20S945.png" width=200 alt="Playlist screen"/>
 </p>
 
 <br />
 
 <p float="center">
     <img src="Screenshots/1.1.0/UserDetailView%20Top%20Tracks%20-%20S945.png" width=200 alt="User top tracks screen"/>
-    <img src="Screenshots/1.1.0/PlayerView%20-%20S945.png" width=200 alt="Player screen"/>
+    <img src="Screenshots/1.1.5/PlayerView%20-%20S945.png" width=200 alt="Player screen"/>
     <img src="Screenshots/1.1.2/PlayerView%20-%20S945.png" width=200 alt="Player screen"/>
-    <img src="Screenshots/1.1.0/PlayerOptionsView%20-%20S945.png" width=200 alt="Player options screen"/>
+    <img src="Screenshots/1.1.2/PlayerOptionsView%20-%20S945.png" width=200 alt="Player options screen"/>
 </p>
 
 <br />
@@ -54,7 +54,7 @@ Country pages: [🇺🇸](https://apps.apple.com/us/app/watchcloud/id6466678799)
 <p float="center">
     <img src="Screenshots/1.1.2/SearchView%20-%20S945.png" width=200 alt="Search screen"/>
     <img src="Screenshots/1.1.0/UserListView%20-%20S945.png" width=200 alt="User list screen"/>
-    <img src="Screenshots/1.1.0/UserDetailView%20-%20S945.png" width=200 alt="User detail screen"/>
+    <img src="Screenshots/1.1.5/UserDetailView%20-%20S945.png" width=200 alt="User detail screen"/>
     <img src="Screenshots/1.1.2/LibraryView%20Bottom%20-%20S945.png" width=200 alt="Library screen bottom"/>
 </p>
 

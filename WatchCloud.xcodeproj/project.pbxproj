@@ -228,6 +228,10 @@
 		94923C6C2ABDBB2C00A67EBE /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		94923C6E2ABDBBD500A67EBE /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		94A31B342AB517410052A922 /* CaseIterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseIterable.swift; sourceTree = "<group>"; };
+		94B3EDB02B08E52E00C04BC5 /* PlayerView - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayerView - S945.png"; sourceTree = "<group>"; };
+		94B3EDB52B08E52E00C04BC5 /* PlaylistView - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlaylistView - S945.png"; sourceTree = "<group>"; };
+		94B3EDBA2B08EAED00C04BC5 /* PlayerOptionsView - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayerOptionsView - S945.png"; sourceTree = "<group>"; };
+		94B3EDBB2B08EB0700C04BC5 /* UserDetailView - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UserDetailView - S945.png"; sourceTree = "<group>"; };
 		94B6343A2ABDFAF900E6FCDA /* ComplicationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ComplicationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		94B6343E2ABDFAF900E6FCDA /* Complication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Complication.swift; sourceTree = "<group>"; };
 		94B634402ABDFAFA00E6FCDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -528,12 +532,23 @@
 		9488EE802AE70DDD0009EC54 /* 1.1.2 */ = {
 			isa = PBXGroup;
 			children = (
+				94B3EDBA2B08EAED00C04BC5 /* PlayerOptionsView - S945.png */,
 				9488EE812AE70DF90009EC54 /* LibraryView - S945.png */,
 				9488EE842AE7B2CA0009EC54 /* LibraryView Bottom - S945.png */,
 				9488EE832AE7B22A0009EC54 /* PlayerView - S945.png */,
 				9488EE822AE70EBD0009EC54 /* SearchView - S945.png */,
 			);
 			path = 1.1.2;
+			sourceTree = "<group>";
+		};
+		94B3EDAF2B08E4BA00C04BC5 /* 1.1.5 */ = {
+			isa = PBXGroup;
+			children = (
+				94B3EDBB2B08EB0700C04BC5 /* UserDetailView - S945.png */,
+				94B3EDB52B08E52E00C04BC5 /* PlaylistView - S945.png */,
+				94B3EDB02B08E52E00C04BC5 /* PlayerView - S945.png */,
+			);
+			path = 1.1.5;
 			sourceTree = "<group>";
 		};
 		94B6343D2ABDFAF900E6FCDA /* Complication */ = {
@@ -579,6 +594,7 @@
 				941A00EC2AC4474C000F4693 /* 1.0.2 */,
 				943477C12AD5FC5700A6DED6 /* 1.1.0 */,
 				9488EE802AE70DDD0009EC54 /* 1.1.2 */,
+				94B3EDAF2B08E4BA00C04BC5 /* 1.1.5 */,
 			);
 			path = Screenshots;
 			sourceTree = "<group>";
