@@ -63,6 +63,7 @@
 		946F38E02AB07F81008CE9D1 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CB2AB07F81008CE9D1 /* AudioPlayer.swift */; };
 		946F38E12AB07F81008CE9D1 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CC2AB07F81008CE9D1 /* App.swift */; };
 		947F59992B0A80E900741C53 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947F59982B0A80E900741C53 /* Notification.swift */; };
+		947F599B2B0A838500741C53 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947F599A2B0A838500741C53 /* Color.swift */; };
 		9488EE612AE013D40009EC54 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE602AE013D40009EC54 /* UserStore.swift */; };
 		9488EE652AE026140009EC54 /* AudioStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE642AE026140009EC54 /* AudioStore.swift */; };
 		9488EE672AE33C260009EC54 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE662AE33C260009EC54 /* Logger.swift */; };
@@ -214,6 +215,7 @@
 		946F38E72AB08470008CE9D1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		946F38E92AB08470008CE9D1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		947F59982B0A80E900741C53 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		947F599A2B0A838500741C53 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		9488EE602AE013D40009EC54 /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		9488EE642AE026140009EC54 /* AudioStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStore.swift; sourceTree = "<group>"; };
 		9488EE662AE33C260009EC54 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -455,6 +457,7 @@
 			children = (
 				94A31B342AB517410052A922 /* CaseIterable.swift */,
 				9421D2A22ACED4FE005FE857 /* CGRect.swift */,
+				947F599A2B0A838500741C53 /* Color.swift */,
 				946F38B92AB07F81008CE9D1 /* Delete.swift */,
 				9421D2A02ACED420005FE857 /* Device.swift */,
 				946F38BC2AB07F81008CE9D1 /* Haptics.swift */,
@@ -813,6 +816,7 @@
 				946F38CF2AB07F81008CE9D1 /* Delete.swift in Sources */,
 				945C226B2B025F49008A5E39 /* AppLauncher.swift in Sources */,
 				9421D29F2ACE2A90005FE857 /* PlaylistListView.swift in Sources */,
+				947F599B2B0A838500741C53 /* Color.swift in Sources */,
 				943756CF2ACDA02500C84006 /* SearchView.swift in Sources */,
 				9421D2BC2AD34E88005FE857 /* AnalyticsEvent.swift in Sources */,
 				9488EE6E2AE40EA80009EC54 /* QRCodeImageView.swift in Sources */,

@@ -76,7 +76,7 @@ struct DownloadsView: View {
             .padding(.horizontal, 6)
         }
         .padding()
-        .background(Color.secondary.opacity(0.2))
+        .background(Color.cellBG)
         .cornerRadius(10)
     }
     

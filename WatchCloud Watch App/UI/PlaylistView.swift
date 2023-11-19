@@ -133,7 +133,7 @@ struct PlaylistView: View {
                 .frame(width: 40, height: 40)
                 .foregroundStyle(LinearGradient.scOrange(.horizontal))
                 .fullWidth()
-                .background(Color.gray.opacity(0.2))
+                .background(Color.cellBG)
         }
         .cornerRadius(8)
         .disabled(playlist.tracks.isEmptyOrNil)

@@ -160,7 +160,7 @@ struct SearchView: View {
                 .frame(width: width, height: 18)
         }
         .padding(.vertical, 8)
-        .background(searchType == type ? Color.scOrange.opacity(0.3) : .secondary.opacity(0.2))
+        .background(searchType == type ? Color.scOrange.opacity(0.3) : .cellBG)
         .cornerRadius(8)
         .onTapGesture {
             searchType = type
@@ -199,7 +199,7 @@ struct SearchView: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 14)
-        .background(.secondary.opacity(0.2))
+        .background(Color.cellBG)
         .cornerRadius(10)
     }
 }

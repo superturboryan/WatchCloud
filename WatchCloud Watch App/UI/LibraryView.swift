@@ -89,7 +89,7 @@ struct LibraryView: View {
             id: PlaylistType.nowPlaying.rawValue,
             title: PlaylistType.nowPlaying.title,
             subtitle: audioStore.loadedTrack?.title ?? "...",
-            bgColor: .orange) {
+            bgColor: .orange.opacity(0.2)) {
                 PlaylistView(
                     playlist: playlist,
                     showSummary: false,
@@ -178,7 +178,7 @@ struct LibraryView: View {
         id: Int,
         title: String,
         subtitle: String? = nil,
-        bgColor: Color = .secondary,
+        bgColor: Color = .cellBG,
         destination: () -> some View
     ) -> some View {
         NavigationLink {
@@ -202,7 +202,7 @@ struct LibraryView: View {
             .lineLimit(1)
             .fontDesign(.rounded)
             .padding(10)
-            .background(bgColor.opacity(0.2))
+            .background(bgColor)
             .cornerRadius(10)
         }
         .buttonStyle(.plain)

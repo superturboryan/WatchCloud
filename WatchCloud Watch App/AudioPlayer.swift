@@ -100,7 +100,7 @@ extension AudioPlayer {
             isPlayerLoaded = true
         }
         let avUrlAsset = AVURLAsset(
-            url: URL(string: track.playbackUrl!)!,
+            url: URL(string: track.playbackUrl!)!, // ⚠️ Check if playback url exists!
             options: ["AVURLAssetHTTPHeaderFieldsKey" : try await authStore.authHeader]
         )
         let avItem = AVPlayerItem(asset: avUrlAsset)
