@@ -116,9 +116,9 @@ struct SearchView: View {
                     title: "\"\(query)\""
                 ) {
                     Task {
-                        if let nextPage = results.wrappedValue.nextPage,
-                           let nextResult: Page<Playlist> = try? await audioStore.pageOfPlaylists(nextPage) {
-                            playlistResults?.update(with: nextResult)
+                        if let nextPageURL = results.wrappedValue.nextPageURL,
+                           let nextPage: Page<Playlist> = try? await audioStore.pageOfPlaylists(nextPageURL) {
+                            playlistResults?.update(with: nextPage)
                         }
                     }
                 }
@@ -132,9 +132,9 @@ struct SearchView: View {
                     sortedAlphabetically: false
                 ) {
                     Task {
-                        if let nextPage = results.wrappedValue.nextPage,
-                            let nextResult: Page<User> = try? await userStore.pageOfUsers(nextPage) {
-                            artistResults?.update(with: nextResult)
+                        if let nextPageURL = results.wrappedValue.nextPageURL,
+                           let nextPage: Page<User> = try? await userStore.pageOfUsers(nextPageURL) {
+                            artistResults?.update(with: nextPage)
                         }
                     }
                 }

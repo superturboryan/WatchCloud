@@ -57,8 +57,7 @@ struct PlaylistListView: View {
         Task {
             var playlistWithTracks = playlist
             let page = try await audioStore.getTracksForPlaylist(playlist.id)
-            playlistWithTracks.tracks = page.items
-            playlistWithTracks.nextPageUrl = page.nextPage
+            playlistWithTracks.updateWith(page)
             selectedPlaylist = playlistWithTracks
         }
     }

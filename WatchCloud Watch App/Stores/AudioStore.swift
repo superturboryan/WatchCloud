@@ -116,8 +116,7 @@ extension AudioStore {
     @MainActor
     private func loadMyLikedTracksPlaylistWithTracks() async throws {
         let page = try await service.getMyLikedTracks()
-        loadedPlaylists[PlaylistType.likes.rawValue]?.tracks = page.items
-        loadedPlaylists[PlaylistType.likes.rawValue]?.nextPageUrl = page.nextPage
+        loadedPlaylists[PlaylistType.likes.rawValue]?.updateWith(page)
     }
     
     @MainActor
@@ -169,8 +168,7 @@ extension AudioStore {
             }
         } else {
             let page = try await getTracksForPlaylist(id)
-            loadedPlaylists[id]?.tracks = page.items
-            loadedPlaylists[id]?.nextPageUrl = page.nextPage
+            loadedPlaylists[id]?.updateWith(page)
         }
     }
 }
