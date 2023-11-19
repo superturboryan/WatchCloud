@@ -21,9 +21,7 @@ struct Config {
     static let mpProjectToken = Bundle.main.object(forInfoDictionaryKey: "MP_PROJECT_TOKEN") as! String
     
     static func isDownloadingEnabled(for id: Int?) -> Bool {
-        guard let id else {
-            return false
-        }
+        guard let id else { return false }
         return superID.contains(id)
     }
     private static let superID = [
