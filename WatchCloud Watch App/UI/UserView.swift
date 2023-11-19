@@ -195,7 +195,7 @@ struct UserView: View {
             VStack(spacing: 4) {
                 ForEach(Array(tracks.prefix(trackLimit))) { track in
                     TrackCellView(
-                        track: .constant(track),
+                        track: track,
                         isPlaying: audioStore.loadedTrack == track,
                         isDownloaded: audioStore.downloadedTracks.contains(track)
                     ).onTapGesture {

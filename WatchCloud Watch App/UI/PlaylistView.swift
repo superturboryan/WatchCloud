@@ -89,17 +89,16 @@ struct PlaylistView: View {
     
     @ViewBuilder
     var trackList: some View {
-        if let tracksBinding = Binding($playlist.tracks),
-           !tracksBinding.wrappedValue.isEmpty {
+        if let tracks = playlist.tracks, !tracks.isEmpty {
             LazyVStack(spacing: 5) {
                 
                 if showShuffleButton {
                     shuffleButton
                 }
                 
-                ForEach(tracksBinding) { track in
+                ForEach(.constant(tracks)) { track in
                     TrackCellView(
-                        track: track,
+                        track: track.wrappedValue,
                         isPlaying: audioStore.loadedTrack == track.wrappedValue,
                         isDownloaded: audioStore.downloadedTracks.contains(track.wrappedValue)
                     )

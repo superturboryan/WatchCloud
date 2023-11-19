@@ -9,7 +9,8 @@ import SoundCloud
 import SwiftUI
 
 struct TrackCellView: View {
-    @Binding var track: Track
+    
+    let track: Track
     let isPlaying: Bool
     let isDownloaded: Bool
     
@@ -40,7 +41,7 @@ struct TrackCellView: View {
 @available(watchOS 10, *)
 #Preview(traits: .sizeThatFitsLayout) {
     TrackCellView(
-        track: .constant(testTrack()),
+        track: testTrack(),
         isPlaying: false,
         isDownloaded: true
     )

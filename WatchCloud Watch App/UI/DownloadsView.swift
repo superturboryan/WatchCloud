@@ -88,7 +88,7 @@ struct DownloadsView: View {
         ) {
             ForEach($audioStore.downloadedTracks) { displayedTrack in
                 TrackCellView(
-                    track: displayedTrack,
+                    track: displayedTrack.wrappedValue,
                     isPlaying: audioStore.loadedTrack == displayedTrack.wrappedValue,
                     isDownloaded: true
                 )
