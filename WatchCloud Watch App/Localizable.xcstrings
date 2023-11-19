@@ -1117,49 +1117,49 @@
         }
       }
     },
-    "If captcha is not appearing, try using" : {
+    "If captcha is not appearing on SoundCloud login page, try using" : {
       "comment" : "Tip message",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "إذا لم يظهر \"captcha\"، حاول استخدامه"
+            "value" : "إذا لم يظهر رمز التحقق \"captcha\" في صفحة تسجيل الدخول إلى SoundCloud، فحاول استخدامه"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wenn das Captcha nicht angezeigt wird, versuchen Sie es mit"
+            "value" : "Wenn das Captcha nicht auf der SoundCloud-Anmeldeseite angezeigt wird, versuchen Sie es mit"
           }
         },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si el captcha no aparece, intenta usar"
+            "value" : "Si el captcha no aparece en la página de inicio de sesión de SoundCloud, intenta usar"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si le captcha ne s'affiche pas, essayez d'utiliser le"
+            "value" : "Si le captcha ne s'affiche pas sur la page de connexion SoundCloud, essayez d'utiliser le"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Se il captcha non apparisse, prova a utilizzare"
+            "value" : "Se il captcha non apparisse sulla pagina di accesso di SoundCloud, prova a utilizzare"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「キャプチャ」が表示されない場合"
+            "value" : "SoundCloudのログインページに「認証画像」が表示されない場合は、以下をお試しください。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "보안문자가 표시되지 않으면 가능하면"
+            "value" : "SoundCloud 로그인 페이지에 \"인증 이미지\"가 표시되지 않으면 다음을 시도해 보십시오."
           }
         }
       }

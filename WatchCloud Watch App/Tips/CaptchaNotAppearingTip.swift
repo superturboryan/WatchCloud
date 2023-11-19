@@ -14,7 +14,7 @@ struct CaptchaNotAppearingTip: Tip {
         Text(String(localized: "Trouble signing in?", comment: "Tip title")).font(.footnote).fontWeight(.medium)
     }
     var message: Text? {
-        Text(String(localized: "If captcha is not appearing, try using", comment: "Tip message")).fontDesign(.rounded)
+        Text(String(localized: "If captcha is not appearing on SoundCloud login page, try using", comment: "Tip message")).fontDesign(.rounded)
         + Text(verbatim: "\n")
         + Text(String(localized: "Sign in with Google", comment: "Tip message")).fontWeight(.bold).fontDesign(.rounded)
     }

@@ -11,4 +11,5 @@ struct Haptics {
     private init() {}
     private static let device = WKInterfaceDevice.current()
     static func click() { device.play(.click) }
+    static func notification() { device.play(.notification) }
 }

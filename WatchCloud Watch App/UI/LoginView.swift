@@ -67,10 +67,11 @@ struct LoginView: View {
             do {
                 try await authStore.login()
                 AnalyticsManager.shared.log(.loginSuccess)
-            } catch(SoundCloud.Error.cancelledLogin) {
+            } catch(AuthStore.Error.cancelledLogin) {
                 AnalyticsManager.shared.log(.loginCancelled)
                 if #available(watchOS 10, *) {
                     LoginView.hasTriedToLoginAndCancelled = true
+                    Haptics.notification()
                 }
             } catch {
                 showErrorAlert = true
