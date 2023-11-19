@@ -136,8 +136,3 @@ struct RootView: View {
         .environmentObject(AuthStore(testSC))
         .environmentObject(UserStore(testSC))
 }
-
-extension Notification.Name {
-    static let switchToPlayerTab = Notification.Name("switchToPlayerTab")
-    static let performLogout = Notification.Name("performLogout")
-}
