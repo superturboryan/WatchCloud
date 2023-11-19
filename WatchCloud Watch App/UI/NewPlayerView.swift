@@ -26,7 +26,7 @@ struct NewPlayerView: View {
     
     var body: some View {
         NavigationStack { // Needed for toolbar
-            VStack(spacing: 14) {
+            VStack(spacing: 12) {
                 if isLuminanceReduced, let track = audioStore.loadedTrack {
                     QRCodeImageView(url: track.permalinkUrl).scaleEffect(x: 1.2, y: 1.2)
                 } else {
@@ -104,6 +104,7 @@ struct NewPlayerView: View {
                     .animation(.default, value: audioStore.loadedTrack)
             }
         }
+        .padding(.bottom, 2)
         .lineLimit(1)
     }
     
