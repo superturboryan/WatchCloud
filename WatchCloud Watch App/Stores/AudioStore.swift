@@ -15,8 +15,7 @@ final class AudioStore: NSObject, ObservableObject {
     @Published private(set) var loadedTrackPlaylistIndex: Int = -1
     @Published var loadedTrack: Track? {
         didSet {
-            loadedTrackPlaylistIndex = loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks?
-                .firstIndex(where: { $0 == loadedTrack }) ?? -1
+            loadedTrackPlaylistIndex = nowPlayingQueue?.firstIndex(where: { $0 == loadedTrack }) ?? -1
         }
     }
     
@@ -35,10 +34,16 @@ final class AudioStore: NSObject, ObservableObject {
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
     private var subscriptions = Set<AnyCancellable>()
-    private let service: SoundCloudAPI
     
-    init(_ service: SoundCloudAPI) {
+    private let service: SoundCloudAPI
+    private let nowPlayingInfoDAO: any DAO<NowPlayingInfo>
+    
+    init(
+        _ service: SoundCloudAPI,
+        _ nowPlayingInfoDAO: any DAO<NowPlayingInfo> = UserDefaultsDAO<NowPlayingInfo>()
+    ) {
         self.service = service
+        self.nowPlayingInfoDAO = nowPlayingInfoDAO
         super.init()
     }
 }
@@ -420,6 +425,31 @@ extension AudioStore: URLSessionTaskDelegate {
                 }
             }
             .store(in: &subscriptions)
+    }
+}
+
+// MARK: - Now Playing
+extension AudioStore {
+    
+    func saveNowPlayingInfo(withProgress progress: Double) {
+        guard let loadedTrack, let nowPlayingQueue else {
+            return
+        }
+        try? nowPlayingInfoDAO.save(NowPlayingInfo(progress: progress, track: loadedTrack, queue: nowPlayingQueue))
+    }
+    
+    @MainActor
+    func loadNowPlayingInfo() async {
+        guard let nowPlayingInfo = try? nowPlayingInfoDAO.get() else {
+            return
+        }
+        setNowPlayingQueue(with: nowPlayingInfo.queue)
+        loadedTrack = nowPlayingInfo.track
+        NotificationCenter.default.post(
+            name: .loadedNowPlayingInfo,
+            object: nil,
+            userInfo: ["info" : nowPlayingInfo]
+        )
     }
 }
 
