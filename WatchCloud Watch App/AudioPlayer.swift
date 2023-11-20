@@ -45,6 +45,7 @@ final class AudioPlayer: ObservableObject {
         self.audioStore = audioStore
         self.authStore = authStore
         setupDeviceMediaControls()
+        listenForLoadedNowPlayingInfoNotification()
     }
     
     deinit {
@@ -77,6 +78,22 @@ final class AudioPlayer: ObservableObject {
             }
         }
         .store(in: &subscriptions)
+    }
+    
+    private func listenForLoadedNowPlayingInfoNotification() {
+        NotificationCenter.default.publisher(for: .loadedNowPlayingInfo).sink { notification in
+            guard let nowPlayingInfo = notification.userInfo?["info"] as? NowPlayingInfo else {
+                Logger.audioPlayer.error("loadNowPlayingInfo Notification is missing NowPlayingInfo in userInfo property")
+                return
+            }
+            Task {
+                try? await self.loadTrack(nowPlayingInfo.track)
+                DispatchQueue.main.async { [weak self] in
+                    self?.progress = nowPlayingInfo.progress
+                }
+                NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
+            }
+        }.store(in: &subscriptions)
     }
     
     private func updatePlayerProgress() {
