@@ -26,9 +26,6 @@ struct UserView: View {
         ScrollView {
             VStack(spacing: 10) {
                 summary
-                if isLoading {
-                    loadingView
-                }
                 if !tracks.isEmpty {
                     playlistSection(
                         String(localized: "Top tracks"),
@@ -44,6 +41,9 @@ struct UserView: View {
                         String(localized: "Liked tracks"),
                         likedTracks
                     )
+                }
+                if isLoading {
+                    loadingView
                 }
             }
             .animation(.default, value: tracks)
