@@ -118,7 +118,7 @@ extension AudioPlayer {
         }
         let avUrlAsset = AVURLAsset(
             url: URL(string: track.playbackUrl!)!, // ⚠️ Check if playback url exists!
-            options: ["AVURLAssetHTTPHeaderFieldsKey" : try await authStore.authHeader]
+            options: [AVURLAsset.httpHeaderFieldsKey : try await authStore.authHeader]
         )
         let avItem = AVPlayerItem(asset: avUrlAsset)
         NotificationCenter.default.addObserver(
@@ -403,6 +403,10 @@ extension AudioPlayer {
 
 extension AudioPlayer {
     static let systemVolumePublisher = AVAudioSession.sharedInstance().publisher(for: \.outputVolume).eraseToAnyPublisher()
+}
+
+extension AVURLAsset {
+    static let httpHeaderFieldsKey = "AVURLAssetHTTPHeaderFieldsKey"
 }
 
 @MainActor
