@@ -14,6 +14,8 @@ import SoundCloud
 /// Use private for dependencies that should be injected inside CompositionRoot, not accessed directly
 enum CompositionRoot {
 
+    static let audioPlayer = AudioPlayer(audioStore, authStore)
+    
     // Stores
     @MainActor static let audioStore = AudioStore(sc)
     @MainActor static let userStore = UserStore(sc)
@@ -30,7 +32,4 @@ enum CompositionRoot {
         clientSecret: Config.clientSecret,
         redirectURI: Config.redirectURI
     )
-    
-    @MainActor
-    static let audioPlayer = AudioPlayer(audioStore, authStore)
 }

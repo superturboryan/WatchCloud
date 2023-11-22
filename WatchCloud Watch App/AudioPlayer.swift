@@ -12,7 +12,6 @@ import OSLog
 import SoundCloud
 import SwiftUI
 
-@MainActor
 final class AudioPlayer: ObservableObject {
     
     @Published var isPlaying = false // Should be private(set)
@@ -90,8 +89,8 @@ final class AudioPlayer: ObservableObject {
                 try? await self.loadTrack(nowPlayingInfo.track)
                 DispatchQueue.main.async { [weak self] in
                     self?.progress = nowPlayingInfo.progress
-                }
-                NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
+                    NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
+                }   
             }
         }.store(in: &subscriptions)
     }
