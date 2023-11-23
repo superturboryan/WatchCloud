@@ -85,6 +85,7 @@
 		94BD056E2B0B964300C3DA89 /* NowPlayingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BD056D2B0B964300C3DA89 /* NowPlayingInfo.swift */; };
 		94C169A02AB474EE00570B4F /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 94C1699F2AB474EE00570B4F /* Nuke */; };
 		94C169A22AB474EE00570B4F /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 94C169A12AB474EE00570B4F /* NukeUI */; };
+		94D4951D2B0F74720013A2D9 /* ImagePipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D4951C2B0F74720013A2D9 /* ImagePipeline.swift */; };
 		94FAA18A2ACB319600EF97CE /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1892ACB319600EF97CE /* UserListView.swift */; };
 		94FAA18C2ACB3B4200EF97CE /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */; };
 		94FAA1D02ACC273600EF97CE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1CF2ACC273600EF97CE /* UserView.swift */; };
@@ -253,6 +254,7 @@
 		94B634542ABE5B7700E6FCDA /* Player Options - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player Options - S945.png"; sourceTree = "<group>"; };
 		94B634552ABE5B7700E6FCDA /* Player - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player - S945.png"; sourceTree = "<group>"; };
 		94BD056D2B0B964300C3DA89 /* NowPlayingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingInfo.swift; sourceTree = "<group>"; };
+		94D4951C2B0F74720013A2D9 /* ImagePipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePipeline.swift; sourceTree = "<group>"; };
 		94F3FCD12AB9A3B5005D03DF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		94F3FCD22AB9A3B5005D03DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		94FAA1892ACB319600EF97CE /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 				9421D2A02ACED420005FE857 /* Device.swift */,
 				946F38BC2AB07F81008CE9D1 /* Haptics.swift */,
 				946F38BB2AB07F81008CE9D1 /* Image.swift */,
+				94D4951C2B0F74720013A2D9 /* ImagePipeline.swift */,
 				94923C6E2ABDBBD500A67EBE /* Int.swift */,
 				946F38BF2AB07F81008CE9D1 /* LinearGradientProgressViewStyle.swift */,
 				9488EE662AE33C260009EC54 /* Logger.swift */,
@@ -829,6 +832,7 @@
 				946F38DD2AB07F81008CE9D1 /* RootView.swift in Sources */,
 				943670C72AEBE13D007E4973 /* SoundCloudAPI.swift in Sources */,
 				9448FF4F2AB34F0A003D63F1 /* VolumeCircleView.swift in Sources */,
+				94D4951D2B0F74720013A2D9 /* ImagePipeline.swift in Sources */,
 				946F38D62AB07F81008CE9D1 /* DownloadsView.swift in Sources */,
 				946F38DE2AB07F81008CE9D1 /* LibraryView.swift in Sources */,
 				946F38E02AB07F81008CE9D1 /* AudioPlayer.swift in Sources */,
