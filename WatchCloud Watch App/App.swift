@@ -5,6 +5,7 @@
 //  Created by Ryan Forsyth on 2023-09-12.
 //
 
+import Nuke
 import SoundCloud
 import SwiftUI
 import TipKit
@@ -22,6 +23,7 @@ struct WatchCloud_Watch_AppApp: App {
     
     init() {
         _ = AnalyticsManager.shared // Calls init on shared instance
+        ImagePipeline.shared = .init(configuration: .withDataCache) // Enables aggressive disk caching
         configureTips()
     }
     
