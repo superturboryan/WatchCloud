@@ -59,13 +59,10 @@ final class AudioPlayer: ObservableObject {
         )
         try? audioSession.setActive(true)
         
-        let oneSecond = CMTime(value: 1, timescale: 1)
-        player.addPeriodicTimeObserver(forInterval: oneSecond, queue: .main) { [weak self] time in
-            DispatchQueue.main.async { [weak self] in
-                self?.shouldSeek = false
-                self?.progress = time.seconds
-                self?.shouldSeek = true
-            }
+        player.addPeriodicTimeObserver(forInterval: .oneSecond, queue: .main) { [weak self] time in
+            self?.shouldSeek = false
+            self?.progress = time.seconds
+            self?.shouldSeek = true
         }
         player.publisher(for: \.timeControlStatus)
         .receive(on: DispatchQueue.main)
@@ -75,8 +72,7 @@ final class AudioPlayer: ObservableObject {
             if self?.audioStore.loadedTrack != nil {
                 self?.updateNowPlayingInfo()
             }
-        }
-        .store(in: &subscriptions)
+        }.store(in: &subscriptions)
     }
     
     private func listenForLoadedNowPlayingInfoNotification() {
@@ -87,7 +83,7 @@ final class AudioPlayer: ObservableObject {
             }
             Task {
                 try? await self.loadTrack(nowPlayingInfo.track)
-                DispatchQueue.main.async { [weak self] in
+                await MainActor.run { [weak self] in
                     self?.progress = nowPlayingInfo.progress
                     NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
                 }   
@@ -127,7 +123,7 @@ extension AudioPlayer {
             object: avItem
         )
         
-        DispatchQueue.main.async { [weak self] in
+        await MainActor.run { [weak self] in
             self?.player.replaceCurrentItem(with: avItem)
             self?.audioStore.loadedTrack = track
             self?.progress = 0
@@ -139,7 +135,7 @@ extension AudioPlayer {
         Logger.audioPlayer.info("🎧 Load and play new track: \(track.title)")
         Task { [weak self] in
             try await self?.loadTrack(track)
-            DispatchQueue.main.async { [weak self] in
+            await MainActor.run { [weak self] in
                 self?.player.play()
                 self?.player.rate = self?.selectedPlaybackSpeed.rawValue ?? 1
             }
@@ -398,6 +394,10 @@ extension AudioPlayer {
         
         var isBackward: Bool { self == .backward }
     }
+}
+
+extension CMTime {
+    static let oneSecond = CMTime(value: 1, timescale: 1)
 }
 
 extension AudioPlayer {
