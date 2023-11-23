@@ -16,7 +16,6 @@ struct CachedImageView: View {
     
     // Defaults
     var fallbackSystemImageName = "photo"
-    var useCache = true
     var ratio: AspectRatio = .fit
     var animated = true
     var roundedCorners = true
@@ -41,7 +40,7 @@ struct CachedImageView: View {
                 .fullWidthAndHeight()
                 .clipShape(RoundedRectangle(cornerRadius: roundedCorners ? geo.size.width / 6 : 0))
             }
-            .pipeline(useCache ? ImagePipeline(configuration: .withDataCache) : ImagePipeline.shared)
+            .pipeline(ImagePipeline.shared)
         }
     }
 }
