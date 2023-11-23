@@ -14,28 +14,27 @@ struct PlayerOptionsView: View {
     @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var player: AudioPlayer
     
-    @Environment(\.dismiss) var dismiss
-    
     @Binding var track: Track
     
     private let hSpacing: CGFloat = 12
     private let buttonSize = CGSize(width: 76, height: 45)
     private let labelYOffset: CGFloat = 36
     
+    private var isDownloadingEnabled: Bool {
+        Config.isDownloadingEnabled(for: userStore.myUser?.id)
+    }
+    
     var body: some View {
         VStack(spacing: 32) {
             HStack(spacing: hSpacing) {
                 likeButton
-                    .disabled(false)
                 downloadButton
-                    .disabled(!Config.isDownloadingEnabled(for: userStore.myUser?.id))
-                    .opacity(Config.isDownloadingEnabled(for: userStore.myUser?.id) ? 1 : 0)
+                    .disabled(!isDownloadingEnabled)
+                    .opacity(isDownloadingEnabled ? 1 : 0)
             }
             HStack(spacing: hSpacing) {
                 playbackSpeedButton
-                    .disabled(false)
                 shareButton
-                    .disabled(false)
             }
         }
         .padding(.bottom, 10)
