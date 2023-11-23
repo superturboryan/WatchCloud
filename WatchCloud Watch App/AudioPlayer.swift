@@ -8,6 +8,7 @@
 import AVFoundation
 import Combine
 import MediaPlayer
+import Nuke
 import OSLog
 import SoundCloud
 import SwiftUI
@@ -34,8 +35,8 @@ final class AudioPlayer: ObservableObject {
     private let remoteCommands = MPRemoteCommandCenter.shared()
     private let nowPlaying = MPNowPlayingInfoCenter.default()
     private let audioSession = AVAudioSession.sharedInstance()
+    private let imagePipeline = ImagePipeline.shared
     
-    private let decoder = JSONDecoder()
     private var subscriptions = Set<AnyCancellable>()
     
     private let audioStore: AudioStore
@@ -196,7 +197,7 @@ extension AudioPlayer {
                 // Only load previous track, don't start playing
                 Task { [weak self] in try await self?.loadTrack(previousTrack) }
             }
-        } else { // Just go to beginning
+        } else { // Just go to beginning of already loaded track
             progress = 0
         }
     }
@@ -224,9 +225,11 @@ extension AudioPlayer {
     
     func beginSeeking(_ direction: SeekDirection) {
         seekTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
-            direction.isBackward ?
-                self?.seekBackwardCommand() :
+            if direction.isBackward {
+                self?.seekBackwardCommand()
+            } else {
                 self?.seekForwardCommand()
+            }
         }
     }
     
@@ -284,17 +287,14 @@ extension AudioPlayer {
             return .success
         }
         remoteCommands.seekForwardCommand.addTarget { [weak self] event in
-            guard let event = event as? MPSeekCommandEvent else { 
-                return .commandFailed
-            }
-            
-            guard // Not at end of track
+            guard
+                let seekEvent = event as? MPSeekCommandEvent,
                 let duration = self?.player.currentItem?.duration,
                 let progress = self?.progress,
-                progress < duration.seconds
+                progress < duration.seconds // Not at end of track
             else { return .commandFailed }
             
-            switch event.type {
+            switch seekEvent.type {
             case .beginSeeking: self?.beginSeeking(.forward)
             case .endSeeking: self?.endSeeking()
             @unknown default: Logger.audioPlayer.warning("Unknown seek event type")
@@ -303,15 +303,13 @@ extension AudioPlayer {
             return .success
         }
         remoteCommands.seekBackwardCommand.addTarget { [weak self] event in
-            guard let event = event as? MPSeekCommandEvent else {
-                return .commandFailed
-            }
-            
-            guard // Not at beginning of track
-                let progress = self?.progress, progress > 0
+            guard 
+                let seekEvent = event as? MPSeekCommandEvent,
+                let progress = self?.progress,
+                progress > 0 // Not at beginning of track
             else { return .commandFailed }
-    
-            switch event.type {
+            
+            switch seekEvent.type {
             case .beginSeeking: self?.beginSeeking(.backward)
             case .endSeeking: self?.endSeeking()
             @unknown default: Logger.audioPlayer.warning("Unknown seek event type")
@@ -367,13 +365,11 @@ extension AudioPlayer {
         let largerImageUrl = url.replacingOccurrences(of: "large.jpg", with: "t500x500.jpg")
         guard
             let url = URL(string: largerImageUrl),
-            // Error, response not handled
-            let (data, _) = try? await URLSession.shared.data(for: URLRequest(url: url))
+            let image = try? await imagePipeline.loadImage(with: url)
         else {
             let fallbackImage = UIImage(systemName: "xmark.icloud.fill")!
             return MPMediaItemArtwork(boundsSize: fallbackImage.size) { _ in fallbackImage }
         }
-        let image = UIImage(data: data)!
         return MPMediaItemArtwork(boundsSize: image.size) { _ in image }
     }
 }
@@ -408,5 +404,4 @@ extension AVURLAsset {
     static let httpHeaderFieldsKey = "AVURLAssetHTTPHeaderFieldsKey"
 }
 
-@MainActor
 let testAudioPlayer = AudioPlayer(AudioStore(testSC), AuthStore(testSC))
