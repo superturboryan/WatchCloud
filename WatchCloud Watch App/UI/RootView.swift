@@ -83,7 +83,7 @@ struct RootView: View {
         ProgressView() {
             VStack(spacing: 12) {
                 Text("Getting ready...")
-                Text(verbatim: Config.isRightToLeft ? "🎶🎶" : "💃🕺")
+                Text(verbatim: Config.isRightToLeftLanguage ? "🎶🎶" : "💃🕺")
             }
             .fontWeight(.semibold)
             .fontDesign(.rounded)
