@@ -107,8 +107,6 @@ struct RootView: View {
             searchStore.load()
             isLoaded = true
             AnalyticsManager.shared.log(.loadLibrarySuccess)
-            
-            await audioStore.loadNowPlayingInfo()
         } catch UserStore.Error.loadingMyProfile,
                 SoundCloud.Error.userNotAuthorized {
             Logger.rootView.info("❌ Profile doesn't exist or API denied access. Performing logout, presenting login screen...")
@@ -124,6 +122,7 @@ struct RootView: View {
     }
     
     private func performLogout() {
+        audioStore.reset()
         authStore.logout()
         userStore.reset()
         searchStore.reset()
