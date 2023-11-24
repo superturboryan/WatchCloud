@@ -18,10 +18,10 @@ final class AudioPlayer: ObservableObject {
     @Published var isPlaying = false // Should be private(set)
     @Published private(set) var isLoading = false
     
-    /// Describes how many seconds the player's current item has been playing for.
+    /// Describes the progress of the `AVPlayer`'s current item in **seconds**.
     ///
-    /// Updating this property causes the player (`AVPlayer`) to seek to the selected value (in seconds) 
-    /// and updates the info displayed by the device's "Now Playing".
+    /// Updating this property causes the `AVPlayer` to seek to the selected value (in seconds)
+    /// and updates the info displayed by the device's "Now Playing" info.
     @Published var progress: TimeInterval = 0.0 { didSet { updatePlayerProgress() }}
     @Published var selectedPlaybackSpeed: PlaybackSpeed = .One
     
@@ -40,10 +40,9 @@ final class AudioPlayer: ObservableObject {
     private var subscriptions = Set<AnyCancellable>()
     
     private let audioStore: AudioStore
-    private let authStore: AuthStore
+
     init(_ audioStore: AudioStore, _ authStore: AuthStore) {
         self.audioStore = audioStore
-        self.authStore = authStore
         setupDeviceMediaControls()
         listenForLoadedNowPlayingInfoNotification()
     }
@@ -70,9 +69,7 @@ final class AudioPlayer: ObservableObject {
         .sink { [weak self] status in
             self?.isPlaying = status == .playing || status == .waitingToPlayAtSpecifiedRate
             self?.isLoading = status == .waitingToPlayAtSpecifiedRate
-            if self?.audioStore.loadedTrack != nil {
-                self?.updateNowPlayingInfo()
-            }
+            self?.updateNowPlayingInfo()
         }.store(in: &subscriptions)
     }
     
@@ -112,11 +109,24 @@ extension AudioPlayer {
             setupPlayer()
             isPlayerLoaded = true
         }
-        let avUrlAsset = AVURLAsset(
-            url: URL(string: track.playbackUrl!)!, // ⚠️ Check if playback url exists!
-            options: [AVURLAsset.httpHeaderFieldsKey : try await authStore.authHeader]
-        )
-        let avItem = AVPlayerItem(asset: avUrlAsset)
+        
+        let trackURL: String
+        if let localFileURL = track.localFileUrl {
+            trackURL = localFileURL
+        } else {
+            guard let steamingInfo = try? await audioStore.streamInfoForTrack(track) else {
+                throw Error.loadingStreamInfo
+            }
+            trackURL = steamingInfo.hlsMp3128URL
+        }
+        
+        guard let assetURL = URL(string: trackURL) else {
+            throw Error.invalidAssetURL
+        }
+        
+        let avItem = AVPlayerItem(asset: AVURLAsset(url: assetURL))
+        avItem.preferredForwardBufferDuration = TimeInterval(30) // Seconds
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.nextTrackCommand),
@@ -371,6 +381,13 @@ extension AudioPlayer {
             return MPMediaItemArtwork(boundsSize: fallbackImage.size) { _ in fallbackImage }
         }
         return MPMediaItemArtwork(boundsSize: image.size) { _ in image }
+    }
+}
+
+extension AudioPlayer {
+    enum Error: LocalizedError {
+        case invalidAssetURL
+        case loadingStreamInfo
     }
 }
 

@@ -184,6 +184,10 @@ extension AudioStore {
             loadedPlaylists[id]?.updateWith(page)
         }
     }
+    
+    func streamInfoForTrack(_ track: Track) async throws -> StreamInfo {
+        try await service.getStreamInfoForTrack(with: track.id)
+    }
 }
 
 // MARK: - Like + Follow 🧡
@@ -315,7 +319,7 @@ extension AudioStore {
 extension AudioStore {
     func download(_ track: Track) async throws {
         let streamInfo = try await service.getStreamInfoForTrack(with: track.id)
-        try await downloadTrack(track, from: streamInfo.httpMp3128Url)
+        try await downloadTrack(track, from: streamInfo.httpMp3128URL)
     }
     
     @MainActor
