@@ -452,11 +452,20 @@ extension AudioStore {
     
     @MainActor
     func loadNowPlayingInfo() async {
-        guard let nowPlayingInfo = try? nowPlayingInfoDAO.get() else {
+        guard var nowPlayingInfo = try? nowPlayingInfoDAO.get() else {
             return
         }
+        
+        if let downloadedTrack = downloadedTracks.first(where: { $0.id == nowPlayingInfo.track.id }) {
+            loadedTrack = downloadedTrack
+            nowPlayingInfo.track = downloadedTrack
+            nowPlayingInfo.queue = downloadedTracks
+        } else {
+            loadedTrack = nowPlayingInfo.track
+        }
+        
         setNowPlayingQueue(with: nowPlayingInfo.queue)
-        loadedTrack = nowPlayingInfo.track
+        
         NotificationCenter.default.post(
             name: .loadedNowPlayingInfo,
             object: nil,

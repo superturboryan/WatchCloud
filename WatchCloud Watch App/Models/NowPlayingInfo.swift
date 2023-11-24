@@ -9,6 +9,6 @@ import SoundCloud
 
 struct NowPlayingInfo: Codable {
     let progress: Double
-    let track: Track
-    let queue: [Track]
+    var track: Track
+    var queue: [Track]
 }
