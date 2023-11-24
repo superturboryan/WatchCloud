@@ -315,6 +315,43 @@ extension AudioStore {
     }
 }
 
+// MARK: - 💾 Now Playing Info
+extension AudioStore {
+    func saveNowPlayingInfo(withProgress progress: Double) {
+        guard let loadedTrack, let nowPlayingQueue else {
+            return
+        }
+        try? nowPlayingInfoDAO.save(NowPlayingInfo(progress: progress, track: loadedTrack, queue: nowPlayingQueue))
+    }
+    
+    @MainActor
+    func loadNowPlayingInfo() async {
+        guard var nowPlayingInfo = try? nowPlayingInfoDAO.get() else {
+            return
+        }
+        
+        if let downloadedTrack = downloadedTracks.first(where: { $0.id == nowPlayingInfo.track.id }) {
+            loadedTrack = downloadedTrack
+            nowPlayingInfo.track = downloadedTrack
+            nowPlayingInfo.queue = downloadedTracks
+        } else {
+            loadedTrack = nowPlayingInfo.track
+        }
+        
+        setNowPlayingQueue(with: nowPlayingInfo.queue)
+        
+        NotificationCenter.default.post(
+            name: .loadedNowPlayingInfo,
+            object: nil,
+            userInfo: ["info" : nowPlayingInfo]
+        )
+    }
+    
+    func deleteNowPlayingInfo() {
+        try? nowPlayingInfoDAO.delete()
+    }
+}
+
 // MARK: - Downloads 📲
 extension AudioStore {
     func download(_ track: Track) async throws {
@@ -437,44 +474,6 @@ extension AudioStore: URLSessionTaskDelegate {
                 }
             }
             .store(in: &subscriptions)
-    }
-}
-
-// MARK: - Now Playing
-extension AudioStore {
-    
-    func saveNowPlayingInfo(withProgress progress: Double) {
-        guard let loadedTrack, let nowPlayingQueue else {
-            return
-        }
-        try? nowPlayingInfoDAO.save(NowPlayingInfo(progress: progress, track: loadedTrack, queue: nowPlayingQueue))
-    }
-    
-    @MainActor
-    func loadNowPlayingInfo() async {
-        guard var nowPlayingInfo = try? nowPlayingInfoDAO.get() else {
-            return
-        }
-        
-        if let downloadedTrack = downloadedTracks.first(where: { $0.id == nowPlayingInfo.track.id }) {
-            loadedTrack = downloadedTrack
-            nowPlayingInfo.track = downloadedTrack
-            nowPlayingInfo.queue = downloadedTracks
-        } else {
-            loadedTrack = nowPlayingInfo.track
-        }
-        
-        setNowPlayingQueue(with: nowPlayingInfo.queue)
-        
-        NotificationCenter.default.post(
-            name: .loadedNowPlayingInfo,
-            object: nil,
-            userInfo: ["info" : nowPlayingInfo]
-        )
-    }
-    
-    func deleteNowPlayingInfo() {
-        try? nowPlayingInfoDAO.delete()
     }
 }
 
