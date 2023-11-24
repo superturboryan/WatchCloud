@@ -57,6 +57,14 @@ extension AudioStore {
         try await loadMyLikedPlaylistsWithoutTracks()
         try await loadMyLikedTracksPlaylistWithTracks()
         try await loadRecentlyPostedPlaylistWithTracks()
+        
+        await loadNowPlayingInfo()
+    }
+    
+    func reset() {
+        loadedPlaylists.removeAll()
+        loadedTrack = nil
+        deleteNowPlayingInfo()
     }
     
     @MainActor
@@ -450,6 +458,10 @@ extension AudioStore {
             object: nil,
             userInfo: ["info" : nowPlayingInfo]
         )
+    }
+    
+    func deleteNowPlayingInfo() {
+        try? nowPlayingInfoDAO.delete()
     }
 }
 
