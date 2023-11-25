@@ -145,7 +145,7 @@ struct DownloadsView: View {
             // Start selected track from beginning
             player.loadAndPlayTrack(track)
         } else if !player.isPlaying {
-            player.continuePlayback()
+            player.playCommand()
         }
         
         NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)

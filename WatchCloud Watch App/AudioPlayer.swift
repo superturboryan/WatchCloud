@@ -40,7 +40,7 @@ final class AudioPlayer: ObservableObject {
     private var subscriptions = Set<AnyCancellable>()
     
     private let audioStore: AudioStore
-
+    
     init(_ audioStore: AudioStore, _ authStore: AuthStore) {
         self.audioStore = audioStore
         setupDeviceMediaControls()
@@ -50,8 +50,11 @@ final class AudioPlayer: ObservableObject {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+}
 
-    private func setupPlayer() {
+// MARK: - Setup
+private extension AudioPlayer {
+    func setupPlayer() {
         try? audioSession.setCategory(
             .playback,
             mode: .default,
@@ -73,7 +76,7 @@ final class AudioPlayer: ObservableObject {
         }.store(in: &subscriptions)
     }
     
-    private func listenForLoadedNowPlayingInfoNotification() {
+    func listenForLoadedNowPlayingInfoNotification() {
         NotificationCenter.default.publisher(for: .loadedNowPlayingInfo).sink { notification in
             guard let nowPlayingInfo = notification.userInfo?["info"] as? NowPlayingInfo else {
                 Logger.audioPlayer.error("loadNowPlayingInfo Notification is missing NowPlayingInfo in userInfo property")
@@ -89,7 +92,7 @@ final class AudioPlayer: ObservableObject {
         }.store(in: &subscriptions)
     }
     
-    private func updatePlayerProgress() {
+    func updatePlayerProgress() {
         guard shouldSeek, let nowPlaying = audioStore.loadedTrack else {
             return
         }
@@ -102,7 +105,7 @@ final class AudioPlayer: ObservableObject {
     }
 }
 
-// MARK: - Play audio
+// MARK: - 🛜💾 Load tracks
 extension AudioPlayer {
     private func loadTrack(_ track: Track) async throws {
         if !isPlayerLoaded {
@@ -125,7 +128,24 @@ extension AudioPlayer {
             self?.progress = 0
         }
     }
+        
+    func loadAndPlayTrack(_ track: Track) {
+        showBluetoothOptionsIfBluetoothAudioOutputNotDetected()
+        Logger.audioPlayer.info("🎧 Load and play new track: \(track.title)")
+        Task { [weak self] in
+            try await self?.loadTrack(track)
+            await MainActor.run { [weak self] in
+                self?.player.play()
+                self?.player.rate = self?.selectedPlaybackSpeed.rawValue ?? 1
+            }
+        }
+    }
     
+    func resetLoadedTrack() {
+        player.pause()
+        player.replaceCurrentItem(with: nil)
+    }
+            
     private func getAVItem(for track: Track) async throws -> AVPlayerItem {
         let trackURL: String
         if let localFileURL = track.localFileUrl {
@@ -146,45 +166,41 @@ extension AudioPlayer {
         return avItem
     }
     
-    func loadAndPlayTrack(_ track: Track) {
-        showBluetoothOptionsIfBluetoothAudioOutputNotDetected()
-        Logger.audioPlayer.info("🎧 Load and play new track: \(track.title)")
-        Task { [weak self] in
-            try await self?.loadTrack(track)
-            await MainActor.run { [weak self] in
-                self?.player.play()
-                self?.player.rate = self?.selectedPlaybackSpeed.rawValue ?? 1
+    private func showBluetoothOptionsIfBluetoothAudioOutputNotDetected() {
+        audioSession.activate(options: []) { [weak self] success, error in
+            if let error {
+                Logger.audioPlayer.error("Session activation error: \(error.localizedDescription)")
+            }
+            if success {
+                DispatchQueue.main.async { self?.player.play() }
             }
         }
     }
-    
-    func togglePlayback() {
+}
+
+// MARK: - ⏪⏯️⏩ Playback Commands
+extension AudioPlayer {
+    func togglePlaybackCommand() {
         if let queue = audioStore.nowPlayingQueue, !queue.isEmpty, audioStore.loadedTrack == nil {
-            //What was this case for again?
+            // Queue is loaded but no track selected
             loadAndPlayTrack(queue.first!)
             return
         }
         
         if isPlaying {
-            player.pause()
+            pauseCommand()
         } else {
-            player.play()
-            player.rate = selectedPlaybackSpeed.rawValue
+            playCommand()
         }
     }
     
-    func continuePlayback() {
+    func playCommand() {
         player.play()
         player.rate = selectedPlaybackSpeed.rawValue
     }
     
-    func pausePlayback() {
+    func pauseCommand() {
         player.pause()
-    }
-    
-    func stop() {
-        player.pause()
-        player.replaceCurrentItem(with: nil)
     }
     
     @objc // Also called by AVPlayerItemDidPlayToEndTime Notification
@@ -221,7 +237,7 @@ extension AudioPlayer {
         guard let duration = player.currentItem?.duration.seconds else {
             return
         }
-        if progress + seekAmount > duration {
+        if progress + seekAmount > duration { // Trying to seek past end
             progress = duration
         } else {
             progress += seekAmount
@@ -229,9 +245,9 @@ extension AudioPlayer {
     }
     
     func seekBackwardCommand() {
-        if progress == 0 {
+        if progress == 0 { // Already at beginning
             return
-        } else if progress - seekAmount < 0 {
+        } else if progress - seekAmount < 0 { // Trying to seek before beginning
             progress = 0
         } else {
             progress -= seekAmount
@@ -254,37 +270,25 @@ extension AudioPlayer {
     
     func cyclePlaybackSpeed() {
         selectedPlaybackSpeed = selectedPlaybackSpeed.next()
-        if isPlaying {
+        if isPlaying { // ⚠️ Adjusting rate while paused will start playback
             player.rate = selectedPlaybackSpeed.rawValue
-        }
-    }
-    
-    private func showBluetoothOptionsIfBluetoothAudioOutputNotDetected() {
-        audioSession.activate(options: []) { [weak self] success, error in
-            if let error {
-                Logger.audioPlayer.error("Session activation error: \(error.localizedDescription)")
-            }
-            if success {
-                DispatchQueue.main.async { self?.player.play() }
-            }
         }
     }
 }
 
 // MARK: - MPNowPlayingInfoCenter
 extension AudioPlayer {
-    
     private func setupDeviceMediaControls() {
         remoteCommands.togglePlayPauseCommand.addTarget { [weak self] _ in
-            self?.togglePlayback()
+            self?.togglePlaybackCommand()
             return .success
         }
         remoteCommands.playCommand.addTarget { [weak self] _ in
-            self?.continuePlayback()
+            self?.playCommand()
             return .success
         }
         remoteCommands.pauseCommand.addTarget { [weak self] _ in
-            self?.pausePlayback()
+            self?.pauseCommand()
             return .success
         }
         remoteCommands.nextTrackCommand.addTarget { [weak self] _ in
@@ -420,10 +424,6 @@ extension CMTime {
 
 extension AudioPlayer {
     static let systemVolumePublisher = AVAudioSession.sharedInstance().publisher(for: \.outputVolume).eraseToAnyPublisher()
-}
-
-extension AVURLAsset {
-    static let httpHeaderFieldsKey = "AVURLAssetHTTPHeaderFieldsKey"
 }
 
 let testAudioPlayer = AudioPlayer(AudioStore(testSC), AuthStore(testSC))

@@ -100,7 +100,7 @@ struct PlayerView: View {
                     VolumeCircleView(progress: $volume, lineWidth: 4)
                         .background(.black) // VolumeCircleView has transparent bg
                 } else {
-                    Button { player.togglePlayback() } label: {
+                    Button { player.togglePlaybackCommand() } label: {
                         if player.isLoading {
                             ProgressView().tint(.scOrange)
                         } else {
@@ -112,7 +112,7 @@ struct PlayerView: View {
                     .contentShape(.focusEffect, Circle())
                     .accessibilityQuickAction(style: .outline) {
                         Button(String(player.isPlaying ? "Pause" : "Play")) {
-                            player.togglePlayback()
+                            player.togglePlaybackCommand()
                         }
                     }
                     .disabled(player.isLoading)

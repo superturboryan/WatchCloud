@@ -133,7 +133,7 @@ struct NewPlayerView: View {
     
     private var togglePlaybackButton: some View {
         Button { // ⏯️
-            player.togglePlayback()
+            player.togglePlaybackCommand()
             AnalyticsManager.shared.log(.tappedTogglePlayback)
         } label: {
             Image(systemName:player.isPlaying ? "pause.fill" : "play.fill")
@@ -144,7 +144,7 @@ struct NewPlayerView: View {
         .contentShape(.focusEffect, Circle())
         .accessibilityQuickAction(style: .outline) { // ♿️
             Button(String(player.isPlaying ? "Pause" : "Play")) {
-                player.togglePlayback()
+                player.togglePlaybackCommand()
             }
         }
         .disabled(player.isLoading)

@@ -167,7 +167,7 @@ struct PlaylistView: View {
             player.loadAndPlayTrack(track)
         } else  {
             // Continue playing
-            player.continuePlayback()
+            player.playCommand()
         }
         
         AnalyticsManager.shared.log(.tappedTrack)

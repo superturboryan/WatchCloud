@@ -217,7 +217,7 @@ struct UserView: View {
             player.loadAndPlayTrack(track)
         } else  {
             // Continue playing
-            player.continuePlayback()
+            player.playCommand()
         }
         NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
     }
