@@ -110,6 +110,23 @@ extension AudioPlayer {
             isPlayerLoaded = true
         }
         
+        let avItem = try await getAVItem(for: track)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.nextTrackCommand),
+            name: Notification.Name.AVPlayerItemDidPlayToEndTime,
+            object: avItem
+        )
+        
+        await MainActor.run { [weak self] in
+            self?.player.replaceCurrentItem(with: avItem)
+            self?.audioStore.loadedTrack = track
+            self?.progress = 0
+        }
+    }
+    
+    private func getAVItem(for track: Track) async throws -> AVPlayerItem {
         let trackURL: String
         if let localFileURL = track.localFileUrl {
             trackURL = localFileURL
@@ -126,19 +143,7 @@ extension AudioPlayer {
         
         let avItem = AVPlayerItem(asset: AVURLAsset(url: assetURL))
         avItem.preferredForwardBufferDuration = TimeInterval(30) // Seconds
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(self.nextTrackCommand),
-            name: Notification.Name.AVPlayerItemDidPlayToEndTime,
-            object: avItem
-        )
-        
-        await MainActor.run { [weak self] in
-            self?.player.replaceCurrentItem(with: avItem)
-            self?.audioStore.loadedTrack = track
-            self?.progress = 0
-        }
+        return avItem
     }
     
     func loadAndPlayTrack(_ track: Track) {
