@@ -16,6 +16,7 @@ struct NewPlayerView: View {
     @Environment(\.isLuminanceReduced) var isLuminanceReduced
     
     @State private var showOptions = false
+    @State private var isSeekButtonLongPressed = false
     
     @State var volume: Float = 0
     @State var showVolumeCircle = false
@@ -30,9 +31,18 @@ struct NewPlayerView: View {
                 } else {
                     artwork.opacity(isLuminanceReduced ? 0 : 1)
                 }
-                trackInfoLabels
+                
+                ZStack {
+                    if isSeekButtonLongPressed {
+                        seekProgressView
+                    } else {
+                        trackInfoLabels
+                    }
+                }
+                .frame(height: 40)
             }
             .animation(.default, value: isLuminanceReduced)
+            .animation(.default, value: isSeekButtonLongPressed)
             .padding(.bottom, 6)
             .padding(.top, -6)
             .toolbar {
@@ -82,6 +92,19 @@ struct NewPlayerView: View {
             }
             .animation(.default, value: showVolumeCircle)
         }
+    }
+    
+    private var seekProgressView: some View {
+        HStack {
+            Text(verbatim: Int(player.progress).timeStringFromSeconds)
+                .foregroundStyle(.primary)
+            Text(verbatim: "/")
+            Text(verbatim: audioStore.loadedTrack!.durationInSeconds.timeStringFromSeconds)
+        }
+        .foregroundStyle(.secondary)
+        .fontDesign(.rounded)
+        .fontWeight(.semibold)
+        .animation(.default.speed(1.2), value: player.progress)
     }
     
     private var trackInfoLabels: some View {
@@ -148,6 +171,7 @@ struct NewPlayerView: View {
     
     private func skipAndSeekButton(_ direction: AudioPlayer.SeekDirection) -> some View {
         ShortAndLongTapButton( // ⏮️ ⏭️
+            isLongTap: $isSeekButtonLongPressed,
             shortTapGesture: {
                 direction.isBackward ? player.previousTrackCommand() : player.nextTrackCommand()
                 AnalyticsManager.shared.log(direction.isBackward ? .tappedSkipToPreviousTrack : .tappedSkipToNextTrack)
