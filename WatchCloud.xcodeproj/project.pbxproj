@@ -86,6 +86,7 @@
 		94C169A02AB474EE00570B4F /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 94C1699F2AB474EE00570B4F /* Nuke */; };
 		94C169A22AB474EE00570B4F /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 94C169A12AB474EE00570B4F /* NukeUI */; };
 		94D4951D2B0F74720013A2D9 /* ImagePipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D4951C2B0F74720013A2D9 /* ImagePipeline.swift */; };
+		94D4951F2B1212280013A2D9 /* ShortAndLongTapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D4951E2B1212280013A2D9 /* ShortAndLongTapButton.swift */; };
 		94FAA18A2ACB319600EF97CE /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1892ACB319600EF97CE /* UserListView.swift */; };
 		94FAA18C2ACB3B4200EF97CE /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */; };
 		94FAA1D02ACC273600EF97CE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1CF2ACC273600EF97CE /* UserView.swift */; };
@@ -255,6 +256,7 @@
 		94B634552ABE5B7700E6FCDA /* Player - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player - S945.png"; sourceTree = "<group>"; };
 		94BD056D2B0B964300C3DA89 /* NowPlayingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingInfo.swift; sourceTree = "<group>"; };
 		94D4951C2B0F74720013A2D9 /* ImagePipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePipeline.swift; sourceTree = "<group>"; };
+		94D4951E2B1212280013A2D9 /* ShortAndLongTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortAndLongTapButton.swift; sourceTree = "<group>"; };
 		94F3FCD12AB9A3B5005D03DF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		94F3FCD22AB9A3B5005D03DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		94FAA1892ACB319600EF97CE /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 				947F59982B0A80E900741C53 /* Notification.swift */,
 				9421D2AE2AD2D151005FE857 /* Optional.swift */,
 				946F38B82AB07F81008CE9D1 /* Progress.swift */,
+				94D4951E2B1212280013A2D9 /* ShortAndLongTapButton.swift */,
 				946F38BD2AB07F81008CE9D1 /* SpinAnimation.swift */,
 				94923C6C2ABDBB2C00A67EBE /* String.swift */,
 				945CCB5E2AB383D500C47E55 /* SwiftUI Preview.swift */,
@@ -851,6 +854,7 @@
 				941A00F82AC70CEE000F4693 /* CachedImageView.swift in Sources */,
 				94923C6D2ABDBB2C00A67EBE /* String.swift in Sources */,
 				9488EE692AE3E2380009EC54 /* AuthStore.swift in Sources */,
+				94D4951F2B1212280013A2D9 /* ShortAndLongTapButton.swift in Sources */,
 				946F38DB2AB07F81008CE9D1 /* LoginView.swift in Sources */,
 				9421D2A32ACED4FE005FE857 /* CGRect.swift in Sources */,
 				943477BC2AD3E1CA00A6DED6 /* DebugAnalyticsService.swift in Sources */,

@@ -22,8 +22,6 @@ struct NewPlayerView: View {
     @State var volumeCircleVisibleTime = 0
     let volumeTimer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     
-    @State var isSeekButtonLongPressed = false
-    
     var body: some View {
         NavigationStack { // Needed for toolbar
             VStack(spacing: 12) {
@@ -151,24 +149,18 @@ struct NewPlayerView: View {
     }
     
     private func skipAndSeekButton(_ direction: AudioPlayer.SeekDirection) -> some View {
-        Button { // ⏮️ ⏭️
-            // 💡 After simultaneous `LongPressGesture` ends, this gesture is called a single time
-            //    as well. Check if this closure is called as a result of the long press gesture
-            //    (as opposed to a regular tap gesture) and the cancel the seeking
-            if isSeekButtonLongPressed {
-                player.endSeeking()
-                isSeekButtonLongPressed.toggle()
-            } else {
+        ShortAndLongTapButton( // ⏮️ ⏭️
+            shortTapGesture: {
                 direction.isBackward ? player.previousTrackCommand() : player.nextTrackCommand()
                 AnalyticsManager.shared.log(direction.isBackward ? .tappedSkipToPreviousTrack : .tappedSkipToNextTrack)
+            }, longTapBegan: {
+                player.beginSeeking(direction)
+            }, longTapEnded: {
+                player.endSeeking()
+            }, label: {
+                Image(systemName: direction.isBackward ? "backward.fill" : "forward.fill")
             }
-        } label: {
-            Image(systemName: direction.isBackward ? "backward.fill" : "forward.fill")
-        }
-        .simultaneousGesture(LongPressGesture(minimumDuration: 0.3).onEnded { _ in
-            isSeekButtonLongPressed = true
-            player.beginSeeking(direction)
-        })
+        )
     }
     
     private var playbackCircleOverlay: some View {
@@ -179,7 +171,7 @@ struct NewPlayerView: View {
             .rotationEffect(.degrees(-90))
             .opacity(player.isLoading ? 0.7 : 1)
             // Only animate if not setting to 0
-            .animation(.linear(duration: player.progress != 0 ? 1 : 0), value: player.progress)
+            .animation(player.progress != 0 ? .linear(duration: 1) : nil, value: player.progress)
             .animation(.default, value: player.isLoading)
     }
     
@@ -195,18 +187,18 @@ struct NewPlayerView: View {
         }
     }
     
-    private func handleVolumeUpdate(_ newVolume: Float) {
-        showVolumeCircle = true
-        volumeCircleVisibleTime = 0
-        volume = newVolume
-    }
-    
     private var volumeControlView: some View {
         #if targetEnvironment(simulator)
         EmptyView()
         #else
         VolumeControlView(hidden: true)
         #endif
+    }
+    
+    private func handleVolumeUpdate(_ newVolume: Float) {
+        showVolumeCircle = true
+        volumeCircleVisibleTime = 0
+        volume = newVolume
     }
 }
 

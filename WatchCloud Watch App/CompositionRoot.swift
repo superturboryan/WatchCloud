@@ -17,7 +17,7 @@ enum CompositionRoot {
     static let audioPlayer = AudioPlayer(audioStore, authStore)
     
     // Stores
-    @MainActor static let audioStore = AudioStore(sc)
+    static let audioStore = AudioStore(sc)
     @MainActor static let userStore = UserStore(sc)
     static let authStore = AuthStore(sc)
     static let searchStore = SearchStore(sc)
