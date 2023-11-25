@@ -127,21 +127,6 @@ struct NewPlayerView: View {
         .lineLimit(1)
     }
     
-    private var trackExtraInfo: some View {
-        HStack(spacing: 2) {
-            if audioStore.loadedTrack?.userFavorite ?? false {
-                Image(systemName: "heart.fill")
-                    .foregroundColor(.pink)
-            }
-            if audioStore.isLoadedTrackDownloaded {
-                Image(systemName: "arrow.down.circle.fill")
-                    .foregroundColor(.green)
-            }
-        }
-        .frame(height: 18)
-        .padding(1)
-    }
-    
     private var playbackButtons: some ToolbarContent {
         ToolbarItemGroup(placement: .bottomBar) {
             skipAndSeekButton(.backward)
