@@ -20,7 +20,7 @@ import SwiftUI
 ///
 struct ShortAndLongTapButton<Label: View>: View {
     
-    @State var isLongTap = false
+    @Binding var isLongTap: Bool
     
     var shortTapGesture: () -> Void
     var longTapBegan: () -> Void
@@ -46,10 +46,13 @@ struct ShortAndLongTapButton<Label: View>: View {
 }
 
 #Preview {
-    ShortAndLongTapButton(
-        shortTapGesture: { print("Short tap") },
-        longTapBegan: { print("Long tap start") },
-        longTapEnded: { print("Long tap end") },
-        label: { Text("Tap me")}
-    )
+    StatefulPreviewWrapper(false) { bool in
+        ShortAndLongTapButton(
+            isLongTap: bool,
+            shortTapGesture: { print("Short tap") },
+            longTapBegan: { print("Long tap start") },
+            longTapEnded: { print("Long tap end") },
+            label: { Text("Tap me")}
+        )
+    }
 }
