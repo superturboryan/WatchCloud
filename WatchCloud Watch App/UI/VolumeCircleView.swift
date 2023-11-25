@@ -30,6 +30,7 @@ struct VolumeCircleView: View {
                 .padding(10)
                 .foregroundStyle(LinearGradient.scOrange(.horizontal))
         }
+        .clipShape(Circle())
     }
 }
 
