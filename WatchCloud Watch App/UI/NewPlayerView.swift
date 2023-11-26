@@ -32,14 +32,13 @@ struct NewPlayerView: View {
                     artwork.opacity(isLuminanceReduced ? 0 : 1)
                 }
                 
-                ZStack {
+                Group {
                     if isSeekButtonLongPressed {
                         seekProgressView
                     } else {
                         trackInfoLabels
                     }
-                }
-                .frame(height: 40)
+                }.frame(height: 40)
             }
             .animation(.default, value: isLuminanceReduced)
             .animation(.default, value: isSeekButtonLongPressed)
