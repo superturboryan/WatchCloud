@@ -47,6 +47,9 @@
         }
       }
     },
+    "(%lld MB)" : {
+
+    },
     "%@hrs" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -421,6 +424,12 @@
         }
       }
     },
+    "%lld tracks" : {
+
+    },
+    "Are you sure you want delete all downloads?" : {
+
+    },
     "Are you sure you want to logout?" : {
       "localizations" : {
         "ar" : {
@@ -653,6 +662,12 @@
           }
         }
       }
+    },
+    "Delete all" : {
+
+    },
+    "Displays a QR code in place of song artwork when watch is dimmed" : {
+
     },
     "Download" : {
       "comment" : "Verb",
@@ -2182,6 +2197,9 @@
           }
         }
       }
+    },
+    "Show QR code" : {
+      "comment" : "Toggle label"
     },
     "Sign in with Google" : {
       "comment" : "Tip message",

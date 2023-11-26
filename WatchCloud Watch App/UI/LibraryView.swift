@@ -77,6 +77,8 @@ struct LibraryView: View {
             Section(header: sectionHeaderView(String(localized: "My Account"))) {
                 currentUserCell
             }
+            
+            settingsCell
 
             PoweredBySCView()
                 .padding(.top, 14)
@@ -143,7 +145,6 @@ struct LibraryView: View {
         }
     }
     
-    @ViewBuilder
     var settingsCell: some View {
         navigationCell(id: -2, title: "Settings") {
             SettingsView()
