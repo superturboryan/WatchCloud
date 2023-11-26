@@ -2473,6 +2473,9 @@
           }
         }
       }
+    },
+    "Use cellular data" : {
+      "comment" : "Toggle label"
     }
   },
   "version" : "1.0"

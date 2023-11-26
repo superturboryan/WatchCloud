@@ -48,6 +48,10 @@ struct SettingsView: View {
             Section(
                 header: Text("Downloads")
             ) {
+                Toggle(isOn: Config.$allowDownloadingUsingData, label: {
+                    Text(String(localized: "Use cellular data", comment: "Toggle label"))
+                })
+                
                 HStack {
                     Text(String(localized: "%d tracks", defaultValue: "\(audioStore.downloadedTracks.count) tracks"))
                     Spacer()
