@@ -372,6 +372,12 @@ extension AudioStore {
         }
     }
     
+    @MainActor func removeAllDownloads() throws {
+        for track in downloadedTracks {
+            try removeDownload(track)
+        }
+    }
+    
     @MainActor
     func cancelDownloadInProgress(for track: Track) throws {
         guard downloadsInProgress.keys.contains(track), let task = downloadTasks[track] else {
@@ -380,6 +386,13 @@ extension AudioStore {
         task.cancel()
         downloadTasks.removeValue(forKey: track)
         downloadsInProgress.removeValue(forKey: track)
+    }
+    
+    func downloadedTracksFileSize() -> Int { // in MB
+        downloadedTracks
+            .map(\.durationInSeconds)
+            .map { Int(Double($0) * 0.015996) } // SoundCloud mp3's are 0.015996 MB / second
+            .reduce(0, +)
     }
 }
 
