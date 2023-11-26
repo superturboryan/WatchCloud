@@ -400,7 +400,12 @@ private extension AudioStore {
     
     @MainActor
     func downloadTrack(_ track: Track, from url: String) async throws {
-        // Checks before starting download
+        // Checks before starting download...
+        // Is downloading over cellular allowed?
+        if PathMonitor.shared.currentPath.isCellular && !Config.allowDownloadingUsingData {
+            throw Error.downloadingWithCellularDisabled
+        }
+        // Is track already downloaded?
         let localMp3Url = track.localFileUrl(withExtension: Track.FileExtension.mp3)
         let localFileDoesNotExist = !FileManager.default.fileExists(atPath: localMp3Url.path)
         let downloadNotAlreadyInProgress = !downloadsInProgress.keys.contains(track)
@@ -505,11 +510,23 @@ extension AudioStore {
         
         case trackDownloadNotInProgress
         case downloadAlreadyExists
+        case downloadingWithCellularDisabled
+        
         case userNotAuthorized
         case network(SoundCloud.StatusCode)
         case invalidURL
         case noInternet
         case removingDownloadedTrack
+        
+        var errorDescription: String? {
+            switch self {
+            case .togglingLikedTrack: String(localized: "There was a problem liking/unliking the song", comment: "Error message")
+            case .downloadAlreadyExists: String(localized: "Download already exists", comment: "Error message")
+            case .downloadingWithCellularDisabled: String(localized: "Downloading with a cellular connection is disabled, go to Settings to enable", comment: "Error message")
+            case .removingDownloadedTrack: String(localized: "There was a problem removing the download", comment: "Error message")
+            default: nil
+            }
+        }
     }
 }
 

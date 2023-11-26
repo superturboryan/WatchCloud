@@ -710,6 +710,9 @@
         }
       }
     },
+    "Download already exists" : {
+      "comment" : "Error message"
+    },
     "Downloaded" : {
       "comment" : "Past participle",
       "localizations" : {
@@ -802,6 +805,9 @@
           }
         }
       }
+    },
+    "Downloading with a cellular connection is disabled, go to Settings to enable" : {
+      "comment" : "Error message"
     },
     "Downloads" : {
       "comment" : "Plural noun",
@@ -2333,6 +2339,12 @@
           }
         }
       }
+    },
+    "There was a problem liking/unliking the song" : {
+      "comment" : "Error message"
+    },
+    "There was a problem removing the download" : {
+      "comment" : "Error message"
     },
     "Top tracks" : {
       "localizations" : {
