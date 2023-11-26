@@ -40,4 +40,12 @@ public extension Int {
         }
         return String(format: "%.1fM", Double(self) / Double(1_000_000))
     }
+    
+    var formattedFileSizeInMbOrGb: String {
+        if self < 1_000 {
+            return "\(self) MB"
+        } else {
+            return String(format: "%.1f GB", Double(self) / Double(1_000))
+        }
+    }
 }
