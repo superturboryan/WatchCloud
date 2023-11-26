@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import OSLog
 import SoundCloud
 
 final class AudioStore: NSObject, ObservableObject {
@@ -176,8 +177,7 @@ extension AudioStore {
                 try await loadRecentlyPostedPlaylistWithTracks()
             // These playlists are not reloaded here
             case .nowPlaying, .downloads:
-                print("⚠️ SC.loadTracksForPlaylist has no effect. Playlist type reloads automatically")
-                break
+                Logger.audioStore.warning("⚠️ Playlist type reloads automatically")
             }
         } else {
             let page = try await getTracksForPlaylist(id)

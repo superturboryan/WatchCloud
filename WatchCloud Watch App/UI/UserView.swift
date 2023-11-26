@@ -5,6 +5,7 @@
 //  Created by Ryan Forsyth on 2023-10-03.
 //
 
+import OSLog
 import SoundCloud
 import SwiftUI
 
@@ -73,7 +74,7 @@ struct UserView: View {
             tracks = try await audioStore.getTracksForUser(user.id, numberOfTracksToLoad).items
             likedTracks = try await audioStore.getLikedTracksForUser(user.id, numberOfTracksToLoad).items
         } catch {
-            print("❌ Failed to load tracks for user")
+            Logger.userView.error("❌ Failed to load tracks for user")
         }
         isLoading = false
     }
