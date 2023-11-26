@@ -151,7 +151,7 @@ extension AudioPlayer {
         if let localFileURL = track.localFileUrl {
             trackURL = localFileURL
         } else {
-            guard let steamingInfo = try? await audioStore.streamInfoForTrack(track) else {
+            guard let steamingInfo = try? await audioStore.streamInfo(for: track) else {
                 throw Error.loadingStreamInfo
             }
             trackURL = steamingInfo.hlsMp3128URL
@@ -160,10 +160,8 @@ extension AudioPlayer {
         guard let assetURL = URL(string: trackURL) else {
             throw Error.invalidAssetURL
         }
-        
-        let avItem = AVPlayerItem(asset: AVURLAsset(url: assetURL))
-        avItem.preferredForwardBufferDuration = TimeInterval(30) // Seconds
-        return avItem
+        // 💡 Set avItem.preferredForwardBufferDuration to manually control buffering
+        return AVPlayerItem(asset: AVURLAsset(url: assetURL))
     }
     
     private func showBluetoothOptionsIfBluetoothAudioOutputNotDetected() {

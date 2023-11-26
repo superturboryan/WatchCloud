@@ -185,7 +185,7 @@ extension AudioStore {
         }
     }
     
-    func streamInfoForTrack(_ track: Track) async throws -> StreamInfo {
+    func streamInfo(for track: Track) async throws -> StreamInfo {
         try await service.getStreamInfoForTrack(with: track.id)
     }
 }
