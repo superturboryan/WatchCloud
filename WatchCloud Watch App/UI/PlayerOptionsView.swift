@@ -15,6 +15,7 @@ struct PlayerOptionsView: View {
     @EnvironmentObject var player: AudioPlayer
     
     @Binding var track: Track
+    @State var audioStoreError: AudioStore.Error? = nil
     
     private let hSpacing: CGFloat = 12
     private let buttonSize = CGSize(width: 76, height: 45)
@@ -42,6 +43,17 @@ struct PlayerOptionsView: View {
         .buttonStyle(.plain)
         .fullWidthAndHeight()
         .background(.black)
+        
+        .alert(
+            String(localized: "Something went wrong", comment: "Alert title"),
+            isPresented: .constant(audioStoreError != nil)
+        ) {
+            Button("Ok") {
+                audioStoreError = nil
+            }
+        } message: {
+            Text(verbatim: audioStoreError?.localizedDescription ?? "")
+        }
     }
     
     var likeButton: some View {
@@ -77,18 +89,25 @@ struct PlayerOptionsView: View {
         AnalyticsManager.shared.log(.tappedLikeTrack)
         
         Task {
-            try await audioStore.toggleLikedTrack(track)
+            do {
+                try await audioStore.toggleLikedTrack(track)
+            } catch let error as AudioStore.Error {
+                audioStoreError = error
+            }
         }
     }
     
     func tappedDownload() {
         Haptics.click()
         Task {
-            if isTrackDownloaded {
-                #warning("Errors not handled")
-                try audioStore.removeDownload(track)
-            } else {
-                try await audioStore.download(track)
+            do {
+                if isTrackDownloaded {
+                    try audioStore.removeDownload(track)
+                } else {
+                    try await audioStore.download(track)
+                }
+            } catch let error as AudioStore.Error {
+                audioStoreError = error
             }
         }
     }
