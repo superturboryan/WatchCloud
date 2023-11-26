@@ -22,9 +22,11 @@ struct WatchCloud_Watch_AppApp: App {
     @Environment(\.scenePhase) var scene
     
     init() {
-        _ = AnalyticsManager.shared // Calls init on shared instance
-        ImagePipeline.shared = .init(configuration: .withDataCache) // Enables aggressive disk caching
         configureTips()
+        // Setup shared instances
+        _ = AnalyticsManager.shared
+        ImagePipeline.shared = .init(configuration: .withDataCache) // Enables aggressive disk caching
+        _ = PathMonitor.shared
     }
     
     var body: some Scene {
