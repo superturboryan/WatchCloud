@@ -47,9 +47,6 @@
         }
       }
     },
-    "(%lld MB)" : {
-
-    },
     "%@hrs" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -424,10 +421,7 @@
         }
       }
     },
-    "%lld tracks" : {
-
-    },
-    "Are you sure you want delete all downloads?" : {
+    "Are you sure you want to delete all downloads?" : {
 
     },
     "Are you sure you want to logout?" : {
@@ -666,7 +660,7 @@
     "Delete all" : {
 
     },
-    "Displays a QR code in place of song artwork when watch is dimmed" : {
+    "Display a QR code in place of artwork when watch is dimmed" : {
 
     },
     "Download" : {

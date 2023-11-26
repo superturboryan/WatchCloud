@@ -41,7 +41,7 @@ public extension Int {
         return String(format: "%.1fM", Double(self) / Double(1_000_000))
     }
     
-    var formattedFileSizeInMbOrGb: String {
+    var formattedFileSizeInMbOrGb: String { // Assuming self is in MB
         if self < 1_000 {
             return "\(self) MB"
         } else {

@@ -24,7 +24,7 @@ struct SettingsView: View {
             playbackSection
             downloadsSection
         }
-        .alert("Are you sure you want delete all downloads?", isPresented: $showDeleteAllAlert) {
+        .alert("Are you sure you want to delete all downloads?", isPresented: $showDeleteAllAlert) {
             Button("Logout", role: .destructive) { try? audioStore.removeAllDownloads() }
             Button(String(localized: "Cancel", comment: "Verb"), role: .cancel) {}
         }
@@ -34,7 +34,7 @@ struct SettingsView: View {
     
     private var playbackSection: some View {
         Section(
-            footer: Text("Display a QR code in place of song artwork when watch is dimmed")
+            footer: Text("Display a QR code in place of artwork when watch is dimmed")
         ) {
             Toggle(isOn: Config.$showQRWhenWatchIsDimmed) {
                 Text(String(localized: "Show QR code", comment: "Toggle label"))
@@ -49,11 +49,11 @@ struct SettingsView: View {
                 header: Text("Downloads")
             ) {
                 HStack {
-                    Text("\(audioStore.downloadedTracks.count) tracks")
+                    Text(String(localized: "%d tracks", defaultValue: "\(audioStore.downloadedTracks.count) tracks"))
                     Spacer()
-                    Text("(\(audioStore.downloadedTracksFileSize()) MB)").foregroundStyle(.secondary)
+                    Text(verbatim: audioStore.downloadedTracksFileSize.formattedFileSizeInMbOrGb)
+                        .foregroundStyle(.secondary)
                 }
-                .animation(.default, value: audioStore.downloadedTracks)
                 
                 if !audioStore.downloadedTracks.isEmpty {
                     Button("Delete all", role: .destructive) {

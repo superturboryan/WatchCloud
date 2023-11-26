@@ -388,11 +388,10 @@ extension AudioStore {
         downloadsInProgress.removeValue(forKey: track)
     }
     
-    func downloadedTracksFileSize() -> Int { // in MB
+    var downloadedTracksFileSize: Double { // in MB
         downloadedTracks
-            .map(\.durationInSeconds)
-            .map { Int(Double($0) * 0.015996) } // SoundCloud mp3's are 0.015996 MB / second
-            .reduce(0, +)
+            .map(\.fileSizeInMb)
+            .reduce(0.0, +)
     }
 }
 
@@ -518,5 +517,9 @@ fileprivate extension Track {
     enum FileExtension {
         public static let mp3 = "mp3"
         public static let json = "json"
+    }
+    
+    var fileSizeInMb: Double {
+        Double(durationInSeconds) * 0.015996 // SoundCloud mp3's are 0.015996 MB / second
     }
 }
