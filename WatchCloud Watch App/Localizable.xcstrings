@@ -422,8 +422,16 @@
         }
       }
     },
-    "Are you sure you want to delete all downloads?" : {
-
+    "%d Tracks" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%lld Tracks"
+          }
+        }
+      }
     },
     "Are you sure you want to logout?" : {
       "localizations" : {
@@ -470,6 +478,9 @@
           }
         }
       }
+    },
+    "Are you sure you want to remove all downloads?" : {
+
     },
     "artists" : {
       "comment" : "Plural noun",
@@ -657,9 +668,6 @@
           }
         }
       }
-    },
-    "Delete all" : {
-
     },
     "Display a QR code in place of artwork when watch is dimmed" : {
 
@@ -1976,6 +1984,9 @@
     "Press and hold track\n to remove download" : {
 
     },
+    "Remove All" : {
+
+    },
     "Search" : {
       "comment" : "Verb",
       "localizations" : {
@@ -2208,7 +2219,7 @@
         }
       }
     },
-    "Show QR code" : {
+    "Show QR Code" : {
       "comment" : "Toggle label"
     },
     "Sign in with Google" : {
@@ -2499,7 +2510,7 @@
         }
       }
     },
-    "Use cellular data" : {
+    "Use Cellular Data" : {
       "comment" : "Toggle label"
     }
   },

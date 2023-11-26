@@ -24,9 +24,10 @@ struct SettingsView: View {
             playbackSection
             downloadsSection
         }
-        .alert("Are you sure you want to delete all downloads?", isPresented: $showDeleteAllAlert) {
-            Button("Delete all", role: .destructive) { try? audioStore.removeAllDownloads() }
+        .alert("Are you sure you want to remove all downloads?", isPresented: $showDeleteAllAlert) {
+            Button("Remove All", role: .destructive) { try? audioStore.removeAllDownloads() }
             Button(String(localized: "Cancel", comment: "Verb"), role: .cancel) {}
+
         }
         .navigationBarTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
@@ -37,7 +38,7 @@ struct SettingsView: View {
             footer: Text("Display a QR code in place of artwork when watch is dimmed")
         ) {
             Toggle(isOn: Config.$showQRWhenWatchIsDimmed) {
-                Text(String(localized: "Show QR code", comment: "Toggle label"))
+                Text(String(localized: "Show QR Code", comment: "Toggle label"))
             }
         }
     }
@@ -49,18 +50,18 @@ struct SettingsView: View {
                 header: Text("Downloads")
             ) {
                 Toggle(isOn: Config.$allowDownloadingUsingData, label: {
-                    Text(String(localized: "Use cellular data", comment: "Toggle label"))
+                    Text(String(localized: "Use Cellular Data", comment: "Toggle label"))
                 })
                 
                 HStack {
-                    Text(String(localized: "%d tracks", defaultValue: "\(audioStore.downloadedTracks.count) tracks"))
+                    Text(String(localized: "%d Tracks", defaultValue: "\(audioStore.downloadedTracks.count) Tracks"))
                     Spacer()
                     Text(verbatim: audioStore.downloadedTracksFileSize.formattedFileSizeInMbOrGb)
                         .foregroundStyle(.secondary)
                 }
                 
                 if !audioStore.downloadedTracks.isEmpty {
-                    Button("Delete all", role: .destructive) {
+                    Button("Remove All", role: .destructive) {
                         showDeleteAllAlert = true
                     }
                     .buttonStyle(.bordered)
