@@ -486,7 +486,6 @@ extension AudioStore: URLSessionTaskDelegate {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] progress in
                 DispatchQueue.main.async { // Not sure if this works better than .receive(on:) alone
-                    print("\n⬇️🎵 Download progress for \(trackBeingDownloaded.title): \(progress.fractionCompleted)")
                     self?.downloadsInProgress[trackBeingDownloaded] = progress
                 }
             }
