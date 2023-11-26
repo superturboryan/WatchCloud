@@ -29,6 +29,7 @@ struct SettingsView: View {
             Button(String(localized: "Cancel", comment: "Verb"), role: .cancel) {}
 
         }
+        .fontDesign(.rounded)
         .navigationBarTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
     }
