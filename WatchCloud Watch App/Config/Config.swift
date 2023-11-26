@@ -37,5 +37,6 @@ enum Config {
     static let mpProjectToken = Bundle.main.object(forInfoDictionaryKey: "MP_PROJECT_TOKEN") as! String
     
     // MARK: - 💾 Loaded from UserDefaults
+    @AppStorage("allowDownloadingUsingData") static var allowDownloadingUsingData = false
     @AppStorage("showQRWhenWatchIsDimmed") static var showQRWhenWatchIsDimmed = false
 }
