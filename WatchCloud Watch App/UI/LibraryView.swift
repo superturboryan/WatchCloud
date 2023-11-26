@@ -146,7 +146,7 @@ struct LibraryView: View {
     }
     
     var settingsCell: some View {
-        navigationCell(id: -2, title: "Settings") {
+        navigationCell(id: -2, title: String(localized: "Settings")) {
             SettingsView()
         }
     }
@@ -191,7 +191,7 @@ struct LibraryView: View {
                     Text(verbatim: title)
                         .font(subtitle == nil ? .body : .headline)
                         .fullWidth(.leading)
-                        .minimumScaleFactor(0.9)
+                        .minimumScaleFactor(0.8)
                     if let subtitle {
                         Text(verbatim: subtitle)
                             .font(.footnote)
