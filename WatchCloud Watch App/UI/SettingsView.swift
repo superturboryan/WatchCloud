@@ -25,7 +25,7 @@ struct SettingsView: View {
             downloadsSection
         }
         .alert("Are you sure you want to delete all downloads?", isPresented: $showDeleteAllAlert) {
-            Button("Logout", role: .destructive) { try? audioStore.removeAllDownloads() }
+            Button("Delete all", role: .destructive) { try? audioStore.removeAllDownloads() }
             Button(String(localized: "Cancel", comment: "Verb"), role: .cancel) {}
         }
         .navigationBarTitle("Settings")
