@@ -85,6 +85,7 @@ struct NewPlayerView: View {
                     VolumeCircleView(progress: $volume, lineWidth: 5)
                         .background(.black) // VolumeCircleView has transparent bg
                         .frame(width: 50, height: 50)
+                        .clipShape(Circle())
                 } else if player.isLoading {
                     ProgressView()
                 }
