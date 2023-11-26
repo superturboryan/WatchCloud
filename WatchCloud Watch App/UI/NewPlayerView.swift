@@ -26,10 +26,10 @@ struct NewPlayerView: View {
     var body: some View {
         NavigationStack { // Needed for toolbar
             VStack(spacing: 12) {
-                if isLuminanceReduced, let track = audioStore.loadedTrack {
+                if Config.showQRWhenWatchIsDimmed, isLuminanceReduced, let track = audioStore.loadedTrack {
                     QRCodeImageView(url: track.permalinkUrl).scaleEffect(x: 1.2, y: 1.2)
                 } else {
-                    artwork.opacity(isLuminanceReduced ? 0 : 1)
+                    artwork
                 }
                 
                 Group {
