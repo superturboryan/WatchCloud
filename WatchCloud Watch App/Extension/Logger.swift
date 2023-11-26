@@ -14,4 +14,5 @@ extension Logger {
     static let audioPlayer = Logger(subsystem: subsystem, category: "AudioPlayer")
     
     static let rootView = Logger(subsystem: subsystem, category: "RootView")
+    static let downloadsView = Logger(subsystem: subsystem, category: "DownloadsView")
 }

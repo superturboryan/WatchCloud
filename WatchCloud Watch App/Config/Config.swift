@@ -24,9 +24,12 @@ enum Config {
     // NSClassFromString("XCTestCase") != nil
     
     // MARK: - 🌏 Localization Helpers
-    static let isObjectFirstLanguage =
-    String(Locale.preferredLanguages[0].prefix(2)) == Locale(identifier: "ko").language.languageCode?.identifier
-    || String(Locale.preferredLanguages[0].prefix(2)) == Locale(identifier: "ja").language.languageCode?.identifier
+    static let isObjectFirstLanguage = objectFirstLanguageCodes.contains(currentLanguageCode)
+    private static let currentLanguageCode = String(Locale.preferredLanguages[0].prefix(2))
+    private static let objectFirstLanguageCodes = [
+        Locale(identifier: "ko").language.languageCode?.identifier,
+        Locale(identifier: "ja").language.languageCode?.identifier
+    ]
     
     static let isRightToLeftLanguage = Locale.current.language.characterDirection == .rightToLeft
     

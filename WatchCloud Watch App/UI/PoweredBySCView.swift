@@ -9,19 +9,19 @@ import SwiftUI
 
 struct PoweredBySCView: View {
     
-    let title = String(localized: "powered by", comment: "Used next to SC logo")
+    let poweredBy = String(localized: "powered by", comment: "Used next to SC logo")
     
     var body: some View {
         VStack(spacing: 4) {
             if !Config.isObjectFirstLanguage {
-                Text(title)
+                Text(poweredBy)
             }
             Image.scLogoVertical
                 .resizable()
                 .scaledToFit()
                 .frame(height: 34)
             if Config.isObjectFirstLanguage {
-                Text(title)
+                Text(poweredBy)
             }
         }
         .font(.system(size: 12, weight: .medium, design: .rounded))
