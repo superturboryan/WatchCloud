@@ -51,7 +51,9 @@ struct SettingsView: View {
                 header: Text("Downloads")
             ) {
                 Toggle(isOn: Config.$allowDownloadingUsingData, label: {
-                    Text(String(localized: "Use Cellular Data", comment: "Toggle label"))
+                    Text(String(localized: "Cellular Data", comment: "Toggle label"))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.9)
                 })
                 
                 HStack {
