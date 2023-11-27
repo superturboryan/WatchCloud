@@ -16,25 +16,32 @@ struct NewPlayerView: View {
     @Environment(\.isLuminanceReduced) var isLuminanceReduced
     
     @State private var showOptions = false
+    @State private var isSeekButtonLongPressed = false
     
     @State var volume: Float = 0
     @State var showVolumeCircle = false
     @State var volumeCircleVisibleTime = 0
     let volumeTimer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     
-    @State var isSeekButtonLongPressed = false
-    
     var body: some View {
         NavigationStack { // Needed for toolbar
-            VStack(spacing: 14) {
-                if isLuminanceReduced, let track = audioStore.loadedTrack {
+            VStack(spacing: 12) {
+                if Config.showQRWhenWatchIsDimmed, isLuminanceReduced, let track = audioStore.loadedTrack {
                     QRCodeImageView(url: track.permalinkUrl).scaleEffect(x: 1.2, y: 1.2)
                 } else {
-                    artwork.opacity(isLuminanceReduced ? 0 : 1)
+                    artwork
                 }
-                trackInfoLabels
+                
+                Group {
+                    if isSeekButtonLongPressed {
+                        seekProgressView
+                    } else {
+                        trackInfoLabels
+                    }
+                }.frame(height: 40)
             }
             .animation(.default, value: isLuminanceReduced)
+            .animation(.default, value: isSeekButtonLongPressed)
             .padding(.bottom, 6)
             .padding(.top, -6)
             .toolbar {
@@ -79,13 +86,25 @@ struct NewPlayerView: View {
                         .background(.black) // VolumeCircleView has transparent bg
                         .frame(width: 50, height: 50)
                         .clipShape(Circle())
-                        
                 } else if player.isLoading {
                     ProgressView()
                 }
             }
             .animation(.default, value: showVolumeCircle)
         }
+    }
+    
+    private var seekProgressView: some View {
+        HStack {
+            Text(verbatim: Int(player.progress).timeStringFromSeconds)
+                .foregroundStyle(.primary)
+            Text(verbatim: "/")
+            Text(verbatim: audioStore.loadedTrack!.durationInSeconds.timeStringFromSeconds)
+        }
+        .foregroundStyle(.secondary)
+        .fontDesign(.rounded)
+        .fontWeight(.semibold)
+        .animation(.default.speed(1.2), value: player.progress)
     }
     
     private var trackInfoLabels: some View {
@@ -104,22 +123,8 @@ struct NewPlayerView: View {
                     .animation(.default, value: audioStore.loadedTrack)
             }
         }
+        .padding(.bottom, 2)
         .lineLimit(1)
-    }
-    
-    private var trackExtraInfo: some View {
-        HStack(spacing: 2) {
-            if audioStore.loadedTrack?.userFavorite ?? false {
-                Image(systemName: "heart.fill")
-                    .foregroundColor(.pink)
-            }
-            if audioStore.isLoadedTrackDownloaded {
-                Image(systemName: "arrow.down.circle.fill")
-                    .foregroundColor(.green)
-            }
-        }
-        .frame(height: 18)
-        .padding(1)
     }
     
     private var playbackButtons: some ToolbarContent {
@@ -132,7 +137,7 @@ struct NewPlayerView: View {
     
     private var togglePlaybackButton: some View {
         Button { // ⏯️
-            player.togglePlayback()
+            player.togglePlaybackCommand()
             AnalyticsManager.shared.log(.tappedTogglePlayback)
         } label: {
             Image(systemName:player.isPlaying ? "pause.fill" : "play.fill")
@@ -143,31 +148,26 @@ struct NewPlayerView: View {
         .contentShape(.focusEffect, Circle())
         .accessibilityQuickAction(style: .outline) { // ♿️
             Button(String(player.isPlaying ? "Pause" : "Play")) {
-                player.togglePlayback()
+                player.togglePlaybackCommand()
             }
         }
         .disabled(player.isLoading)
     }
     
     private func skipAndSeekButton(_ direction: AudioPlayer.SeekDirection) -> some View {
-        Button { // ⏮️ ⏭️
-            // 💡 After simultaneous `LongPressGesture` ends, this gesture is called a single time
-            //    as well. Check if this closure is called as a result of the long press gesture
-            //    (as opposed to a regular tap gesture) and the cancel the seeking
-            if isSeekButtonLongPressed {
-                player.endSeeking()
-                isSeekButtonLongPressed.toggle()
-            } else {
+        ShortAndLongTapButton( // ⏮️ ⏭️
+            isLongTap: $isSeekButtonLongPressed,
+            shortTapGesture: {
                 direction.isBackward ? player.previousTrackCommand() : player.nextTrackCommand()
                 AnalyticsManager.shared.log(direction.isBackward ? .tappedSkipToPreviousTrack : .tappedSkipToNextTrack)
+            }, longTapBegan: {
+                player.beginSeeking(direction)
+            }, longTapEnded: {
+                player.endSeeking()
+            }, label: {
+                Image(systemName: direction.isBackward ? "backward.fill" : "forward.fill")
             }
-        } label: {
-            Image(systemName: direction.isBackward ? "backward.fill" : "forward.fill")
-        }
-        .simultaneousGesture(LongPressGesture(minimumDuration: 0.3).onEnded { _ in
-            isSeekButtonLongPressed = true
-            player.beginSeeking(direction)
-        })
+        )
     }
     
     private var playbackCircleOverlay: some View {
@@ -178,7 +178,7 @@ struct NewPlayerView: View {
             .rotationEffect(.degrees(-90))
             .opacity(player.isLoading ? 0.7 : 1)
             // Only animate if not setting to 0
-            .animation(.linear(duration: player.progress != 0 ? 1 : 0), value: player.progress)
+            .animation(player.progress != 0 ? .linear(duration: 1) : nil, value: player.progress)
             .animation(.default, value: player.isLoading)
     }
     
@@ -194,18 +194,18 @@ struct NewPlayerView: View {
         }
     }
     
-    private func handleVolumeUpdate(_ newVolume: Float) {
-        showVolumeCircle = true
-        volumeCircleVisibleTime = 0
-        volume = newVolume
-    }
-    
     private var volumeControlView: some View {
         #if targetEnvironment(simulator)
         EmptyView()
         #else
         VolumeControlView(hidden: true)
         #endif
+    }
+    
+    private func handleVolumeUpdate(_ newVolume: Float) {
+        showVolumeCircle = true
+        volumeCircleVisibleTime = 0
+        volume = newVolume
     }
 }
 

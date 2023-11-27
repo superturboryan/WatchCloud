@@ -1,3 +1,29 @@
+# 1.2.0
+🌎 Published 27 November  
+🔨 Xcode 15.0  
+⌚️ watchOS 10.0  
+📦 **SoundCloud Swift Package 1.0.4 ⭐️**  
+
+### ✨ Features
+- Loaded track + queue are saved when app is backgrounded, loaded on app launch
+- Portuguese (pt-br), Dutch localizations
+- SettingsView
+    - Toggle displaying QR code
+    - Toggle allowing downloading over data
+    - View total downloads size
+    - Remove all downloads
+
+### 🐞 Bug fixes
+- **AudioPlayer uses HLS streaming URLs (instead of mp3)** ‼️🤦‍♂️
+- AudioPlayer uses `Nuke.ImagePipeline` to load images
+- Remove @MainActor from AudioPlayer class declaration, add to methods instead
+- LoginView displays tip when login is cancelled
+- Translation, capitalization fixes
+- Add padding to CachedImageView's fallback image
+- Show alert when liking track or starting download fails
+- Add UserListView empty state
+
+
 # 1.1.5
 🌎 Published 18 November  
 🔨 Xcode 15.0  
@@ -5,7 +31,7 @@
 📦 SoundCloud Swift Package 1.0.1   
 
 ### 🐞 Bug fixes
-- New installs weren't being shown loging screen! 
+- New installs weren't being shown login screen! 
     - Check if UserStore throws error when loading, perform logout
 
 

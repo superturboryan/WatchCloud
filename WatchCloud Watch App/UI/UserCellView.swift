@@ -23,7 +23,7 @@ struct UserCellView: View {
         }
         .lineLimit(1)
         .padding(10)
-        .background(.secondary.opacity(0.2))
+        .background(Color.cellBG)
         .cornerRadius(10)
     }
 }

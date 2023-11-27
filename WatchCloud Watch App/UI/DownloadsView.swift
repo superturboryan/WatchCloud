@@ -5,6 +5,7 @@
 //  Created by Ryan Forsyth on 2023-08-31.
 //
 
+import OSLog
 import SoundCloud
 import SwiftUI
 
@@ -18,11 +19,11 @@ struct DownloadsView: View {
     var body: some View {
         ScrollView {
             VStack {
-                // Four possible states:
+                // 💡 Four possible states:
                 // 1 - Downloads in progress
                 // 2 - Downloaded tracks exist
-                // 3 - Neither 1 or 2 (Empty)
-                // 4 - Both 1 and 2
+                // 3 - Both 1 and 2
+                // 4 - Neither 1 or 2 (Empty)
                 
                 if !audioStore.downloadsInProgress.isEmpty {
                     downloadsInProgressList
@@ -41,15 +42,15 @@ struct DownloadsView: View {
         .navigationTitle(String(localized: "Downloads", comment: "Plural noun"))
     }
     
-    #warning("🌍 Localize strings")
     var downloadsInProgressList: some View {
-        Section(header: sectionHeaderView("In Progress (\(audioStore.downloadsInProgress.count))")) {
+        Section(
+            header: sectionHeaderView(String(localized: "In Progress (\(audioStore.downloadsInProgress.count))"))
+        ) {
             ForEach(
                 audioStore.downloadsInProgress
                     .filter { $0.value.totalUnitCount != 0 }
-                    .sorted(by: { $0.value.fractionCompleted > $1.value.fractionCompleted }),
-                id: \.key.id
-            ) { track, progress in
+                    .sorted(by: { $0.value.fractionCompleted > $1.value.fractionCompleted }), id: \.key.id)
+            { track, progress in
                 downloadInProgressCell(track, progress)
                 .onLongPressGesture {
                     try? audioStore.cancelDownloadInProgress(for: track)
@@ -76,19 +77,18 @@ struct DownloadsView: View {
             .padding(.horizontal, 6)
         }
         .padding()
-        .background(Color.secondary.opacity(0.2))
+        .background(Color.cellBG)
         .cornerRadius(10)
     }
     
-    #warning("🌍 Localize strings")
     var downloadedTrackList: some View {
         Section(
-            header: sectionHeaderView("Downloaded (\(audioStore.downloadedTracks.count))"),
-            footer: sectionFooterView("Press and hold track\n to remove download")
+            header: sectionHeaderView(String(localized: "Downloaded (\(audioStore.downloadedTracks.count))")),
+            footer: sectionFooterView(String(localized: "Press and hold track\n to remove download"))
         ) {
             ForEach($audioStore.downloadedTracks) { displayedTrack in
                 TrackCellView(
-                    track: displayedTrack,
+                    track: displayedTrack.wrappedValue,
                     isPlaying: audioStore.loadedTrack == displayedTrack.wrappedValue,
                     isDownloaded: true
                 )
@@ -98,7 +98,7 @@ struct DownloadsView: View {
                         try audioStore.removeDownload(displayedTrack.wrappedValue)
                         Haptics.click()
                     } catch {
-                        print("❌ Error deleting download: \(error)");
+                        Logger.downloadsView.error("Failed to remove download")
                     }
                 }
             }
@@ -135,7 +135,7 @@ struct DownloadsView: View {
     }
     
     func tapped(_ track: Track) {
-        // ⚠️ Copied from PlaylistView.tapped, move to LibraryView?
+        // ⚠️ Copied from PlaylistView.tapped
         // Set queue
         if audioStore.nowPlayingQueue != audioStore.downloadedTracks {
             audioStore.setNowPlayingQueue(with: audioStore.downloadedTracks)
@@ -145,7 +145,7 @@ struct DownloadsView: View {
             // Start selected track from beginning
             player.loadAndPlayTrack(track)
         } else if !player.isPlaying {
-            player.continuePlayback()
+            player.playCommand()
         }
         
         NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)

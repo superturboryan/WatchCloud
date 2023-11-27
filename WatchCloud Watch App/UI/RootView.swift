@@ -18,21 +18,19 @@ struct RootView: View {
     @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var searchStore: SearchStore
     
-    @State var loaded = false
-    @State var loading = false
+    @State private var isLoaded = false
+    @State private var isLoading = false
     @State private var selectedTab: RootTab = .library
     
     var body: some View {
         ZStack {
-            if loaded {
+            if isLoaded {
                 rootTabView
             } else {
                 loadingView
-                // On first load
-                .task { await load() }
             }
         }
-        .animation(.default, value: loaded)
+        .animation(.default, value: isLoaded)
         .fullScreenCover(isPresented: Binding(get: { !authStore.isLoggedIn }) { _ in }) {
             LoginView()
         }
@@ -46,27 +44,30 @@ struct RootView: View {
         }
     }
     
-    @ViewBuilder
-    var rootTabView: some View {
-        let playlistIsLoaded = !audioStore.nowPlayingQueue.isEmptyOrNil
+    private var rootTabView: some View {
         TabView(selection: $selectedTab) {
             LibraryView().tag(RootTab.library)
-            // 👇 Loading PlayerView is the culprit for "Attribute graph cycle detected"... 
-            if playlistIsLoaded {
-                if #available(watchOS 10, *) {
-                    NewPlayerView().tag(RootTab.player)
-                        .transition(.move(edge: .trailing))
-                        .animation(.default, value: playlistIsLoaded)
-                } else {
-                    PlayerView().tag(RootTab.player)
-                        .transition(.move(edge: .trailing))
-                        .animation(.default, value: playlistIsLoaded)
-                }
-            }
+            osDependentPlayerView
         }
         .tabViewStyle(PageTabViewStyle())
         .onReceive(NotificationCenter.default.publisher(for: .switchToPlayerTab)) { _ in
             switchToPlayerTabAfterDelay()
+        }
+    }
+    
+    @ViewBuilder
+    private var osDependentPlayerView: some View {
+        let playlistIsLoaded = !audioStore.nowPlayingQueue.isEmptyOrNil
+        if playlistIsLoaded {
+            if #available(watchOS 10, *) {
+                NewPlayerView().tag(RootTab.player)
+                    .transition(.move(edge: .trailing))
+                    .animation(.default, value: playlistIsLoaded)
+            } else {
+                PlayerView().tag(RootTab.player)
+                    .transition(.move(edge: .trailing))
+                    .animation(.default, value: playlistIsLoaded)
+            }
         }
     }
     
@@ -81,7 +82,7 @@ struct RootView: View {
         ProgressView() {
             VStack(spacing: 12) {
                 Text("Getting ready...")
-                Text(verbatim: Config.isRightToLeft ? "🎶🎶" : "💃🕺")
+                Text(verbatim: Config.isRightToLeftLanguage ? "🎶🎶" : "💃🕺")
             }
             .fontWeight(.semibold)
             .fontDesign(.rounded)
@@ -89,36 +90,37 @@ struct RootView: View {
         }
         .controlSize(.large)
         .tint(Color.scOrange)
-        .opacity(loading ? 1 : 0)
-        .animation(.default, value: loading)
+        .opacity(isLoading ? 1 : 0)
+        .animation(.default, value: isLoading)
+        .task { await load() } // On first load
     }
     
     func load() async {
-        loading = true
+        isLoading = true
         defer {
-            loading = false
+            isLoading = false
         }
         do {
             try await userStore.load()
             try await audioStore.load()
             searchStore.load()
-            loaded = true
+            isLoaded = true
             AnalyticsManager.shared.log(.loadLibrarySuccess)
         } catch UserStore.Error.loadingMyProfile,
                 SoundCloud.Error.userNotAuthorized {
-            Logger.rootView.info("❌ Profile doesn't exist or API denied access. Performing logout, presenting login screen...")
+            Logger.rootView.info("❌ Profile doesn't exist or API denied access. Performing logout...")
             performLogout()
-            return
-        } catch SoundCloud.Error.tooManyRequests { // Review if this error is actually thrown
+        } catch SoundCloud.Error.tooManyRequests { // Can still be thrown by AudioStore
             AnalyticsManager.shared.log(.tooManyRequests)
-            loaded = true
+            isLoaded = true
         } catch {
             Logger.rootView.info("Failed to load library but profile exists, going into offline mode...")
-            loaded = true
+            isLoaded = true
         }
     }
     
     private func performLogout() {
+        audioStore.reset()
         authStore.logout()
         userStore.reset()
         searchStore.reset()
@@ -128,13 +130,8 @@ struct RootView: View {
 
 #Preview {
     RootView()
-        .environmentObject(testAudioPlayer)
+        .environmentObject(SearchStore(testSC))
         .environmentObject(AudioStore(testSC))
         .environmentObject(AuthStore(testSC))
         .environmentObject(UserStore(testSC))
-}
-
-extension Notification.Name {
-    static let switchToPlayerTab = Notification.Name("switchToPlayerTab")
-    static let performLogout = Notification.Name("performLogout")
 }

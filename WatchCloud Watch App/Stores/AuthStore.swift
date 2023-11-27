@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SoundCloud
 
 final class AuthStore: ObservableObject {
     
@@ -20,15 +21,15 @@ final class AuthStore: ObservableObject {
 }
 
 extension AuthStore {
-    var authHeader: [String : String] { get async throws {
-        try await service.authenticatedHeader
-    }}
-    
+
     @MainActor
     func login() async throws {
         do {
             try await service.login()
             isLoggedIn = true
+        } catch SoundCloud.Error.cancelledLogin {
+            isLoggedIn = false
+            throw Error.cancelledLogin
         } catch {
             isLoggedIn = false
             throw Error.loggingIn
@@ -43,6 +44,7 @@ extension AuthStore {
 
 extension AuthStore {
     enum Error: LocalizedError {
+        case cancelledLogin
         case loggingIn
     }
 }

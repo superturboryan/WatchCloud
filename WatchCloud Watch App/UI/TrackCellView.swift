@@ -9,7 +9,8 @@ import SoundCloud
 import SwiftUI
 
 struct TrackCellView: View {
-    @Binding var track: Track
+    
+    let track: Track
     let isPlaying: Bool
     let isDownloaded: Bool
     
@@ -32,7 +33,7 @@ struct TrackCellView: View {
         .lineLimit(1)
         .padding(10)
         .foregroundColor(isPlaying ? .scOrange : nil)
-        .background(.secondary.opacity(0.2))
+        .background(Color.cellBG)
         .cornerRadius(10)
     }
 }
@@ -40,7 +41,7 @@ struct TrackCellView: View {
 @available(watchOS 10, *)
 #Preview(traits: .sizeThatFitsLayout) {
     TrackCellView(
-        track: .constant(testTrack()),
+        track: testTrack(),
         isPlaying: false,
         isDownloaded: true
     )

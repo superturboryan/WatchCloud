@@ -33,6 +33,8 @@ struct UserListView: View {
                     userListLoadingView.onAppear {
                         reachedBottomOfList()
                     }
+                } else if !canLoadMore, users.isEmpty {
+                    sectionFooterView(String(localized: "List is empty"))
                 } else {
                     sectionFooterView(String(localized: "End of list"))
                 }

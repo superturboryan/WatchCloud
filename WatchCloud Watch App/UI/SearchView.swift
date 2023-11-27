@@ -116,9 +116,9 @@ struct SearchView: View {
                     title: "\"\(query)\""
                 ) {
                     Task {
-                        if let nextPage = results.wrappedValue.nextPage,
-                           let nextResult: Page<Playlist> = try? await audioStore.pageOfPlaylists(nextPage) {
-                            playlistResults?.update(with: nextResult)
+                        if let nextPageURL = results.wrappedValue.nextPageURL,
+                           let nextPage: Page<Playlist> = try? await audioStore.pageOfPlaylists(nextPageURL) {
+                            playlistResults?.update(with: nextPage)
                         }
                     }
                 }
@@ -132,9 +132,9 @@ struct SearchView: View {
                     sortedAlphabetically: false
                 ) {
                     Task {
-                        if let nextPage = results.wrappedValue.nextPage,
-                            let nextResult: Page<User> = try? await userStore.pageOfUsers(nextPage) {
-                            artistResults?.update(with: nextResult)
+                        if let nextPageURL = results.wrappedValue.nextPageURL,
+                           let nextPage: Page<User> = try? await userStore.pageOfUsers(nextPageURL) {
+                            artistResults?.update(with: nextPage)
                         }
                     }
                 }
@@ -160,7 +160,7 @@ struct SearchView: View {
                 .frame(width: width, height: 18)
         }
         .padding(.vertical, 8)
-        .background(searchType == type ? Color.scOrange.opacity(0.3) : .secondary.opacity(0.2))
+        .background(searchType == type ? Color.scOrange.opacity(0.3) : .cellBG)
         .cornerRadius(8)
         .onTapGesture {
             searchType = type
@@ -199,7 +199,7 @@ struct SearchView: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 14)
-        .background(.secondary.opacity(0.2))
+        .background(Color.cellBG)
         .cornerRadius(10)
     }
 }

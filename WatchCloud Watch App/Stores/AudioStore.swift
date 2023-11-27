@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import OSLog
 import SoundCloud
 
 final class AudioStore: NSObject, ObservableObject {
@@ -15,8 +16,7 @@ final class AudioStore: NSObject, ObservableObject {
     @Published private(set) var loadedTrackPlaylistIndex: Int = -1
     @Published var loadedTrack: Track? {
         didSet {
-            loadedTrackPlaylistIndex = loadedPlaylists[PlaylistType.nowPlaying.rawValue]?.tracks?
-                .firstIndex(where: { $0 == loadedTrack }) ?? -1
+            loadedTrackPlaylistIndex = nowPlayingQueue?.firstIndex(where: { $0 == loadedTrack }) ?? -1
         }
     }
     
@@ -35,10 +35,16 @@ final class AudioStore: NSObject, ObservableObject {
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
     private var subscriptions = Set<AnyCancellable>()
-    private let service: SoundCloudAPI
     
-    init(_ service: SoundCloudAPI) {
+    private let service: SoundCloudAPI
+    private let nowPlayingInfoDAO: any DAO<NowPlayingInfo>
+    
+    init(
+        _ service: SoundCloudAPI,
+        _ nowPlayingInfoDAO: any DAO<NowPlayingInfo> = UserDefaultsDAO<NowPlayingInfo>()
+    ) {
         self.service = service
+        self.nowPlayingInfoDAO = nowPlayingInfoDAO
         super.init()
     }
 }
@@ -52,6 +58,14 @@ extension AudioStore {
         try await loadMyLikedPlaylistsWithoutTracks()
         try await loadMyLikedTracksPlaylistWithTracks()
         try await loadRecentlyPostedPlaylistWithTracks()
+        
+        await loadNowPlayingInfo()
+    }
+    
+    func reset() {
+        loadedPlaylists.removeAll()
+        loadedTrack = nil
+        deleteNowPlayingInfo()
     }
     
     @MainActor
@@ -116,8 +130,7 @@ extension AudioStore {
     @MainActor
     private func loadMyLikedTracksPlaylistWithTracks() async throws {
         let page = try await service.getMyLikedTracks()
-        loadedPlaylists[PlaylistType.likes.rawValue]?.tracks = page.items
-        loadedPlaylists[PlaylistType.likes.rawValue]?.nextPageUrl = page.nextPage
+        loadedPlaylists[PlaylistType.likes.rawValue]?.updateWith(page)
     }
     
     @MainActor
@@ -164,14 +177,16 @@ extension AudioStore {
                 try await loadRecentlyPostedPlaylistWithTracks()
             // These playlists are not reloaded here
             case .nowPlaying, .downloads:
-                print("⚠️ SC.loadTracksForPlaylist has no effect. Playlist type reloads automatically")
-                break
+                Logger.audioStore.warning("⚠️ Playlist type reloads automatically")
             }
         } else {
             let page = try await getTracksForPlaylist(id)
-            loadedPlaylists[id]?.tracks = page.items
-            loadedPlaylists[id]?.nextPageUrl = page.nextPage
+            loadedPlaylists[id]?.updateWith(page)
         }
+    }
+    
+    func streamInfo(for track: Track) async throws -> StreamInfo {
+        try await service.getStreamInfoForTrack(with: track.id)
     }
 }
 
@@ -300,11 +315,48 @@ extension AudioStore {
     }
 }
 
+// MARK: - 💾 Now Playing Info
+extension AudioStore {
+    func saveNowPlayingInfo(withProgress progress: Double) {
+        guard let loadedTrack, let nowPlayingQueue else {
+            return
+        }
+        try? nowPlayingInfoDAO.save(NowPlayingInfo(progress: progress, track: loadedTrack, queue: nowPlayingQueue))
+    }
+    
+    @MainActor
+    func loadNowPlayingInfo() async {
+        guard var nowPlayingInfo = try? nowPlayingInfoDAO.get() else {
+            return
+        }
+        
+        if let downloadedTrack = downloadedTracks.first(where: { $0.id == nowPlayingInfo.track.id }) {
+            loadedTrack = downloadedTrack
+            nowPlayingInfo.track = downloadedTrack
+            nowPlayingInfo.queue = downloadedTracks
+        } else {
+            loadedTrack = nowPlayingInfo.track
+        }
+        
+        setNowPlayingQueue(with: nowPlayingInfo.queue)
+        
+        NotificationCenter.default.post(
+            name: .loadedNowPlayingInfo,
+            object: nil,
+            userInfo: ["info" : nowPlayingInfo]
+        )
+    }
+    
+    func deleteNowPlayingInfo() {
+        try? nowPlayingInfoDAO.delete()
+    }
+}
+
 // MARK: - Downloads 📲
 extension AudioStore {
     func download(_ track: Track) async throws {
         let streamInfo = try await service.getStreamInfoForTrack(with: track.id)
-        try await downloadTrack(track, from: streamInfo.httpMp3128Url)
+        try await downloadTrack(track, from: streamInfo.httpMp3128URL)
     }
     
     @MainActor
@@ -320,6 +372,12 @@ extension AudioStore {
         }
     }
     
+    @MainActor func removeAllDownloads() throws {
+        for track in downloadedTracks {
+            try removeDownload(track)
+        }
+    }
+    
     @MainActor
     func cancelDownloadInProgress(for track: Track) throws {
         guard downloadsInProgress.keys.contains(track), let task = downloadTasks[track] else {
@@ -329,6 +387,12 @@ extension AudioStore {
         downloadTasks.removeValue(forKey: track)
         downloadsInProgress.removeValue(forKey: track)
     }
+    
+    var downloadedTracksFileSize: Double { // in MB
+        downloadedTracks
+            .map(\.fileSizeInMb)
+            .reduce(0.0, +)
+    }
 }
 
 // MARK: - Private Downloads 🙈
@@ -336,7 +400,12 @@ private extension AudioStore {
     
     @MainActor
     func downloadTrack(_ track: Track, from url: String) async throws {
-        // Checks before starting download
+        // Checks before starting download...
+        // Is downloading over cellular allowed?
+        if PathMonitor.shared.currentPath.isCellular && !Config.allowDownloadingUsingData {
+            throw Error.downloadingWithCellularDisabled
+        }
+        // Is track already downloaded?
         let localMp3Url = track.localFileUrl(withExtension: Track.FileExtension.mp3)
         let localFileDoesNotExist = !FileManager.default.fileExists(atPath: localMp3Url.path)
         let downloadNotAlreadyInProgress = !downloadsInProgress.keys.contains(track)
@@ -417,7 +486,6 @@ extension AudioStore: URLSessionTaskDelegate {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] progress in
                 DispatchQueue.main.async { // Not sure if this works better than .receive(on:) alone
-                    print("\n⬇️🎵 Download progress for \(trackBeingDownloaded.title): \(progress.fractionCompleted)")
                     self?.downloadsInProgress[trackBeingDownloaded] = progress
                 }
             }
@@ -441,11 +509,23 @@ extension AudioStore {
         
         case trackDownloadNotInProgress
         case downloadAlreadyExists
+        case downloadingWithCellularDisabled
+        
         case userNotAuthorized
         case network(SoundCloud.StatusCode)
         case invalidURL
         case noInternet
         case removingDownloadedTrack
+        
+        var errorDescription: String? {
+            switch self {
+            case .togglingLikedTrack: String(localized: "There was a problem liking/unliking the song", comment: "Error message")
+            case .downloadAlreadyExists: String(localized: "Download already exists", comment: "Error message")
+            case .downloadingWithCellularDisabled: String(localized: "Downloading with a cellular connection is disabled, go to Settings to enable", comment: "Error message")
+            case .removingDownloadedTrack: String(localized: "There was a problem removing the download", comment: "Error message")
+            default: nil
+            }
+        }
     }
 }
 
@@ -453,5 +533,9 @@ fileprivate extension Track {
     enum FileExtension {
         public static let mp3 = "mp3"
         public static let json = "json"
+    }
+    
+    var fileSizeInMb: Double {
+        Double(durationInSeconds) * 0.015996 // SoundCloud mp3's are 0.015996 MB / second
     }
 }

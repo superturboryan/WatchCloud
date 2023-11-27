@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension Int {
+extension Int {
     var timeStringFromSeconds: String {
         let minutes = String(format: "%02d", ((self % 3600) / 60))
         let seconds = String(format: "%02d", ((self % 3600) % 60))
@@ -39,5 +39,15 @@ public extension Int {
             return String(format: "%.0fk", Double(self) / Double(1_000))
         }
         return String(format: "%.1fM", Double(self) / Double(1_000_000))
+    }
+}
+
+extension Double {
+    var formattedFileSizeInMbOrGb: String { // Assuming self is in MB
+        if self < 1_000 {
+            return String(format: "%.0f MB", self)
+        } else {
+            return String(format: "%.1f GB", self / Double(1_000))
+        }
     }
 }

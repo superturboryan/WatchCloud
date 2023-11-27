@@ -89,17 +89,16 @@ struct PlaylistView: View {
     
     @ViewBuilder
     var trackList: some View {
-        if let tracksBinding = Binding($playlist.tracks),
-           !tracksBinding.wrappedValue.isEmpty {
+        if let tracks = playlist.tracks, !tracks.isEmpty {
             LazyVStack(spacing: 5) {
                 
                 if showShuffleButton {
                     shuffleButton
                 }
                 
-                ForEach(tracksBinding) { track in
+                ForEach(.constant(tracks)) { track in
                     TrackCellView(
-                        track: track,
+                        track: track.wrappedValue,
                         isPlaying: audioStore.loadedTrack == track.wrappedValue,
                         isDownloaded: audioStore.downloadedTracks.contains(track.wrappedValue)
                     )
@@ -133,7 +132,7 @@ struct PlaylistView: View {
                 .frame(width: 40, height: 40)
                 .foregroundStyle(LinearGradient.scOrange(.horizontal))
                 .fullWidth()
-                .background(Color.gray.opacity(0.2))
+                .background(Color.cellBG)
         }
         .cornerRadius(8)
         .disabled(playlist.tracks.isEmptyOrNil)
@@ -143,9 +142,8 @@ struct PlaylistView: View {
     private func loadNextPageOfTracks() {
         if let nextPageUrl = playlist.nextPageUrl {
             Task {
-                let page: Page<Track> = try await audioStore.pageOfTracks(nextPageUrl)
-                playlist.tracks! += page.items
-                playlist.nextPageUrl = page.nextPage
+                let nextPage: Page<Track> = try await audioStore.pageOfTracks(nextPageUrl)
+                playlist.updateWith(nextPage)
             }
         }
     }
@@ -169,7 +167,7 @@ struct PlaylistView: View {
             player.loadAndPlayTrack(track)
         } else  {
             // Continue playing
-            player.continuePlayback()
+            player.playCommand()
         }
         
         AnalyticsManager.shared.log(.tappedTrack)

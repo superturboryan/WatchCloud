@@ -41,15 +41,4 @@ final class AuthStore_Tests: XCTestCase {
             XCTAssertFalse(sut.isLoggedIn)
         }
     }
-    
-    func test_storeUsesAuthenticatedHeaderFromService() async throws {
-        // Given
-        let expectedHeader = ["expected" : "header"]
-        mockService.authenticatedHeader = expectedHeader
-        sut = AuthStore(mockService)
-        // When
-        let headerFromStore = try await sut.authHeader
-        // Then
-        XCTAssertEqual(headerFromStore, expectedHeader)
-    }
 }

@@ -60,7 +60,7 @@ extension UserStore {
             } catch {
                 throw Error.loadingUsersImFollowing
             }
-        } else if let nextPageUrl = usersImFollowing.nextPage {
+        } else if let nextPageUrl = usersImFollowing.nextPageURL {
             let nextPage: Page<User> = try await pageOfUsers(nextPageUrl)
             usersImFollowing.update(with: nextPage)
         }

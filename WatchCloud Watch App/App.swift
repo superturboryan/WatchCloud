@@ -5,6 +5,7 @@
 //  Created by Ryan Forsyth on 2023-09-12.
 //
 
+import Nuke
 import SoundCloud
 import SwiftUI
 import TipKit
@@ -18,10 +19,10 @@ struct WatchCloud_Watch_AppApp: App {
     @StateObject var player = CompositionRoot.audioPlayer
     
     @State var isFirstLaunch = true
-    @Environment(\.scenePhase) var scenePhase
+    @Environment(\.scenePhase) var scene
     
     init() {
-        _ = AnalyticsManager.shared // Calls init on shared instance
+        initializeSharedInstances()
         configureTips()
     }
     
@@ -33,21 +34,30 @@ struct WatchCloud_Watch_AppApp: App {
                 .environmentObject(userStore)
                 .environmentObject(searchStore)
                 .environmentObject(player)
-                .onChange(of: scenePhase) { log($0) }
+                .onChange(of: scene) { onSceneChange($0) }
         }
     }
 }
 
 private extension WatchCloud_Watch_AppApp {
-    func log(_ scenePhase: ScenePhase) {
-        let event = isFirstLaunch ? .appLaunch : scenePhase.event
-        AnalyticsManager.shared.log(event)
+    func onSceneChange(_ scene: ScenePhase) {
+        let analyticsEvent = isFirstLaunch ? .appLaunch : scene.event
+        AnalyticsManager.shared.log(analyticsEvent)
         isFirstLaunch = false
+        
+        if scene == .background {
+            audioStore.saveNowPlayingInfo(withProgress: player.progress)
+        }
+    }
+    
+    func initializeSharedInstances() {
+        _ = AnalyticsManager.shared
+        ImagePipeline.shared = .init(configuration: .withDataCache) // Enables aggressive disk caching
+        _ = PathMonitor.shared
     }
     
     func configureTips() {
         if #available(watchOS 10, *) {
-//            try? Tips.resetDatastore() // ⚠️ Always showing tips
             try? Tips.configure([
                 .displayFrequency(.immediate),
                 .datastoreLocation(.applicationDefault)

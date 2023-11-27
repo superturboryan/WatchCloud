@@ -8,20 +8,20 @@
 import AVFoundation
 import Combine
 import MediaPlayer
+import Nuke
 import OSLog
 import SoundCloud
-import SwiftUI
+import UIKit.UIImage
 
-@MainActor
 final class AudioPlayer: ObservableObject {
     
     @Published var isPlaying = false // Should be private(set)
     @Published private(set) var isLoading = false
     
-    /// Describes how many seconds the player's current item has been playing for.
+    /// Describes the progress of the `AVPlayer`'s current item in **seconds**.
     ///
-    /// Updating this property causes the player (`AVPlayer`) to seek to the selected value (in seconds) 
-    /// and updates the info displayed by the device's "Now Playing".
+    /// Updating this property causes the `AVPlayer` to seek to the selected value (in seconds)
+    /// and updates the info displayed by the device's "Now Playing" info.
     @Published var progress: TimeInterval = 0.0 { didSet { updatePlayerProgress() }}
     @Published var selectedPlaybackSpeed: PlaybackSpeed = .One
     
@@ -35,23 +35,26 @@ final class AudioPlayer: ObservableObject {
     private let remoteCommands = MPRemoteCommandCenter.shared()
     private let nowPlaying = MPNowPlayingInfoCenter.default()
     private let audioSession = AVAudioSession.sharedInstance()
+    private let imagePipeline = ImagePipeline.shared
     
-    private let decoder = JSONDecoder()
     private var subscriptions = Set<AnyCancellable>()
     
     private let audioStore: AudioStore
-    private let authStore: AuthStore
+    
     init(_ audioStore: AudioStore, _ authStore: AuthStore) {
         self.audioStore = audioStore
-        self.authStore = authStore
         setupDeviceMediaControls()
+        listenForLoadedNowPlayingInfoNotification()
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+}
 
-    private func setupPlayer() {
+// MARK: - Setup
+private extension AudioPlayer {
+    func setupPlayer() {
         try? audioSession.setCategory(
             .playback,
             mode: .default,
@@ -59,27 +62,37 @@ final class AudioPlayer: ObservableObject {
         )
         try? audioSession.setActive(true)
         
-        let oneSecond = CMTime(value: 1, timescale: 1)
-        player.addPeriodicTimeObserver(forInterval: oneSecond, queue: .main) { [weak self] time in
-            DispatchQueue.main.async { [weak self] in
-                self?.shouldSeek = false
-                self?.progress = time.seconds
-                self?.shouldSeek = true
-            }
+        player.addPeriodicTimeObserver(forInterval: .oneSecond, queue: .main) { [weak self] time in
+            self?.shouldSeek = false
+            self?.progress = time.seconds
+            self?.shouldSeek = true
         }
         player.publisher(for: \.timeControlStatus)
         .receive(on: DispatchQueue.main)
         .sink { [weak self] status in
             self?.isPlaying = status == .playing || status == .waitingToPlayAtSpecifiedRate
             self?.isLoading = status == .waitingToPlayAtSpecifiedRate
-            if self?.audioStore.loadedTrack != nil {
-                self?.updateNowPlayingInfo()
-            }
-        }
-        .store(in: &subscriptions)
+            self?.updateNowPlayingInfo()
+        }.store(in: &subscriptions)
     }
     
-    private func updatePlayerProgress() {
+    func listenForLoadedNowPlayingInfoNotification() {
+        NotificationCenter.default.publisher(for: .loadedNowPlayingInfo).sink { notification in
+            guard let nowPlayingInfo = notification.userInfo?["info"] as? NowPlayingInfo else {
+                Logger.audioPlayer.error("loadNowPlayingInfo Notification is missing NowPlayingInfo in userInfo property")
+                return
+            }
+            Task {
+                try? await self.loadTrack(nowPlayingInfo.track)
+                await MainActor.run { [weak self] in
+                    self?.progress = nowPlayingInfo.progress
+                    NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
+                }   
+            }
+        }.store(in: &subscriptions)
+    }
+    
+    func updatePlayerProgress() {
         guard shouldSeek, let nowPlaying = audioStore.loadedTrack else {
             return
         }
@@ -92,71 +105,97 @@ final class AudioPlayer: ObservableObject {
     }
 }
 
-// MARK: - Play audio
+// MARK: - 🛜💾 Load tracks
 extension AudioPlayer {
     private func loadTrack(_ track: Track) async throws {
         if !isPlayerLoaded {
             setupPlayer()
             isPlayerLoaded = true
         }
-        let avUrlAsset = AVURLAsset(
-            url: URL(string: track.playbackUrl!)!,
-            options: ["AVURLAssetHTTPHeaderFieldsKey" : try await authStore.authHeader]
-        )
-        let avItem = AVPlayerItem(asset: avUrlAsset)
+        
+        let avItem = try await getAVItem(for: track)
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.nextTrackCommand),
             name: Notification.Name.AVPlayerItemDidPlayToEndTime,
             object: avItem
         )
-        
-        DispatchQueue.main.async { [weak self] in
+        await MainActor.run { [weak self] in
             self?.player.replaceCurrentItem(with: avItem)
             self?.audioStore.loadedTrack = track
             self?.progress = 0
         }
     }
-    
+        
     func loadAndPlayTrack(_ track: Track) {
         showBluetoothOptionsIfBluetoothAudioOutputNotDetected()
         Logger.audioPlayer.info("🎧 Load and play new track: \(track.title)")
         Task { [weak self] in
             try await self?.loadTrack(track)
-            DispatchQueue.main.async { [weak self] in
+            await MainActor.run { [weak self] in
                 self?.player.play()
                 self?.player.rate = self?.selectedPlaybackSpeed.rawValue ?? 1
             }
         }
     }
     
-    func togglePlayback() {
-        if let queue = audioStore.nowPlayingQueue, !queue.isEmpty, audioStore.loadedTrack == nil {
-            //What was this case for again?
-            loadAndPlayTrack(queue.first!)
-            return
+    func resetLoadedTrack() {
+        player.pause()
+        player.replaceCurrentItem(with: nil)
+    }
+            
+    private func getAVItem(for track: Track) async throws -> AVPlayerItem {
+        let trackURL: String
+        if let localFileURL = track.localFileUrl {
+            trackURL = localFileURL
+        } else {
+            guard let steamingInfo = try? await audioStore.streamInfo(for: track) else {
+                throw Error.loadingStreamInfo
+            }
+            trackURL = steamingInfo.hlsMp3128URL
         }
         
+        guard let assetURL = URL(string: trackURL) else {
+            throw Error.invalidAssetURL
+        }
+        // 💡 Set avItem.preferredForwardBufferDuration to manually control buffering
+        return AVPlayerItem(asset: AVURLAsset(url: assetURL))
+    }
+    
+    private func showBluetoothOptionsIfBluetoothAudioOutputNotDetected() {
+        audioSession.activate(options: []) { [weak self] success, error in
+            if let error {
+                Logger.audioPlayer.error("Session activation error: \(error.localizedDescription)")
+            }
+            if success {
+                DispatchQueue.main.async { self?.player.play() }
+            }
+        }
+    }
+}
+
+// MARK: - ⏪⏯️⏩ Playback Commands
+extension AudioPlayer {
+    func togglePlaybackCommand() {
+        // Check if queue is loaded but no track selected
+        if let firstTrack = audioStore.nowPlayingQueue?.first, audioStore.loadedTrack == nil {
+            loadAndPlayTrack(firstTrack)
+            return
+        }
         if isPlaying {
-            player.pause()
+            pauseCommand()
         } else {
-            player.play()
-            player.rate = selectedPlaybackSpeed.rawValue
+            playCommand()
         }
     }
     
-    func continuePlayback() {
+    func playCommand() {
         player.play()
         player.rate = selectedPlaybackSpeed.rawValue
     }
     
-    func pausePlayback() {
+    func pauseCommand() {
         player.pause()
-    }
-    
-    func stop() {
-        player.pause()
-        player.replaceCurrentItem(with: nil)
     }
     
     @objc // Also called by AVPlayerItemDidPlayToEndTime Notification
@@ -184,7 +223,7 @@ extension AudioPlayer {
                 // Only load previous track, don't start playing
                 Task { [weak self] in try await self?.loadTrack(previousTrack) }
             }
-        } else { // Just go to beginning
+        } else { // Just go to beginning of already loaded track
             progress = 0
         }
     }
@@ -193,7 +232,7 @@ extension AudioPlayer {
         guard let duration = player.currentItem?.duration.seconds else {
             return
         }
-        if progress + seekAmount > duration {
+        if progress + seekAmount > duration { // Trying to seek past end
             progress = duration
         } else {
             progress += seekAmount
@@ -201,9 +240,9 @@ extension AudioPlayer {
     }
     
     func seekBackwardCommand() {
-        if progress == 0 {
+        if progress == 0 { // Already at beginning
             return
-        } else if progress - seekAmount < 0 {
+        } else if progress - seekAmount < 0 { // Trying to seek before beginning
             progress = 0
         } else {
             progress -= seekAmount
@@ -212,9 +251,11 @@ extension AudioPlayer {
     
     func beginSeeking(_ direction: SeekDirection) {
         seekTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
-            direction.isBackward ?
-                self?.seekBackwardCommand() :
+            if direction.isBackward {
+                self?.seekBackwardCommand()
+            } else {
                 self?.seekForwardCommand()
+            }
         }
     }
     
@@ -224,37 +265,25 @@ extension AudioPlayer {
     
     func cyclePlaybackSpeed() {
         selectedPlaybackSpeed = selectedPlaybackSpeed.next()
-        if isPlaying {
+        if isPlaying { // ⚠️ Adjusting rate while paused will start playback
             player.rate = selectedPlaybackSpeed.rawValue
-        }
-    }
-    
-    private func showBluetoothOptionsIfBluetoothAudioOutputNotDetected() {
-        audioSession.activate(options: []) { [weak self] success, error in
-            if let error {
-                Logger.audioPlayer.error("Session activation error: \(error.localizedDescription)")
-            }
-            if success {
-                DispatchQueue.main.async { self?.player.play() }
-            }
         }
     }
 }
 
 // MARK: - MPNowPlayingInfoCenter
-extension AudioPlayer {
-    
-    private func setupDeviceMediaControls() {
+private extension AudioPlayer {
+    func setupDeviceMediaControls() {
         remoteCommands.togglePlayPauseCommand.addTarget { [weak self] _ in
-            self?.togglePlayback()
+            self?.togglePlaybackCommand()
             return .success
         }
         remoteCommands.playCommand.addTarget { [weak self] _ in
-            self?.continuePlayback()
+            self?.playCommand()
             return .success
         }
         remoteCommands.pauseCommand.addTarget { [weak self] _ in
-            self?.pausePlayback()
+            self?.pauseCommand()
             return .success
         }
         remoteCommands.nextTrackCommand.addTarget { [weak self] _ in
@@ -272,17 +301,14 @@ extension AudioPlayer {
             return .success
         }
         remoteCommands.seekForwardCommand.addTarget { [weak self] event in
-            guard let event = event as? MPSeekCommandEvent else { 
-                return .commandFailed
-            }
-            
-            guard // Not at end of track
+            guard
+                let seekEvent = event as? MPSeekCommandEvent,
                 let duration = self?.player.currentItem?.duration,
                 let progress = self?.progress,
-                progress < duration.seconds
+                progress < duration.seconds // Not at end of track
             else { return .commandFailed }
             
-            switch event.type {
+            switch seekEvent.type {
             case .beginSeeking: self?.beginSeeking(.forward)
             case .endSeeking: self?.endSeeking()
             @unknown default: Logger.audioPlayer.warning("Unknown seek event type")
@@ -291,15 +317,13 @@ extension AudioPlayer {
             return .success
         }
         remoteCommands.seekBackwardCommand.addTarget { [weak self] event in
-            guard let event = event as? MPSeekCommandEvent else {
-                return .commandFailed
-            }
-            
-            guard // Not at beginning of track
-                let progress = self?.progress, progress > 0
+            guard 
+                let seekEvent = event as? MPSeekCommandEvent,
+                let progress = self?.progress,
+                progress > 0 // Not at beginning of track
             else { return .commandFailed }
-    
-            switch event.type {
+            
+            switch seekEvent.type {
             case .beginSeeking: self?.beginSeeking(.backward)
             case .endSeeking: self?.endSeeking()
             @unknown default: Logger.audioPlayer.warning("Unknown seek event type")
@@ -316,20 +340,22 @@ extension AudioPlayer {
         }
     }
     
-    private func updateNowPlayingInfo(with time: CMTime? = nil) {
+    func updateNowPlayingInfo(with time: CMTime? = nil) {
         guard let loadedTrack = audioStore.loadedTrack else {
             nowPlaying.nowPlayingInfo = nil
             return
         }
         
         var info = nowPlaying.nowPlayingInfo
+        defer {
+            nowPlaying.nowPlayingInfo = info
+        }
         let currentID = info?[MPMediaItemPropertyPersistentID] as? Int
         let currentTime = (time ?? player.currentTime()).seconds
         
-        if currentID == loadedTrack.id {
-            info![MPNowPlayingInfoPropertyElapsedPlaybackTime] = currentTime
-        }
-        else {
+        if currentID == loadedTrack.id { // Only update time
+            info?[MPNowPlayingInfoPropertyElapsedPlaybackTime] = currentTime
+        } else { // Update all properties
             info = [
                 MPMediaItemPropertyPersistentID: loadedTrack.id,
                 MPMediaItemPropertyTitle: loadedTrack.title,
@@ -338,31 +364,31 @@ extension AudioPlayer {
                 MPMediaItemPropertyPlaybackDuration: loadedTrack.durationInSeconds,
                 MPNowPlayingInfoPropertyElapsedPlaybackTime: currentTime
             ]
-            
-            let url = loadedTrack.artworkUrl ?? loadedTrack.user.avatarUrl 
+            let imageURL = loadedTrack.artworkUrl ?? loadedTrack.user.avatarUrl
             Task { [weak self] in
-                guard let artwork = await self?.fetchArtwork(url) else {
-                    return
-                }
-                self?.nowPlaying.nowPlayingInfo?[MPMediaItemPropertyArtwork] = artwork
+                self?.nowPlaying.nowPlayingInfo?[MPMediaItemPropertyArtwork] = await self?.getMediaItemArtwork(imageURL)
             }
         }
-        
-        nowPlaying.nowPlayingInfo = info
     }
     
-    private func fetchArtwork(_ url: String) async -> MPMediaItemArtwork {
+    func getMediaItemArtwork(_ url: String) async -> MPMediaItemArtwork {
         let largerImageUrl = url.replacingOccurrences(of: "large.jpg", with: "t500x500.jpg")
         guard
             let url = URL(string: largerImageUrl),
-            // Error, response not handled
-            let (data, _) = try? await URLSession.shared.data(for: URLRequest(url: url))
+            let image = try? await imagePipeline.loadImage(with: url)
         else {
-            let fallbackImage = UIImage(systemName: "xmark.icloud.fill")!
+            Logger.audioPlayer.error("Failed to load MPMediaItemArtwork from url \(url)")
+            let fallbackImage = UIImage(systemName: "photo")!
             return MPMediaItemArtwork(boundsSize: fallbackImage.size) { _ in fallbackImage }
         }
-        let image = UIImage(data: data)!
         return MPMediaItemArtwork(boundsSize: image.size) { _ in image }
+    }
+}
+
+extension AudioPlayer {
+    enum Error: LocalizedError {
+        case invalidAssetURL
+        case loadingStreamInfo
     }
 }
 
@@ -384,9 +410,12 @@ extension AudioPlayer {
     }
 }
 
+extension CMTime {
+    static let oneSecond = CMTime(value: 1, timescale: 1)
+}
+
 extension AudioPlayer {
     static let systemVolumePublisher = AVAudioSession.sharedInstance().publisher(for: \.outputVolume).eraseToAnyPublisher()
 }
 
-@MainActor
 let testAudioPlayer = AudioPlayer(AudioStore(testSC), AuthStore(testSC))

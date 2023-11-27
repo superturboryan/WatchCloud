@@ -80,7 +80,7 @@ struct PlaylistSummaryView: View {
                 .padding(6)
                 .size(CGSize(width: (Device.screenSize.width - 10) / 2, height: 40))
                 .fontWeight(.semibold)
-                .background(Color.gray.opacity(0.2))
+                .background(Color.cellBG)
                 .foregroundColor(.blue)
                 .cornerRadius(8)
         }
@@ -95,7 +95,7 @@ struct PlaylistSummaryView: View {
                 .padding()
                 .size(CGSize(width: (Device.screenSize.width - 10) / 2, height: 40))
                 .fontWeight(.semibold)
-                .background(Color.gray.opacity(0.2))
+                .background(Color.cellBG)
                 .foregroundColor(.pink)
                 .cornerRadius(8)
         }

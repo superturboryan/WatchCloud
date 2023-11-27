@@ -21,73 +21,77 @@ struct LibraryView: View {
             ScrollViewReader { sv in
                 let scrollToTop = { sv.scrollTo(👆, anchor: .top) }
                 ScrollView {
-                    VStack {
-                        if let nowPlayingBinding = Binding($audioStore.loadedPlaylists[PlaylistType.nowPlaying.rawValue]),
-                           !(nowPlayingBinding.wrappedValue.tracks?.isEmpty ?? true) {
-                            nowPlayingCell(nowPlayingBinding).id(👆)
-                            searchCell
-                            if Config.isDownloadingEnabled(for: userStore.myUser?.id) {
-                                downloadsCell
-                            }
-                        } else {
-                            searchCell.id(👆)
-                            if Config.isDownloadingEnabled(for: userStore.myUser?.id) {
-                                downloadsCell
-                            }
-                        }
-
-                        systemPlaylistCell(Binding($audioStore.loadedPlaylists[PlaylistType.likes.rawValue])!)
-
-                        systemPlaylistCell(Binding($audioStore.loadedPlaylists[PlaylistType.recentlyPosted.rawValue])!)
-
-                        followingCell
-
-                        if !audioStore.myPlaylistIds.isEmpty {
-                            Section(header: sectionHeaderView(String(localized:"My Playlists"))) {
-                                ForEach($audioStore.loadedPlaylists.values
-                                    .filter { audioStore.myPlaylistIds.contains($0.wrappedValue.id) }
-                                    .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
-                                ) {
-                                    userPlaylistCell($0)
-                                }
-                            }
-                        }
-                        
-                        if !audioStore.myLikedPlaylistIds.isEmpty {
-                            Section(header: sectionHeaderView(String(localized: "Liked Playlists"))) {
-                                ForEach($audioStore.loadedPlaylists.values
-                                    .filter { audioStore.myLikedPlaylistIds.contains($0.wrappedValue.id) }
-                                    .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
-                                ) {
-                                    userPlaylistCell($0)
-                                }
-                            }
-                        }
-
-                        Section(header: sectionHeaderView(String(localized: "My Account"))) {
-                            currentUserCell
-                        }
-
-                        PoweredBySCView()
-                            .padding(.top, 14)
-                    }
-                    .padding(.horizontal, 4)
+                    libraryView
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle(String(localized:"Library"))
                 .onChange(of: authStore.isLoggedIn) { if $0 { scrollToTop() } }
-                // Don't need to scroll if not logged in? 🤔
             }
         }
     }
     
-    // Special playlist cells //////////////////////////////////////////////////////////////////////
+    private var libraryView: some View {
+        VStack {
+            if let nowPlayingBinding = Binding($audioStore.loadedPlaylists[PlaylistType.nowPlaying.rawValue]),
+               !(nowPlayingBinding.wrappedValue.tracks?.isEmpty ?? true) {
+                nowPlayingCell(nowPlayingBinding).id(👆) // Assign id for topmost cell conditionally
+                searchCell
+                downloadsCell
+            } else {
+                searchCell.id(👆)
+                downloadsCell
+            }
+
+            if let likedTracksPlaylist = Binding($audioStore.loadedPlaylists[PlaylistType.likes.rawValue]) {
+                systemPlaylistCell(likedTracksPlaylist)
+            }
+            
+            if let recentlyPostedPlaylist = Binding($audioStore.loadedPlaylists[PlaylistType.recentlyPosted.rawValue]) {
+                systemPlaylistCell(recentlyPostedPlaylist)
+            }
+
+            followingCell
+
+            if !audioStore.myPlaylistIds.isEmpty {
+                Section(header: sectionHeaderView(String(localized:"My Playlists"))) {
+                    ForEach($audioStore.loadedPlaylists.values
+                        .filter { audioStore.myPlaylistIds.contains($0.wrappedValue.id) }
+                        .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
+                    ) {
+                        userPlaylistCell($0)
+                    }
+                }
+            }
+            
+            if !audioStore.myLikedPlaylistIds.isEmpty {
+                Section(header: sectionHeaderView(String(localized: "Liked Playlists"))) {
+                    ForEach($audioStore.loadedPlaylists.values
+                        .filter { audioStore.myLikedPlaylistIds.contains($0.wrappedValue.id) }
+                        .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
+                    ) {
+                        userPlaylistCell($0)
+                    }
+                }
+            }
+
+            Section(header: sectionHeaderView(String(localized: "My Account"))) {
+                currentUserCell
+            }
+            
+            settingsCell
+
+            PoweredBySCView()
+                .padding(.top, 14)
+        }
+        .padding(.horizontal, 4)
+    }
+    
     func nowPlayingCell(_ playlist: Binding<Playlist>) -> some View {
         navigationCell(
             id: PlaylistType.nowPlaying.rawValue,
             title: PlaylistType.nowPlaying.title,
             subtitle: audioStore.loadedTrack?.title ?? "...",
-            bgColor: .orange) {
+            bgColor: .orange.opacity(0.2)) {
                 PlaylistView(
                     playlist: playlist,
                     showSummary: false,
@@ -97,14 +101,16 @@ struct LibraryView: View {
             }
     }
     
+    @ViewBuilder
     var downloadsCell: some View {
-        navigationCell(
-            id: PlaylistType.downloads.rawValue,
-            title: PlaylistType.downloads.title) {
-                DownloadsView()
-            }
+        if Config.isDownloadingEnabled(for: userStore.myUser?.id) {
+            navigationCell(
+                id: PlaylistType.downloads.rawValue,
+                title: PlaylistType.downloads.title) {
+                    DownloadsView()
+                }
+        }
     }
-    // /////////////////////////////////////////////////////////////////////////////////////////////
     
     func systemPlaylistCell(_ playlist: Binding<Playlist>) -> some View {
         navigationCell(id: playlist.wrappedValue.id, title: playlist.wrappedValue.title) {
@@ -139,9 +145,8 @@ struct LibraryView: View {
         }
     }
     
-    @ViewBuilder
     var settingsCell: some View {
-        navigationCell(id: -2, title: "Settings") {
+        navigationCell(id: -2, title: String(localized: "Settings")) {
             SettingsView()
         }
     }
@@ -174,7 +179,7 @@ struct LibraryView: View {
         id: Int,
         title: String,
         subtitle: String? = nil,
-        bgColor: Color = .secondary,
+        bgColor: Color = .cellBG,
         destination: () -> some View
     ) -> some View {
         NavigationLink {
@@ -184,9 +189,9 @@ struct LibraryView: View {
                 imageForCell(id)
                 VStack {
                     Text(verbatim: title)
-                        .font(subtitle == nil ? .body : .headline) // Make prominent if subtitle exists
+                        .font(subtitle == nil ? .body : .headline)
                         .fullWidth(.leading)
-                        .minimumScaleFactor(0.9)
+                        .minimumScaleFactor(0.8)
                     if let subtitle {
                         Text(verbatim: subtitle)
                             .font(.footnote)
@@ -198,7 +203,7 @@ struct LibraryView: View {
             .lineLimit(1)
             .fontDesign(.rounded)
             .padding(10)
-            .background(bgColor.opacity(0.2))
+            .background(bgColor)
             .cornerRadius(10)
         }
         .buttonStyle(.plain)
@@ -241,8 +246,7 @@ struct LibraryView: View {
             colour = Color.scOrange
         }
         
-        var image: any View =
-        Image(systemName: imageName)
+        var image: any View = Image(systemName: imageName)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .fontWeight(.medium)

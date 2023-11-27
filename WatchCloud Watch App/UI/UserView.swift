@@ -5,6 +5,7 @@
 //  Created by Ryan Forsyth on 2023-10-03.
 //
 
+import OSLog
 import SoundCloud
 import SwiftUI
 
@@ -26,9 +27,6 @@ struct UserView: View {
         ScrollView {
             VStack(spacing: 10) {
                 summary
-                if isLoading {
-                    loadingView
-                }
                 if !tracks.isEmpty {
                     playlistSection(
                         String(localized: "Top tracks"),
@@ -44,6 +42,9 @@ struct UserView: View {
                         String(localized: "Liked tracks"),
                         likedTracks
                     )
+                }
+                if isLoading {
+                    loadingView
                 }
             }
             .animation(.default, value: tracks)
@@ -73,7 +74,7 @@ struct UserView: View {
             tracks = try await audioStore.getTracksForUser(user.id, numberOfTracksToLoad).items
             likedTracks = try await audioStore.getLikedTracksForUser(user.id, numberOfTracksToLoad).items
         } catch {
-            print("❌ Failed to load tracks for user")
+            Logger.userView.error("❌ Failed to load tracks for user")
         }
         isLoading = false
     }
@@ -195,7 +196,7 @@ struct UserView: View {
             VStack(spacing: 4) {
                 ForEach(Array(tracks.prefix(trackLimit))) { track in
                     TrackCellView(
-                        track: .constant(track),
+                        track: track,
                         isPlaying: audioStore.loadedTrack == track,
                         isDownloaded: audioStore.downloadedTracks.contains(track)
                     ).onTapGesture {
@@ -217,7 +218,7 @@ struct UserView: View {
             player.loadAndPlayTrack(track)
         } else  {
             // Continue playing
-            player.continuePlayback()
+            player.playCommand()
         }
         NotificationCenter.default.post(name: .switchToPlayerTab, object: nil)
     }

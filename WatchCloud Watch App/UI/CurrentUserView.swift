@@ -35,7 +35,7 @@ struct CurrentUserView: View {
     
     private func tappedLogout() {
         Haptics.click()
-        player.stop()
+        player.resetLoadedTrack()
         NotificationCenter.default.post(name: .performLogout, object: nil)
         dismiss()
     }

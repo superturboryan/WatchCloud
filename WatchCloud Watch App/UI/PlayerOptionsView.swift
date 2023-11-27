@@ -14,28 +14,28 @@ struct PlayerOptionsView: View {
     @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var player: AudioPlayer
     
-    @Environment(\.dismiss) var dismiss
-    
     @Binding var track: Track
+    @State var audioStoreError: AudioStore.Error? = nil
     
     private let hSpacing: CGFloat = 12
     private let buttonSize = CGSize(width: 76, height: 45)
     private let labelYOffset: CGFloat = 36
     
+    private var isDownloadingEnabled: Bool {
+        Config.isDownloadingEnabled(for: userStore.myUser?.id)
+    }
+    
     var body: some View {
         VStack(spacing: 32) {
             HStack(spacing: hSpacing) {
                 likeButton
-                    .disabled(false)
                 downloadButton
-                    .disabled(!Config.isDownloadingEnabled(for: userStore.myUser?.id))
-                    .opacity(Config.isDownloadingEnabled(for: userStore.myUser?.id) ? 1 : 0)
+                    .disabled(!isDownloadingEnabled)
+                    .opacity(isDownloadingEnabled ? 1 : 0)
             }
             HStack(spacing: hSpacing) {
                 playbackSpeedButton
-                    .disabled(false)
                 shareButton
-                    .disabled(false)
             }
         }
         .padding(.bottom, 10)
@@ -43,6 +43,16 @@ struct PlayerOptionsView: View {
         .buttonStyle(.plain)
         .fullWidthAndHeight()
         .background(.black)
+        .alert(
+            String(localized: "Something Went Wrong", comment: "Alert title"),
+            isPresented: .constant(audioStoreError != nil)
+        ) {
+            Button("Ok") {
+                audioStoreError = nil
+            }
+        } message: {
+            Text(verbatim: audioStoreError?.localizedDescription ?? "")
+        }
     }
     
     var likeButton: some View {
@@ -78,18 +88,25 @@ struct PlayerOptionsView: View {
         AnalyticsManager.shared.log(.tappedLikeTrack)
         
         Task {
-            try await audioStore.toggleLikedTrack(track)
+            do {
+                try await audioStore.toggleLikedTrack(track)
+            } catch let error as AudioStore.Error {
+                audioStoreError = error
+            }
         }
     }
     
     func tappedDownload() {
         Haptics.click()
         Task {
-            if isTrackDownloaded {
-                #warning("Errors not handled")
-                try audioStore.removeDownload(track)
-            } else {
-                try await audioStore.download(track)
+            do {
+                if isTrackDownloaded {
+                    try audioStore.removeDownload(track)
+                } else {
+                    try await audioStore.download(track)
+                }
+            } catch let error as AudioStore.Error {
+                audioStoreError = error
             }
         }
     }

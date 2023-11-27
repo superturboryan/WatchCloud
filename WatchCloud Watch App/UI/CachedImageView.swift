@@ -11,12 +11,9 @@ import SwiftUI
 
 struct CachedImageView: View {
     
-    // Dependencies
     let url: String?
     
-    // Defaults
-    var fallbackSystemImageName = "photo"
-    var useCache = true
+    var fallbackSystemImage = "photo" // SF Symbol
     var ratio: AspectRatio = .fit
     var animated = true
     var roundedCorners = true
@@ -30,8 +27,9 @@ struct CachedImageView: View {
                             .aspectRatio(contentMode: ratio == .fit ? .fit : .fill)
                             .animation(.default, value: image)
                     } else if state.error != nil {
-                        Image(systemName: fallbackSystemImageName).resizable()
+                        Image(systemName: fallbackSystemImage).resizable()
                             .aspectRatio(contentMode: ratio == .fit ? .fit : .fill)
+                            .padding()
                     } else {
                         ProgressView()
                     }
@@ -41,7 +39,7 @@ struct CachedImageView: View {
                 .fullWidthAndHeight()
                 .clipShape(RoundedRectangle(cornerRadius: roundedCorners ? geo.size.width / 6 : 0))
             }
-            .pipeline(useCache ? ImagePipeline(configuration: .withDataCache) : ImagePipeline.shared)
+            .pipeline(ImagePipeline.shared)
         }
     }
 }
