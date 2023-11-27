@@ -1940,6 +1940,9 @@
         }
       }
     },
+    "List is empty" : {
+
+    },
     "Loading playlists..." : {
       "localizations" : {
         "ar" : {
