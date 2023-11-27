@@ -737,6 +737,7 @@
 				"es-419",
 				ja,
 				it,
+				"pt-BR",
 			);
 			mainGroup = 946F38892AB079C9008CE9D1;
 			packageReferences = (

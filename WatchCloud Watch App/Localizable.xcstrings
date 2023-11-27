@@ -44,6 +44,12 @@
             "state" : "translated",
             "value" : "시청할 음악을 다운로드하려면"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "para baixar músicas para o relógio"
+          }
         }
       }
     },
@@ -97,6 +103,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ 시간"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@h"
           }
         }
       }
@@ -255,6 +267,24 @@
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "%lld 분"
+                }
+              }
+            }
+          }
+        },
+        "pt-BR" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lldmin"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lldmins"
                 }
               }
             }
@@ -419,6 +449,24 @@
               }
             }
           }
+        },
+        "pt-BR" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld faixa"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld faixas"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -579,6 +627,24 @@
               }
             }
           }
+        },
+        "pt-BR" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Faixa"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Faixas"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -625,6 +691,12 @@
             "state" : "translated",
             "value" : "정말로 로그아웃하시겠습니까?"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tem certeza que deseja sair?"
+          }
         }
       }
     },
@@ -670,6 +742,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "모든 다운로드를 삭제하시겠습니까?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tem certeza de que deseja remover todos os downloads?"
           }
         }
       }
@@ -718,6 +796,12 @@
             "state" : "translated",
             "value" : "예술가"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "artistas"
+          }
         }
       }
     },
@@ -764,6 +848,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "취소하다"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
           }
         }
       }
@@ -812,6 +902,12 @@
             "state" : "translated",
             "value" : "셀룰러 데이터"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dados Celular"
+          }
         }
       }
     },
@@ -838,13 +934,13 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Effacer l'historique"
+            "value" : "Effacer L'historique"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Elimina cronologia"
+            "value" : "Elimina Cronologia"
           }
         },
         "ja" : {
@@ -857,6 +953,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "검색 기록 삭제"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apagar O Histórico"
           }
         }
       }
@@ -905,6 +1007,12 @@
             "state" : "translated",
             "value" : "로그인"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conectar"
+          }
         }
       }
     },
@@ -950,6 +1058,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "시계가 어두워지면 작품 대신 QR 코드 표시"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exiba um código QR no lugar da imagem da música quando o relógio estiver esmaecido"
           }
         }
       }
@@ -998,6 +1112,12 @@
             "state" : "translated",
             "value" : "다운로드"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download"
+          }
         }
       }
     },
@@ -1045,6 +1165,12 @@
             "state" : "translated",
             "value" : "다운로드가 이미 존재합니다"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O download já existe"
+          }
         }
       }
     },
@@ -1078,7 +1204,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scaricato"
+            "value" : "Scaricata"
           }
         },
         "ja" : {
@@ -1091,6 +1217,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "다운로드됨"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baixada"
           }
         }
       }
@@ -1150,6 +1282,12 @@
             "state" : "translated",
             "value" : "다운로드됨(%lld)"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baixada (%lld)"
+          }
         }
       }
     },
@@ -1195,6 +1333,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "다운로드 중"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baixando"
           }
         }
       }
@@ -1243,6 +1387,12 @@
             "state" : "translated",
             "value" : "시계가 어두워지면 노래 이미지 대신 QR 코드 표시"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O download com uma conexão de celular está desativado, vá para as configurações para ativar"
+          }
         }
       }
     },
@@ -1290,6 +1440,12 @@
             "state" : "translated",
             "value" : "다운로드"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloads"
+          }
         }
       }
     },
@@ -1335,6 +1491,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "목록 끝"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fim da lista"
           }
         }
       }
@@ -1382,6 +1544,12 @@
             "state" : "translated",
             "value" : "재생목록 끝"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fim da playlist"
+          }
         }
       }
     },
@@ -1427,6 +1595,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "SoundCloud에 연결하지 못했습니다. 다시 시도해 주세요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falha ao conectar ao SoundCloud, tente novamente"
           }
         }
       }
@@ -1474,6 +1648,12 @@
             "state" : "translated",
             "value" : "팔로우한 아티스트"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguindo"
+          }
         }
       }
     },
@@ -1520,6 +1700,12 @@
             "state" : "translated",
             "value" : "준비 중..."
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preparando-se..."
+          }
         }
       }
     },
@@ -1565,6 +1751,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "검색 기록"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "História"
           }
         }
       }
@@ -1613,6 +1805,12 @@
             "state" : "translated",
             "value" : "SoundCloud 로그인 페이지에 \"인증 이미지\"가 표시되지 않으면 다음을 시도해 보십시오."
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se o captcha não aparecer na página de login do SoundCloud, tente usar"
+          }
         }
       }
     },
@@ -1658,6 +1856,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "진행 중(%lld)"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Em Andamento (%lld)"
           }
         }
       }
@@ -1705,6 +1909,12 @@
             "state" : "translated",
             "value" : "보안문자가 표시되지 않으면"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "no canto superior esquerdo do player e toque em"
+          }
         }
       }
     },
@@ -1750,6 +1960,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "도서관"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biblioteca"
           }
         }
       }
@@ -1798,6 +2014,12 @@
             "state" : "translated",
             "value" : "좋아하다"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gostar"
+          }
         }
       }
     },
@@ -1825,7 +2047,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Titres aimés"
+            "value" : "Titres Aimés"
           }
         },
         "it" : {
@@ -1844,6 +2066,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "좋아했다"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Curtida"
           }
         }
       }
@@ -1871,7 +2099,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Playlists aimés"
+            "value" : "Playlists Aimés"
           }
         },
         "it" : {
@@ -1890,6 +2118,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "좋아요를 누른 재생목록"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Playlists Curtidas"
           }
         }
       }
@@ -1937,11 +2171,66 @@
             "state" : "translated",
             "value" : "좋아요 표시한 노래"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faixas Curtidas"
+          }
         }
       }
     },
     "List is empty" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "القائمة فارغة"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste ist leer"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La lista esta vacía"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La liste est vide"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'elenco è vuoto"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "リストが空です"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "목록이 비어 있습니다."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A lista está vazia"
+          }
+        }
+      }
     },
     "Loading playlists..." : {
       "localizations" : {
@@ -1985,6 +2274,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "재생목록 로드 중..."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carregando listas..."
           }
         }
       }
@@ -2032,6 +2327,12 @@
             "state" : "translated",
             "value" : "트랙 로드 중"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carregando faixas..."
+          }
         }
       }
     },
@@ -2078,6 +2379,12 @@
             "state" : "translated",
             "value" : "아티스트 로드 중..."
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carregando artistas..."
+          }
         }
       }
     },
@@ -2123,6 +2430,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "로그 아웃"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sair"
           }
         }
       }
@@ -2171,6 +2484,12 @@
             "state" : "translated",
             "value" : "가장 최근에 게시된"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mais recente"
+          }
         }
       }
     },
@@ -2216,6 +2535,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "내 계정"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minha Conta"
           }
         }
       }
@@ -2263,6 +2588,12 @@
             "state" : "translated",
             "value" : "내 재생목록"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minhas Playlists"
+          }
         }
       }
     },
@@ -2277,25 +2608,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ok"
+            "value" : "OK"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
           }
         },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ok"
+            "value" : "OK"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ok"
+            "value" : "OK"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ok"
+            "value" : "OK"
           }
         },
         "ja" : {
@@ -2308,6 +2645,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "좋아요"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
           }
         }
       }
@@ -2354,6 +2697,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "재생목록이 비어 있습니다"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A lista está vazia"
           }
         }
       }
@@ -2402,6 +2751,12 @@
             "state" : "translated",
             "value" : "재생목록"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "listas"
+          }
         }
       }
     },
@@ -2449,6 +2804,12 @@
             "state" : "translated",
             "value" : "에 의해 구동"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "alimentado por"
+          }
         }
       }
     },
@@ -2495,6 +2856,12 @@
             "state" : "translated",
             "value" : "다운로드를 삭제하려면 노래를 길게 누르세요."
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pressione e segure a faixa para remover o download"
+          }
         }
       }
     },
@@ -2540,6 +2907,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "모두 제거"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deletar Tudo"
           }
         }
       }
@@ -2588,6 +2961,12 @@
             "state" : "translated",
             "value" : "찾다"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pesquisar"
+          }
         }
       }
     },
@@ -2635,6 +3014,12 @@
             "state" : "translated",
             "value" : "%@ 를 검색하세요"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pesquisar por %@"
+          }
         }
       }
     },
@@ -2655,19 +3040,19 @@
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ver todo"
+            "value" : "Ver Todo"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tout voir"
+            "value" : "Tout Voir"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vede tutto"
+            "value" : "Vedere Tutto"
           }
         },
         "ja" : {
@@ -2680,6 +3065,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "모두 보기"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver Tudo"
           }
         }
       }
@@ -2727,6 +3118,12 @@
             "state" : "translated",
             "value" : "설정"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurações"
+          }
         }
       }
     },
@@ -2772,6 +3169,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "함께 나누다"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartilhar"
           }
         }
       }
@@ -2820,6 +3223,12 @@
             "state" : "translated",
             "value" : "QR 코드 표시"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar Código QR"
+          }
         }
       }
     },
@@ -2866,6 +3275,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "'Google로 로그인'을 시도해 보세요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faça login no Google"
           }
         }
       }
@@ -2914,6 +3329,12 @@
             "state" : "translated",
             "value" : "에러 발생됨"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algo deu errado"
+          }
         }
       }
     },
@@ -2960,6 +3381,12 @@
             "state" : "translated",
             "value" : "재생 속도"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velocidade"
+          }
         }
       }
     },
@@ -3005,6 +3432,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "대다"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toque"
           }
         }
       }
@@ -3053,6 +3486,12 @@
             "state" : "translated",
             "value" : "노래에 좋아요/좋아요 표시 취소하는 중에 문제가 발생했습니다."
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocorreu um problema ao gostar/não gostar da faixa"
+          }
         }
       }
     },
@@ -3100,6 +3539,12 @@
             "state" : "translated",
             "value" : "다운로드를 삭제하는 중에 문제가 발생했습니다."
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocorreu um problema ao remover o download"
+          }
         }
       }
     },
@@ -3120,19 +3565,19 @@
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pistas destacadas"
+            "value" : "Pistas Destacadas"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Meilleurs titres"
+            "value" : "Meilleurs Titres"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Le migliori canzoni"
+            "value" : "Migliori Canzoni"
           }
         },
         "ja" : {
@@ -3145,6 +3590,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "인기곡"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faixas Superiores"
           }
         }
       }
@@ -3193,6 +3644,12 @@
             "state" : "translated",
             "value" : "노래"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "faixas"
+          }
         }
       }
     },
@@ -3239,6 +3696,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "로그인하는 데 문제가 있나요?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Problemas para fazer login?"
           }
         }
       }
