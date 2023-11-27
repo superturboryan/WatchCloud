@@ -22,11 +22,8 @@ struct WatchCloud_Watch_AppApp: App {
     @Environment(\.scenePhase) var scene
     
     init() {
+        initializeSharedInstances()
         configureTips()
-        // Setup shared instances
-        _ = AnalyticsManager.shared
-        ImagePipeline.shared = .init(configuration: .withDataCache) // Enables aggressive disk caching
-        _ = PathMonitor.shared
     }
     
     var body: some Scene {
@@ -53,9 +50,14 @@ private extension WatchCloud_Watch_AppApp {
         }
     }
     
+    func initializeSharedInstances() {
+        _ = AnalyticsManager.shared
+        ImagePipeline.shared = .init(configuration: .withDataCache) // Enables aggressive disk caching
+        _ = PathMonitor.shared
+    }
+    
     func configureTips() {
         if #available(watchOS 10, *) {
-//            try? Tips.resetDatastore() // ⚠️ Always showing tips
             try? Tips.configure([
                 .displayFrequency(.immediate),
                 .datastoreLocation(.applicationDefault)

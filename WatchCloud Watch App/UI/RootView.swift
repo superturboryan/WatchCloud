@@ -58,7 +58,6 @@ struct RootView: View {
     @ViewBuilder
     private var osDependentPlayerView: some View {
         let playlistIsLoaded = !audioStore.nowPlayingQueue.isEmptyOrNil
-        // 👇 Loading PlayerView is the culprit for "Attribute graph cycle detected"...
         if playlistIsLoaded {
             if #available(watchOS 10, *) {
                 NewPlayerView().tag(RootTab.player)
