@@ -43,7 +43,6 @@ struct PlayerOptionsView: View {
         .buttonStyle(.plain)
         .fullWidthAndHeight()
         .background(.black)
-        
         .alert(
             String(localized: "Something Went Wrong", comment: "Alert title"),
             isPresented: .constant(audioStoreError != nil)

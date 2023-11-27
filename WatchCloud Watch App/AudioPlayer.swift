@@ -11,7 +11,7 @@ import MediaPlayer
 import Nuke
 import OSLog
 import SoundCloud
-import SwiftUI
+import UIKit.UIImage
 
 final class AudioPlayer: ObservableObject {
     
@@ -114,14 +114,12 @@ extension AudioPlayer {
         }
         
         let avItem = try await getAVItem(for: track)
-        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.nextTrackCommand),
             name: Notification.Name.AVPlayerItemDidPlayToEndTime,
             object: avItem
         )
-        
         await MainActor.run { [weak self] in
             self?.player.replaceCurrentItem(with: avItem)
             self?.audioStore.loadedTrack = track
@@ -179,12 +177,11 @@ extension AudioPlayer {
 // MARK: - ⏪⏯️⏩ Playback Commands
 extension AudioPlayer {
     func togglePlaybackCommand() {
-        if let queue = audioStore.nowPlayingQueue, !queue.isEmpty, audioStore.loadedTrack == nil {
-            // Queue is loaded but no track selected
-            loadAndPlayTrack(queue.first!)
+        // Check if queue is loaded but no track selected
+        if let firstTrack = audioStore.nowPlayingQueue?.first, audioStore.loadedTrack == nil {
+            loadAndPlayTrack(firstTrack)
             return
         }
-        
         if isPlaying {
             pauseCommand()
         } else {
@@ -275,8 +272,8 @@ extension AudioPlayer {
 }
 
 // MARK: - MPNowPlayingInfoCenter
-extension AudioPlayer {
-    private func setupDeviceMediaControls() {
+private extension AudioPlayer {
+    func setupDeviceMediaControls() {
         remoteCommands.togglePlayPauseCommand.addTarget { [weak self] _ in
             self?.togglePlaybackCommand()
             return .success
@@ -343,20 +340,22 @@ extension AudioPlayer {
         }
     }
     
-    private func updateNowPlayingInfo(with time: CMTime? = nil) {
+    func updateNowPlayingInfo(with time: CMTime? = nil) {
         guard let loadedTrack = audioStore.loadedTrack else {
             nowPlaying.nowPlayingInfo = nil
             return
         }
         
         var info = nowPlaying.nowPlayingInfo
+        defer {
+            nowPlaying.nowPlayingInfo = info
+        }
         let currentID = info?[MPMediaItemPropertyPersistentID] as? Int
         let currentTime = (time ?? player.currentTime()).seconds
         
-        if currentID == loadedTrack.id {
-            info![MPNowPlayingInfoPropertyElapsedPlaybackTime] = currentTime
-        }
-        else {
+        if currentID == loadedTrack.id { // Only update time
+            info?[MPNowPlayingInfoPropertyElapsedPlaybackTime] = currentTime
+        } else { // Update all properties
             info = [
                 MPMediaItemPropertyPersistentID: loadedTrack.id,
                 MPMediaItemPropertyTitle: loadedTrack.title,
@@ -365,26 +364,21 @@ extension AudioPlayer {
                 MPMediaItemPropertyPlaybackDuration: loadedTrack.durationInSeconds,
                 MPNowPlayingInfoPropertyElapsedPlaybackTime: currentTime
             ]
-            
-            let url = loadedTrack.artworkUrl ?? loadedTrack.user.avatarUrl 
+            let imageURL = loadedTrack.artworkUrl ?? loadedTrack.user.avatarUrl
             Task { [weak self] in
-                guard let artwork = await self?.fetchArtwork(url) else {
-                    return
-                }
-                self?.nowPlaying.nowPlayingInfo?[MPMediaItemPropertyArtwork] = artwork
+                self?.nowPlaying.nowPlayingInfo?[MPMediaItemPropertyArtwork] = await self?.getMediaItemArtwork(imageURL)
             }
         }
-        
-        nowPlaying.nowPlayingInfo = info
     }
     
-    private func fetchArtwork(_ url: String) async -> MPMediaItemArtwork {
+    func getMediaItemArtwork(_ url: String) async -> MPMediaItemArtwork {
         let largerImageUrl = url.replacingOccurrences(of: "large.jpg", with: "t500x500.jpg")
         guard
             let url = URL(string: largerImageUrl),
             let image = try? await imagePipeline.loadImage(with: url)
         else {
-            let fallbackImage = UIImage(systemName: "xmark.icloud.fill")!
+            Logger.audioPlayer.error("Failed to load MPMediaItemArtwork from url \(url)")
+            let fallbackImage = UIImage(systemName: "photo")!
             return MPMediaItemArtwork(boundsSize: fallbackImage.size) { _ in fallbackImage }
         }
         return MPMediaItemArtwork(boundsSize: image.size) { _ in image }
