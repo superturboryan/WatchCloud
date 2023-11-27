@@ -1,8 +1,8 @@
 # 1.2.0
-🌎 Published _  
+🌎 Published 27 November  
 🔨 Xcode 15.0  
 ⌚️ watchOS 10.0  
-📦 **SoundCloud Swift Package 1.0.3 ⭐️**  
+📦 **SoundCloud Swift Package 1.0.4 ⭐️**  
 
 ### ✨ Features
 - Loaded track + queue are saved when app is backgrounded, loaded on app launch
@@ -15,11 +15,10 @@
 
 ### 🐞 Bug fixes
 - **AudioPlayer uses HLS streaming URLs (instead of mp3)** ‼️🤦‍♂️
-- AudioPlayer uses `Nuke.ImagePipeline` to load artwork
+- AudioPlayer uses `Nuke.ImagePipeline` to load images
 - Remove @MainActor from AudioPlayer class declaration, add to methods instead
 - LoginView displays tip when login is cancelled
 - Translation, capitalization fixes
-- AudioPlayer loads images using Nuke.ImagePipeline
 - Add padding to CachedImageView's fallback image
 - Show alert when liking track or starting download fails
 - Add UserListView empty state
