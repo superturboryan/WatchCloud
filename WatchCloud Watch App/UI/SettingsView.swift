@@ -60,12 +60,16 @@ struct SettingsView: View {
                 
                 HStack {
                     Text(String(localized: "%d Tracks", defaultValue: "\(audioStore.downloadedTracks.count) Tracks"))
-                    Spacer()
+                        .minimumScaleFactor(0.8)
+                    Spacer(minLength: 10)
                     HStack {
                         Text(verbatim: audioStore.downloadedTracksFileSize.formattedFileSizeInMbOrGb)
                         Image(systemName: "applewatch")
-                    }.foregroundStyle(.secondary)
+                    }
+                    .minimumScaleFactor(0.8)
+                    .foregroundStyle(.secondary)
                 }
+                .lineLimit(1)
                 
                 if !audioStore.downloadedTracks.isEmpty {
                     Button("Remove All", role: .destructive) {
