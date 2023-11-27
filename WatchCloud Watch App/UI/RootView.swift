@@ -108,10 +108,9 @@ struct RootView: View {
             AnalyticsManager.shared.log(.loadLibrarySuccess)
         } catch UserStore.Error.loadingMyProfile,
                 SoundCloud.Error.userNotAuthorized {
-            Logger.rootView.info("❌ Profile doesn't exist or API denied access. Performing logout, presenting login screen...")
+            Logger.rootView.info("❌ Profile doesn't exist or API denied access. Performing logout...")
             performLogout()
-            return
-        } catch SoundCloud.Error.tooManyRequests { // Review if this error is actually thrown
+        } catch SoundCloud.Error.tooManyRequests { // Can still be thrown by AudioStore
             AnalyticsManager.shared.log(.tooManyRequests)
             isLoaded = true
         } catch {
@@ -131,7 +130,7 @@ struct RootView: View {
 
 #Preview {
     RootView()
-        .environmentObject(testAudioPlayer)
+        .environmentObject(SearchStore(testSC))
         .environmentObject(AudioStore(testSC))
         .environmentObject(AuthStore(testSC))
         .environmentObject(UserStore(testSC))
