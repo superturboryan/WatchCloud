@@ -40,6 +40,8 @@ struct SettingsView: View {
         ) {
             Toggle(isOn: Config.$showQRWhenWatchIsDimmed) {
                 Text(String(localized: "Show QR Code", comment: "Toggle label"))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }
         }
     }
@@ -53,14 +55,16 @@ struct SettingsView: View {
                 Toggle(isOn: Config.$allowDownloadingUsingData, label: {
                     Text(String(localized: "Cellular Data", comment: "Toggle label"))
                         .lineLimit(1)
-                        .minimumScaleFactor(0.9)
+                        .minimumScaleFactor(0.7)
                 })
                 
                 HStack {
                     Text(String(localized: "%d Tracks", defaultValue: "\(audioStore.downloadedTracks.count) Tracks"))
                     Spacer()
-                    Text(verbatim: audioStore.downloadedTracksFileSize.formattedFileSizeInMbOrGb)
-                        .foregroundStyle(.secondary)
+                    HStack {
+                        Text(verbatim: audioStore.downloadedTracksFileSize.formattedFileSizeInMbOrGb)
+                        Image(systemName: "applewatch")
+                    }.foregroundStyle(.secondary)
                 }
                 
                 if !audioStore.downloadedTracks.isEmpty {
