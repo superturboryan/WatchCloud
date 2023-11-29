@@ -420,27 +420,30 @@ private extension AudioStore {
         // ‼️ Response does not contain ID for track (only encrypted ID)
         // Add track ID to request header to know which track is being downloaded in delegate
         request.addValue("\(track.id)", forHTTPHeaderField: "track_id")
-        // Make request for track data
-        guard let (trackData, response) = try? await URLSession.shared.data(for: request, delegate: self) else {
+        // Make request to download track
+        guard let (tempLocation, response) = try? await URLSession.shared.download(for: request, delegate: self) else {
+            downloadsInProgress.removeValue(forKey: track)
             throw Error.noInternet
         }
         let statusCodeInt = (response as! HTTPURLResponse).statusCode
         let statusCode = SoundCloud.StatusCode(rawValue: statusCodeInt) ?? .unknown
         guard statusCode != SoundCloud.StatusCode.unauthorized else {
+            downloadsInProgress.removeValue(forKey: track)
             throw Error.userNotAuthorized
         }
         guard !statusCode.errorOccurred else {
+            downloadsInProgress.removeValue(forKey: track)
             throw Error.network(statusCode)
         }
         // Download completed successfully...
         downloadsInProgress.removeValue(forKey: track)
-        // Save track data as mp3
-        try trackData.write(to: localMp3Url)
+        // Move from tempLocation to documents directory
+        try? FileManager.default.moveItem(at: tempLocation, to: localMp3Url)
         // Save track metadata as track json object
         let trackJsonData = try encoder.encode(track)
         let localJsonUrl = track.localFileUrl(withExtension: Track.FileExtension.json)
         try trackJsonData.write(to: localJsonUrl)
-        // Create copy of track with local file url added
+        // Create copy of Track object with local file url added
         var trackWithLocalFileUrl = track
         trackWithLocalFileUrl.localFileUrl = localMp3Url.absoluteString
         downloadedTracks.append(trackWithLocalFileUrl)
@@ -458,6 +461,7 @@ private extension AudioStore {
         var loadedTracks = [Track]()
         for id in downloadedTrackIdList {
             let trackJsonURL = documentsURL.appendingPathComponent("\(id).\(Track.FileExtension.json)")
+            #warning("Errors not handled")
             let trackJsonData = try Data(contentsOf: trackJsonURL)
             var downloadedTrack = try decoder.decode(Track.self, from: trackJsonData)
             
