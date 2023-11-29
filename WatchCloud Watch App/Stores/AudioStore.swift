@@ -387,7 +387,7 @@ extension AudioStore {
     @MainActor
     func cancelDownloadInProgress(for track: Track) throws {
         guard downloadsInProgress.keys.contains(track), let task = downloadTasks[track] else {
-            throw Error.trackDownloadNotInProgress
+            throw Error.downloadNotInProgress
         }
         task.cancel()
         downloadTasks.removeValue(forKey: track)
@@ -415,15 +415,17 @@ private extension AudioStore {
         // Load track for each id, set local mp3 file url for track
         var loadedTracks = [Track]()
         for id in downloadedTrackIdList {
-            let trackJsonURL = documentsURL.appendingPathComponent("\(id).\(Track.FileExtension.json)")
-            #warning("Errors not handled, add logging?")
-            let trackJsonData = try Data(contentsOf: trackJsonURL)
-            var downloadedTrack = try decoder.decode(Track.self, from: trackJsonData)
-            
-            let downloadedTrackLocalMp3Url = downloadedTrack.localFileUrl(withExtension: Track.FileExtension.mp3).absoluteString
-            downloadedTrack.localFileUrl = downloadedTrackLocalMp3Url
-            
-            loadedTracks.append(downloadedTrack)
+            do {
+                let trackJsonURL = documentsURL.appendingPathComponent("\(id).\(Track.FileExtension.json)")
+                let trackJsonData = try Data(contentsOf: trackJsonURL)
+                var downloadedTrack = try decoder.decode(Track.self, from: trackJsonData)
+                
+                let downloadedTrackLocalMp3Url = downloadedTrack.localFileUrl(withExtension: Track.FileExtension.mp3).absoluteString
+                downloadedTrack.localFileUrl = downloadedTrackLocalMp3Url
+                loadedTracks.append(downloadedTrack)
+            } catch {
+                throw Error.loadingDownloadedTracks
+            }
         }
         downloadedTracks = loadedTracks
     }
@@ -446,7 +448,6 @@ private extension AudioStore {
         downloadsInProgress[track] = 0.0
         // Setup request
         var request = URLRequest(url: URL(string: url)!)
-        
         request.allHTTPHeaderFields = try await service.authenticatedHeader
         // ‼️ Response does not contain ID for track (only encrypted ID)
         // Add track ID to request header to know which track is being downloaded in delegate
@@ -469,6 +470,7 @@ extension AudioStore: URLSessionDownloadDelegate {
             return
         }
         defer { // Always perform these actions regardless of download failing
+            // Should this be done after or being updating downloadedTracks?
             downloadTasks.removeValue(forKey: downloadedTrack)
             downloadsInProgress.removeValue(forKey: downloadedTrack)
         }
@@ -503,8 +505,7 @@ extension AudioStore: URLSessionDownloadDelegate {
             return
         }
         // Assign progress to track being downloaded
-        let progress = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
-        downloadsInProgress[downloadingTrack] = progress
+        downloadsInProgress[downloadingTrack] = downloadTask.progress.fractionCompleted
     }
     
     private func getTrack(from task: URLSessionTask) -> Track? {
@@ -542,15 +543,16 @@ extension AudioStore {
         case togglingLikedTrack
         case togglingLikedPlaylist
         
-        case trackDownloadNotInProgress
+        case loadingDownloadedTracks
+        case downloadNotInProgress
         case downloadAlreadyExists
         case downloadingWithCellularDisabled
+        case removingDownloadedTrack
         
         case userNotAuthorized
         case network(SoundCloud.StatusCode)
         case invalidURL
         case noInternet
-        case removingDownloadedTrack
         
         var errorDescription: String? {
             switch self {
