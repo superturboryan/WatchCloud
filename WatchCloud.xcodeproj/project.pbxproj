@@ -42,7 +42,6 @@
 		946F38A32AB079CA008CE9D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946F38A22AB079CA008CE9D1 /* Preview Assets.xcassets */; };
 		946F38B12AB07A2E008CE9D1 /* SoundCloud in Frameworks */ = {isa = PBXBuildFile; productRef = 946F38B02AB07A2E008CE9D1 /* SoundCloud */; };
 		946F38CD2AB07F81008CE9D1 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38B72AB07F81008CE9D1 /* View.swift */; };
-		946F38CE2AB07F81008CE9D1 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38B82AB07F81008CE9D1 /* Progress.swift */; };
 		946F38CF2AB07F81008CE9D1 /* Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38B92AB07F81008CE9D1 /* Delete.swift */; };
 		946F38D02AB07F81008CE9D1 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38BA2AB07F81008CE9D1 /* Config.swift */; };
 		946F38D12AB07F81008CE9D1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38BB2AB07F81008CE9D1 /* Image.swift */; };
@@ -196,7 +195,6 @@
 		946F38B22AB07A78008CE9D1 /* WatchCloud-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "WatchCloud-Watch-App-Info.plist"; path = "WatchCloud Watch App/Config/WatchCloud-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		946F38B42AB07D74008CE9D1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		946F38B72AB07F81008CE9D1 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		946F38B82AB07F81008CE9D1 /* Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
 		946F38B92AB07F81008CE9D1 /* Delete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delete.swift; sourceTree = "<group>"; };
 		946F38BA2AB07F81008CE9D1 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		946F38BB2AB07F81008CE9D1 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -478,7 +476,6 @@
 				94923C6E2ABDBBD500A67EBE /* Numbers.swift */,
 				9421D2AE2AD2D151005FE857 /* Optional.swift */,
 				94D495202B1396D00013A2D9 /* PathMonitor.swift */,
-				946F38B82AB07F81008CE9D1 /* Progress.swift */,
 				94D4951E2B1212280013A2D9 /* ShortAndLongTapButton.swift */,
 				946F38BD2AB07F81008CE9D1 /* SpinAnimation.swift */,
 				94923C6C2ABDBB2C00A67EBE /* String.swift */,
@@ -866,7 +863,6 @@
 				943477BC2AD3E1CA00A6DED6 /* DebugAnalyticsService.swift in Sources */,
 				946F38D92AB07F81008CE9D1 /* PlaylistView.swift in Sources */,
 				946F38D32AB07F81008CE9D1 /* SpinAnimation.swift in Sources */,
-				946F38CE2AB07F81008CE9D1 /* Progress.swift in Sources */,
 				947F59992B0A80E900741C53 /* Notification.swift in Sources */,
 				9448FF4B2AB31308003D63F1 /* CompositionRoot.swift in Sources */,
 				946F38D42AB07F81008CE9D1 /* MarqueeText.swift in Sources */,
