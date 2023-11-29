@@ -59,7 +59,7 @@ final class AudioStore: NSObject, ObservableObject {
 extension AudioStore {
     func load() async throws {
         await loadDefaultPlaylists()
-        try await loadDownloadedTracks()
+        try? await loadDownloadedTracks() // Don't throw for this case, fail silently
         try await loadMyPlaylistsWithoutTracks()
         try await loadMyLikedPlaylistsWithoutTracks()
         try await loadMyLikedTracksPlaylistWithTracks()
@@ -484,12 +484,7 @@ extension AudioStore: URLSessionDownloadDelegate {
         let localMp3Url = downloadedTrack.localFileUrl(withExtension: Track.FileExtension.mp3)
         try? FileManager.default.moveItem(at: tempLocation, to: localMp3Url)
         // Save track metadata as track json object
-        guard let trackJsonData = try? encoder.encode(downloadedTrack) else {
-            Logger.audioStore.error("Failed to encode JSON metadata for track \(downloadedTrack.title)")
-            return
-        }
-        let localJsonUrl = downloadedTrack.localFileUrl(withExtension: Track.FileExtension.json)
-        try? trackJsonData.write(to: localJsonUrl)
+        saveTrackMetadata(downloadedTrack)
         // Create copy of Track object with local file url added
         var trackWithLocalFileUrl = downloadedTrack
         trackWithLocalFileUrl.localFileUrl = localMp3Url.absoluteString
@@ -504,20 +499,32 @@ extension AudioStore: URLSessionDownloadDelegate {
         totalBytesWritten: Int64,
         totalBytesExpectedToWrite: Int64
     ) {
-        // Assign task's progress to track being downloaded
         guard let downloadingTrack = getTrack(from: downloadTask) else {
             return
         }
+        // Assign progress to track being downloaded
         let progress = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
         downloadsInProgress[downloadingTrack] = progress
     }
-        
+    
     private func getTrack(from task: URLSessionTask) -> Track? {
         guard // ‼️ Get id from request header field set before starting download, find track in downloadsInProgress
             let trackId = Int(task.originalRequest?.value(forHTTPHeaderField: "track_id") ?? ""),
             let track = downloadsInProgress.keys.first(where: { $0.id == trackId })
-        else { return nil }
+        else {
+            Logger.audioStore.error("Failed to find track in request header or downloadsInProgress")
+            return nil
+        }
         return track
+    }
+    
+    private func saveTrackMetadata(_ track: Track) {
+        guard let trackJsonData = try? encoder.encode(track) else {
+            Logger.audioStore.error("Failed to encode JSON metadata for track \(track.title)")
+            return
+        }
+        let localJsonUrl = track.localFileUrl(withExtension: Track.FileExtension.json)
+        try? trackJsonData.write(to: localJsonUrl)
     }
 }
 
