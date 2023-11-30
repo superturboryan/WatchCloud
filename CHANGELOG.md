@@ -1,3 +1,19 @@
+# 1.2.1
+🌎 Published _ November  
+🔨 Xcode 15.0  
+⌚️ watchOS 10.0  
+📦 SoundCloud Swift Package 1.0.4  
+
+### ✨ Features
+- Add `App Prefers Network Upon Foreground (Watch)` to info.plist 
+    - This could reduce time from launch until library view is loaded ([doc](https://developer.apple.com/documentation/bundleresources/information_property_list/wkprefersnetworkuponforeground))
+
+### 🐞 Bug fixes
+- AudioStore uses URLSession **with background configuration** for downloads instead of default URLSession.shared
+    - Downloads were failing immediately when app left foreground
+- AudioStore uses URLSession.downloadTask with delegate methods instead of async URLSession.data
+- AudioStore.load doesn't throw error if loadDownloadedTracks fails
+
 # 1.2.0
 🌎 Published 27 November  
 🔨 Xcode 15.0  
