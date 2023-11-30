@@ -1,7 +1,10 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Send message to watch" : {
+    "Login" : {
+
+    },
+    "Login successful" : {
 
     }
   },

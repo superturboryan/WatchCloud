@@ -5,10 +5,19 @@
 //  Created by Ryan Forsyth on 2023-11-30.
 //
 
+import SoundCloud
 import SwiftUI
 
 @main
 struct WatchCloud_LoginApp: App {
+    
+    static let sc = SoundCloud(SoundCloud.Config(
+        clientId: Config.clientId,
+        clientSecret: Config.clientSecret,
+        redirectURI: Config.redirectURI
+    ))
+    
+    @StateObject var authStore = AuthStore(sc)
     
     init() {
         _ = WCPhoneSessionHandler.shared
@@ -17,6 +26,7 @@ struct WatchCloud_LoginApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
+                .environmentObject(authStore)
         }
     }
 }

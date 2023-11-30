@@ -5,21 +5,51 @@
 //  Created by Ryan Forsyth on 2023-11-30.
 //
 
+import SoundCloud
 import SwiftUI
 
 struct RootView: View {
+    
+    @EnvironmentObject var authStore: AuthStore
+        
     var body: some View {
-        VStack {
-            Button(action: {
-                WCPhoneSessionHandler.shared.sendMessage()
-            }, label: {
-                Text("Send message to watch")
-            })
+        Group {
+            if authStore.isLoggedIn {
+                loggedInView
+            } else {
+                loginView
+            }
         }
-        .padding()
+        .task {
+            authStore.logout()
+        }
+    }
+    
+    private var loginView: some View {
+        VStack {
+            Button {
+                performLogin()
+            } label: {
+                Text("Login")
+            }
+
+        }
+    }
+    
+    func performLogin() {
+        Task {
+            try await authStore.login()
+        }
+    }
+    
+    private var loggedInView: some View {
+        VStack {
+            Text("Login successful")
+        }
     }
 }
 
 #Preview {
     RootView()
+        .environmentObject(AuthStore(testSC))
 }
