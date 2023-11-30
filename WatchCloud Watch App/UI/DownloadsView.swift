@@ -48,8 +48,8 @@ struct DownloadsView: View {
         ) {
             ForEach(
                 audioStore.downloadsInProgress
-                    .filter { $0.value.totalUnitCount != 0 }
-                    .sorted(by: { $0.value.fractionCompleted > $1.value.fractionCompleted }), id: \.key.id)
+                    .filter { $0.value != 0.0 }
+                    .sorted(by: { $0.value > $1.value }), id: \.key.id)
             { track, progress in
                 downloadInProgressCell(track, progress)
                 .onLongPressGesture {
@@ -60,16 +60,16 @@ struct DownloadsView: View {
         }
     }
     
-    func downloadInProgressCell(_ track: Track, _ progress: Progress) -> some View {
+    func downloadInProgressCell(_ track: Track, _ progress: Double) -> some View {
         VStack(spacing: 4) {
             Text(verbatim: track.title)
                 .lineLimit(1)
 
             HStack(spacing: 8) {
-                ProgressView(value: progress.fractionCompleted, total: 1.0)
+                ProgressView(value: progress, total: 1.0)
                     .progressViewStyle(LinearGradientProgressViewStyle(fill: .green, height: 8))
-                    .animation(.default, value: progress.fractionCompleted)
-                Text(verbatim: "\(Int(progress.fractionCompleted * 100.0))%")
+                    .animation(.default, value: progress)
+                Text(verbatim: "\(Int(progress * 100.0))%")
                     .font(.footnote)
                     .fontWeight(.semibold)
                     .fixedSize()
