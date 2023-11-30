@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  RootView.swift
 //  WatchCloud Login
 //
 //  Created by Ryan Forsyth on 2023-11-30.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct RootView: View {
     var body: some View {
         VStack {
             Button(action: {
@@ -21,5 +21,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    RootView()
 }

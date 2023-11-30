@@ -81,8 +81,8 @@
 		94B6343F2ABDFAF900E6FCDA /* Complication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B6343E2ABDFAF900E6FCDA /* Complication.swift */; };
 		94B634412ABDFAFA00E6FCDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B634402ABDFAFA00E6FCDA /* Assets.xcassets */; };
 		94B634452ABDFAFA00E6FCDA /* ComplicationExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 94B6343A2ABDFAF900E6FCDA /* ComplicationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		94B8BB122B18CA7800BEB53B /* WatchCloud_LoginApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B8BB112B18CA7800BEB53B /* WatchCloud_LoginApp.swift */; };
-		94B8BB142B18CA7800BEB53B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B8BB132B18CA7800BEB53B /* ContentView.swift */; };
+		94B8BB122B18CA7800BEB53B /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B8BB112B18CA7800BEB53B /* App.swift */; };
+		94B8BB142B18CA7800BEB53B /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B8BB132B18CA7800BEB53B /* RootView.swift */; };
 		94B8BB162B18CA7900BEB53B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B8BB152B18CA7900BEB53B /* Assets.xcassets */; };
 		94B8BB192B18CA7900BEB53B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B8BB182B18CA7900BEB53B /* Preview Assets.xcassets */; };
 		94BD056E2B0B964300C3DA89 /* NowPlayingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BD056D2B0B964300C3DA89 /* NowPlayingInfo.swift */; };
@@ -281,11 +281,11 @@
 		94B634542ABE5B7700E6FCDA /* Player Options - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player Options - S945.png"; sourceTree = "<group>"; };
 		94B634552ABE5B7700E6FCDA /* Player - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player - S945.png"; sourceTree = "<group>"; };
 		94B8BB0F2B18CA7800BEB53B /* WatchCloud Login.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchCloud Login.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		94B8BB112B18CA7800BEB53B /* WatchCloud_LoginApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCloud_LoginApp.swift; sourceTree = "<group>"; };
-		94B8BB132B18CA7800BEB53B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		94B8BB112B18CA7800BEB53B /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		94B8BB132B18CA7800BEB53B /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		94B8BB152B18CA7900BEB53B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94B8BB182B18CA7900BEB53B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		94B8BB1D2B18D57100BEB53B /* WatchCloud-Login-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WatchCloud-Login-Info.plist"; sourceTree = SOURCE_ROOT; };
+		94B8BB1D2B18D57100BEB53B /* WatchCloud-Login-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "WatchCloud-Login-Info.plist"; path = "WatchCloud Login/Config/WatchCloud-Login-Info.plist"; sourceTree = SOURCE_ROOT; };
 		94BD056D2B0B964300C3DA89 /* NowPlayingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingInfo.swift; sourceTree = "<group>"; };
 		94D4951C2B0F74720013A2D9 /* ImagePipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePipeline.swift; sourceTree = "<group>"; };
 		94D4951E2B1212280013A2D9 /* ShortAndLongTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortAndLongTapButton.swift; sourceTree = "<group>"; };
@@ -651,13 +651,11 @@
 		94B8BB102B18CA7800BEB53B /* WatchCloud Login */ = {
 			isa = PBXGroup;
 			children = (
-				94B8BB1D2B18D57100BEB53B /* WatchCloud-Login-Info.plist */,
-				94B8BB112B18CA7800BEB53B /* WatchCloud_LoginApp.swift */,
-				94B8BB132B18CA7800BEB53B /* ContentView.swift */,
+				94B8BB112B18CA7800BEB53B /* App.swift */,
+				94B8BB132B18CA7800BEB53B /* RootView.swift */,
 				94EE88952B18E12E00486B15 /* WCPhoneSessionHandler.swift */,
-				94B8BB152B18CA7900BEB53B /* Assets.xcassets */,
-				94B8BB172B18CA7900BEB53B /* Preview Content */,
 				94EE88A32B19018E00486B15 /* Localizable.xcstrings */,
+				94EE88A52B19035F00486B15 /* Config */,
 			);
 			path = "WatchCloud Login";
 			sourceTree = "<group>";
@@ -668,6 +666,16 @@
 				94B8BB182B18CA7900BEB53B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		94EE88A52B19035F00486B15 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				94B8BB1D2B18D57100BEB53B /* WatchCloud-Login-Info.plist */,
+				94B8BB152B18CA7900BEB53B /* Assets.xcassets */,
+				94B8BB172B18CA7900BEB53B /* Preview Content */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		94F3FCD02AB9A3B5005D03DF /* Screenshots */ = {
@@ -992,8 +1000,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94B8BB142B18CA7800BEB53B /* ContentView.swift in Sources */,
-				94B8BB122B18CA7800BEB53B /* WatchCloud_LoginApp.swift in Sources */,
+				94B8BB142B18CA7800BEB53B /* RootView.swift in Sources */,
+				94B8BB122B18CA7800BEB53B /* App.swift in Sources */,
 				94EE88962B18E12E00486B15 /* WCPhoneSessionHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1371,13 +1379,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Login/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Login/Config/Preview Content\"";
 				DEVELOPMENT_TEAM = T6MXF72738;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "WatchCloud-Login-Info.plist";
+				INFOPLIST_FILE = "WatchCloud Login/Config/WatchCloud-Login-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1407,13 +1415,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Login/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Login/Config/Preview Content\"";
 				DEVELOPMENT_TEAM = T6MXF72738;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "WatchCloud-Login-Info.plist";
+				INFOPLIST_FILE = "WatchCloud Login/Config/WatchCloud-Login-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

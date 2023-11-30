@@ -16,7 +16,7 @@ struct WatchCloud_LoginApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
         }
     }
 }
