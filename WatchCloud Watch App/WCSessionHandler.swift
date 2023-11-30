@@ -1,6 +1,6 @@
 //
 //  WCSessionHandler.swift
-//  WatchCloud Login
+//  WatchCloud Watch App
 //
 //  Created by Ryan Forsyth on 2023-11-30.
 //
@@ -26,15 +26,8 @@ class WCSessionHandler: NSObject, WCSessionDelegate {
         print("WCSession activated successfully? \(activationState == .activated)")
     }
     
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        
-    }
-    
-    func sessionDidDeactivate(_ session: WCSession) {
-        
-    }
-    
-    func sendMessage() {
-        session.sendMessage(["hello" : "watchOS"], replyHandler: nil)
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        print("Message from iOS app: \(message)")
     }
 }
+

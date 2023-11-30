@@ -54,6 +54,8 @@ private extension WatchCloud_Watch_AppApp {
         _ = AnalyticsManager.shared
         ImagePipeline.shared = .init(configuration: .withDataCache) // Enables aggressive disk caching
         _ = PathMonitor.shared
+        
+        _ = WCSessionHandler.shared
     }
     
     func configureTips() {
