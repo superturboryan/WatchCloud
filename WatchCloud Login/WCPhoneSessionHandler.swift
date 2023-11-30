@@ -13,6 +13,7 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
     
     static let shared = WCPhoneSessionHandler()
     private let session = WCSession.default
+    private let encoder = JSONEncoder()
     
     override init() {
         super.init()
@@ -34,9 +35,11 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
         
     }
     
-    func sendMessage() {
-        let authTokens = TokenResponse(accessToken: "from iOS app", expiresIn: 100000, refreshToken: "", scope: "", tokenType: "")
-        let jsonData = try! JSONEncoder().encode(authTokens)
-        session.sendMessage(["tokens" : jsonData], replyHandler: nil)
+    func send(_ authTokens: TokenResponse) {
+        guard let encodedTokens = try? encoder.encode(authTokens) else {
+            return
+        }
+        let message = ["\(TokenResponse.self)" : encodedTokens]
+        session.sendMessage(message, replyHandler: nil)
     }
 }

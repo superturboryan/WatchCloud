@@ -28,10 +28,10 @@ class WCWatchSessionHandler: NSObject, WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        if let _ = message["tokens"] as? Data {
-            NotificationCenter.default.post(name: .newAuthTokens, object: message)
+        if let tokenData = message["\(TokenResponse.self)"] as? Data {
+            NotificationCenter.default.post(name: .newAuthTokens, object: tokenData)
         } else {
-            print("Message from iOS app: \(message)")
+            print("Received unexpected message from iOS app: \(message)")
         }
     }
 }

@@ -21,6 +21,10 @@ final class AuthStore: ObservableObject {
 }
 
 extension AuthStore {
+    
+    var tokens: TokenResponse? {
+        service.tokens
+    }
 
     @MainActor
     func login() async throws {

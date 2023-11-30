@@ -23,6 +23,11 @@ struct RootView: View {
         .task {
             authStore.logout()
         }
+        .onChange(of: authStore.isLoggedIn) { isLoggedIn in
+            if isLoggedIn, let tokens = authStore.tokens {
+                WCPhoneSessionHandler.shared.send(tokens)
+            }
+        }
     }
     
     private var loginView: some View {

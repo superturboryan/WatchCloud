@@ -8,7 +8,7 @@
 import SoundCloud
 
 protocol AuthService {
-    var authenticatedHeader: [String : String] { get async throws }
+    var tokens: TokenResponse? { get }
     func login() async throws
     func logout()
 }
