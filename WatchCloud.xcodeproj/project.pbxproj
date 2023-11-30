@@ -81,6 +81,10 @@
 		94B6343F2ABDFAF900E6FCDA /* Complication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B6343E2ABDFAF900E6FCDA /* Complication.swift */; };
 		94B634412ABDFAFA00E6FCDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B634402ABDFAFA00E6FCDA /* Assets.xcassets */; };
 		94B634452ABDFAFA00E6FCDA /* ComplicationExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 94B6343A2ABDFAF900E6FCDA /* ComplicationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		94B8BB122B18CA7800BEB53B /* WatchCloud_LoginApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B8BB112B18CA7800BEB53B /* WatchCloud_LoginApp.swift */; };
+		94B8BB142B18CA7800BEB53B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B8BB132B18CA7800BEB53B /* ContentView.swift */; };
+		94B8BB162B18CA7900BEB53B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B8BB152B18CA7900BEB53B /* Assets.xcassets */; };
+		94B8BB192B18CA7900BEB53B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B8BB182B18CA7900BEB53B /* Preview Assets.xcassets */; };
 		94BD056E2B0B964300C3DA89 /* NowPlayingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BD056D2B0B964300C3DA89 /* NowPlayingInfo.swift */; };
 		94C169A02AB474EE00570B4F /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 94C1699F2AB474EE00570B4F /* Nuke */; };
 		94C169A22AB474EE00570B4F /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 94C169A12AB474EE00570B4F /* NukeUI */; };
@@ -253,6 +257,11 @@
 		94B634532ABE5B7700E6FCDA /* Library - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Library - S945.png"; sourceTree = "<group>"; };
 		94B634542ABE5B7700E6FCDA /* Player Options - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player Options - S945.png"; sourceTree = "<group>"; };
 		94B634552ABE5B7700E6FCDA /* Player - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player - S945.png"; sourceTree = "<group>"; };
+		94B8BB0F2B18CA7800BEB53B /* WatchCloud Login.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchCloud Login.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		94B8BB112B18CA7800BEB53B /* WatchCloud_LoginApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCloud_LoginApp.swift; sourceTree = "<group>"; };
+		94B8BB132B18CA7800BEB53B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		94B8BB152B18CA7900BEB53B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		94B8BB182B18CA7900BEB53B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		94BD056D2B0B964300C3DA89 /* NowPlayingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingInfo.swift; sourceTree = "<group>"; };
 		94D4951C2B0F74720013A2D9 /* ImagePipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePipeline.swift; sourceTree = "<group>"; };
 		94D4951E2B1212280013A2D9 /* ShortAndLongTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortAndLongTapButton.swift; sourceTree = "<group>"; };
@@ -290,6 +299,13 @@
 			files = (
 				94B6343C2ABDFAF900E6FCDA /* SwiftUI.framework in Frameworks */,
 				94B6343B2ABDFAF900E6FCDA /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94B8BB0C2B18CA7800BEB53B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +396,7 @@
 				946F389A2AB079C9008CE9D1 /* WatchCloud Watch App */,
 				94B6343D2ABDFAF900E6FCDA /* Complication */,
 				94474B572AF2723E00BEA5F0 /* Unit Tests */,
+				94B8BB102B18CA7800BEB53B /* WatchCloud Login */,
 				946F38912AB079C9008CE9D1 /* Products */,
 				946F38AF2AB07A2E008CE9D1 /* Frameworks */,
 				946F38AD2AB079FE008CE9D1 /* Packages */,
@@ -397,6 +414,7 @@
 				946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */,
 				94B6343A2ABDFAF900E6FCDA /* ComplicationExtension.appex */,
 				94474B562AF2723E00BEA5F0 /* Unit Tests.xctest */,
+				94B8BB0F2B18CA7800BEB53B /* WatchCloud Login.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -601,6 +619,25 @@
 			path = 1.0.1;
 			sourceTree = "<group>";
 		};
+		94B8BB102B18CA7800BEB53B /* WatchCloud Login */ = {
+			isa = PBXGroup;
+			children = (
+				94B8BB112B18CA7800BEB53B /* WatchCloud_LoginApp.swift */,
+				94B8BB132B18CA7800BEB53B /* ContentView.swift */,
+				94B8BB152B18CA7900BEB53B /* Assets.xcassets */,
+				94B8BB172B18CA7900BEB53B /* Preview Content */,
+			);
+			path = "WatchCloud Login";
+			sourceTree = "<group>";
+		};
+		94B8BB172B18CA7900BEB53B /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				94B8BB182B18CA7900BEB53B /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		94F3FCD02AB9A3B5005D03DF /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
@@ -695,6 +732,23 @@
 			productReference = 94B6343A2ABDFAF900E6FCDA /* ComplicationExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		94B8BB0E2B18CA7800BEB53B /* WatchCloud Login */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 94B8BB1C2B18CA7900BEB53B /* Build configuration list for PBXNativeTarget "WatchCloud Login" */;
+			buildPhases = (
+				94B8BB0B2B18CA7800BEB53B /* Sources */,
+				94B8BB0C2B18CA7800BEB53B /* Frameworks */,
+				94B8BB0D2B18CA7800BEB53B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WatchCloud Login";
+			productName = "WatchCloud Login";
+			productReference = 94B8BB0F2B18CA7800BEB53B /* WatchCloud Login.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -716,6 +770,9 @@
 						CreatedOnToolsVersion = 14.3.1;
 					};
 					94B634392ABDFAF900E6FCDA = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					94B8BB0E2B18CA7800BEB53B = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
@@ -751,6 +808,7 @@
 				946F38952AB079C9008CE9D1 /* WatchCloud Watch App */,
 				94B634392ABDFAF900E6FCDA /* ComplicationExtension */,
 				94474B552AF2723E00BEA5F0 /* Unit Tests */,
+				94B8BB0E2B18CA7800BEB53B /* WatchCloud Login */,
 			);
 		};
 /* End PBXProject section */
@@ -787,6 +845,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				94B634412ABDFAFA00E6FCDA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94B8BB0D2B18CA7800BEB53B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94B8BB192B18CA7900BEB53B /* Preview Assets.xcassets in Resources */,
+				94B8BB162B18CA7900BEB53B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -879,6 +946,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				94B6343F2ABDFAF900E6FCDA /* Complication.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94B8BB0B2B18CA7800BEB53B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94B8BB142B18CA7800BEB53B /* ContentView.swift in Sources */,
+				94B8BB122B18CA7800BEB53B /* WatchCloud_LoginApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1238,6 +1314,78 @@
 			};
 			name = Release;
 		};
+		94B8BB1A2B18CA7900BEB53B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Login/Preview Content\"";
+				DEVELOPMENT_TEAM = T6MXF72738;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "RyanDF.WatchCloud-Login";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		94B8BB1B2B18CA7900BEB53B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Login/Preview Content\"";
+				DEVELOPMENT_TEAM = T6MXF72738;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "RyanDF.WatchCloud-Login";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1282,6 +1430,15 @@
 			buildConfigurations = (
 				94B634472ABDFAFA00E6FCDA /* Debug */,
 				94B634482ABDFAFA00E6FCDA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		94B8BB1C2B18CA7900BEB53B /* Build configuration list for PBXNativeTarget "WatchCloud Login" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				94B8BB1A2B18CA7900BEB53B /* Debug */,
+				94B8BB1B2B18CA7900BEB53B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
