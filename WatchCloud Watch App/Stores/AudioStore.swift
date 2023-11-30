@@ -467,10 +467,11 @@ extension AudioStore: URLSessionDownloadDelegate {
         didFinishDownloadingTo tempLocation: URL
     ) {
         guard let downloadedTrack = getTrack(from: downloadTask) else {
+            Logger.audioStore.error("Failed to find track in request header or downloadsInProgress after download complete")
             return
         }
         defer { // Always perform these actions regardless of download failing
-            // Should this be done after or being updating downloadedTracks?
+            // Should this be done after or before updating downloadedTracks?
             downloadTasks.removeValue(forKey: downloadedTrack)
             downloadsInProgress.removeValue(forKey: downloadedTrack)
         }
@@ -513,7 +514,6 @@ extension AudioStore: URLSessionDownloadDelegate {
             let trackId = Int(task.originalRequest?.value(forHTTPHeaderField: "track_id") ?? ""),
             let track = downloadsInProgress.keys.first(where: { $0.id == trackId })
         else {
-            Logger.audioStore.error("Failed to find track in request header or downloadsInProgress")
             return nil
         }
         return track
