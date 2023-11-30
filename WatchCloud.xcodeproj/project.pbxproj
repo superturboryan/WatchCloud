@@ -91,6 +91,7 @@
 		94D4951D2B0F74720013A2D9 /* ImagePipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D4951C2B0F74720013A2D9 /* ImagePipeline.swift */; };
 		94D4951F2B1212280013A2D9 /* ShortAndLongTapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D4951E2B1212280013A2D9 /* ShortAndLongTapButton.swift */; };
 		94D495212B1396D00013A2D9 /* PathMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D495202B1396D00013A2D9 /* PathMonitor.swift */; };
+		94EE88962B18E12E00486B15 /* WCSessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE88952B18E12E00486B15 /* WCSessionHandler.swift */; };
 		94FAA18A2ACB319600EF97CE /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1892ACB319600EF97CE /* UserListView.swift */; };
 		94FAA18C2ACB3B4200EF97CE /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */; };
 		94FAA1D02ACC273600EF97CE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1CF2ACC273600EF97CE /* UserView.swift */; };
@@ -262,10 +263,12 @@
 		94B8BB132B18CA7800BEB53B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		94B8BB152B18CA7900BEB53B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94B8BB182B18CA7900BEB53B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		94B8BB1D2B18D57100BEB53B /* WatchCloud-Login-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WatchCloud-Login-Info.plist"; sourceTree = SOURCE_ROOT; };
 		94BD056D2B0B964300C3DA89 /* NowPlayingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingInfo.swift; sourceTree = "<group>"; };
 		94D4951C2B0F74720013A2D9 /* ImagePipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePipeline.swift; sourceTree = "<group>"; };
 		94D4951E2B1212280013A2D9 /* ShortAndLongTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortAndLongTapButton.swift; sourceTree = "<group>"; };
 		94D495202B1396D00013A2D9 /* PathMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathMonitor.swift; sourceTree = "<group>"; };
+		94EE88952B18E12E00486B15 /* WCSessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCSessionHandler.swift; sourceTree = "<group>"; };
 		94F3FCD12AB9A3B5005D03DF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		94F3FCD22AB9A3B5005D03DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		94FAA1892ACB319600EF97CE /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
@@ -622,8 +625,10 @@
 		94B8BB102B18CA7800BEB53B /* WatchCloud Login */ = {
 			isa = PBXGroup;
 			children = (
+				94B8BB1D2B18D57100BEB53B /* WatchCloud-Login-Info.plist */,
 				94B8BB112B18CA7800BEB53B /* WatchCloud_LoginApp.swift */,
 				94B8BB132B18CA7800BEB53B /* ContentView.swift */,
+				94EE88952B18E12E00486B15 /* WCSessionHandler.swift */,
 				94B8BB152B18CA7900BEB53B /* Assets.xcassets */,
 				94B8BB172B18CA7900BEB53B /* Preview Content */,
 			);
@@ -955,6 +960,7 @@
 			files = (
 				94B8BB142B18CA7800BEB53B /* ContentView.swift in Sources */,
 				94B8BB122B18CA7800BEB53B /* WatchCloud_LoginApp.swift in Sources */,
+				94EE88962B18E12E00486B15 /* WCSessionHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1161,7 +1167,8 @@
 				INFOPLIST_FILE = "WatchCloud Watch App/Config/WatchCloud-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = WatchCloud;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKWatchOnly = YES;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.RyanDF.WatchCloud;
+				INFOPLIST_KEY_WKWatchOnly = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1193,7 +1200,8 @@
 				INFOPLIST_FILE = "WatchCloud Watch App/Config/WatchCloud-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = WatchCloud;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKWatchOnly = YES;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.RyanDF.WatchCloud;
+				INFOPLIST_KEY_WKWatchOnly = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1328,6 +1336,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WatchCloud-Login-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1340,7 +1349,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "RyanDF.WatchCloud-Login";
+				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
@@ -1364,6 +1373,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WatchCloud-Login-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1376,7 +1386,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "RyanDF.WatchCloud-Login";
+				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;

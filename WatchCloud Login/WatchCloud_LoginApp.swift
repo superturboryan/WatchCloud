@@ -9,6 +9,11 @@ import SwiftUI
 
 @main
 struct WatchCloud_LoginApp: App {
+    
+    init() {
+        _ = WCSessionHandler.shared
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

@@ -12,7 +12,7 @@
 		<key>WatchCloud Login.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>2</integer>
 		</dict>
 		<key>WatchCloud Watch App.xcscheme_^#shared#^_</key>
 		<dict>
@@ -33,6 +33,11 @@
 			<true/>
 		</dict>
 		<key>946F38E52AB08470008CE9D1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>94B8BB0E2B18CA7800BEB53B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
