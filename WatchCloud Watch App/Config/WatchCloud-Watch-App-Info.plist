@@ -52,5 +52,7 @@
 	<array>
 		<string>audio</string>
 	</array>
+	<key>WKPrefersNetworkUponForeground</key>
+	<true/>
 </dict>
 </plist>
