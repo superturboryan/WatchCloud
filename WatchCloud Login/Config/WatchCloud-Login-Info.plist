@@ -4,5 +4,18 @@
 <dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>SC_CLIENT_ID</key>
+	<string>$(SC_CLIENT_ID)</string>
+	<key>SC_CLIENT_SECRET</key>
+	<string>$(SC_CLIENT_SECRET)</string>
+	<key>SC_REDIRECT_URI</key>
+	<string>$(SC_REDIRECT_URI)</string>
+	<key>MP_PROJECT_TOKEN</key>
+	<string>$(MP_PROJECT_TOKEN)</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
