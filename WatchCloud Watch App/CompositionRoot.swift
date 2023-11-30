@@ -5,6 +5,7 @@
 //  Created by Ryan Forsyth on 2023-09-14.
 //
 
+import Foundation
 import SoundCloud
 
 /// Simplified dependency injection container
@@ -23,7 +24,11 @@ enum CompositionRoot {
     static let searchStore = SearchStore(sc)
     
     // Services
-    private static let sc = SoundCloud(config)
+    private static let sc: SoundCloud = {
+        let sc = SoundCloud(config)
+        sc.listenForNewAuthTokensNotification()
+        return sc
+    }()
     
     // Config
     private static let config = SoundCloud.Config(
@@ -32,4 +37,12 @@ enum CompositionRoot {
         clientSecret: Config.clientSecret,
         redirectURI: Config.redirectURI
     )
+}
+
+extension SoundCloud {
+    func listenForNewAuthTokensNotification() {
+        NotificationCenter.default.publisher(for: .newAuthTokens).sink { [weak self] notification in
+            self?.handleNewAuthTokensNotification(notification)
+        }.store(in: &subscriptions)
+    }
 }

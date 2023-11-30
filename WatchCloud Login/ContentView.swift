@@ -11,7 +11,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Button(action: {
-                WCSessionHandler.shared.sendMessage()
+                WCPhoneSessionHandler.shared.sendMessage()
             }, label: {
                 Text("Send message to watch")
             })

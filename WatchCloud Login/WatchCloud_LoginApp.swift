@@ -11,7 +11,7 @@ import SwiftUI
 struct WatchCloud_LoginApp: App {
     
     init() {
-        _ = WCSessionHandler.shared
+        _ = WCPhoneSessionHandler.shared
     }
     
     var body: some Scene {

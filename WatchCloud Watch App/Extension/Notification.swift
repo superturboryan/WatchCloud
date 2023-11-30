@@ -15,4 +15,7 @@ extension Notification.Name {
     // RootView
     static let switchToPlayerTab = Notification.Name("switchToPlayerTab")
     static let performLogout = Notification.Name("performLogout")
+    
+    // SoundCloud
+    static let newAuthTokens = Notification.Name("newAuthTokens")
 }

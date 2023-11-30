@@ -91,9 +91,10 @@
 		94D4951D2B0F74720013A2D9 /* ImagePipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D4951C2B0F74720013A2D9 /* ImagePipeline.swift */; };
 		94D4951F2B1212280013A2D9 /* ShortAndLongTapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D4951E2B1212280013A2D9 /* ShortAndLongTapButton.swift */; };
 		94D495212B1396D00013A2D9 /* PathMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D495202B1396D00013A2D9 /* PathMonitor.swift */; };
-		94EE88962B18E12E00486B15 /* WCSessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE88952B18E12E00486B15 /* WCSessionHandler.swift */; };
-		94EE88982B18E72900486B15 /* WCSessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE88972B18E72900486B15 /* WCSessionHandler.swift */; };
+		94EE88962B18E12E00486B15 /* WCPhoneSessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE88952B18E12E00486B15 /* WCPhoneSessionHandler.swift */; };
+		94EE88982B18E72900486B15 /* WCWatchSessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE88972B18E72900486B15 /* WCWatchSessionHandler.swift */; };
 		94EE889D2B18EADC00486B15 /* WatchCloud Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		94EE88A22B18F00E00486B15 /* SoundCloud in Frameworks */ = {isa = PBXBuildFile; productRef = 94EE88A12B18F00E00486B15 /* SoundCloud */; };
 		94FAA18A2ACB319600EF97CE /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1892ACB319600EF97CE /* UserListView.swift */; };
 		94FAA18C2ACB3B4200EF97CE /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */; };
 		94FAA1D02ACC273600EF97CE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1CF2ACC273600EF97CE /* UserView.swift */; };
@@ -288,8 +289,8 @@
 		94D4951C2B0F74720013A2D9 /* ImagePipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePipeline.swift; sourceTree = "<group>"; };
 		94D4951E2B1212280013A2D9 /* ShortAndLongTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortAndLongTapButton.swift; sourceTree = "<group>"; };
 		94D495202B1396D00013A2D9 /* PathMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathMonitor.swift; sourceTree = "<group>"; };
-		94EE88952B18E12E00486B15 /* WCSessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCSessionHandler.swift; sourceTree = "<group>"; };
-		94EE88972B18E72900486B15 /* WCSessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCSessionHandler.swift; sourceTree = "<group>"; };
+		94EE88952B18E12E00486B15 /* WCPhoneSessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCPhoneSessionHandler.swift; sourceTree = "<group>"; };
+		94EE88972B18E72900486B15 /* WCWatchSessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCWatchSessionHandler.swift; sourceTree = "<group>"; };
 		94F3FCD12AB9A3B5005D03DF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		94F3FCD22AB9A3B5005D03DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		94FAA1892ACB319600EF97CE /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
@@ -330,6 +331,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94EE88A22B18F00E00486B15 /* SoundCloud in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,7 +451,7 @@
 				946F38CC2AB07F81008CE9D1 /* App.swift */,
 				946F38CB2AB07F81008CE9D1 /* AudioPlayer.swift */,
 				9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */,
-				94EE88972B18E72900486B15 /* WCSessionHandler.swift */,
+				94EE88972B18E72900486B15 /* WCWatchSessionHandler.swift */,
 				9446C5FA2ABDA57E00BCE5DF /* Localizable.xcstrings */,
 				9421D2B62AD34C0E005FE857 /* Analytics */,
 				946F38B32AB07CB1008CE9D1 /* Config */,
@@ -650,7 +652,7 @@
 				94B8BB1D2B18D57100BEB53B /* WatchCloud-Login-Info.plist */,
 				94B8BB112B18CA7800BEB53B /* WatchCloud_LoginApp.swift */,
 				94B8BB132B18CA7800BEB53B /* ContentView.swift */,
-				94EE88952B18E12E00486B15 /* WCSessionHandler.swift */,
+				94EE88952B18E12E00486B15 /* WCPhoneSessionHandler.swift */,
 				94B8BB152B18CA7900BEB53B /* Assets.xcassets */,
 				94B8BB172B18CA7900BEB53B /* Preview Content */,
 			);
@@ -774,6 +776,9 @@
 				94EE889F2B18EADC00486B15 /* PBXTargetDependency */,
 			);
 			name = "WatchCloud Login";
+			packageProductDependencies = (
+				94EE88A12B18F00E00486B15 /* SoundCloud */,
+			);
 			productName = "WatchCloud Login";
 			productReference = 94B8BB0F2B18CA7800BEB53B /* WatchCloud Login.app */;
 			productType = "com.apple.product-type.application";
@@ -929,7 +934,7 @@
 				9421D2BC2AD34E88005FE857 /* AnalyticsEvent.swift in Sources */,
 				9488EE6E2AE40EA80009EC54 /* QRCodeImageView.swift in Sources */,
 				9421D2BA2AD34CC9005FE857 /* MixpanelAnalyticsService.swift in Sources */,
-				94EE88982B18E72900486B15 /* WCSessionHandler.swift in Sources */,
+				94EE88982B18E72900486B15 /* WCWatchSessionHandler.swift in Sources */,
 				94A31B352AB517410052A922 /* CaseIterable.swift in Sources */,
 				9421D2A92ACF5B59005FE857 /* PlaylistCellView.swift in Sources */,
 				946F38DD2AB07F81008CE9D1 /* RootView.swift in Sources */,
@@ -985,7 +990,7 @@
 			files = (
 				94B8BB142B18CA7800BEB53B /* ContentView.swift in Sources */,
 				94B8BB122B18CA7800BEB53B /* WatchCloud_LoginApp.swift in Sources */,
-				94EE88962B18E12E00486B15 /* WCSessionHandler.swift in Sources */,
+				94EE88962B18E12E00486B15 /* WCPhoneSessionHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1536,6 +1541,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 94C1699E2AB474EE00570B4F /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = NukeUI;
+		};
+		94EE88A12B18F00E00486B15 /* SoundCloud */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SoundCloud;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
