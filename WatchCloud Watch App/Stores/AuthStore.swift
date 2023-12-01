@@ -11,7 +11,7 @@ import SoundCloud
 final class AuthStore: ObservableObject {
     
     /// Initial state is `true` to prevent `LoginView` from appearing on every app launch
-    @Published public private(set) var isLoggedIn: Bool = true
+    @Published public var isLoggedIn: Bool = true
     
     private let service: AuthService
     
