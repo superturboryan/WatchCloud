@@ -54,7 +54,10 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
             return
         }
         let message = ["\(TokenResponse.self)" : encodedTokens]
-        session.sendMessage(message, replyHandler: nil)
-//        transfer = session.transferUserInfo(message) // Doesn't work on simulator
+        do {
+            try session.updateApplicationContext(message)
+        } catch {
+            Logger.wcPhoneSessionHandler.error("Failed to TokenResponse to watch")
+        }
     }
 }
