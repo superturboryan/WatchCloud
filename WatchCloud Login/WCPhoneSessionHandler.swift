@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OSLog
 import SoundCloud
 import WatchConnectivity
 
@@ -15,12 +16,25 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
     private let session = WCSession.default
     private let encoder = JSONEncoder()
     
+    private var transfer: WCSessionUserInfoTransfer?
+    
     override init() {
         super.init()
-        if WCSession.isSupported() {
-            session.delegate = self
-            session.activate()
+        setupSession()
+        observeTransfer()
+    }
+    
+    private func setupSession() {
+        guard WCSession.isSupported() else {
+            Logger.wcPhoneSessionHandler.critical("WCSession is not supported")
+            return
         }
+        session.delegate = self
+        session.activate()
+    }
+    
+    private func observeTransfer() {
+        
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
@@ -41,5 +55,6 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
         }
         let message = ["\(TokenResponse.self)" : encodedTokens]
         session.sendMessage(message, replyHandler: nil)
+//        transfer = session.transferUserInfo(message) // Doesn't work on simulator
     }
 }

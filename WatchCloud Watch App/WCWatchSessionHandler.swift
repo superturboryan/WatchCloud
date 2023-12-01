@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OSLog
 import SoundCloud
 import WatchConnectivity
 
@@ -16,8 +17,13 @@ class WCWatchSessionHandler: NSObject, WCSessionDelegate {
     
     override init() {
         super.init()
-        if !WCSession.isSupported() {
-            fatalError()
+        setupSession()
+    }
+    
+    private func setupSession() {
+        guard WCSession.isSupported() else {
+            Logger.wcWatchSessionHandler.critical("WCSession is not supported")
+            return
         }
         session.delegate = self
         session.activate()
@@ -32,6 +38,14 @@ class WCWatchSessionHandler: NSObject, WCSessionDelegate {
             NotificationCenter.default.post(name: .newAuthTokens, object: tokenData)
         } else {
             print("Received unexpected message from iOS app: \(message)")
+        }
+    }
+    
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any] = [:]) {
+        if let tokenData = userInfo["\(TokenResponse.self)"] as? Data {
+            NotificationCenter.default.post(name: .newAuthTokens, object: tokenData)
+        } else {
+            print("Received unexpected dictionary from iOS app: \(userInfo)")
         }
     }
 }

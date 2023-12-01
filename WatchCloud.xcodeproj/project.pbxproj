@@ -100,6 +100,7 @@
 		94EE88BF2B190FCC00486B15 /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE682AE3E2380009EC54 /* AuthStore.swift */; };
 		94EE88C02B190FE200486B15 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE6B2AE3E5D00009EC54 /* LoginService.swift */; };
 		94EE88C12B190FF800486B15 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38BA2AB07F81008CE9D1 /* Config.swift */; };
+		94EE88C42B195A7000486B15 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE88C32B195A7000486B15 /* Logger.swift */; };
 		94FAA18A2ACB319600EF97CE /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1892ACB319600EF97CE /* UserListView.swift */; };
 		94FAA18C2ACB3B4200EF97CE /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */; };
 		94FAA1D02ACC273600EF97CE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1CF2ACC273600EF97CE /* UserView.swift */; };
@@ -297,6 +298,7 @@
 		94EE88972B18E72900486B15 /* WCWatchSessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCWatchSessionHandler.swift; sourceTree = "<group>"; };
 		94EE88A32B19018E00486B15 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		94EE88B82B190CFA00486B15 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		94EE88C32B195A7000486B15 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		94F3FCD12AB9A3B5005D03DF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		94F3FCD22AB9A3B5005D03DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		94FAA1892ACB319600EF97CE /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
@@ -660,6 +662,7 @@
 				94EE88952B18E12E00486B15 /* WCPhoneSessionHandler.swift */,
 				94EE88A32B19018E00486B15 /* Localizable.xcstrings */,
 				94EE88A52B19035F00486B15 /* Config */,
+				94EE88C22B195A5300486B15 /* Extension */,
 			);
 			path = "WatchCloud Login";
 			sourceTree = "<group>";
@@ -680,6 +683,14 @@
 				94B8BB1D2B18D57100BEB53B /* WatchCloud-Login-Info.plist */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		94EE88C22B195A5300486B15 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				94EE88C32B195A7000486B15 /* Logger.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		94F3FCD02AB9A3B5005D03DF /* Screenshots */ = {
@@ -1009,6 +1020,7 @@
 				94EE88BF2B190FCC00486B15 /* AuthStore.swift in Sources */,
 				94EE88C02B190FE200486B15 /* LoginService.swift in Sources */,
 				94B8BB122B18CA7800BEB53B /* App.swift in Sources */,
+				94EE88C42B195A7000486B15 /* Logger.swift in Sources */,
 				94EE88962B18E12E00486B15 /* WCPhoneSessionHandler.swift in Sources */,
 				94EE88C12B190FF800486B15 /* Config.swift in Sources */,
 			);
