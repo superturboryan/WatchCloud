@@ -24,7 +24,7 @@ enum CompositionRoot {
     static let searchStore = SearchStore(sc)
     
     // Services
-    private static let sc: SoundCloud = {
+    static let sc: SoundCloud = {
         let sc = SoundCloud(config)
         sc.listenForNewAuthTokensNotification()
         return sc

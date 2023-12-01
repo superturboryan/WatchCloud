@@ -23,27 +23,22 @@ struct RootView: View {
         .task {
             authStore.logout()
         }
-        .onChange(of: authStore.isLoggedIn) { isLoggedIn in
-            if isLoggedIn, let tokens = authStore.tokens {
-                WCPhoneSessionHandler.shared.send(tokens)
-            }
-        }
     }
     
     private var loginView: some View {
         VStack {
             Button {
-                performLogin()
+                performLoginAndSendTokens()
             } label: {
                 Text("Login")
             }
-
         }
     }
     
-    func performLogin() {
+    func performLoginAndSendTokens() {
         Task {
-            try await authStore.login()
+            let tokens = try await authStore.login()
+            WCPhoneSessionHandler.shared.send(tokens)
         }
     }
     

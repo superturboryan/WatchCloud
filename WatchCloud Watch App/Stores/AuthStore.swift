@@ -22,15 +22,13 @@ final class AuthStore: ObservableObject {
 
 extension AuthStore {
     
-    var tokens: TokenResponse? {
-        service.tokens
-    }
-
+    @discardableResult
     @MainActor
-    func login() async throws {
+    func login() async throws -> TokenResponse {
         do {
-            try await service.login()
+            let tokens = try await service.login()
             isLoggedIn = true
+            return tokens
         } catch SoundCloud.Error.cancelledLogin {
             isLoggedIn = false
             throw Error.cancelledLogin
