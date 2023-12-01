@@ -42,6 +42,14 @@ struct RootView: View {
         .onReceive(NotificationCenter.default.publisher(for: .performLogout)) { _ in
             performLogout()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .reloadRootTabView)) { _ in
+            guard !authStore.isLoggedIn else {
+                Logger.rootView.warning("Received notification to reload RootView but already logged in")
+                return
+            }
+            isLoaded = false
+            authStore.isLoggedIn = true // Crude way to hide login 👀
+        }
     }
     
     private var rootTabView: some View {
