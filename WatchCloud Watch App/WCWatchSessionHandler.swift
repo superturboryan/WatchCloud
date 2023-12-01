@@ -48,5 +48,13 @@ class WCWatchSessionHandler: NSObject, WCSessionDelegate {
             print("Received unexpected dictionary from iOS app: \(userInfo)")
         }
     }
+    
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+        if let tokenData = applicationContext["\(TokenResponse.self)"] as? Data {
+            NotificationCenter.default.post(name: .newAuthTokens, object: tokenData)
+        } else {
+            print("Received unexpected applicationContext from iOS app: \(applicationContext)")
+        }
+    }
 }
 
