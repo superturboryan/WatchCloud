@@ -43,6 +43,9 @@ extension SoundCloud {
     func listenForNewAuthTokensNotification() {
         NotificationCenter.default.publisher(for: .newAuthTokens).sink { [weak self] notification in
             self?.handleNewAuthTokensNotification(notification)
-        }.store(in: &subscriptions)
+            Task { await MainActor.run {
+                NotificationCenter.default.post(name: .reloadRootTabView, object: nil)
+            }}
+        }.store(in: &self.subscriptions)
     }
 }
