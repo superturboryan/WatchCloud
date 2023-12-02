@@ -7,16 +7,9 @@
 
 import SwiftUI
 
-struct HelpItem: Hashable {
-    let title: String
-    let text: [String]
-}
-
 struct HelpView: View {
-    @State var helpItems: [HelpItem] = [
-        HelpItem(title: "Can I delete this app?", text: ["Yes!"]),
-        HelpItem(title: "What does it do?", text: ["Yes!", "Yes!", "Yes!"]),
-    ]
+    
+    @State var helpItems = HelpItem.all
     
     var body: some View {
         NavigationView {
@@ -38,20 +31,14 @@ struct HelpView: View {
     }
 }
 
-struct ExpandableSection<Content: View, Header: View>: View {
+struct HelpItem: Hashable {
+    let title: String
+    let text: [String]
     
-    @State var isExpanded = false
-    
-    let content: () -> Content
-    let header: () -> Header
-    
-    var body: some View {
-        if #available(iOS 17.0, *) {
-            Section(isExpanded: $isExpanded, content: content, header: header)
-        } else {
-            Section(content: content, header: header)
-        }
-    }
+    static let all: [HelpItem] = [
+        HelpItem(title: "Can I delete this app?", text: ["Yes!"]),
+        HelpItem(title: "What does it do?", text: ["Yes!", "Yes!", "Yes!"]),
+    ]
 }
 
 #Preview {
