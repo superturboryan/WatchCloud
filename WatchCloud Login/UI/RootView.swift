@@ -29,9 +29,8 @@ struct RootView: View {
             }
             .animation(.default, value: showSplashScreen)
             .fullWidthAndHeight()
-            .background(Color.black)
             .sheet(isPresented: $showHelpView) {
-                
+                HelpView()
             }
         }
         .task {
@@ -57,7 +56,6 @@ struct RootView: View {
             instructionsView
             Spacer()
         }
-        .padding()
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button {
@@ -79,10 +77,9 @@ struct RootView: View {
             HStack {
                 Text("WatchCloud")
                     .font(.system(.title, weight: .bold))
-                    .foregroundStyle(.white)
                 Text("Login")
                     .font(.system(.title, weight: .bold))
-                    .foregroundStyle(.white.opacity(0.8))
+                    .foregroundStyle(.primary.opacity(0.7))
             }
         }
         .matchedGeometryEffect(id: "header", in: header)
@@ -90,7 +87,7 @@ struct RootView: View {
     
     @ViewBuilder
     private var instructionsView: some View {
-        let disabledOpacity = 0.5
+        let disabledOpacity = 0.4
         
         VStack(spacing: 60) {
             
@@ -100,12 +97,12 @@ struct RootView: View {
                     .opacity(isWatchAppInstalled ? disabledOpacity : 1)
                 HStack {
                     Image(systemName: isWatchAppInstalled ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
-                        .foregroundStyle(isWatchAppInstalled ? .green : .yellow)
+                        .foregroundStyle(isWatchAppInstalled ? .green : .scOrangeLight)
                         .symbolReplaceEffect()
                     Text("Watch App\(isWatchAppInstalled ? "" : " Not") Installed")
                 }
                 .padding()
-                .background(.white.opacity(0.12))
+                .background(.primary.opacity(0.12))
                 .clipShape(RoundedRectangle(cornerRadius: 8))
             }
             .animation(.default, value: isWatchAppInstalled)
@@ -115,7 +112,7 @@ struct RootView: View {
                 Label("Connect to SoundCloud account", systemImage: "2.circle")
                     .opacity(isWatchAppInstalled && !authStore.isLoggedIn ? 1 : disabledOpacity)
                 
-                Group {
+                ZStack {
                     if authStore.isLoggedIn {
                         HStack {
                             Image(systemName: "checkmark.circle.fill")
@@ -123,17 +120,18 @@ struct RootView: View {
                             Text("Account Connected")
                         }
                         .padding()
-                        .background(.white.opacity(0.12))
+                        .background(.primary.opacity(0.12))
                         .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .zIndex(1)
                     } else {
                         LoginButton {
                             performLoginAndSendTokens()
                         }
                         .opacity(isWatchAppInstalled ? 1 : disabledOpacity)
                         .disabled(!isWatchAppInstalled)
+                        .zIndex(0)
                     }
                 }
-                .animation(.default, value: isWatchAppInstalled)
                 .animation(.default, value: authStore.isLoggedIn)
             }
             
@@ -148,7 +146,7 @@ struct RootView: View {
             .animation(.default, value: authStore.isLoggedIn)
         }
         .font(.headline)
-        .foregroundStyle(.white)
+        .fontWeight(.bold)
     }
     
     private var appIcon: some View {

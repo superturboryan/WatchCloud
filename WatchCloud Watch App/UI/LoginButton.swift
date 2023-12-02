@@ -19,16 +19,18 @@ struct LoginButton: View {
                 .minimumScaleFactor(0.7)
                 .foregroundStyle(.white)
         }
+        .buttonStyle(.plain)
         .font(.title3)
         .padding(.horizontal, 20)
         .padding(.vertical, 18)
-        .background(.white.opacity(0.12))
+        .background(Color.offBlack)
         .overlay {
             Capsule()
                 .strokeBorder(style: StrokeStyle(lineWidth: 6))
                 .foregroundStyle(LinearGradient.scOrange(.horizontal))
         }
         .clipShape(Capsule())
+        .shadow(color: .primary.opacity(0.15), radius: 4, y: 4)
     }
 }
 
@@ -36,5 +38,5 @@ struct LoginButton: View {
 #Preview(traits: .sizeThatFitsLayout) {
     LoginButton { }
         .padding()
-        .background(Color.black)
 }
+

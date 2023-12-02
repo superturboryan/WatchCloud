@@ -10,10 +10,13 @@
     "Connect to SoundCloud account" : {
 
     },
-    "Help" : {
+    "Hello, World!" : {
 
     },
     "Install WatchCloud app onto Apple Watch" : {
+
+    },
+    "Login" : {
 
     },
     "Login successful" : {
@@ -25,7 +28,7 @@
     "Watch App%@ Installed" : {
 
     },
-    "WatchCloud Login" : {
+    "WatchCloud" : {
 
     }
   },
