@@ -17,6 +17,7 @@ struct LoginButton: View {
                 .lineLimit(1)
                 .fontWeight(.semibold)
                 .minimumScaleFactor(0.7)
+                .foregroundStyle(.white)
         }
         .font(.title3)
         .padding(.horizontal, 20)
@@ -31,6 +32,9 @@ struct LoginButton: View {
     }
 }
 
-#Preview {
+@available(watchOS 10, iOS 17, *)
+#Preview(traits: .sizeThatFitsLayout) {
     LoginButton { }
+        .padding()
+        .background(Color.black)
 }

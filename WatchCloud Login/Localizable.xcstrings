@@ -1,10 +1,31 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Login" : {
+    "1) Install WatchCloud app onto Apple Watch" : {
+
+    },
+    "2) Connect to SoundCloud account" : {
+
+    },
+    "3) Open app on Apple Watch" : {
+
+    },
+    "Account Connected" : {
+
+    },
+    "Connect" : {
+      "comment" : "Verb"
+    },
+    "Help" : {
 
     },
     "Login successful" : {
+
+    },
+    "Watch App%@ Installed" : {
+
+    },
+    "WatchCloud Login" : {
 
     }
   },

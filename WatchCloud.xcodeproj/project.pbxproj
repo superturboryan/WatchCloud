@@ -432,9 +432,9 @@
 			isa = PBXGroup;
 			children = (
 				946F389A2AB079C9008CE9D1 /* WatchCloud Watch App */,
+				94B8BB102B18CA7800BEB53B /* WatchCloud Login */,
 				94B6343D2ABDFAF900E6FCDA /* Complication */,
 				94474B572AF2723E00BEA5F0 /* Unit Tests */,
-				94B8BB102B18CA7800BEB53B /* WatchCloud Login */,
 				946F38912AB079C9008CE9D1 /* Products */,
 				946F38AF2AB07A2E008CE9D1 /* Frameworks */,
 				946F38AD2AB079FE008CE9D1 /* Packages */,
@@ -1418,7 +1418,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1454,7 +1454,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

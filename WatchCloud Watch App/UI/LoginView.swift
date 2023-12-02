@@ -12,6 +12,7 @@ import TipKit
 struct LoginView: View {
 
     @EnvironmentObject var authStore: AuthStore
+    
     @State var showErrorAlert = false
     @State var showTip = false
     

@@ -15,16 +15,14 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
     
     static let shared = WCPhoneSessionHandler()
     
-    var isWatchAppInstalled = CurrentValueSubject<Bool, Never>(false)
+    var isWatchAppInstalled: AnyPublisher<Bool, Never> = CurrentValueSubject<Bool, Never>(false).eraseToAnyPublisher()
     
     private let session = WCSession.default
     private let encoder = JSONEncoder()
-    private var subscriptions = Set<AnyCancellable>()
     
     override init() {
         super.init()
         setupSession()
-        observeSessionProperties()
     }
     
     private func setupSession() {
@@ -36,14 +34,9 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
         session.activate()
     }
     
-    private func observeSessionProperties() {
-        session.publisher(for: \.isWatchAppInstalled)
-            .assign(to: \.value, on: isWatchAppInstalled)
-            .store(in: &subscriptions)
-    }
-    
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print("WCSession activated successfully? \(activationState == .activated)")
+        isWatchAppInstalled = session.publisher(for: \.isWatchAppInstalled).eraseToAnyPublisher()
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {
