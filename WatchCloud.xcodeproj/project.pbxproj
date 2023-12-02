@@ -428,6 +428,14 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		9450555D2B1B908D005B4445 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				94B8BB132B18CA7800BEB53B /* RootView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		946F38892AB079C9008CE9D1 = {
 			isa = PBXGroup;
 			children = (
@@ -663,11 +671,11 @@
 			isa = PBXGroup;
 			children = (
 				94B8BB112B18CA7800BEB53B /* App.swift */,
-				94B8BB132B18CA7800BEB53B /* RootView.swift */,
 				94EE88952B18E12E00486B15 /* WCPhoneSessionHandler.swift */,
 				94EE88A32B19018E00486B15 /* Localizable.xcstrings */,
 				94EE88A52B19035F00486B15 /* Config */,
 				94EE88C22B195A5300486B15 /* Extension */,
+				9450555D2B1B908D005B4445 /* UI */,
 			);
 			path = "WatchCloud Login";
 			sourceTree = "<group>";

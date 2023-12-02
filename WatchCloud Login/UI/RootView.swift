@@ -13,30 +13,22 @@ struct RootView: View {
     @EnvironmentObject var authStore: AuthStore
     
     @State var isWatchAppInstalled = false
+    @State var showSplashScreen = true
         
+    @Namespace var header
+    
     var body: some View {
         NavigationView {
-            VStack {
-                appIcon
-                    .frame(width: 100, height: 100)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                Text("WatchCloud Login")
-                    .font(.system(.title, weight: .bold))
-                    .foregroundStyle(.white)
-                Spacer()
-                instructionsView
-                Spacer()
-            }
-            .padding()
-            .fullWidthAndHeight()
-            .background(Color.black)
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button { } label: {
-                        Image(systemName: "questionmark.circle")
-                    }
+            ZStack {
+                if showSplashScreen {
+                    splashScreen.zIndex(1)
+                } else {
+                    rootView.zIndex(0)
                 }
             }
+            .fullWidthAndHeight()
+            .background(Color.black)
+            .animation(.default, value: showSplashScreen)
         }
         .task {
             authStore.logout()
@@ -46,6 +38,43 @@ struct RootView: View {
         }
     }
     
+    private var splashScreen: some View {
+        headerView
+            
+            .task {
+                try? await Task.sleep(for: .seconds(0.75))
+                showSplashScreen = false
+            }
+    }
+    
+    private var rootView: some View {
+        VStack {
+            headerView
+            Spacer()
+            instructionsView
+            Spacer()
+        }
+        .padding()
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                Button { } label: {
+                    Image(systemName: "questionmark.circle")
+                }
+            }
+        }
+    }
+    
+    private var headerView: some View {
+        VStack {
+            appIcon
+                .frame(width: 100, height: 100)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+            Text("WatchCloud Login")
+                .font(.system(.title, weight: .bold))
+                .foregroundStyle(.white)
+        }
+        .matchedGeometryEffect(id: "header", in: header)
+    }
     
     private var instructionsView: some View {
         VStack(spacing: 60) {
