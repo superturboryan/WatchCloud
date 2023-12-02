@@ -58,6 +58,7 @@ struct RootView: View {
             ToolbarItem(placement: .confirmationAction) {
                 Button { } label: {
                     Image(systemName: "questionmark.circle")
+                        .fontWeight(.bold)
                 }
             }
         }
@@ -68,25 +69,34 @@ struct RootView: View {
             appIcon
                 .frame(width: 100, height: 100)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
-            Text("WatchCloud Login")
-                .font(.system(.title, weight: .bold))
-                .foregroundStyle(.white)
+            
+            HStack {
+                Text("WatchCloud")
+                    .font(.system(.title, weight: .bold))
+                    .foregroundStyle(.white)
+                Text("Login")
+                    .font(.system(.title, weight: .bold))
+                    .foregroundStyle(.white.opacity(0.8))
+            }
         }
         .matchedGeometryEffect(id: "header", in: header)
     }
     
+    @ViewBuilder
     private var instructionsView: some View {
+        let disabledOpacity = 0.5
+        
         VStack(spacing: 60) {
             
+            // 1
             VStack(spacing: 16) {
                 Label("Install WatchCloud app onto Apple Watch", systemImage: "1.circle")
-                    .font(.headline)
-                    .opacity(isWatchAppInstalled ? 0.7 : 1)
+                    .opacity(isWatchAppInstalled ? disabledOpacity : 1)
                 HStack {
                     Image(systemName: isWatchAppInstalled ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
                         .foregroundStyle(isWatchAppInstalled ? .green : .yellow)
+                        .symbolReplaceEffect()
                     Text("Watch App\(isWatchAppInstalled ? "" : " Not") Installed")
-                        .fontWeight(.semibold)
                 }
                 .padding()
                 .background(.white.opacity(0.12))
@@ -94,11 +104,10 @@ struct RootView: View {
             }
             .animation(.default, value: isWatchAppInstalled)
             
+            // 2
             VStack(spacing: 16) {
-                
                 Label("Connect to SoundCloud account", systemImage: "2.circle")
-                    .font(.headline)
-                    .opacity(isWatchAppInstalled && !authStore.isLoggedIn ? 1 : 0.7)
+                    .opacity(isWatchAppInstalled && !authStore.isLoggedIn ? 1 : disabledOpacity)
                 
                 Group {
                     if authStore.isLoggedIn {
@@ -107,7 +116,6 @@ struct RootView: View {
                                 .foregroundStyle(.green)
                             Text("Account Connected")
                         }
-                        .fontWeight(.semibold)
                         .padding()
                         .background(.white.opacity(0.12))
                         .clipShape(RoundedRectangle(cornerRadius: 8))
@@ -115,7 +123,7 @@ struct RootView: View {
                         LoginButton {
                             performLoginAndSendTokens()
                         }
-                        .opacity(isWatchAppInstalled ? 1 : 0.5)
+                        .opacity(isWatchAppInstalled ? 1 : disabledOpacity)
                         .disabled(!isWatchAppInstalled)
                     }
                 }
@@ -123,24 +131,18 @@ struct RootView: View {
                 .animation(.default, value: authStore.isLoggedIn)
             }
             
+            // 3
             VStack(spacing: 16) {
                 Label("Open app on Apple Watch", systemImage: "3.circle")
-                    .font(.headline)
-                    .opacity(authStore.isLoggedIn ? 1 : 0.7)
-                
-                openWatchAppPrompt
-                    .opacity(authStore.isLoggedIn ? 1 : 0.7)
+                appIcon
+                    .frame(width: 50, height: 50)
+                    .clipShape(Circle())
             }
+            .opacity(authStore.isLoggedIn ? 1 : disabledOpacity)
             .animation(.default, value: authStore.isLoggedIn)
         }
+        .font(.headline)
         .foregroundStyle(.white)
-    }
-    
-    private var openWatchAppPrompt: some View {
-        appIcon
-            .frame(width: 50, height: 50)
-            .clipShape(Circle())
-            .zIndex(1)
     }
     
     private var appIcon: some View {
