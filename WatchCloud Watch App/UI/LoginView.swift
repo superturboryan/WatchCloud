@@ -13,7 +13,7 @@ struct LoginView: View {
 
     @EnvironmentObject var authStore: AuthStore
     @State var showErrorAlert = false
-    @State var showingTip = false
+    @State var showTip = false
     
     @available(watchOS 10, *)
     @Parameter static var hasTriedToLoginAndCancelled: Bool = false
@@ -26,10 +26,10 @@ struct LoginView: View {
         .fullWidthAndHeight()
         .background(.black)
         .overlay(alignment: .bottom) {
-            if !showingTip {
+            if !showTip {
                 PoweredBySCView()
                     .padding(.bottom, 8)
-                    .animation(.default, value: showingTip)
+                    .animation(.default, value: showTip)
             }
         }.alert(
             "Failed to connect to SoundCloud, \nplease try again",
@@ -44,50 +44,31 @@ struct LoginView: View {
     }
     
     private var loginButton: some View {
-        Button { tappedLogin() } label: {
-            Label(String(localized: "Connect", comment: "Verb"), systemImage: "cloud.fill")
-                .lineLimit(1)
-                .fontWeight(.semibold)
-                .minimumScaleFactor(0.7)
-        }
-        .font(.title3)
-        .padding(.horizontal, 20)
-        .padding(.vertical, 18)
-        .background(.white.opacity(0.12))
-        .overlay {
-            Capsule()
-                .strokeBorder(style: StrokeStyle(lineWidth: 6))
-                .foregroundStyle(LinearGradient.scOrange(.horizontal))
-        }
-        .clipShape(Capsule())
-    }
-    
-    private func tappedLogin() {
-        Task {
-            do {
-                try await authStore.login()
-                AnalyticsManager.shared.log(.loginSuccess)
-            } catch(AuthStore.Error.cancelledLogin) {
-                AnalyticsManager.shared.log(.loginCancelled)
-                if #available(watchOS 10, *) {
-                    LoginView.hasTriedToLoginAndCancelled = true
-                    Haptics.notification()
+        LoginButton {
+            Task {
+                do {
+                    try await authStore.login()
+                    AnalyticsManager.shared.log(.loginSuccess)
+                } catch(AuthStore.Error.cancelledLogin) {
+                    AnalyticsManager.shared.log(.loginCancelled)
+                    if #available(watchOS 10, *) {
+                        LoginView.hasTriedToLoginAndCancelled = true
+                        Haptics.notification()
+                    }
+                } catch {
+                    showErrorAlert = true
+                    AnalyticsManager.shared.log(.loginFailure)
                 }
-            } catch {
-                showErrorAlert = true
-                AnalyticsManager.shared.log(.loginFailure)
             }
         }
     }
-    
+
     @ViewBuilder
     private var captchaNotAppearingTip: some View {
         if #available(watchOS 10, *) {
             TipView(CaptchaNotAppearingTip(), arrowEdge: .bottom)
-            .onVisibilityChange {
-                showingTip = $0
-            }
-            .animation(.default, value: showingTip)
+            .onVisibilityChange { showTip = $0 }
+            .animation(.default, value: showTip)
         } else {
             EmptyView()
         }

@@ -58,8 +58,8 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
         guard let encodedTokens = try? encoder.encode(authTokens) else {
             return
         }
-        let message = ["\(TokenResponse.self)" : encodedTokens]
         do {
+            let message = ["\(TokenResponse.self)" : encodedTokens]
             try session.updateApplicationContext(message)
         } catch {
             Logger.wcPhoneSessionHandler.error("Failed to TokenResponse to watch")

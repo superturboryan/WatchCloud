@@ -27,7 +27,7 @@ extension View {
 
     @ViewBuilder
     func symbolReplaceEffect(_ speed: Double = 1.0) -> some View {
-        if #available(watchOS 10.0, *) {
+        if #available(watchOS 10.0, iOS 17.0, *) {
             self.contentTransition(.symbolEffect(.replace, options: .speed(speed)))
         } else {
             self

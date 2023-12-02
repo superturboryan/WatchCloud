@@ -101,6 +101,9 @@
 		94EE88C02B190FE200486B15 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE6B2AE3E5D00009EC54 /* LoginService.swift */; };
 		94EE88C12B190FF800486B15 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38BA2AB07F81008CE9D1 /* Config.swift */; };
 		94EE88C42B195A7000486B15 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE88C32B195A7000486B15 /* Logger.swift */; };
+		94EE88C52B1B3F3200486B15 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38B72AB07F81008CE9D1 /* View.swift */; };
+		94EE88C72B1B3FFF00486B15 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE88C62B1B3FFF00486B15 /* LoginButton.swift */; };
+		94EE88C82B1B3FFF00486B15 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE88C62B1B3FFF00486B15 /* LoginButton.swift */; };
 		94FAA18A2ACB319600EF97CE /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1892ACB319600EF97CE /* UserListView.swift */; };
 		94FAA18C2ACB3B4200EF97CE /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */; };
 		94FAA1D02ACC273600EF97CE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1CF2ACC273600EF97CE /* UserView.swift */; };
@@ -299,6 +302,7 @@
 		94EE88A32B19018E00486B15 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		94EE88B82B190CFA00486B15 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		94EE88C32B195A7000486B15 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		94EE88C62B1B3FFF00486B15 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		94F3FCD12AB9A3B5005D03DF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		94F3FCD22AB9A3B5005D03DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		94FAA1892ACB319600EF97CE /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
@@ -546,6 +550,7 @@
 				946F38C22AB07F81008CE9D1 /* CurrentUserView.swift */,
 				946F38C12AB07F81008CE9D1 /* DownloadsView.swift */,
 				946F38C92AB07F81008CE9D1 /* LibraryView.swift */,
+				94EE88C62B1B3FFF00486B15 /* LoginButton.swift */,
 				946F38C62AB07F81008CE9D1 /* LoginView.swift */,
 				941A00EA2AC304B6000F4693 /* NewPlayerView.swift */,
 				946F38C32AB07F81008CE9D1 /* PlayerOptionsView.swift */,
@@ -561,8 +566,8 @@
 				946F38C52AB07F81008CE9D1 /* SettingsView.swift */,
 				946F38C72AB07F81008CE9D1 /* TrackCellView.swift */,
 				94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */,
-				94FAA1CF2ACC273600EF97CE /* UserView.swift */,
 				94FAA1892ACB319600EF97CE /* UserListView.swift */,
+				94FAA1CF2ACC273600EF97CE /* UserView.swift */,
 				9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */,
 			);
 			path = UI;
@@ -976,6 +981,7 @@
 				9488EE672AE33C260009EC54 /* Logger.swift in Sources */,
 				946F38DF2AB07F81008CE9D1 /* PlayerView.swift in Sources */,
 				9448FF4D2AB343D7003D63F1 /* WatchKit.swift in Sources */,
+				94EE88C72B1B3FFF00486B15 /* LoginButton.swift in Sources */,
 				946F38D22AB07F81008CE9D1 /* Haptics.swift in Sources */,
 				946F38D82AB07F81008CE9D1 /* PlayerOptionsView.swift in Sources */,
 				9421D2BE2AD34FFC005FE857 /* AnalyticsManager.swift in Sources */,
@@ -1016,6 +1022,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94EE88C52B1B3F3200486B15 /* View.swift in Sources */,
+				94EE88C82B1B3FFF00486B15 /* LoginButton.swift in Sources */,
 				94B8BB142B18CA7800BEB53B /* RootView.swift in Sources */,
 				94EE88BF2B190FCC00486B15 /* AuthStore.swift in Sources */,
 				94EE88C02B190FE200486B15 /* LoginService.swift in Sources */,

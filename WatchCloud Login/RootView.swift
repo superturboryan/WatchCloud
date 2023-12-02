@@ -20,6 +20,8 @@ struct RootView: View {
                 loginView
             }
         }
+        .fullWidthAndHeight()
+        .background(Color.black)
         .task {
             authStore.logout()
         }
@@ -50,6 +52,5 @@ struct RootView: View {
 }
 
 #Preview {
-    RootView()
-        .environmentObject(AuthStore(testSC))
+    RootView().environmentObject(AuthStore(testSC))
 }
