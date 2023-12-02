@@ -29,29 +29,20 @@ class WCWatchSessionHandler: NSObject, WCSessionDelegate {
         session.activate()
     }
     
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    func session(
+        _ session: WCSession,
+        activationDidCompleteWith activationState: WCSessionActivationState,
+        error: Error?
+    ) {
         print("WCSession activated successfully? \(activationState == .activated)")
     }
-    
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        if let tokenData = message["\(TokenResponse.self)"] as? Data {
-            NotificationCenter.default.post(name: .newAuthTokens, object: tokenData)
-        } else {
-            print("Received unexpected message from iOS app: \(message)")
-        }
-    }
-    
-    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any] = [:]) {
-        if let tokenData = userInfo["\(TokenResponse.self)"] as? Data {
-            NotificationCenter.default.post(name: .newAuthTokens, object: tokenData)
-        } else {
-            print("Received unexpected dictionary from iOS app: \(userInfo)")
-        }
-    }
-    
-    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+        
+    func session(
+        _ session: WCSession,
+        didReceiveApplicationContext applicationContext: [String : Any]
+    ) {
         if let tokenData = applicationContext["\(TokenResponse.self)"] as? Data {
-            NotificationCenter.default.post(name: .newAuthTokens, object: tokenData)
+            NotificationCenter.default.post(name: .didReceiveAuthTokensFromPhone, object: tokenData)
         } else {
             print("Received unexpected applicationContext from iOS app: \(applicationContext)")
         }

@@ -18,5 +18,13 @@ extension Notification.Name {
     static let switchToPlayerTab = Notification.Name("switchToPlayerTab")
     
     // SoundCloud
-    static let newAuthTokens = Notification.Name("newAuthTokens")
+    static let didReceiveAuthTokensFromPhone = Notification.Name("didReceiveAuthTokensFromPhone")
+}
+
+extension NotificationCenter {
+    func postUsingMainActor(_ aName: NSNotification.Name, _ anObject: Any? = nil) {
+        Task { await MainActor.run{
+            post(name: aName, object: anObject)
+        }}
+    }
 }

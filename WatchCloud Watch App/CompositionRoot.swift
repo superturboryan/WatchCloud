@@ -41,11 +41,9 @@ enum CompositionRoot {
 
 extension SoundCloud {
     func listenForNewAuthTokensNotification() {
-        NotificationCenter.default.publisher(for: .newAuthTokens).sink { [weak self] notification in
+        NotificationCenter.default.publisher(for: .didReceiveAuthTokensFromPhone).sink { [weak self] notification in
             self?.handleNewAuthTokensNotification(notification)
-            Task { await MainActor.run {
-                NotificationCenter.default.post(name: .reloadRootTabView, object: nil)
-            }}
+            NotificationCenter.default.postUsingMainActor(.reloadRootTabView)
         }.store(in: &self.subscriptions)
     }
 }
