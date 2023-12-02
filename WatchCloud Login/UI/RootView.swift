@@ -26,9 +26,9 @@ struct RootView: View {
                     rootView.zIndex(0)
                 }
             }
+            .animation(.default, value: showSplashScreen)
             .fullWidthAndHeight()
             .background(Color.black)
-            .animation(.default, value: showSplashScreen)
         }
         .task {
             authStore.logout()
@@ -40,7 +40,6 @@ struct RootView: View {
     
     private var splashScreen: some View {
         headerView
-            
             .task {
                 try? await Task.sleep(for: .seconds(0.75))
                 showSplashScreen = false
@@ -80,7 +79,7 @@ struct RootView: View {
         VStack(spacing: 60) {
             
             VStack(spacing: 16) {
-                Text("1) Install WatchCloud app onto Apple Watch")
+                Label("Install WatchCloud app onto Apple Watch", systemImage: "1.circle")
                     .font(.headline)
                     .opacity(isWatchAppInstalled ? 0.7 : 1)
                 HStack {
@@ -93,10 +92,11 @@ struct RootView: View {
                 .background(.white.opacity(0.12))
                 .clipShape(RoundedRectangle(cornerRadius: 8))
             }
+            .animation(.default, value: isWatchAppInstalled)
             
             VStack(spacing: 16) {
                 
-                Text("2) Connect to SoundCloud account")
+                Label("Connect to SoundCloud account", systemImage: "2.circle")
                     .font(.headline)
                     .opacity(isWatchAppInstalled && !authStore.isLoggedIn ? 1 : 0.7)
                 
@@ -119,18 +119,20 @@ struct RootView: View {
                         .disabled(!isWatchAppInstalled)
                     }
                 }
+                .animation(.default, value: isWatchAppInstalled)
+                .animation(.default, value: authStore.isLoggedIn)
             }
             
             VStack(spacing: 16) {
-                Text("3) Open app on Apple Watch")
+                Label("Open app on Apple Watch", systemImage: "3.circle")
                     .font(.headline)
                     .opacity(authStore.isLoggedIn ? 1 : 0.7)
                 
                 openWatchAppPrompt
-                    .opacity(authStore.isLoggedIn ? 1 : 0)
+                    .opacity(authStore.isLoggedIn ? 1 : 0.7)
             }
+            .animation(.default, value: authStore.isLoggedIn)
         }
-        .animation(.default, value: authStore.isLoggedIn && isWatchAppInstalled)
         .foregroundStyle(.white)
     }
     
@@ -146,20 +148,7 @@ struct RootView: View {
             .resizable()
             .scaledToFill()
     }
-    
-    private var infoButton: some View {
-        Button {
-            print("Tapped info")
-        } label: {
-            HStack {
-                Image(systemName: "questionmark.circle.fill")
-                Text("Help").fontWeight(.semibold)
-            }
-            .foregroundStyle(.white)
-        }
-        .buttonStyle(.borderedProminent)
-    }
-    
+        
     func performLoginAndSendTokens() {
         Task {
             let tokens = try await authStore.login()
