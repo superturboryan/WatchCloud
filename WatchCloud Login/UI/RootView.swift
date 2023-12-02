@@ -13,6 +13,7 @@ struct RootView: View {
     @EnvironmentObject var authStore: AuthStore
     
     @State var isWatchAppInstalled = false
+    @State var showHelpView = false
     @State var showSplashScreen = true
         
     @Namespace var header
@@ -29,6 +30,9 @@ struct RootView: View {
             .animation(.default, value: showSplashScreen)
             .fullWidthAndHeight()
             .background(Color.black)
+            .sheet(isPresented: $showHelpView) {
+                
+            }
         }
         .task {
             authStore.logout()
@@ -56,7 +60,9 @@ struct RootView: View {
         .padding()
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button { } label: {
+                Button {
+                    showHelpView = true
+                } label: {
                     Image(systemName: "questionmark.circle")
                         .fontWeight(.bold)
                 }
