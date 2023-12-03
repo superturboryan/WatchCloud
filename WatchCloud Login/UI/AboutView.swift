@@ -1,5 +1,5 @@
 //
-//  HelpView.swift
+//  AboutView.swift
 //  WatchCloud Login
 //
 //  Created by Ryan Forsyth on 2023-12-02.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct HelpView: View {
+struct AboutView: View {
     
-    @State var helpItems = HelpItem.all
+    @State var aboutItems = AboutItem.all
     
     var body: some View {
         NavigationView {
             VStack {
-                List(helpItems, id: \.self) { item in
+                List(aboutItems, id: \.self) { item in
                     ExpandableSection {
                         ForEach(item.text, id: \.self) { text in
                             Text(text)
@@ -31,16 +31,16 @@ struct HelpView: View {
     }
 }
 
-struct HelpItem: Hashable {
+struct AboutItem: Hashable {
     let title: String
     let text: [String]
     
-    static let all: [HelpItem] = [
-        HelpItem(title: "Can I delete this app?", text: ["Yes!"]),
-        HelpItem(title: "What does it do?", text: ["Yes!", "Yes!", "Yes!"]),
+    static let all: [AboutItem] = [
+        AboutItem(title: "Can I delete this app?", text: ["Yes!"]),
+        AboutItem(title: "What does it do?", text: ["Yes!", "Yes!", "Yes!"]),
     ]
 }
 
 #Preview {
-    HelpView()
+    AboutView()
 }

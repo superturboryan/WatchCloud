@@ -91,7 +91,7 @@
 		94D4951D2B0F74720013A2D9 /* ImagePipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D4951C2B0F74720013A2D9 /* ImagePipeline.swift */; };
 		94D4951F2B1212280013A2D9 /* ShortAndLongTapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D4951E2B1212280013A2D9 /* ShortAndLongTapButton.swift */; };
 		94D495212B1396D00013A2D9 /* PathMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D495202B1396D00013A2D9 /* PathMonitor.swift */; };
-		94E44C152B1BC46000ACF29B /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E44C142B1BC46000ACF29B /* HelpView.swift */; };
+		94E44C152B1BC46000ACF29B /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E44C142B1BC46000ACF29B /* AboutView.swift */; };
 		94E44C162B1BCC8400ACF29B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947F599A2B0A838500741C53 /* Color.swift */; };
 		94E44C192B1BDE3B00ACF29B /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E44C182B1BDE3B00ACF29B /* List.swift */; };
 		94EE88962B18E12E00486B15 /* WCPhoneSessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE88952B18E12E00486B15 /* WCPhoneSessionHandler.swift */; };
@@ -300,7 +300,7 @@
 		94D4951C2B0F74720013A2D9 /* ImagePipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePipeline.swift; sourceTree = "<group>"; };
 		94D4951E2B1212280013A2D9 /* ShortAndLongTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortAndLongTapButton.swift; sourceTree = "<group>"; };
 		94D495202B1396D00013A2D9 /* PathMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathMonitor.swift; sourceTree = "<group>"; };
-		94E44C142B1BC46000ACF29B /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		94E44C142B1BC46000ACF29B /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		94E44C182B1BDE3B00ACF29B /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		94EE88952B18E12E00486B15 /* WCPhoneSessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCPhoneSessionHandler.swift; sourceTree = "<group>"; };
 		94EE88972B18E72900486B15 /* WCWatchSessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCWatchSessionHandler.swift; sourceTree = "<group>"; };
@@ -436,7 +436,7 @@
 		9450555D2B1B908D005B4445 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				94E44C142B1BC46000ACF29B /* HelpView.swift */,
+				94E44C142B1BC46000ACF29B /* AboutView.swift */,
 				94B8BB132B18CA7800BEB53B /* RootView.swift */,
 			);
 			path = UI;
@@ -1041,7 +1041,7 @@
 				94EE88C82B1B3FFF00486B15 /* LoginButton.swift in Sources */,
 				94E44C162B1BCC8400ACF29B /* Color.swift in Sources */,
 				94B8BB142B18CA7800BEB53B /* RootView.swift in Sources */,
-				94E44C152B1BC46000ACF29B /* HelpView.swift in Sources */,
+				94E44C152B1BC46000ACF29B /* AboutView.swift in Sources */,
 				94E44C192B1BDE3B00ACF29B /* List.swift in Sources */,
 				94EE88BF2B190FCC00486B15 /* AuthStore.swift in Sources */,
 				94EE88C02B190FE200486B15 /* LoginService.swift in Sources */,
