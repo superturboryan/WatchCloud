@@ -76,9 +76,9 @@ struct RootView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             
             HStack {
-                Text("WatchCloud")
+                Text(String(localized: "WatchCloud", comment: "App Name/Title"))
                     .font(.system(.title, weight: .bold))
-                Text("Login")
+                Text(String(localized: "Login", comment: "App Name/Title"))
                     .font(.system(.title, weight: .bold))
                     .foregroundStyle(.primary.opacity(0.6))
             }
@@ -100,7 +100,11 @@ struct RootView: View {
                     Image(systemName: isWatchAppInstalled ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
                         .foregroundStyle(isWatchAppInstalled ? .green : .scOrangeLight)
                         .symbolReplaceEffect()
-                    Text("Watch App\(isWatchAppInstalled ? "" : " Not") Installed")
+                    if isWatchAppInstalled {
+                        Text("Watch App Installed")
+                    } else {
+                        Text("Watch App Not Installed")
+                    }
                 }
                 .padding()
                 .background(.primary.opacity(0.12))

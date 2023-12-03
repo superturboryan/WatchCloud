@@ -30,6 +30,7 @@ struct AboutView: View {
                                 .textCase(.none)
                                 .foregroundStyle(colorScheme.lessReadableText)
                                 .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                                .padding(.trailing, 4)
                                 .minimumScaleFactor(0.9)
                         }
                         .listRowBackground(Color.clear)
@@ -90,11 +91,11 @@ struct AboutItem: Hashable {
             """
             You can send an email to **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌
             
-            You can also visit the **[**issues page**](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** to see questions from the community 👋
+            You can also visit the **[issues page](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** to see questions from the community 👋
             """),
         ]),
         AboutItem(title: String(localized: "Legal"), text: []),
-        AboutItem(title: "WatchCloud Privacy Policy", text: [String(localized:
+        AboutItem(title: String(localized:"WatchCloud Privacy Policy"), text: [String(localized:
             """
             **[Tap here](https://github.com/superturboryan/WatchCloud-Privacy-Policy/)**
             """),
