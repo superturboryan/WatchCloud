@@ -6,7 +6,6 @@
 //
 
 import Combine
-import Foundation
 import OSLog
 import SoundCloud
 import WatchConnectivity
@@ -36,7 +35,9 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print("WCSession activated successfully? \(activationState == .activated)")
-        isWatchAppInstalled = session.publisher(for: \.isWatchAppInstalled).eraseToAnyPublisher()
+        isWatchAppInstalled = session.publisher(for: \.isWatchAppInstalled)
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {

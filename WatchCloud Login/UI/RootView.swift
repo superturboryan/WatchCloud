@@ -36,7 +36,7 @@ struct RootView: View {
         .task {
             authStore.logout()
         }
-        .onReceive(WCPhoneSessionHandler.shared.isWatchAppInstalled.receive(on: DispatchQueue.main)) {
+        .onReceive(WCPhoneSessionHandler.shared.isWatchAppInstalled) {
             isWatchAppInstalled = $0
         }
     }
@@ -64,6 +64,7 @@ struct RootView: View {
                     Image(systemName: "questionmark.circle")
                         .fontWeight(.bold)
                 }
+                .tint(.scOrangeLight)
             }
         }
     }
@@ -79,7 +80,7 @@ struct RootView: View {
                     .font(.system(.title, weight: .bold))
                 Text("Login")
                     .font(.system(.title, weight: .bold))
-                    .foregroundStyle(.primary.opacity(0.7))
+                    .foregroundStyle(.primary.opacity(0.6))
             }
         }
         .matchedGeometryEffect(id: "header", in: header)
@@ -93,7 +94,7 @@ struct RootView: View {
             
             // 1
             VStack(spacing: 16) {
-                Label("Install WatchCloud app onto Apple Watch", systemImage: "1.circle")
+                Label("Install WatchCloud app on Apple Watch", systemImage: "1.circle")
                     .opacity(isWatchAppInstalled ? disabledOpacity : 1)
                 HStack {
                     Image(systemName: isWatchAppInstalled ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
@@ -109,7 +110,7 @@ struct RootView: View {
             
             // 2
             VStack(spacing: 16) {
-                Label("Connect to SoundCloud account", systemImage: "2.circle")
+                Label("Connect to SoundCloud", systemImage: "2.circle")
                     .opacity(isWatchAppInstalled && !authStore.isLoggedIn ? 1 : disabledOpacity)
                 
                 ZStack {
