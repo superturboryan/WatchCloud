@@ -1,10 +1,28 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "**[Tap here](https://developers.soundcloud.com/docs/api/terms-of-use)**" : {
+
+    },
+    "**[Tap here](https://github.com/superturboryan/WatchCloud-Privacy-Policy/)**" : {
+
+    },
+    "**WatchCloud is a watchOS app that makes it possible to stream SoundCloud directly to your Apple Watch.**\n\nThis **iOS** app is used to connect WatchCloud to your SoundCloud account." : {
+
+    },
     "About" : {
 
     },
     "Account Connected" : {
+
+    },
+    "After completing the instructions to connect your account, verify that WatchCloud has been connected on your Apple Watch. The watchOS app will remain connected without this iOS app.\n\nYou can then delete this app from your iPhone. You can download this app again from the App Store if you need to reconnect your SoundCloud account." : {
+
+    },
+    "Can I connect to SoundCloud on my watch?" : {
+
+    },
+    "Can I delete this app from my phone?" : {
 
     },
     "Close" : {
@@ -16,7 +34,13 @@
     "Connect to SoundCloud" : {
 
     },
+    "Frequently Asked Questions" : {
+
+    },
     "Install WatchCloud app on Apple Watch" : {
+
+    },
+    "Legal" : {
 
     },
     "Login" : {
@@ -28,10 +52,25 @@
     "Open app on Apple Watch" : {
 
     },
+    "SoundCloud API Terms of Use" : {
+
+    },
     "Watch App%@ Installed" : {
 
     },
     "WatchCloud" : {
+
+    },
+    "What is this app?" : {
+
+    },
+    "Where can I get help?" : {
+
+    },
+    "Yes, but **there may be issues displaying the webpage for some of the login methods.**\n\nAll login methods (soundcloud.com, Apple ID, FB, Google) work from this iPhone app." : {
+
+    },
+    "You can send an email to **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nYou can also visit the **[**issues page**](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** to see questions from the community 👋" : {
 
     }
   },

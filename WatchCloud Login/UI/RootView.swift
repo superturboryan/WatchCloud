@@ -162,12 +162,6 @@ struct RootView: View {
             WCPhoneSessionHandler.shared.send(tokens)
         }
     }
-    
-    private var loggedInView: some View {
-        VStack {
-            Text("Login successful")
-        }
-    }
 }
 
 #Preview {
