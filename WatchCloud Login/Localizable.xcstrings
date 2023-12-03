@@ -1,16 +1,19 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "About" : {
+
+    },
     "Account Connected" : {
+
+    },
+    "Close" : {
 
     },
     "Connect" : {
       "comment" : "Verb"
     },
     "Connect to SoundCloud" : {
-
-    },
-    "Help" : {
 
     },
     "Install WatchCloud app on Apple Watch" : {

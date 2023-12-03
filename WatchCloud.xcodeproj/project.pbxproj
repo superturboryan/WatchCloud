@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		941687192B1CBD6100A62407 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941687182B1CBD6100A62407 /* Text.swift */; };
+		9416871B2B1CD13300A62407 /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9416871A2B1CD13300A62407 /* ColorScheme.swift */; };
 		941A00EB2AC304B6000F4693 /* NewPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A00EA2AC304B6000F4693 /* NewPlayerView.swift */; };
 		941A00F82AC70CEE000F4693 /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A00F72AC70CEE000F4693 /* CachedImageView.swift */; };
 		9421D29F2ACE2A90005FE857 /* PlaylistListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9421D29E2ACE2A90005FE857 /* PlaylistListView.swift */; };
@@ -180,6 +182,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		941687182B1CBD6100A62407 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		9416871A2B1CD13300A62407 /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		941A00EA2AC304B6000F4693 /* NewPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlayerView.swift; sourceTree = "<group>"; };
 		941A00ED2AC44793000F4693 /* Player - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player - S945.png"; sourceTree = "<group>"; };
 		941A00EE2AC44793000F4693 /* Player Options - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player Options - S945.png"; sourceTree = "<group>"; };
@@ -707,8 +711,10 @@
 		94EE88C22B195A5300486B15 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				94EE88C32B195A7000486B15 /* Logger.swift */,
+				9416871A2B1CD13300A62407 /* ColorScheme.swift */,
 				94E44C182B1BDE3B00ACF29B /* List.swift */,
+				94EE88C32B195A7000486B15 /* Logger.swift */,
+				941687182B1CBD6100A62407 /* Text.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1045,7 +1051,9 @@
 				94E44C192B1BDE3B00ACF29B /* List.swift in Sources */,
 				94EE88BF2B190FCC00486B15 /* AuthStore.swift in Sources */,
 				94EE88C02B190FE200486B15 /* LoginService.swift in Sources */,
+				941687192B1CBD6100A62407 /* Text.swift in Sources */,
 				94B8BB122B18CA7800BEB53B /* App.swift in Sources */,
+				9416871B2B1CD13300A62407 /* ColorScheme.swift in Sources */,
 				94EE88C42B195A7000486B15 /* Logger.swift in Sources */,
 				94EE88962B18E12E00486B15 /* WCPhoneSessionHandler.swift in Sources */,
 				94EE88C12B190FF800486B15 /* Config.swift in Sources */,

@@ -9,24 +9,51 @@ import SwiftUI
 
 struct AboutView: View {
     
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.dismiss) var dismiss
+    
     @State var aboutItems = AboutItem.all
     
     var body: some View {
         NavigationView {
             VStack {
                 List(aboutItems, id: \.self) { item in
-                    ExpandableSection {
-                        ForEach(item.text, id: \.self) { text in
-                            Text(text)
+                    if !item.text.isEmpty {
+                        ExpandableSection {
+                            ForEach(item.text, id: \.self) { text in
+                                Text.md(text)
+                            }
+                        } header: {
+                            Text(item.title)
+                                .font(.title3)
+                                .fontWeight(.medium)
+                                .textCase(.none)
+                                .foregroundStyle(colorScheme.lessReadableText)
+                                .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                                .minimumScaleFactor(0.9)
                         }
-                    } header: {
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 0))
+                    } else {
                         Text(item.title)
-                            .font(.headline)
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .listRowBackground(Color.clear)
+                            .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
                     }
                 }
                 .listStyle(.sidebar)
+                .scrollContentBackground(.hidden)
+                .tint(.scOrangeLight)
             }
-            .navigationTitle("Help")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("About")
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button { dismiss() } label: { Text("Close") }
+                        .tint(.scOrangeLight)
+                }
+            }
         }
     }
 }
@@ -36,11 +63,54 @@ struct AboutItem: Hashable {
     let text: [String]
     
     static let all: [AboutItem] = [
-        AboutItem(title: "Can I delete this app?", text: ["Yes!"]),
-        AboutItem(title: "What does it do?", text: ["Yes!", "Yes!", "Yes!"]),
+        AboutItem(title: "Frequently Asked Questions", text: []),
+        AboutItem(title: "What is this app?", text: [
+            """
+            **WatchCloud is a watchOS app that makes it possible to stream SoundCloud directly to your Apple Watch.**
+
+            This **iOS** app is used to connect WatchCloud to your SoundCloud account.
+            """,
+        ]),
+        AboutItem(title: "Can I delete this app from my phone?", text: [
+            """
+            After completing the instructions to connect your account, verify that WatchCloud has been connected on your Apple Watch. The watchOS app will remain connected without this iOS app.
+            
+            You can then delete this app from your iPhone. You can download this app again from the App Store if you need to reconnect your SoundCloud account.
+            """,
+        ]),
+        AboutItem(title: "Can I connect to SoundCloud on my watch?", text: [
+            """
+            Yes, but **there may be issues displaying the webpage for some of the login methods.**
+            
+            All login methods (soundcloud.com, Apple ID, FB, Google) work from this iPhone app.
+            """,
+        ]),
+        AboutItem(title: "Where can I get help?", text: [
+            """
+            You can send an email to **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌
+            
+            You can also visit the **[**issues page**](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** to see questions from the community 👋
+            """,
+        ]),
+        AboutItem(title: "Legal", text: []),
+        AboutItem(title: "WatchCloud Privacy Policy", text: [
+            """
+            **[Tap here](https://github.com/superturboryan/WatchCloud-Privacy-Policy/)**
+            """,
+        ]),
+        AboutItem(title: "SoundCloud API Terms of Use", text: [
+            """
+            **[Tap here](https://developers.soundcloud.com/docs/api/terms-of-use)**
+            """,
+        ]),
     ]
 }
 
 #Preview {
     AboutView()
 }
+
+//AboutItem(title: "", text: [
+//    """
+//    """,
+//])
