@@ -100,7 +100,6 @@ struct UserView: View {
                 }
             artistInfoLabels
         }
-        .padding(.horizontal)
         .fullWidth()
         .onTapGesture {
             if let description = user.description, !description.isEmpty {
@@ -114,23 +113,33 @@ struct UserView: View {
             Text(user.username)
                 .font(.headline)
 
-            HStack(spacing: 8) {
+            HStack {
+                
+                HStack(spacing: 2) {
+                    Image(systemName: "person.wave.2.fill").foregroundStyle(Color.scOrange)
+                    Text(user.followersCount.formattedIfOver1000)
+                }
+                .frame(maxWidth: .infinity)
+                Spacer(minLength: 1)
+                
                 if let city = user.city, !city.isEmpty {
                     HStack(spacing: 2) {
                         Image(systemName: "mappin").foregroundStyle(.blue)
                         Text(verbatim: city)
                     }
+                    .frame(maxWidth: .infinity)
+                    Spacer(minLength: 1)
                 }
-                HStack(spacing: 2) {
-                    Image(systemName: "person.wave.2.fill").foregroundStyle(Color.scOrange)
-                    Text(user.followersCount.formattedIfOver1000)
-                }
+
                 HStack(spacing: 2) {
                     Image(systemName: "music.note").foregroundStyle(Color.scOrange)
                     Text(user.trackCount.formattedIfOver1000)
                 }
+                .frame(maxWidth: .infinity)
             }
+            .fontWeight(.medium)
             .minimumScaleFactor(0.8)
+            .padding(.horizontal, -8)
         }
         .font(.footnote)
         .lineLimit(1)
