@@ -55,7 +55,7 @@ extension AuthStore {
         
         var errorDescription: String? {
             switch self {
-            case .cancelledLogin: String(localized: "Connecting to SoundCloud was cancelled.")
+            case .cancelledLogin: "Connecting to SoundCloud was cancelled."
             case .loggingIn: String(localized: "There was a problem connecting to SoundCloud. Verify your account works on soundcloud.com or try one of the other login methods")
             }
         }

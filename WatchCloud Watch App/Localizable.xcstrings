@@ -1124,9 +1124,6 @@
         }
       }
     },
-    "Connecting to SoundCloud was cancelled." : {
-
-    },
     "Display a QR code in place of artwork when watch is dimmed" : {
       "localizations" : {
         "ar" : {
@@ -3830,7 +3827,62 @@
       }
     },
     "There was a problem connecting to SoundCloud. Verify your account works on soundcloud.com or try one of the other login methods" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حدثت مشكلة في الاتصال بـ SoundCloud. تأكد من أن حسابك يعمل على soundcloud.com أو جرّب إحدى طرق تسجيل الدخول الأخرى"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beim Login zu SoundCloud ist ein Problem aufgetreten. Überprüfen Sie, ob Ihr Konto auf soundcloud.com funktioniert, oder probieren Sie eine der anderen Anmeldemethoden aus"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hay un problema al conectarse a SoundCloud. Verifique que su cuenta funcione en soundcloud.com o pruebe uno de los otros métodos de inicio de sesión"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un problème est survenu lors de la connexion à SoundCloud. Vérifiez que votre compte fonctionne sur soundcloud.com ou essayez l'une des autres méthodes de connexion"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si è verificato un problema durante la connessione a SoundCloud. Verifica che il tuo conto funziona su soundcloud.com o prova uno degli altri metodi di accesso"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SoundCloud への接続に問題が発生しました。アカウントが soundcloud.com で動作することを確認するか、他のログイン方法のいずれかを試してください"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SoundCloud에 연결하는 중에 문제가 발생했습니다. soundcloud.com에서 계정이 작동하는지 확인하거나 다른 로그인 방법 중 하나를 사용해 보세요."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er is een probleem opgetreden bij het verbinden met SoundCloud. Controleer of je account werkt op soundcloud.com of probeer een van de andere inlogmethoden"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocorreu um problema na conexão com o SoundCloud. Verifique se sua conta funciona no soundcloud.com ou tente um dos outros métodos de login"
+          }
+        }
+      }
     },
     "There was a problem liking/unliking the song" : {
       "comment" : "Error message",

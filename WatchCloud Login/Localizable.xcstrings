@@ -640,9 +640,6 @@
         }
       }
     },
-    "Connecting to SoundCloud was cancelled." : {
-
-    },
     "Frequently Asked Questions" : {
       "localizations" : {
         "ar" : {
@@ -877,7 +874,62 @@
       }
     },
     "OK" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نعم"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "わかりました"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "좋아요"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
     },
     "Open app on Apple Watch" : {
       "localizations" : {
@@ -938,10 +990,122 @@
       }
     },
     "powered by" : {
-      "comment" : "Used next to SC logo"
+      "comment" : "Used next to SC logo",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مدعوم من"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "angetrieben von"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "impulsado por"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "alimentée par"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "alimentato da"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "による提供"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "에 의해 구동"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "aangedreven door"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "alimentado por"
+          }
+        }
+      }
     },
     "Something Went Wrong" : {
-      "comment" : "Alert title"
+      "comment" : "Alert title",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "هناك خطأ ما"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etwas ist schief gelaufen"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocurrió Un Error"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qualcosa non funziona"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "エラーが発生しました"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "에러 발생됨"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er is iets fout gegaan"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algo deu errado"
+          }
+        }
+      }
     },
     "SoundCloud API Terms of Use" : {
       "localizations" : {
@@ -1002,7 +1166,62 @@
       }
     },
     "There was a problem connecting to SoundCloud. Verify your account works on soundcloud.com or try one of the other login methods" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حدثت مشكلة في الاتصال بـ SoundCloud. تأكد من أن حسابك يعمل على soundcloud.com أو جرّب إحدى طرق تسجيل الدخول الأخرى"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beim Herstellen der Verbindung zu SoundCloud ist ein Problem aufgetreten. Überprüfen Sie, ob Ihr Konto auf soundcloud.com funktioniert, oder probieren Sie eine der anderen Anmeldemethoden aus"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hubo un problema al conectarse a SoundCloud. Verifique que su cuenta funcione en soundcloud.com o pruebe uno de los otros métodos de inicio de sesión"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un problème est survenu lors de la connexion à SoundCloud. Vérifiez que votre compte fonctionne sur soundcloud.com ou essayez l'une des autres méthodes de connexion"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si è verificato un problema durante la connessione a SoundCloud. Verifica che il tuo conto funziona su soundcloud.com o prova uno degli altri metodi di accesso"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SoundCloud への接続に問題が発生しました。アカウントが soundcloud.com で動作することを確認するか、他のログイン方法のいずれかを試してください"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SoundCloud에 연결하는 중에 문제가 발생했습니다. soundcloud.com에서 계정이 작동하는지 확인하거나 다른 로그인 방법 중 하나를 사용해 보세요."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er is een probleem opgetreden bij het verbinden met SoundCloud. Controleer of je account werkt op soundcloud.com of probeer een van de andere inlogmethoden"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocorreu um problema na conexão com o SoundCloud. Verifique se sua conta funciona no soundcloud.com ou tente um dos outros métodos de login"
+          }
+        }
+      }
     },
     "Watch App Installed" : {
       "localizations" : {
