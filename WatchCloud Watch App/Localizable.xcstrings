@@ -1124,6 +1124,9 @@
         }
       }
     },
+    "Connecting to SoundCloud was cancelled." : {
+
+    },
     "Display a QR code in place of artwork when watch is dimmed" : {
       "localizations" : {
         "ar" : {
@@ -3825,6 +3828,9 @@
           }
         }
       }
+    },
+    "There was a problem connecting to SoundCloud. Verify your account works on soundcloud.com or try one of the other login methods" : {
+
     },
     "There was a problem liking/unliking the song" : {
       "comment" : "Error message",

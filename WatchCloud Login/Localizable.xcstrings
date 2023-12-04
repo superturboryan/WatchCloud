@@ -640,6 +640,9 @@
         }
       }
     },
+    "Connecting to SoundCloud was cancelled." : {
+
+    },
     "Frequently Asked Questions" : {
       "localizations" : {
         "ar" : {
@@ -873,6 +876,9 @@
         }
       }
     },
+    "OK" : {
+
+    },
     "Open app on Apple Watch" : {
       "localizations" : {
         "ar" : {
@@ -931,6 +937,9 @@
         }
       }
     },
+    "Something Went Wrong" : {
+      "comment" : "Alert title"
+    },
     "SoundCloud API Terms of Use" : {
       "localizations" : {
         "ar" : {
@@ -988,6 +997,9 @@
           }
         }
       }
+    },
+    "There was a problem connecting to SoundCloud. Verify your account works on soundcloud.com or try one of the other login methods" : {
+
     },
     "Watch App Installed" : {
       "localizations" : {

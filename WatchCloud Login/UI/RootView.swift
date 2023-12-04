@@ -16,6 +16,8 @@ struct RootView: View {
     @State var showAboutView = false
     @State var showSplashScreen = true
     
+    @State var loginError: AuthStore.Error?
+    
     private let disabledOpacity = 0.4
     
     @Namespace var header
@@ -36,6 +38,14 @@ struct RootView: View {
         }
         .onReceive(WCPhoneSessionHandler.shared.isWatchAppInstalled) {
             isWatchAppInstalled = $0
+        }
+        .alert(
+            String(localized: "Something Went Wrong", comment: "Alert title"),
+            isPresented: .constant(loginError != nil)
+        ) {
+            Button("OK") { loginError = nil }
+        } message: {
+            Text(verbatim: loginError?.localizedDescription ?? "")
         }
     }
     
@@ -166,8 +176,12 @@ struct RootView: View {
         
     func performLoginAndSendTokens() {
         Task {
-            let tokens = try await authStore.login()
-            WCPhoneSessionHandler.shared.send(tokens)
+            do {
+                let tokens = try await authStore.login()
+                WCPhoneSessionHandler.shared.send(tokens)
+            } catch let error as AuthStore.Error where error == .loggingIn {
+                loginError = error
+            }
         }
     }
 }
