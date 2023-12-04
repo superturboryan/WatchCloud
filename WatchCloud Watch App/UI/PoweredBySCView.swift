@@ -28,7 +28,7 @@ struct PoweredBySCView: View {
     }
 }
 
-@available(watchOS 10, *)
+@available(watchOS 10, iOS 17, *)
 #Preview(traits: .sizeThatFitsLayout) {
     PoweredBySCView()
         .padding()

@@ -937,6 +937,9 @@
         }
       }
     },
+    "powered by" : {
+      "comment" : "Used next to SC logo"
+    },
     "Something Went Wrong" : {
       "comment" : "Alert title"
     },

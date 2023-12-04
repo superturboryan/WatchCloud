@@ -17,31 +17,38 @@ struct AboutView: View {
     var body: some View {
         NavigationView {
             VStack {
-                List(aboutItems, id: \.self) { item in
-                    if !item.text.isEmpty {
-                        ExpandableSection {
-                            ForEach(item.text, id: \.self) { text in
-                                Text.md(text)
+                List {
+                    ForEach(aboutItems, id: \.self) { item in
+                        if !item.text.isEmpty {
+                            ExpandableSection {
+                                ForEach(item.text, id: \.self) { text in
+                                    Text.md(text)
+                                }
+                            } header: {
+                                Text(item.title)
+                                    .font(.title3)
+                                    .fontWeight(.medium)
+                                    .textCase(.none)
+                                    .foregroundStyle(colorScheme.lessReadableText)
+                                    .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                                    .padding(.trailing, 4)
+                                    .minimumScaleFactor(0.9)
                             }
-                        } header: {
-                            Text(item.title)
-                                .font(.title3)
-                                .fontWeight(.medium)
-                                .textCase(.none)
-                                .foregroundStyle(colorScheme.lessReadableText)
-                                .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
-                                .padding(.trailing, 4)
-                                .minimumScaleFactor(0.9)
-                        }
-                        .listRowBackground(Color.clear)
-                        .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 0))
-                    } else {
-                        Text(item.title)
-                            .font(.title2)
-                            .fontWeight(.semibold)
                             .listRowBackground(Color.clear)
-                            .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
+                            .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 0))
+                        } else {
+                            Text(item.title)
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                                .listRowBackground(Color.clear)
+                                .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
+                        }
                     }
+                    
+                    PoweredBySCView()
+                        .fullWidth()
+                        .listRowBackground(Color.clear)
+                        .scaleEffect(1.2)
                 }
                 .listStyle(.sidebar)
                 .scrollContentBackground(.hidden)

@@ -64,6 +64,7 @@
 		946F38E02AB07F81008CE9D1 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CB2AB07F81008CE9D1 /* AudioPlayer.swift */; };
 		946F38E12AB07F81008CE9D1 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CC2AB07F81008CE9D1 /* App.swift */; };
 		947400C22B1DF89A00C5BF64 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947400C12B1DF89A00C5BF64 /* Device.swift */; };
+		947400C32B1E0FA200C5BF64 /* PoweredBySCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */; };
 		947F59992B0A80E900741C53 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947F59982B0A80E900741C53 /* Notification.swift */; };
 		947F599B2B0A838500741C53 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947F599A2B0A838500741C53 /* Color.swift */; };
 		9488EE612AE013D40009EC54 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE602AE013D40009EC54 /* UserStore.swift */; };
@@ -1048,6 +1049,7 @@
 			files = (
 				94EE88C52B1B3F3200486B15 /* View.swift in Sources */,
 				94EE88C82B1B3FFF00486B15 /* LoginButton.swift in Sources */,
+				947400C32B1E0FA200C5BF64 /* PoweredBySCView.swift in Sources */,
 				94E44C162B1BCC8400ACF29B /* Color.swift in Sources */,
 				94B8BB142B18CA7800BEB53B /* RootView.swift in Sources */,
 				94E44C152B1BC46000ACF29B /* AboutView.swift in Sources */,
