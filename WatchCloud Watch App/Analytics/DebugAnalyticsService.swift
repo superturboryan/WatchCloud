@@ -24,16 +24,6 @@ extension DebugAnalyticsService: AnalyticsService {
         if shouldPrint {
             Logger.analytics.notice("📊 \(name)")
         }
-        if shouldPrint && name == "\(AnalyticsEvent.appBackground)" {
-            dumpEvents()
-        }
-    }
-    
-    func dumpEvents() {
-        Logger.analytics.log("📊 All analytics events since launch:")
-        for event in eventsLogged {
-            Logger.analytics.notice("\(event.0) \(event.1 != nil ? ": \(event.1!)" : "")")
-        }
     }
 }
 
