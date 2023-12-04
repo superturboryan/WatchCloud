@@ -71,10 +71,12 @@ struct RootView: View {
         }
     }
     
+    @ViewBuilder
     private var headerView: some View {
+        let iconSize = Device.screenSize.width / 4
         VStack {
             appIcon
-                .frame(width: 100, height: 100)
+                .frame(width: iconSize, height: iconSize)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             
             HStack {
