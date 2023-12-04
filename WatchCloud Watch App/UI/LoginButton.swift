@@ -30,7 +30,7 @@ struct LoginButton: View {
                 .foregroundStyle(LinearGradient.scOrange(.horizontal))
         }
         .clipShape(Capsule())
-        .shadow(color: .primary.opacity(0.15), radius: 4, y: 4)
+        .shadow(color: .primary.opacity(0.15), radius: 6, y: 6)
     }
 }
 

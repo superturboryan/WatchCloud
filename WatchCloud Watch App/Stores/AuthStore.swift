@@ -15,8 +15,12 @@ final class AuthStore: ObservableObject {
     
     private let service: AuthService
     
-    init(_ service: AuthService) {
+    init(
+        _ service: AuthService,
+        isLoggedIn: Bool = true
+    ) {
         self.service = service
+        self.isLoggedIn = isLoggedIn
     }
 }
 

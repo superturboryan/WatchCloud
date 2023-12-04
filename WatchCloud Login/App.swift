@@ -17,7 +17,7 @@ struct WatchCloud_LoginApp: App {
         redirectURI: Config.redirectURI
     ))
     
-    @StateObject var authStore = AuthStore(sc)
+    @StateObject var authStore = AuthStore(sc, isLoggedIn: false)
     
     init() {
         _ = WCPhoneSessionHandler.shared

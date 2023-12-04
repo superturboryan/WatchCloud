@@ -30,12 +30,9 @@ struct RootView: View {
                 }
             }
             .animation(.default, value: showSplashScreen)
-            .sheet(isPresented: $showAboutView) {
-                AboutView()
-            }
         }
-        .task {
-            authStore.logout()
+        .sheet(isPresented: $showAboutView) {
+            AboutView()
         }
         .onReceive(WCPhoneSessionHandler.shared.isWatchAppInstalled) {
             isWatchAppInstalled = $0
@@ -44,8 +41,7 @@ struct RootView: View {
     
     private var splashScreen: some View {
         headerView
-            .task {
-                // Hide after delay
+            .task { // Hide after delay
                 try? await Task.sleep(for: .seconds(0.75))
                 showSplashScreen = false
             }
@@ -177,5 +173,5 @@ struct RootView: View {
 }
 
 #Preview {
-    RootView().environmentObject(AuthStore(testSC))
+    RootView().environmentObject(AuthStore(testSC, isLoggedIn: false))
 }
