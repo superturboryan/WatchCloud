@@ -18,6 +18,7 @@ enum AnalyticsEvent {
     case loginFailure
     case loginCancelled
     case logout
+    case receivedAuthTokensFromPhone
     
     // Buttons
     case tappedSystemPlaylist

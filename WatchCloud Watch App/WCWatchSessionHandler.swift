@@ -34,7 +34,9 @@ class WCWatchSessionHandler: NSObject, WCSessionDelegate {
         activationDidCompleteWith activationState: WCSessionActivationState,
         error: Error?
     ) {
-        print("WCSession activated successfully? \(activationState == .activated)")
+        if let error {
+            Logger.wcWatchSessionHandler.error("Error occurred activating WCSession: \(error)")
+        }
     }
         
     func session(
@@ -42,9 +44,10 @@ class WCWatchSessionHandler: NSObject, WCSessionDelegate {
         didReceiveApplicationContext applicationContext: [String : Any]
     ) {
         if let tokenData = applicationContext["\(TokenResponse.self)"] as? Data {
+            AnalyticsManager.shared.log(.receivedAuthTokensFromPhone)
             NotificationCenter.default.post(name: .didReceiveAuthTokensFromPhone, object: tokenData)
         } else {
-            print("Received unexpected applicationContext from iOS app: \(applicationContext)")
+            Logger.wcWatchSessionHandler.error("Received unexpected applicationContext from iOS app: \(applicationContext)")
         }
     }
 }
