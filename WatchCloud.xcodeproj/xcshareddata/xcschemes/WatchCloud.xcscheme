@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "94B8BB0E2B18CA7800BEB53B"
-               BuildableName = "WatchCloud Login.app"
-               BlueprintName = "WatchCloud Login"
+               BuildableName = "WatchCloud.app"
+               BlueprintName = "WatchCloud"
                ReferencedContainer = "container:WatchCloud.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,8 +44,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "94B8BB0E2B18CA7800BEB53B"
-            BuildableName = "WatchCloud Login.app"
-            BlueprintName = "WatchCloud Login"
+            BuildableName = "WatchCloud.app"
+            BlueprintName = "WatchCloud"
             ReferencedContainer = "container:WatchCloud.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -61,8 +61,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "94B8BB0E2B18CA7800BEB53B"
-            BuildableName = "WatchCloud Login.app"
-            BlueprintName = "WatchCloud Login"
+            BuildableName = "WatchCloud.app"
+            BlueprintName = "WatchCloud"
             ReferencedContainer = "container:WatchCloud.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
