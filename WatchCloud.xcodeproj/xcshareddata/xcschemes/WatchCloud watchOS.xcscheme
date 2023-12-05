@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "946F388F2AB079C9008CE9D1"
+               BlueprintIdentifier = "94B8BB0E2B18CA7800BEB53B"
                BuildableName = "WatchCloud.app"
                BlueprintName = "WatchCloud"
                ReferencedContainer = "container:WatchCloud.xcodeproj">
@@ -70,7 +70,8 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
+      allowLocationSimulation = "YES"
+      notificationPayloadFile = "PushNotificationPayload.apns">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
