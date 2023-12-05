@@ -14,17 +14,16 @@ struct LibraryView: View {
     @EnvironmentObject var authStore: AuthStore
     @EnvironmentObject var userStore: UserStore
 
-    let 👆 = "👆"
+    private let topCell = "top"
     
     var body: some View {
         NavigationStack {
             ScrollViewReader { sv in
-                let scrollToTop = { sv.scrollTo(👆, anchor: .top) }
-                
+                let scrollToTop = { sv.scrollTo(topCell, anchor: .top) }
                 libraryView
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle(String(localized:"Library"))
-                .onChange(of: authStore.isLoggedIn) { if $0 { scrollToTop() } }
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle(String(localized:"Library"))
+                    .onChange(of: authStore.isLoggedIn) { if $0 { scrollToTop() } }
             }
         }
     }
@@ -33,11 +32,11 @@ struct LibraryView: View {
         List {
             if let nowPlayingBinding = Binding($audioStore.loadedPlaylists[PlaylistType.nowPlaying.rawValue]),
                !(nowPlayingBinding.wrappedValue.tracks?.isEmpty ?? true) {
-                nowPlayingCell(nowPlayingBinding).id(👆) // Assign id for topmost cell conditionally
+                nowPlayingCell(nowPlayingBinding).id(topCell)
                 searchCell
                 downloadsCell
             } else {
-                searchCell.id(👆)
+                searchCell.id(topCell)
                 downloadsCell
             }
 
