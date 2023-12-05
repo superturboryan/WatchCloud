@@ -14,25 +14,25 @@ struct LoginView: View {
     @EnvironmentObject var authStore: AuthStore
     
     @State var showErrorAlert = false
+    @State var showLoginButton = false
     @State var showTip = false
     
     @available(watchOS 10, *)
     @Parameter static var hasTriedToLoginAndCancelled: Bool = false
 
     var body: some View {
-        VStack {
-            captchaNotAppearingTip
-            loginButton
+        VStack(spacing: 30) {
+            if !showLoginButton {
+                connectOnPhonePrompt
+                showLoginButtonButton
+            } else {
+                loginButton
+            }
         }
+        .animation(.default, value: showLoginButton)
         .fullWidthAndHeight()
         .background(.black)
-        .overlay(alignment: .bottom) {
-            if !showTip {
-                PoweredBySCView()
-                    .padding(.bottom, 8)
-                    .animation(.default, value: showTip)
-            }
-        }.alert(
+        .alert(
             "Failed to connect to SoundCloud, \nplease try again",
             isPresented: $showErrorAlert
         ) {
@@ -42,6 +42,23 @@ struct LoginView: View {
         .buttonStyle(.plain)
         .ignoresSafeArea()
         .interactiveDismissDisabled()
+    }
+    
+    private var connectOnPhonePrompt: some View {
+        Text("Connect to SoundCloud using the WatchCloud iOS app on your phone (recommended)")
+            .fontWeight(.bold)
+            .multilineTextAlignment(.center)
+            .fontDesign(.rounded)
+    }
+    
+    private var showLoginButtonButton: some View {
+        Button {
+            showLoginButton = true
+        } label: {
+            Text("or connect here")
+                .fontWeight(.medium)
+                .foregroundStyle(LinearGradient.scOrange(.horizontal, reversed: true))
+        }
     }
     
     private var loginButton: some View {
@@ -65,7 +82,7 @@ struct LoginView: View {
     }
 
     @ViewBuilder
-    private var captchaNotAppearingTip: some View {
+    private var captchaNotAppearingTip: some View { // ‼️ Not currently shown
         if #available(watchOS 10, *) {
             TipView(CaptchaNotAppearingTip(), arrowEdge: .bottom)
             .onVisibilityChange { showTip = $0 }

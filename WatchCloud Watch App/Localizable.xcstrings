@@ -1124,6 +1124,9 @@
         }
       }
     },
+    "Connect to SoundCloud using the WatchCloud iOS app on your phone (recommended)" : {
+
+    },
     "Display a QR code in place of artwork when watch is dimmed" : {
       "localizations" : {
         "ar" : {
@@ -2948,6 +2951,9 @@
           }
         }
       }
+    },
+    "or connect here" : {
+
     },
     "Playlist is empty" : {
       "localizations" : {
