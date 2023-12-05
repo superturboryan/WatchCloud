@@ -20,9 +20,8 @@ struct LibraryView: View {
         NavigationStack {
             ScrollViewReader { sv in
                 let scrollToTop = { sv.scrollTo(👆, anchor: .top) }
-                ScrollView {
-                    libraryView
-                }
+                
+                libraryView
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle(String(localized:"Library"))
                 .onChange(of: authStore.isLoggedIn) { if $0 { scrollToTop() } }
@@ -31,7 +30,7 @@ struct LibraryView: View {
     }
     
     private var libraryView: some View {
-        VStack {
+        List {
             if let nowPlayingBinding = Binding($audioStore.loadedPlaylists[PlaylistType.nowPlaying.rawValue]),
                !(nowPlayingBinding.wrappedValue.tracks?.isEmpty ?? true) {
                 nowPlayingCell(nowPlayingBinding).id(👆) // Assign id for topmost cell conditionally
@@ -76,14 +75,14 @@ struct LibraryView: View {
 
             Section(header: sectionHeaderView(String(localized: "My Account"))) {
                 currentUserCell
+                settingsCell
             }
-            
-            settingsCell
 
             PoweredBySCView()
                 .padding(.top, 14)
+                .fullWidth()
+                .listRowBackground(Color.clear)
         }
-        .padding(.horizontal, 4)
     }
     
     func nowPlayingCell(_ playlist: Binding<Playlist>) -> some View {
@@ -137,6 +136,8 @@ struct LibraryView: View {
             PlaylistCellView(playlist: playlist)
         }
         .buttonStyle(.plain)
+        .listRowBackground(Color.clear)
+        .listRowInsets(EdgeInsets())
     }
     
     var currentUserCell: some View {
@@ -202,11 +203,13 @@ struct LibraryView: View {
             }
             .lineLimit(1)
             .fontDesign(.rounded)
-            .padding(10)
+            .padding(14)
             .background(bgColor)
             .cornerRadius(10)
         }
         .buttonStyle(.plain)
+        .listRowBackground(Color.clear)
+        .listRowInsets(EdgeInsets())
     }
     
     func imageForCell(_ id: Int) -> some View {
@@ -263,5 +266,5 @@ struct LibraryView: View {
     LibraryView()
         .environmentObject(AudioStore(testSC))
         .environmentObject(AuthStore(testSC))
-        .environmentObject(testAudioPlayer)
+        .environmentObject(UserStore(testSC))
 }
