@@ -51,7 +51,7 @@ struct LibraryView: View {
             followingCell
 
             if !audioStore.myPlaylistIds.isEmpty {
-                Section(header: sectionHeaderView(String(localized:"My Playlists"))) {
+                Section(header: Text("My Playlists")) {
                     ForEach($audioStore.loadedPlaylists.values
                         .filter { audioStore.myPlaylistIds.contains($0.wrappedValue.id) }
                         .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
@@ -62,7 +62,7 @@ struct LibraryView: View {
             }
             
             if !audioStore.myLikedPlaylistIds.isEmpty {
-                Section(header: sectionHeaderView(String(localized: "Liked Playlists"))) {
+                Section(header: Text("Liked Playlists")) {
                     ForEach($audioStore.loadedPlaylists.values
                         .filter { audioStore.myLikedPlaylistIds.contains($0.wrappedValue.id) }
                         .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
@@ -72,7 +72,7 @@ struct LibraryView: View {
                 }
             }
 
-            Section(header: sectionHeaderView(String(localized: "My Account"))) {
+            Section(header: Text("My Account")) {
                 currentUserCell
                 settingsCell
             }
