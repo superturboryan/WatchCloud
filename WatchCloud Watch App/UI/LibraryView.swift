@@ -51,7 +51,7 @@ struct LibraryView: View {
             followingCell
 
             if !audioStore.myPlaylistIds.isEmpty {
-                Section(header: Text("My Playlists")) {
+                Section(header: headerText(String(localized: "My Playlists"))) {
                     ForEach($audioStore.loadedPlaylists.values
                         .filter { audioStore.myPlaylistIds.contains($0.wrappedValue.id) }
                         .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
@@ -62,7 +62,7 @@ struct LibraryView: View {
             }
             
             if !audioStore.myLikedPlaylistIds.isEmpty {
-                Section(header: Text("Liked Playlists")) {
+                Section(header: headerText(String(localized: "Liked Playlists"))) {
                     ForEach($audioStore.loadedPlaylists.values
                         .filter { audioStore.myLikedPlaylistIds.contains($0.wrappedValue.id) }
                         .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
@@ -72,11 +72,19 @@ struct LibraryView: View {
                 }
             }
 
-            Section(header: Text("My Account")) {
+            Section(header: headerText(String(localized: "My Account"))) {
                 currentUserCell
                 settingsCell
             }
         }
+        .sectionSpacing(8)
+    }
+    
+    func headerText(_ text: String) -> some View {
+        Text(text)
+            .foregroundStyle(.secondary)
+            .padding(.bottom, 2)
+            .padding(.top, 4)
     }
     
     func nowPlayingCell(_ playlist: Binding<Playlist>) -> some View {
