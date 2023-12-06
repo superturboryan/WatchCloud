@@ -49,7 +49,6 @@ struct AboutView: View {
                         .fullWidth()
                         .listRowBackground(Color.clear)
                         .listRowInsets(EdgeInsets())
-                        .foregroundStyle(.secondary)
                 }
                 .padding(.top, -10)
                 .listStyle(.sidebar)
@@ -67,7 +66,7 @@ struct AboutView: View {
                     Text(Config.appVersion)
                         .font(.footnote)
                         .fontWeight(.medium)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(colorScheme.lessReadableText)
                 }
             }
         }

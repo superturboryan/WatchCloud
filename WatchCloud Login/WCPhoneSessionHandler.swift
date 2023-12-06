@@ -34,18 +34,21 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        print("WCSession activated successfully? \(activationState == .activated)")
+        guard error == nil else {
+            Logger.wcPhoneSessionHandler.error("Error occurred activating WCSession: \(error)")
+            return
+        }
         isWatchAppInstalled = session.publisher(for: \.isWatchAppInstalled)
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {
-        
+        Logger.wcPhoneSessionHandler.warning("WCSession sessionDidBecomeInactive")
     }
     
     func sessionDidDeactivate(_ session: WCSession) {
-        
+        Logger.wcPhoneSessionHandler.warning("WCSession sessionDidDeactivate")
     }
     
     func send(_ authTokens: TokenResponse) {
