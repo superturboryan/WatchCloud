@@ -76,11 +76,6 @@ struct LibraryView: View {
                 currentUserCell
                 settingsCell
             }
-
-            PoweredBySCView()
-                .padding(.top, 14)
-                .fullWidth()
-                .listRowBackground(Color.clear)
         }
     }
     
