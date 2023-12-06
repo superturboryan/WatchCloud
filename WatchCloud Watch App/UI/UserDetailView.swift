@@ -1,5 +1,5 @@
 //
-//  UserView.swift
+//  UserDetailView.swift
 //  WatchCloud Watch App
 //
 //  Created by Ryan Forsyth on 2023-10-03.
@@ -9,7 +9,7 @@ import OSLog
 import SoundCloud
 import SwiftUI
 
-struct UserView: View {
+struct UserDetailView: View {
     
     @EnvironmentObject var audioStore: AudioStore
     @EnvironmentObject var userStore: UserStore
@@ -246,7 +246,7 @@ struct UserView: View {
 
 #Preview {
     NavigationStack {
-        UserView(user: testUser(27127117))
+        UserDetailView(user: testUser(27127117))
             .environmentObject(AudioStore(testSC))
             .environmentObject(UserStore(testSC))
             .environmentObject(testAudioPlayer)

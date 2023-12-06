@@ -25,7 +25,7 @@ struct UserListView: View {
         List {
             ForEach(sortedUsers, id: \.wrappedValue.id) { user in
                 NavigationLink {
-                    UserView(user: user.wrappedValue).onAppear {
+                    UserDetailView(user: user.wrappedValue).onAppear {
                         AnalyticsManager.shared.log(.tappedUser)
                     }
                 } label: {
