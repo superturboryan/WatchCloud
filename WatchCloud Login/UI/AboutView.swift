@@ -16,7 +16,7 @@ struct AboutView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 0) {
                 List {
                     ForEach(aboutItems, id: \.self) { item in
                         if !item.text.isEmpty {
@@ -48,8 +48,10 @@ struct AboutView: View {
                     PoweredBySCView()
                         .fullWidth()
                         .listRowBackground(Color.clear)
-                        .scaleEffect(1.2)
+                        .listRowInsets(EdgeInsets())
+                        .foregroundStyle(.secondary)
                 }
+                .padding(.top, -10)
                 .listStyle(.sidebar)
                 .scrollContentBackground(.hidden)
                 .tint(.scOrangeLight)
@@ -60,6 +62,12 @@ struct AboutView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button { dismiss() } label: { Text("Close") }
                         .tint(.scOrangeLight)
+                }
+                ToolbarItem(placement: .cancellationAction) {
+                    Text(Config.appVersion)
+                        .font(.footnote)
+                        .fontWeight(.medium)
+                        .foregroundStyle(.secondary)
                 }
             }
         }
