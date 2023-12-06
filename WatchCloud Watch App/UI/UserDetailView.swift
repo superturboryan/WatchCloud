@@ -24,35 +24,33 @@ struct UserDetailView: View {
     @State var showFullDescriptionView = false
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 10) {
-                summary
-                if !tracks.isEmpty {
-                    playlistSection(
-                        String(localized: "Top tracks"),
-                        tracks.sorted(by: { $0.playbackCount ?? 0 > $1.playbackCount ?? 0 })
-                    )
-                    playlistSection(
-                        String(localized: "Most recent", comment: "Playlist section title"),
-                        tracks.sorted(by: { $0.createdAt > $1.createdAt })
-                    )
-                }
-                if !likedTracks.isEmpty {
-                    playlistSection(
-                        String(localized: "Liked tracks"),
-                        likedTracks
-                    )
-                }
-                if isLoading {
-                    loadingView
-                }
+        List {
+            summary
+            if !tracks.isEmpty {
+                playlistSection(
+                    String(localized: "Top tracks"),
+                    tracks.sorted(by: { $0.playbackCount ?? 0 > $1.playbackCount ?? 0 })
+                )
+                playlistSection(
+                    String(localized: "Most recent", comment: "Playlist section title"),
+                    tracks.sorted(by: { $0.createdAt > $1.createdAt })
+                )
             }
-            .animation(.default, value: tracks)
-            .animation(.default, value: likedTracks)
-            .padding(.top, -14)
-            .fontDesign(.rounded)
-            .buttonStyle(.plain)
+            if !likedTracks.isEmpty {
+                playlistSection(
+                    String(localized: "Liked tracks"),
+                    likedTracks
+                )
+            }
+            if isLoading {
+                loadingView
+            }
         }
+        .animation(.default, value: tracks)
+        .animation(.default, value: likedTracks)
+        .padding(.top, -8)
+        .fontDesign(.rounded)
+        .buttonStyle(.plain)
         .sheet(isPresented: $showFullDescriptionView) {
             fullDescriptionView
         }
@@ -88,6 +86,8 @@ struct UserDetailView: View {
                 .foregroundColor(.secondary)
         }
         .padding(.bottom, 10)
+        .listRowBackground(Color.clear)
+        .listRowInsets(EdgeInsets())
     }
     
     private var summary: some View {
@@ -101,6 +101,8 @@ struct UserDetailView: View {
             artistInfoLabels
         }
         .fullWidth()
+        .listRowBackground(Color.clear)
+        .listRowInsets(EdgeInsets())
         .onTapGesture {
             if let description = user.description, !description.isEmpty {
                 showFullDescriptionView = true
@@ -181,8 +183,8 @@ struct UserDetailView: View {
     private func playlistSection(_ title: String, _ tracks: [Track], _ trackLimit: Int = 3) -> some View {
         let playlist = Playlist(id: 0, user: user, title: title, tracks: tracks)
         let hasMoreTracksToShow = tracks.count > trackLimit
-        VStack(spacing: 12) {
-            // See all button
+        
+        Section(header:
             NavigationLink {
                 PlaylistView(
                     playlist: .constant(playlist),
@@ -198,19 +200,20 @@ struct UserDetailView: View {
                     }
                 }
                 .font(.footnote)
-                .padding(.horizontal)
+                .padding(.bottom, 4)
             }
             .disabled(!hasMoreTracksToShow)
-            // First three tracks from playlist
-            VStack(spacing: 4) {
-                ForEach(Array(tracks.prefix(trackLimit))) { track in
-                    TrackCellView(
-                        track: track,
-                        isPlaying: audioStore.loadedTrack == track,
-                        isDownloaded: audioStore.downloadedTracks.contains(track)
-                    ).onTapGesture {
-                        tapped(track, in: tracks)
-                    }
+        ) {
+            ForEach(Array(tracks.prefix(trackLimit))) { track in
+                TrackCellView(
+                    track: track,
+                    isPlaying: audioStore.loadedTrack == track,
+                    isDownloaded: audioStore.downloadedTracks.contains(track)
+                )
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
+                .onTapGesture {
+                    tapped(track, in: tracks)
                 }
             }
         }
@@ -246,7 +249,9 @@ struct UserDetailView: View {
 
 #Preview {
     NavigationStack {
-        UserDetailView(user: testUser(27127117))
+        UserDetailView(
+            user: testUser(27127117),
+            tracks: [testTrack(), testTrack(), testTrack(), testTrack(), ])
             .environmentObject(AudioStore(testSC))
             .environmentObject(UserStore(testSC))
             .environmentObject(testAudioPlayer)
