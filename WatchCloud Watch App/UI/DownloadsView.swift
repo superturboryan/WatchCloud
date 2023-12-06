@@ -17,23 +17,20 @@ struct DownloadsView: View {
     @State var isEmpty = false
     
     var body: some View {
-        ScrollView {
-            VStack {
-                // 💡 Four possible states:
-                // 1 - Downloads in progress
-                // 2 - Downloaded tracks exist
-                // 3 - Both 1 and 2
-                // 4 - Neither 1 or 2 (Empty)
-                
-                if !audioStore.downloadsInProgress.isEmpty {
-                    downloadsInProgressList
-                }
-                
-                if !audioStore.downloadedTracks.isEmpty {
-                    downloadedTrackList
-                } else if audioStore.downloadsInProgress.isEmpty {
-                    downloadedTracksEmptyView
-                }
+        // 💡 Four possible states:
+        // 1 - Downloads in progress
+        // 2 - Downloaded tracks exist
+        // 3 - Both 1 and 2
+        // 4 - Neither 1 or 2 (Empty)
+        List {
+            if !audioStore.downloadsInProgress.isEmpty {
+                downloadsInProgressList
+            }
+            
+            if !audioStore.downloadedTracks.isEmpty {
+                downloadedTrackList
+            } else if audioStore.downloadsInProgress.isEmpty {
+                downloadedTracksEmptyView
             }
         }
         .disabled(audioStore.downloadsInProgress.isEmpty && audioStore.downloadedTracks.isEmpty)
@@ -44,13 +41,12 @@ struct DownloadsView: View {
     
     var downloadsInProgressList: some View {
         Section(
-            header: sectionHeaderView(String(localized: "In Progress (\(audioStore.downloadsInProgress.count))"))
+            header: Text("In Progress (\(audioStore.downloadsInProgress.count))")
         ) {
             ForEach(
-                audioStore.downloadsInProgress
-                    .filter { $0.value != 0.0 }
-                    .sorted(by: { $0.value > $1.value }), id: \.key.id)
-            { track, progress in
+                audioStore.downloadsInProgress.sorted(by: { $0.value > $1.value }), 
+                id: \.key.id
+            ){ track, progress in
                 downloadInProgressCell(track, progress)
                 .onLongPressGesture {
                     try? audioStore.cancelDownloadInProgress(for: track)
@@ -79,12 +75,14 @@ struct DownloadsView: View {
         .padding()
         .background(Color.cellBG)
         .cornerRadius(10)
+        .listRowBackground(Color.clear)
+        .listRowInsets(EdgeInsets())
     }
     
     var downloadedTrackList: some View {
         Section(
-            header: sectionHeaderView(String(localized: "Downloaded (\(audioStore.downloadedTracks.count))")),
-            footer: sectionFooterView(String(localized: "Press and hold track\n to remove download"))
+            header: Text ("Downloaded (\(audioStore.downloadedTracks.count))"),
+            footer: Text("Press and hold track\n to remove download").fullWidth()
         ) {
             ForEach($audioStore.downloadedTracks) { displayedTrack in
                 TrackCellView(
@@ -92,6 +90,8 @@ struct DownloadsView: View {
                     isPlaying: audioStore.loadedTrack == displayedTrack.wrappedValue,
                     isDownloaded: true
                 )
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
                 .onTapGesture { tapped(displayedTrack.wrappedValue) }
                 .onLongPressGesture {
                     do {
@@ -120,6 +120,9 @@ struct DownloadsView: View {
         }
         .fontWeight(.medium)
         .multilineTextAlignment(.center)
+        .fullWidth()
+        .listRowBackground(Color.clear)
+        .listRowInsets(EdgeInsets())
     }
     
     var playerOptionsDownloadButton: some View {
@@ -155,7 +158,18 @@ struct DownloadsView: View {
 #Preview {
     return NavigationStack {
         DownloadsView()
-            .environmentObject(AudioStore(testSC))
+            .environmentObject({ () -> AudioStore in
+                let store = AudioStore(testSC)
+                Task {
+                    await store.loadDefaultPlaylists()
+                    store.downloadedTracks = [testTrack(), testTrack(), testTrack(), ]
+                    store.downloadsInProgress = [
+                        testTrack() : 0.5,
+                        testTrack() : 0.9
+                    ]
+                }
+                return store
+            }())
             .environmentObject(testAudioPlayer)
     }
 }
