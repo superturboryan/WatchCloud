@@ -23,6 +23,7 @@ struct SettingsView: View {
         List {
             playbackSection
             downloadsSection
+            appInfoSection
         }
         .alert("Are you sure you want to remove all downloads?", isPresented: $showDeleteAllAlert) {
             Button("Remove All", role: .destructive) { try? audioStore.removeAllDownloads() }
@@ -79,6 +80,24 @@ struct SettingsView: View {
                     .listItemTint(.clear)
                 }
             }
+        }
+    }
+    
+    private var appInfoSection: some View {
+        Section(
+            header: Text("App")
+        ) {
+            HStack {
+                Text("Version")
+                Spacer()
+                Text(Config.appVersion)
+                    .fontWeight(.medium)
+            }
+            
+            PoweredBySCView()
+                .fullWidth()
+                .padding(.top, 4)
+                .listRowBackground(Color.clear)
         }
     }
 }

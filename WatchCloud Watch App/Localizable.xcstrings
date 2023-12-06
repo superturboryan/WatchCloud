@@ -714,6 +714,9 @@
         }
       }
     },
+    "App" : {
+
+    },
     "Are you sure you want to logout?" : {
       "localizations" : {
         "ar" : {
@@ -2272,7 +2275,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Titres Aimés"
+            "value" : "Aimée"
           }
         },
         "it" : {
@@ -4183,6 +4186,9 @@
           }
         }
       }
+    },
+    "Version" : {
+
     }
   },
   "version" : "1.0"
