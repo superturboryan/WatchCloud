@@ -43,6 +43,18 @@ extension View {
     }
 }
 
+extension List {
+    
+    @ViewBuilder
+    func sectionSpacing(_ spacing: CGFloat) -> some View {
+        if #available(watchOS 10, iOS 17, *) {
+            self.listSectionSpacing(spacing)
+        } else {
+            self
+        }
+    }
+}
+
 // MARK: - LazyVStack header + footer
 func sectionHeaderView(_ title: String) -> some View {
     Text(verbatim: title.uppercased())
