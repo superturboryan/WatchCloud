@@ -174,7 +174,7 @@ struct UserDetailView: View {
                 .font(.system(size: 12, weight: .semibold))
                 .padding(.horizontal, 3)
                 .background { LinearGradient.scOrange(.vertical) }
-                .roundedCorner(4, corners: .allCorners)
+                .clipShape(RoundedRectangle(cornerRadius: 4))
                 .offset(y: 3)
         }
     }
