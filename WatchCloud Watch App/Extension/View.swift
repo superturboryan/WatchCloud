@@ -64,13 +64,3 @@ func sectionHeaderView(_ title: String) -> some View {
         .padding(.top, 6)
         .fullWidth(.leading)
 }
-
-func sectionFooterView(_ text: String) -> some View {
-    Text(verbatim: text)
-        .font(.footnote)
-        .fontWeight(.medium)
-        .foregroundColor(.secondary)
-        .multilineTextAlignment(.center)
-        .padding(.top, 6)
-        .padding(.bottom, 12)
-}

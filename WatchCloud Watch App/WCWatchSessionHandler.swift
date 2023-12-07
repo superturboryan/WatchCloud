@@ -34,9 +34,7 @@ class WCWatchSessionHandler: NSObject, WCSessionDelegate {
         activationDidCompleteWith activationState: WCSessionActivationState,
         error: Error?
     ) {
-        if let error {
-            Logger.wcWatchSessionHandler.error("Error occurred activating WCSession: \(error)")
-        }
+        if let error { Logger.wcWatchSessionHandler.error("Error occurred activating WCSession: \(error)") }
     }
         
     func session(
