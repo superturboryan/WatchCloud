@@ -205,7 +205,8 @@ struct LibraryView: View {
             }
             .lineLimit(1)
             .fontDesign(.rounded)
-            .padding(16)
+            .padding(.vertical, 16)
+            .padding(.horizontal, 12)
             .background(bgColor)
             .cornerRadius(10)
         }
