@@ -29,6 +29,7 @@ struct LoginView: View {
                 loginButton
             }
         }
+        .fontDesign(.rounded)
         .animation(.default, value: showLoginButton)
         .fullWidthAndHeight()
         .background(.black)
@@ -48,7 +49,7 @@ struct LoginView: View {
         Text("Connect to SoundCloud using the WatchCloud iOS app on your phone (recommended)")
             .fontWeight(.bold)
             .multilineTextAlignment(.center)
-            .fontDesign(.rounded)
+            .padding(.top)
     }
     
     private var showLoginButtonButton: some View {
@@ -56,6 +57,7 @@ struct LoginView: View {
             showLoginButton = true
         } label: {
             Text("or connect here")
+                .font(.footnote)
                 .fontWeight(.medium)
                 .foregroundStyle(LinearGradient.scOrange(.horizontal, reversed: true))
         }
