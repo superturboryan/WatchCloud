@@ -51,7 +51,7 @@ struct SettingsView: View {
     private var downloadsSection: some View {
         if Config.isDownloadingEnabled(for: userStore.myUser?.id) {
             Section(
-                header: Text("Downloads")
+                header: Text("Downloads").padding(.bottom, 2)
             ) {
                 Toggle(isOn: Config.$allowDownloadingUsingData, label: {
                     Text(String(localized: "Cellular Data", comment: "Toggle label"))
@@ -85,7 +85,7 @@ struct SettingsView: View {
     
     private var appInfoSection: some View {
         Section(
-            header: Text("App")
+            header: Text("App").padding(.bottom, 2)
         ) {
             HStack {
                 Text("Version")
@@ -96,7 +96,7 @@ struct SettingsView: View {
             
             PoweredBySCView()
                 .fullWidth()
-                .padding(.top, 4)
+                .padding(.top, 6)
                 .listRowBackground(Color.clear)
         }
     }
