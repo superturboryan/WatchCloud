@@ -12,6 +12,8 @@ enum Config {
     
     static let apiUrl = "https://api.soundcloud.com/"
     
+    static let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+    
     static func isDownloadingEnabled(for id: Int?) -> Bool {
         guard let id else { return false }
         return [

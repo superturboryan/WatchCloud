@@ -18,4 +18,6 @@ extension Logger {
     static let downloadsView = Logger(subsystem: subsystem, category: "DownloadsView")
     static let rootView = Logger(subsystem: subsystem, category: "RootView")
     static let userView = Logger(subsystem: subsystem, category: "UserView")
+    
+    static let wcWatchSessionHandler = Logger(subsystem: subsystem, category: "WCWatchSessionHandler")
 }

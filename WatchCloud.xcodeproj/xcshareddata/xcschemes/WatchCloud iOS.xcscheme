@@ -14,21 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "946F38952AB079C9008CE9D1"
-               BuildableName = "WatchCloud Watch App.app"
-               BlueprintName = "WatchCloud Watch App"
-               ReferencedContainer = "container:WatchCloud.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "946F388F2AB079C9008CE9D1"
+               BlueprintIdentifier = "94B8BB0E2B18CA7800BEB53B"
                BuildableName = "WatchCloud.app"
                BlueprintName = "WatchCloud"
                ReferencedContainer = "container:WatchCloud.xcodeproj">
@@ -40,31 +26,14 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
-      <TestPlans>
-         <TestPlanReference
-            reference = "container:Test Plan.xctestplan"
-            default = "YES">
-         </TestPlanReference>
-      </TestPlans>
-      <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "94474B552AF2723E00BEA5F0"
-               BuildableName = "Unit Tests.xctest"
-               BlueprintName = "Unit Tests"
-               ReferencedContainer = "container:WatchCloud.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = "vi"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -75,15 +44,15 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "946F38952AB079C9008CE9D1"
-            BuildableName = "WatchCloud Watch App.app"
-            BlueprintName = "WatchCloud Watch App"
+            BlueprintIdentifier = "94B8BB0E2B18CA7800BEB53B"
+            BuildableName = "WatchCloud.app"
+            BlueprintName = "WatchCloud"
             ReferencedContainer = "container:WatchCloud.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -92,9 +61,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "946F38952AB079C9008CE9D1"
-            BuildableName = "WatchCloud Watch App.app"
-            BlueprintName = "WatchCloud Watch App"
+            BlueprintIdentifier = "94B8BB0E2B18CA7800BEB53B"
+            BuildableName = "WatchCloud.app"
+            BlueprintName = "WatchCloud"
             ReferencedContainer = "container:WatchCloud.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

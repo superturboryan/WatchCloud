@@ -42,13 +42,9 @@ extension UserStore {
         if let savedUser = try? myUserDAO.get() {
             myUser = savedUser
         } else {
-            do {
-                let loadedUser = try await service.getMyUser()
-                myUser = loadedUser
-                try? myUserDAO.save(loadedUser)
-            } catch {
-                throw Error.loadingMyProfile
-            }
+            let loadedUser = try await service.getMyUser()
+            myUser = loadedUser
+            try? myUserDAO.save(loadedUser) // Ignore error thrown by DAO
         }
     }
     

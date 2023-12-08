@@ -1,0 +1,1693 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "**[Tap here](https://developers.soundcloud.com/docs/api/terms-of-use)**" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[اضغط هنا](https://developers.soundcloud.com/docs/api/terms-of-use)**"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[Hier tippen](https://developers.soundcloud.com/docs/api/terms-of-use)**"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[Toca aquí](https://developers.soundcloud.com/docs/api/terms-of-use)**"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[Cliquez ici](https://developers.soundcloud.com/docs/api/terms-of-use)**"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[Tocca qui](https://developers.soundcloud.com/docs/api/terms-of-use)**"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[ここをタップ](https://developers.soundcloud.com/docs/api/terms-of-use)**"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[여기를 누르세요](https://developers.soundcloud.com/docs/api/terms-of-use)**"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[Tik hier](https://developers.soundcloud.com/docs/api/terms-of-use)**"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[Toque aqui](https://developers.soundcloud.com/docs/api/terms-of-use)**"
+          }
+        }
+      }
+    },
+    "**[Tap here](https://github.com/superturboryan/WatchCloud-Privacy-Policy/)**" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[انقر هنا](https://github.com/superturboryan/WatchCloud-Privacy-Policy/)**"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[Hier tippen](https://github.com/superturboryan/WatchCloud-Privacy-Policy/)**"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[Toca aquí](https://github.com/superturboryan/WatchCloud-Privacy-Policy/)**"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[Cliquez ici](https://github.com/superturboryan/WatchCloud-Privacy-Policy/)**"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[Tocca qui](https://github.com/superturboryan/WatchCloud-Privacy-Policy/)**"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[ここをタップ](https://github.com/superturboryan/WatchCloud-Privacy-Policy/)**"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[여기를 누르세요](https://github.com/superturboryan/WatchCloud-Privacy-Policy/)**"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[Tik hier](https://github.com/superturboryan/WatchCloud-Privacy-Policy/)**"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[Toque aqui](https://github.com/superturboryan/WatchCloud-Privacy-Policy/)**"
+          }
+        }
+      }
+    },
+    "**WatchCloud is a watchOS app that makes it possible to stream SoundCloud directly to your Apple Watch.**\n\nThis **iOS** app is used to connect WatchCloud to your SoundCloud account." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**WatchCloud هو أحد تطبيقات watchOS التي تتيح إمكانية بث SoundCloud مباشرة إلى Apple Watch.**\n\nيتم استخدام تطبيق **iOS** هذا لتوصيل WatchCloud بحساب SoundCloud الخاص بك."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**WatchCloud ist eine watchOS-App, die es ermöglicht, SoundCloud direkt auf Ihre Apple Watch zu streamen.**\n\nDiese **iOS**-App wird verwendet, um WatchCloud mit Ihrem SoundCloud-Konto zu verbinden."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**WatchCloud es una aplicación de watchOS que permite transmitir SoundCloud directamente a tu Apple Watch.**\n\nEsta aplicación **iOS** se utiliza para conectar WatchCloud a su cuenta de SoundCloud."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**WatchCloud est une application watchOS qui permet de diffuser SoundCloud directement sur votre Apple Watch.**\n\nCette application **iOS** est utilisée pour connecter WatchCloud à votre compte SoundCloud."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**WatchCloud è un'app watchOS che rende possibile lo streaming di SoundCloud direttamente sul tuo Apple Watch.**\n\nQuesta app **iOS** viene utilizzata per connettere WatchCloud al tuo conto SoundCloud."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**WatchCloud は、SoundCloud を Apple Watch に直接ストリーミングできるようにする watchOS アプリです。**\n\nこの **iOS** アプリは、WatchCloud を SoundCloud アカウントに接続するために使用されます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**WatchCloud는 SoundCloud를 Apple Watch로 직접 스트리밍할 수 있게 해주는 watchOS 앱입니다.**\n\n이 **iOS** 앱은 WatchCloud를 SoundCloud 계정에 연결하는 데 사용됩니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**WatchCloud is een watchOS-app die het mogelijk maakt om SoundCloud rechtstreeks naar je Apple Watch te streamen.**\n\nDeze **iOS**-app wordt gebruikt om WatchCloud met uw SoundCloud-account te verbinden."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**WatchCloud é um aplicativo watchOS que possibilita transmitir o SoundCloud diretamente para o seu Apple Watch.**\n\nEste aplicativo **iOS** é usado para conectar o WatchCloud à sua conta do SoundCloud."
+          }
+        }
+      }
+    },
+    "About" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "عن"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Information"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Información"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À Propos"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informazioni"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "情報"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "정보"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informatie"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informação"
+          }
+        }
+      }
+    },
+    "Account Connected" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الحساب متصل"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konto Verbunden"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta Conectada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compte Connecté"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conto Connesso"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アカウントが接続されました"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "계정이 연결되었습니다"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account Verbonden"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conta Conectada"
+          }
+        }
+      }
+    },
+    "After completing the instructions to connect your account, verify that WatchCloud has been connected on your Apple Watch. The watchOS app will remain connected without this iOS app.\n\nYou can then delete this app from your iPhone. You can download this app again from the App Store if you need to reconnect your SoundCloud account." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "بعد إكمال تعليمات ربط حسابك، تأكد من اتصال WatchCloud على Apple Watch. سيظل تطبيق watchOS متصلاً بدون تطبيق iOS هذا.\n\nيمكنك بعد ذلك حذف هذا التطبيق من جهاز iPhone الخاص بك. يمكنك تنزيل هذا التطبيق مرة أخرى من App Store إذا كنت بحاجة إلى إعادة الاتصال بحساب SoundCloud الخاص بك."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nachdem Sie die Anweisungen zum Verbinden Ihres Kontos abgeschlossen haben, überprüfen Sie, ob WatchCloud auf Ihrer Apple Watch verbunden wurde. Die watchOS-App bleibt auch ohne diese iOS-App verbunden.\n\nAnschließend können Sie diese App von Ihrem iPhone löschen. Sie können diese App erneut aus dem App Store herunterladen, wenn Sie Ihr SoundCloud-Konto erneut verbinden müssen."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Después de completar las instrucciones para conectar su cuenta, verifique que WatchCloud se haya conectado en su Apple Watch. La aplicación watchOS permanecerá conectada sin esta aplicación iOS.\n\nLuego puedes eliminar esta aplicación de tu iPhone. Puede descargar esta aplicación nuevamente desde la App Store si necesita volver a conectar su cuenta de SoundCloud."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Après avoir suivi les instructions pour connecter votre compte, vérifiez que WatchCloud a été connecté sur votre Apple Watch. L'application watchOS restera connectée sans cette application iOS.\n\nVous pouvez ensuite supprimer cette application de votre iPhone. Vous pouvez télécharger à nouveau cette application depuis l'App Store si vous devez reconnecter votre compte SoundCloud."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dopo aver completato le istruzioni per connettere il tuo conto, verifica che WatchCloud sia stato connesso sul tuo Apple Watch. L'app watchOS rimarrà connessa senza questa app iOS.\n\nPotrai quindi eliminare questa app dal tuo iPhone. Puoi scaricare nuovamente questa app dall'App Store se devi ricollegare il tuo account SoundCloud."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アカウントを接続する手順を完了したら、Apple Watch で WatchCloud が接続されていることを確認します。 watchOS アプリは、この iOS アプリがなくても接続されたままになります。\n\nその後、このアプリを iPhone から削除できます。 SoundCloud アカウントを再接続する必要がある場合は、App Store からこのアプリを再度ダウンロードできます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "계정 연결 지침을 완료한 후 WatchCloud가 Apple Watch에 연결되었는지 확인하세요. watchOS 앱은 이 iOS 앱이 없어도 연결 상태를 유지합니다.\n\n그런 다음 iPhone에서 이 앱을 삭제할 수 있습니다. SoundCloud 계정을 다시 연결해야 하는 경우 App Store에서 이 앱을 다시 다운로드할 수 있습니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nadat u de instructies voor het koppelen van uw account heeft voltooid, controleert u of WatchCloud is verbonden met uw Apple Watch. De watchOS-app blijft verbonden zonder deze iOS-app.\n\nVervolgens kunt u deze app van uw iPhone verwijderen. U kunt deze app opnieuw downloaden vanuit de App Store als u uw SoundCloud-account opnieuw moet verbinden."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Após concluir as instruções para conectar sua conta, verifique se o WatchCloud foi conectado ao seu Apple Watch. O aplicativo watchOS permanecerá conectado sem este aplicativo iOS.\n\nVocê pode então excluir este aplicativo do seu iPhone. Você pode baixar este aplicativo novamente na App Store se precisar reconectar sua conta do SoundCloud."
+          }
+        }
+      }
+    },
+    "Can I connect to SoundCloud on my watch?" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "هل يمكنني الاتصال بـ SoundCloud على ساعتي؟"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kann ich eine direkte Verbindung zu meiner Uhr herstellen?"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Puedo conectarme a SoundCloud en mi reloj?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Est-ce que je peux me connecter directement sur ma montre ?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posso connettermi direttamente sul mio Apple Watch?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ウォッチでSoundCloudに接続できますか?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Watch에 직접 연결할 수 있나요?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kan ik verbinding maken met SoundCloud op mijn horloge?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posso me conectar diretamente no meu relógio?"
+          }
+        }
+      }
+    },
+    "Can I delete this app from my phone?" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "هل يمكنني حذف هذا التطبيق من هاتفي؟"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kann ich diese App von meinem Telefon löschen?"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Puedo eliminar esta aplicación de mi teléfono?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Est-ce que je peux supprimer cette application iOS ?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posso eliminare questa app dal mio telefono?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このアプリを携帯電話から削除できますか?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "내 휴대폰에서 이 앱을 삭제할 수 있나요?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kan ik deze app van mijn telefoon verwijderen?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posso excluir este aplicativo do meu telefone?"
+          }
+        }
+      }
+    },
+    "Close" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يغلق"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schließen"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fermer"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiudere"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "閉じる"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "닫다"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dicht"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fechar"
+          }
+        }
+      }
+    },
+    "Connect" : {
+      "comment" : "Verb",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تسجيل دخول"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conectar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se Connecter"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connetersi"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログイン"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "로그인"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conectar"
+          }
+        }
+      }
+    },
+    "Connect to SoundCloud" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اتصل بـ SoundCloud"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Melden Sie sich bei SoundCloud an"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conéctate a SoundCloud"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connectez-vous à SoundCloud"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connettiti a SoundCloud"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SoundCloudに接続する"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사운드클라우드에 연결"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maak verbinding met SoundCloud"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conecte-se ao SoundCloud"
+          }
+        }
+      }
+    },
+    "Frequently Asked Questions" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أسئلة مكررة"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Häufig Gestellte Fragen"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preguntas Frecuentes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FAQ"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Domande Frequenti"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "よくある質問"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자주 묻는 질문"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veel Gestelde Vragen"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perguntas Frequentes"
+          }
+        }
+      }
+    },
+    "Install WatchCloud app on Apple Watch" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "قم بتثبيت تطبيق WatchCloud على Apple Watch"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installieren Sie die WatchCloud-App auf der Apple Watch"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instale la aplicación WatchCloud en Apple Watch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installez l'application WatchCloud sur votre Apple Watch"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installa l'app WatchCloud su Apple Watch"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple WatchにWatchCloudアプリをインストールする"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Watch에 WatchCloud 앱 설치"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installeer de WatchCloud-app op Apple Watch"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instale o aplicativo WatchCloud no Apple Watch"
+          }
+        }
+      }
+    },
+    "Legal" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "قانوني"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legal"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legal"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Légal"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legale"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "法的"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "합법적인"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legaal"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legal"
+          }
+        }
+      }
+    },
+    "Login" : {
+      "comment" : "App Name/Title",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اتصال"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexion"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログイン"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "로그인"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        }
+      }
+    },
+    "OK" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نعم"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "わかりました"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "좋아요"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "Open app on Apple Watch" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "افتح التطبيق على ساعة أبل"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnen Sie die App auf der Apple Watch"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir aplicación en Apple Watch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrez l'application sur votre Apple Watch"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri l'app su Apple Watch"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Watchでアプリを開く"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Watch에서 앱 열기"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open de app op Apple Watch"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abra o aplicativo no Apple Watch"
+          }
+        }
+      }
+    },
+    "powered by" : {
+      "comment" : "Used next to SC logo",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مدعوم من"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "angetrieben von"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "impulsado por"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "alimentée par"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "alimentato da"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "による提供"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "에 의해 구동"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "aangedreven door"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "alimentado por"
+          }
+        }
+      }
+    },
+    "Something Went Wrong" : {
+      "comment" : "Alert title",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "هناك خطأ ما"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etwas ist schief gelaufen"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocurrió Un Error"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qualcosa non funziona"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "エラーが発生しました"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "에러 발생됨"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er is iets fout gegaan"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algo deu errado"
+          }
+        }
+      }
+    },
+    "SoundCloud API Terms of Use" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "شروط استخدام SoundCloud API"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nutzungsbedingungen der SoundCloud-API"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Términos de uso de la API de SoundCloud"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conditions d'utilisation de l'API SoundCloud"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Termini di Utilizzo dell'API SoundCloud"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SoundCloud API利用規約"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SoundCloud API 이용 약관"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebruiksvoorwaarden SoundCloud API"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Termos de uso da API SoundCloud"
+          }
+        }
+      }
+    },
+    "There was a problem connecting to SoundCloud. Verify your account works on soundcloud.com or try one of the other login methods" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حدثت مشكلة في الاتصال بـ SoundCloud. تأكد من أن حسابك يعمل على soundcloud.com أو جرّب إحدى طرق تسجيل الدخول الأخرى"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beim Herstellen der Verbindung zu SoundCloud ist ein Problem aufgetreten. Überprüfen Sie, ob Ihr Konto auf soundcloud.com funktioniert, oder probieren Sie eine der anderen Anmeldemethoden aus"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hubo un problema al conectarse a SoundCloud. Verifique que su cuenta funcione en soundcloud.com o pruebe uno de los otros métodos de inicio de sesión"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un problème est survenu lors de la connexion à SoundCloud. Vérifiez que votre compte fonctionne sur soundcloud.com ou essayez l'une des autres méthodes de connexion"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si è verificato un problema durante la connessione a SoundCloud. Verifica che il tuo conto funziona su soundcloud.com o prova uno degli altri metodi di accesso"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SoundCloud への接続に問題が発生しました。アカウントが soundcloud.com で動作することを確認するか、他のログイン方法のいずれかを試してください"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SoundCloud에 연결하는 중에 문제가 발생했습니다. soundcloud.com에서 계정이 작동하는지 확인하거나 다른 로그인 방법 중 하나를 사용해 보세요."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er is een probleem opgetreden bij het verbinden met SoundCloud. Controleer of je account werkt op soundcloud.com of probeer een van de andere inlogmethoden"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocorreu um problema na conexão com o SoundCloud. Verifique se sua conta funciona no soundcloud.com ou tente um dos outros métodos de login"
+          }
+        }
+      }
+    },
+    "Watch App Installed" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تم تثبيت تطبيق watchOS"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Watch-App installiert"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aplicación watchOS instalada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Application watchOS installée"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Applicazione watchOS Installata"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ウォッチアプリがインストールされました"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시계 앱이 설치됨"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Horloge-App Geïnstalleerd"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aplicativo watchOS instalado"
+          }
+        }
+      }
+    },
+    "Watch App Not Installed" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تطبيق watchOS غير مثبت"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Watch-App nicht installiert"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aplicación watchOS no instalada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Application watchOS non installée"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Applicazione watchOS Non Installata"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Watch アプリがインストールされていません"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시계 앱이 설치되지 않았습니다"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Horloge-App Niet Geïnstalleerd"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aplicativo watchOS não instalado"
+          }
+        }
+      }
+    },
+    "WatchCloud" : {
+      "comment" : "App Name/Title",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WatchCloud"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WatchCloud"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WatchCloud"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WatchCloud"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WatchCloud"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WatchCloud"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WatchCloud"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WatchCloud"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WatchCloud"
+          }
+        }
+      }
+    },
+    "WatchCloud Privacy Policy" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "سياسة خصوصية WatchCloud"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WatchCloud-Datenschutzrichtlinie"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de Privacidad "
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Politique de Confidentialité"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informativa sulla privacy"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WatchCloud プライバシー ポリシー"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WatchCloud 개인정보 보호정책"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WatchCloud-privacybeleid"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de Privacidade"
+          }
+        }
+      }
+    },
+    "What is this app?" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ماذا يفعل هذا التطبيق؟"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Was ist diese App?"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Qué es esta aplicación?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Que fait cette application ?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cos'è questa app?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このアプリは何ですか?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 앱은 무엇입니까?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wat is deze app?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O que é esse aplicativo?"
+          }
+        }
+      }
+    },
+    "Where can I get help?" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أين يمكنني الحصول على المساعدة؟"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wo kann ich Hilfe bekommen?"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Dónde puedo obtener ayuda?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contacter l'assistance"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dove posso ottenere aiuto?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "どこで助けが得られますか?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "어디서 도움을 받을 수 있나요?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waar kan ik hulp krijgen?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onde posso obter ajuda?"
+          }
+        }
+      }
+    },
+    "Yes, but **there may be issues displaying the webpage for some of the login methods.**\n\nAll login methods (soundcloud.com, Apple ID, FB, Google) work from this iPhone app." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نعم، ولكن **قد تكون هناك مشكلات في عرض صفحة الويب لبعض طرق تسجيل الدخول.**\n\nتعمل جميع طرق تسجيل الدخول (soundcloud.com، Apple ID، FB، Google) من خلال تطبيق iPhone هذا."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja, aber **bei einigen Anmeldemethoden kann es zu Problemen bei der Anzeige der Webseite kommen.**\n\nAlle Anmeldemethoden (soundcloud.com, Apple ID, FB, Google) funktionieren über diese iPhone-App."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sí, pero **puede haber problemas al mostrar la página web para algunos de los métodos de inicio de sesión.**\n\nTodos los métodos de inicio de sesión (soundcloud.com, ID de Apple, FB, Google) funcionan desde esta aplicación para iPhone."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oui, mais **il peut y avoir des problèmes d'affichage de la page web pour certaines méthodes de connexion.**\n\nToutes les méthodes de connexion (soundcloud.com, Apple ID, FB, Google) fonctionnent à partir de cette application iPhone."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sì, ma **potrebbero verificarsi problemi nella visualizzazione della pagina web per alcuni metodi di accesso.**\n\nTutti i metodi di accesso (soundcloud.com, ID Apple, FB, Google) funzionano da questa app per iPhone."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "はい、ただし **一部のログイン方法では Web ページの表示に問題が発生する可能性があります。**\n\nすべてのログイン方法 (soundcloud.com、Apple ID、FB、Google) はこの iPhone アプリから機能します。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "예, 하지만 **일부 로그인 방법에 대해 웹페이지를 표시하는 데 문제가 있을 수 있습니다.**\n\n모든 로그인 방법(soundcloud.com, Apple ID, FB, Google)은 이 iPhone 앱에서 작동합니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja, maar **er kunnen problemen optreden bij het weergeven van de webpagina bij sommige inlogmethoden.**\n\nAlle inlogmethoden (soundcloud.com, Apple ID, FB, Google) werken vanuit deze iPhone-app."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sim, mas **pode haver problemas na exibição da página da Web para alguns dos métodos de login.**\n\nTodos os métodos de login (soundcloud.com, Apple ID, FB, Google) funcionam neste aplicativo para iPhone."
+          }
+        }
+      }
+    },
+    "You can send an email to **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nYou can also visit the **[issues page](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** to see questions from the community 👋" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يمكنك إرسال بريد إلكتروني إلى **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 📨\n\nيمكنك أيضًا زيارة **[صفحة المشكلات](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** للاطلاع على أسئلة المجتمع 👋"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sie können eine E-Mail an **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌 senden\n\nSie können auch die **[Problemseite](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** besuchen, um Fragen aus der Community zu sehen 👋"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puede enviar un correo electrónico a **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nTambién puedes visitar la **[página de problemas](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** para ver las preguntas de la comunidad 👋"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous pouvez envoyer un e-mail à **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nVous pouvez également visiter la **[page des problèmes](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** pour voir des questions déjà posées par la communauté 👋"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puoi inviare un'e-mail a **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nPuoi anche visitare la **[pagina dei problemi](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** per vedere le domande della community 👋"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** にメールを送信できます 💌\n\n**[問題ページ](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** にアクセスして、コミュニティからの質問を確認することもできます 👋"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)**으로 이메일을 보내실 수 있습니다 💌\n\n**[문제 페이지](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)**를 방문하여 커뮤니티의 질문을 볼 수도 있습니다 👋"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "U kunt een e-mail sturen naar **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nJe kunt ook de **[problemenpagina](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** bezoeken om vragen van de community te bekijken 👋"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você pode enviar um e-mail para **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nVocê também pode visitar a **[página de problemas](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** para ver as perguntas da comunidade 👋"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

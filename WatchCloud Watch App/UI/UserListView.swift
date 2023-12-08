@@ -17,30 +17,43 @@ struct UserListView: View {
     var sortedAlphabetically = true
     var reachedBottomOfList: (() -> Void)? = nil
     
+    var sortedUsers: Array<Binding<User>> {
+        $users.sorted(by: { sortedAlphabetically ? $0.wrappedValue.username < $1.wrappedValue.username : false })
+    }
+    
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                ForEach( $users.sorted(by: { sortedAlphabetically ? $0.wrappedValue.username < $1.wrappedValue.username : false }), id: \.wrappedValue.id) { user in
-                    NavigationLink {
-                        UserView(user: user.wrappedValue).onAppear {
-                            AnalyticsManager.shared.log(.tappedUser)
-                        }
-                    } label: {
-                        UserCellView(user: user)
+        List {
+            ForEach(sortedUsers, id: \.wrappedValue.id) { user in
+                NavigationLink {
+                    UserDetailView(user: user.wrappedValue).onAppear {
+                        AnalyticsManager.shared.log(.tappedUser)
                     }
+                } label: {
+                    UserCellView(user: user)
                 }
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
+            }
+            Group {
                 if canLoadMore, let reachedBottomOfList {
                     userListLoadingView.onAppear {
                         reachedBottomOfList()
                     }
                 } else if !canLoadMore, users.isEmpty {
-                    sectionFooterView(String(localized: "List is empty"))
+                    Text("List is empty")
+                        
                 } else {
-                    sectionFooterView(String(localized: "End of list"))
+                    Text("End of list")
                 }
             }
-            .animation(.default, value: users)
+            .font(.footnote)
+            .fontWeight(.medium)
+            .foregroundColor(.secondary)
+            .fullWidth()
+            .listRowBackground(Color.clear)
+            .listRowInsets(EdgeInsets())
         }
+        .animation(.default, value: users)
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(title)
         .buttonStyle(.plain)
@@ -51,8 +64,6 @@ struct UserListView: View {
             ProgressView()
                 .tint(.scOrange)
             Text("Loading users...")
-                .font(.footnote)
-                .foregroundColor(.secondary)
         }
         .padding(.vertical, 10)
     }

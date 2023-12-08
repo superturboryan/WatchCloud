@@ -75,7 +75,7 @@ extension AudioStore {
     }
     
     @MainActor
-    private func loadDefaultPlaylists() {
+    func loadDefaultPlaylists() {
         loadedPlaylists.removeAll()
         let myUser = User(id: -1)
         

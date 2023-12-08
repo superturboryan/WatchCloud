@@ -26,7 +26,10 @@ struct CurrentUserView: View {
         .padding(.bottom, 6)
         .padding(.top, -20)
         .edgesIgnoringSafeArea([.bottom])
-        .alert("Are you sure you want to logout?", isPresented: $showLogoutAlert) {
+        .alert(
+            "Are you sure you want to logout?",
+            isPresented: $showLogoutAlert
+        ) {
             Button("Logout", role: .destructive) { tappedLogout() }
             Button(String(localized: "Cancel", comment: "Verb"), role: .cancel) {}
         }

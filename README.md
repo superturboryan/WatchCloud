@@ -17,9 +17,9 @@ SC_REDIRECT_URI = ...
 MP_PROJECT_TOKEN = ...
 ```
 
-2. Set the configuration under *Project > Configurations*.
+2. Set the configuration under *Project > Configurations*
 
-3. Select *WatchCloud Watch App* scheme and *watchOS device* run destination.
+3. Select *WatchCloud watchOS* scheme and *watchOS device* run destination ⌚️
 
 4. Run! 🕺💃  
 
@@ -58,6 +58,12 @@ Country pages: [🇺🇸](https://apps.apple.com/us/app/watchcloud/id6466678799)
     <img src="Screenshots/1.1.2/LibraryView%20Bottom%20-%20S945.png" width=200 alt="Library screen bottom"/>
 </p>
 
+<br />
+
+<p float="center">
+    <img src="Screenshots/1.3.0/iOS%20RootView%20-%2015Pro.png" width=350 alt="iOS root screen"/>
+    <img src="Screenshots/1.3.0/iOS%20AboutView%20-%2015Pro.png" width=350 alt="iOS about screen"/>
+</p>
 
 ## Dependencies
 📦 [KeychainSwift](https://github.com/evgenyneu/keychain-swift/)  

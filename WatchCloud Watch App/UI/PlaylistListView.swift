@@ -21,25 +21,33 @@ struct PlaylistListView: View {
     var reachedBottomOfList: (() -> Void)? = nil
     
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                ForEach($playlists, id: \.id) { playlist in
-                    Button {
-                        tapped(playlist.wrappedValue)
-                    } label: {
-                        PlaylistCellView(playlist: playlist)
-                    }
+        List {
+            ForEach($playlists, id: \.id) { playlist in
+                Button {
+                    tapped(playlist.wrappedValue)
+                } label: {
+                    PlaylistCellView(playlist: playlist)
                 }
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
+            }
+            Group {
                 if canLoadMore, let reachedBottomOfList {
                     userListLoadingView.onAppear {
                         reachedBottomOfList()
                     }
                 } else {
-                    sectionFooterView(String(localized: "End of list"))
+                    Text("End of list")
+                        .font(.footnote)
+                        .fontWeight(.medium)
+                        .foregroundColor(.secondary)
+                        .fullWidth()
                 }
             }
-            .animation(.default, value: playlists)
+            .listRowBackground(Color.clear)
+            .listRowInsets(EdgeInsets())
         }
+        .animation(.default, value: playlists)
         .navigationDestination(isPresented: .constant(selectedPlaylist != nil)) {
             if let selectedPlaylist = Binding($selectedPlaylist) {
                 PlaylistView(playlist: selectedPlaylist).onDisappear {
@@ -70,16 +78,17 @@ struct PlaylistListView: View {
                 .font(.footnote)
                 .foregroundColor(.secondary)
         }
-        .padding(.vertical, 10)
+        .padding(.vertical)
     }
 }
 
 #Preview {
     NavigationStack {
         PlaylistListView(
-            playlists: .constant([testPlaylist(),testPlaylist(),testPlaylist(),]),
+            playlists: .constant([testPlaylist(),testPlaylist(),testPlaylist(),testPlaylist(),]),
             canLoadMore: .constant(false),
             title: "Following"
+//            reachedBottomOfList: {}
         )
         .environmentObject(AudioStore(testSC))
     }

@@ -54,6 +54,11 @@ private extension WatchCloud_Watch_AppApp {
         _ = AnalyticsManager.shared
         ImagePipeline.shared = .init(configuration: .withDataCache) // Enables aggressive disk caching
         _ = PathMonitor.shared
+        
+        // 💡 Initialize SoundCloud instance before WCWatchSessionHandler so that SC can listen for
+        //    newAuthToken notification if one has been enqueued for watch after logging in on phone
+        _ = CompositionRoot.sc
+        _ = WCWatchSessionHandler.shared
     }
     
     func configureTips() {
