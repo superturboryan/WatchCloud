@@ -12,26 +12,28 @@ import TipKit
 struct LoginView: View {
 
     @EnvironmentObject var authStore: AuthStore
+    
     @State var showErrorAlert = false
-    @State var showingTip = false
+    @State var showLoginButton = false
+    @State var showTip = false
     
     @available(watchOS 10, *)
     @Parameter static var hasTriedToLoginAndCancelled: Bool = false
 
     var body: some View {
-        VStack {
-            captchaNotAppearingTip
-            loginButton
+        VStack(spacing: 30) {
+            if !showLoginButton {
+                connectOnPhonePrompt
+                showLoginButtonButton
+            } else {
+                loginButton
+            }
         }
+        .fontDesign(.rounded)
+        .animation(.default, value: showLoginButton)
         .fullWidthAndHeight()
         .background(.black)
-        .overlay(alignment: .bottom) {
-            if !showingTip {
-                PoweredBySCView()
-                    .padding(.bottom, 8)
-                    .animation(.default, value: showingTip)
-            }
-        }.alert(
+        .alert(
             "Failed to connect to SoundCloud, \nplease try again",
             isPresented: $showErrorAlert
         ) {
@@ -43,51 +45,50 @@ struct LoginView: View {
         .interactiveDismissDisabled()
     }
     
-    private var loginButton: some View {
-        Button { tappedLogin() } label: {
-            Label(String(localized: "Connect", comment: "Verb"), systemImage: "cloud.fill")
-                .lineLimit(1)
-                .fontWeight(.semibold)
-                .minimumScaleFactor(0.7)
-        }
-        .font(.title3)
-        .padding(.horizontal, 20)
-        .padding(.vertical, 18)
-        .background(.white.opacity(0.12))
-        .overlay {
-            Capsule()
-                .strokeBorder(style: StrokeStyle(lineWidth: 6))
-                .foregroundStyle(LinearGradient.scOrange(.horizontal))
-        }
-        .clipShape(Capsule())
+    private var connectOnPhonePrompt: some View {
+        Text("Connect to SoundCloud using the WatchCloud iOS app on your phone (recommended)")
+            .fontWeight(.bold)
+            .multilineTextAlignment(.center)
+            .padding(.top)
     }
     
-    private func tappedLogin() {
-        Task {
-            do {
-                try await authStore.login()
-                AnalyticsManager.shared.log(.loginSuccess)
-            } catch(AuthStore.Error.cancelledLogin) {
-                AnalyticsManager.shared.log(.loginCancelled)
-                if #available(watchOS 10, *) {
-                    LoginView.hasTriedToLoginAndCancelled = true
-                    Haptics.notification()
+    private var showLoginButtonButton: some View {
+        Button {
+            showLoginButton = true
+        } label: {
+            Text("or connect here")
+                .font(.footnote)
+                .fontWeight(.medium)
+                .foregroundStyle(LinearGradient.scOrange(.horizontal, reversed: true))
+        }
+    }
+    
+    private var loginButton: some View {
+        LoginButton {
+            Task {
+                do {
+                    try await authStore.login()
+                    AnalyticsManager.shared.log(.loginSuccess)
+                } catch(AuthStore.Error.cancelledLogin) {
+                    AnalyticsManager.shared.log(.loginCancelled)
+                    if #available(watchOS 10, *) {
+                        LoginView.hasTriedToLoginAndCancelled = true
+                        Haptics.notification()
+                    }
+                } catch {
+                    showErrorAlert = true
+                    AnalyticsManager.shared.log(.loginFailure)
                 }
-            } catch {
-                showErrorAlert = true
-                AnalyticsManager.shared.log(.loginFailure)
             }
         }
     }
-    
+
     @ViewBuilder
-    private var captchaNotAppearingTip: some View {
+    private var captchaNotAppearingTip: some View { // ‼️ Not currently shown
         if #available(watchOS 10, *) {
             TipView(CaptchaNotAppearingTip(), arrowEdge: .bottom)
-            .onVisibilityChange {
-                showingTip = $0
-            }
-            .animation(.default, value: showingTip)
+            .onVisibilityChange { showTip = $0 }
+            .animation(.default, value: showTip)
         } else {
             EmptyView()
         }

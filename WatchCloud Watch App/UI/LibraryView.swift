@@ -14,31 +14,29 @@ struct LibraryView: View {
     @EnvironmentObject var authStore: AuthStore
     @EnvironmentObject var userStore: UserStore
 
-    let 👆 = "👆"
+    private let topCell = "top"
     
     var body: some View {
         NavigationStack {
             ScrollViewReader { sv in
-                let scrollToTop = { sv.scrollTo(👆, anchor: .top) }
-                ScrollView {
-                    libraryView
-                }
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle(String(localized:"Library"))
-                .onChange(of: authStore.isLoggedIn) { if $0 { scrollToTop() } }
+                let scrollToTop = { sv.scrollTo(topCell, anchor: .top) }
+                libraryView
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle(String(localized:"Library"))
+                    .onChange(of: authStore.isLoggedIn) { if $0 { scrollToTop() } }
             }
         }
     }
     
     private var libraryView: some View {
-        VStack {
+        List {
             if let nowPlayingBinding = Binding($audioStore.loadedPlaylists[PlaylistType.nowPlaying.rawValue]),
                !(nowPlayingBinding.wrappedValue.tracks?.isEmpty ?? true) {
-                nowPlayingCell(nowPlayingBinding).id(👆) // Assign id for topmost cell conditionally
+                nowPlayingCell(nowPlayingBinding).id(topCell)
                 searchCell
                 downloadsCell
             } else {
-                searchCell.id(👆)
+                searchCell.id(topCell)
                 downloadsCell
             }
 
@@ -53,7 +51,7 @@ struct LibraryView: View {
             followingCell
 
             if !audioStore.myPlaylistIds.isEmpty {
-                Section(header: sectionHeaderView(String(localized:"My Playlists"))) {
+                Section(header: headerText(String(localized: "My Playlists"))) {
                     ForEach($audioStore.loadedPlaylists.values
                         .filter { audioStore.myPlaylistIds.contains($0.wrappedValue.id) }
                         .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
@@ -64,7 +62,7 @@ struct LibraryView: View {
             }
             
             if !audioStore.myLikedPlaylistIds.isEmpty {
-                Section(header: sectionHeaderView(String(localized: "Liked Playlists"))) {
+                Section(header: headerText(String(localized: "Liked Playlists"))) {
                     ForEach($audioStore.loadedPlaylists.values
                         .filter { audioStore.myLikedPlaylistIds.contains($0.wrappedValue.id) }
                         .sorted(by: { $0.wrappedValue.title < $1.wrappedValue.title })
@@ -74,16 +72,19 @@ struct LibraryView: View {
                 }
             }
 
-            Section(header: sectionHeaderView(String(localized: "My Account"))) {
+            Section(header: headerText(String(localized: "My Account"))) {
                 currentUserCell
+                settingsCell
             }
-            
-            settingsCell
-
-            PoweredBySCView()
-                .padding(.top, 14)
         }
-        .padding(.horizontal, 4)
+        .sectionSpacing(8)
+    }
+    
+    func headerText(_ text: String) -> some View {
+        Text(text)
+            .foregroundStyle(.secondary)
+            .padding(.bottom, 2)
+            .padding(.top, 4)
     }
     
     func nowPlayingCell(_ playlist: Binding<Playlist>) -> some View {
@@ -137,6 +138,8 @@ struct LibraryView: View {
             PlaylistCellView(playlist: playlist)
         }
         .buttonStyle(.plain)
+        .listRowBackground(Color.clear)
+        .listRowInsets(EdgeInsets())
     }
     
     var currentUserCell: some View {
@@ -202,11 +205,14 @@ struct LibraryView: View {
             }
             .lineLimit(1)
             .fontDesign(.rounded)
-            .padding(10)
+            .padding(.vertical, 16)
+            .padding(.horizontal, 12)
             .background(bgColor)
             .cornerRadius(10)
         }
         .buttonStyle(.plain)
+        .listRowBackground(Color.clear)
+        .listRowInsets(EdgeInsets())
     }
     
     func imageForCell(_ id: Int) -> some View {
@@ -263,5 +269,5 @@ struct LibraryView: View {
     LibraryView()
         .environmentObject(AudioStore(testSC))
         .environmentObject(AuthStore(testSC))
-        .environmentObject(testAudioPlayer)
+        .environmentObject(UserStore(testSC))
 }

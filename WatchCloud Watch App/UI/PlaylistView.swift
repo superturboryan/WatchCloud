@@ -34,7 +34,7 @@ struct PlaylistView: View {
     
     var body: some View {
         ScrollViewReader { sv in
-            ScrollView {
+            List {
                 if showSummary {
                     PlaylistSummaryView(
                         playlist: $playlist,
@@ -43,15 +43,17 @@ struct PlaylistView: View {
                         tappedPlayAll: { tappedPlayAll(sv) },
                         tappedLike: { tappedLike() }
                     )
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets())
                 }
                 
                 if isLoading {
                     trackListLoadingView
                 } else if !playlist.tracks.isEmptyOrNil {
                     trackList
-                        .padding(.top)
                 }
             }
+            .sectionSpacing(0)
             .task {
                 #warning("Errors not handled")
                 if isFirstLoad, let onFirstLoad {
@@ -85,41 +87,48 @@ struct PlaylistView: View {
                 .foregroundColor(.secondary)
         }
         .padding(.vertical, 10)
+        .listRowBackground(Color.clear)
+        .listRowInsets(EdgeInsets())
     }
     
     @ViewBuilder
     var trackList: some View {
-        if let tracks = playlist.tracks, !tracks.isEmpty {
-            LazyVStack(spacing: 5) {
-                
+        Group {
+            if let tracks = playlist.tracks, !tracks.isEmpty {
                 if showShuffleButton {
-                    shuffleButton
+                    shuffleButton.listRowInsets(EdgeInsets())
                 }
-                
-                ForEach(.constant(tracks)) { track in
-                    TrackCellView(
-                        track: track.wrappedValue,
-                        isPlaying: audioStore.loadedTrack == track.wrappedValue,
-                        isDownloaded: audioStore.downloadedTracks.contains(track.wrappedValue)
-                    )
-                    // .id() automatically applied when using ForEach(Identifiable) 🤓
-                    .onTapGesture { tapped(track.wrappedValue) }
-                }
-                
-                if playlist.hasNextPage {
-                    trackListLoadingView.onAppear {
-                        loadNextPageOfTracks()
+                Section(footer: Group {
+                        if playlist.hasNextPage {
+                            trackListLoadingView.onAppear {
+                                loadNextPageOfTracks()
+                            }
+                        } else {
+                            Text("End of playlist")
+                                .fullWidth()
+                                .padding(.vertical, 10)
+                        }}
+                        .padding(.top)
+                ) {
+                    ForEach(.constant(tracks)) { track in
+                        TrackCellView(
+                            track: track.wrappedValue,
+                            isPlaying: audioStore.loadedTrack == track.wrappedValue,
+                            isDownloaded: audioStore.downloadedTracks.contains(track.wrappedValue)
+                        )
+                        // .id() automatically applied when using ForEach(Identifiable) 🤓
+                        .onTapGesture { tapped(track.wrappedValue) }
                     }
-                } else {
-                    sectionFooterView(String(localized: "End of playlist"))
                 }
+            } else {
+                Text("Playlist is empty")
+                    .fullWidth()
+                    .foregroundColor(.secondary)
+                    .padding(20)
             }
-            .animation(.default, value: playlist.tracks)
-        } else {
-            Text("Playlist is empty")
-                .foregroundColor(.secondary)
-                .padding(20)
         }
+        .listRowBackground(Color.clear)
+        .listRowInsets(EdgeInsets())
     }
     
     private var shuffleButton: some View {
@@ -136,7 +145,6 @@ struct PlaylistView: View {
         }
         .cornerRadius(8)
         .disabled(playlist.tracks.isEmptyOrNil)
-
     }
     
     private func loadNextPageOfTracks() {
@@ -150,9 +158,9 @@ struct PlaylistView: View {
     
     // MARK: - Tap actions
     func tappedPlayAll(_ sv: ScrollViewProxy) {
-        tapped(playlist.tracks!.first!)
         let firstTrackId = playlist.tracks?.first?.id ?? -1
         withAnimation { sv.scrollTo(firstTrackId, anchor: .center) }
+        tapped(playlist.tracks!.first!)
         AnalyticsManager.shared.log(.tappedPlayAll)
     }
     

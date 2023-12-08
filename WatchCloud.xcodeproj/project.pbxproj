@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		941687192B1CBD6100A62407 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941687182B1CBD6100A62407 /* Text.swift */; };
+		9416871B2B1CD13300A62407 /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9416871A2B1CD13300A62407 /* ColorScheme.swift */; };
 		941A00EB2AC304B6000F4693 /* NewPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A00EA2AC304B6000F4693 /* NewPlayerView.swift */; };
 		941A00F82AC70CEE000F4693 /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A00F72AC70CEE000F4693 /* CachedImageView.swift */; };
 		9421D29F2ACE2A90005FE857 /* PlaylistListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9421D29E2ACE2A90005FE857 /* PlaylistListView.swift */; };
@@ -21,7 +23,6 @@
 		9421D2BE2AD34FFC005FE857 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9421D2BD2AD34FFC005FE857 /* AnalyticsManager.swift */; };
 		943477BC2AD3E1CA00A6DED6 /* DebugAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943477BB2AD3E1CA00A6DED6 /* DebugAnalyticsService.swift */; };
 		943477BF2AD421E200A6DED6 /* CaptchaNotAppearingTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943477BE2AD421E200A6DED6 /* CaptchaNotAppearingTip.swift */; };
-		943477C02AD5AAA800A6DED6 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9446C5FA2ABDA57E00BCE5DF /* Localizable.xcstrings */; };
 		943477CC2AD5FF0500A6DED6 /* LoginView - S945.png in Resources */ = {isa = PBXBuildFile; fileRef = 943477CB2AD5FF0500A6DED6 /* LoginView - S945.png */; };
 		943670C72AEBE13D007E4973 /* SoundCloudAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943670C62AEBE13D007E4973 /* SoundCloudAPI.swift */; };
 		943756CF2ACDA02500C84006 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943756CE2ACDA02500C84006 /* SearchView.swift */; };
@@ -37,12 +38,10 @@
 		945C22692B010F33008A5E39 /* AudioStore_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C22682B010F33008A5E39 /* AudioStore_Tests.swift */; };
 		945C226B2B025F49008A5E39 /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C226A2B025F49008A5E39 /* AppLauncher.swift */; };
 		945CCB5F2AB383D500C47E55 /* SwiftUI Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CCB5E2AB383D500C47E55 /* SwiftUI Preview.swift */; };
-		946F38972AB079C9008CE9D1 /* WatchCloud Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		946F38A02AB079CA008CE9D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946F389F2AB079CA008CE9D1 /* Assets.xcassets */; };
 		946F38A32AB079CA008CE9D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946F38A22AB079CA008CE9D1 /* Preview Assets.xcassets */; };
 		946F38B12AB07A2E008CE9D1 /* SoundCloud in Frameworks */ = {isa = PBXBuildFile; productRef = 946F38B02AB07A2E008CE9D1 /* SoundCloud */; };
 		946F38CD2AB07F81008CE9D1 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38B72AB07F81008CE9D1 /* View.swift */; };
-		946F38CF2AB07F81008CE9D1 /* Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38B92AB07F81008CE9D1 /* Delete.swift */; };
 		946F38D02AB07F81008CE9D1 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38BA2AB07F81008CE9D1 /* Config.swift */; };
 		946F38D12AB07F81008CE9D1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38BB2AB07F81008CE9D1 /* Image.swift */; };
 		946F38D22AB07F81008CE9D1 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38BC2AB07F81008CE9D1 /* Haptics.swift */; };
@@ -61,6 +60,8 @@
 		946F38DF2AB07F81008CE9D1 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CA2AB07F81008CE9D1 /* PlayerView.swift */; };
 		946F38E02AB07F81008CE9D1 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CB2AB07F81008CE9D1 /* AudioPlayer.swift */; };
 		946F38E12AB07F81008CE9D1 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38CC2AB07F81008CE9D1 /* App.swift */; };
+		947400C22B1DF89A00C5BF64 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947400C12B1DF89A00C5BF64 /* Device.swift */; };
+		947400C32B1E0FA200C5BF64 /* PoweredBySCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94923C6A2ABDB5A300A67EBE /* PoweredBySCView.swift */; };
 		947F59992B0A80E900741C53 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947F59982B0A80E900741C53 /* Notification.swift */; };
 		947F599B2B0A838500741C53 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947F599A2B0A838500741C53 /* Color.swift */; };
 		9488EE612AE013D40009EC54 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE602AE013D40009EC54 /* UserStore.swift */; };
@@ -81,26 +82,39 @@
 		94B6343F2ABDFAF900E6FCDA /* Complication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B6343E2ABDFAF900E6FCDA /* Complication.swift */; };
 		94B634412ABDFAFA00E6FCDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B634402ABDFAFA00E6FCDA /* Assets.xcassets */; };
 		94B634452ABDFAFA00E6FCDA /* ComplicationExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 94B6343A2ABDFAF900E6FCDA /* ComplicationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		94B8BB122B18CA7800BEB53B /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B8BB112B18CA7800BEB53B /* App.swift */; };
+		94B8BB142B18CA7800BEB53B /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B8BB132B18CA7800BEB53B /* RootView.swift */; };
+		94B8BB162B18CA7900BEB53B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B8BB152B18CA7900BEB53B /* Assets.xcassets */; };
+		94B8BB192B18CA7900BEB53B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B8BB182B18CA7900BEB53B /* Preview Assets.xcassets */; };
 		94BD056E2B0B964300C3DA89 /* NowPlayingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BD056D2B0B964300C3DA89 /* NowPlayingInfo.swift */; };
 		94C169A02AB474EE00570B4F /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 94C1699F2AB474EE00570B4F /* Nuke */; };
 		94C169A22AB474EE00570B4F /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 94C169A12AB474EE00570B4F /* NukeUI */; };
 		94D4951D2B0F74720013A2D9 /* ImagePipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D4951C2B0F74720013A2D9 /* ImagePipeline.swift */; };
 		94D4951F2B1212280013A2D9 /* ShortAndLongTapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D4951E2B1212280013A2D9 /* ShortAndLongTapButton.swift */; };
 		94D495212B1396D00013A2D9 /* PathMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D495202B1396D00013A2D9 /* PathMonitor.swift */; };
+		94E44C152B1BC46000ACF29B /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E44C142B1BC46000ACF29B /* AboutView.swift */; };
+		94E44C162B1BCC8400ACF29B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947F599A2B0A838500741C53 /* Color.swift */; };
+		94E44C192B1BDE3B00ACF29B /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E44C182B1BDE3B00ACF29B /* List.swift */; };
+		94EE88962B18E12E00486B15 /* WCPhoneSessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE88952B18E12E00486B15 /* WCPhoneSessionHandler.swift */; };
+		94EE88982B18E72900486B15 /* WCWatchSessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE88972B18E72900486B15 /* WCWatchSessionHandler.swift */; };
+		94EE889D2B18EADC00486B15 /* WatchCloud Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		94EE88A22B18F00E00486B15 /* SoundCloud in Frameworks */ = {isa = PBXBuildFile; productRef = 94EE88A12B18F00E00486B15 /* SoundCloud */; };
+		94EE88A42B19018E00486B15 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 94EE88A32B19018E00486B15 /* Localizable.xcstrings */; };
+		94EE88B92B190CFA00486B15 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 94EE88B82B190CFA00486B15 /* Config.xcconfig */; };
+		94EE88BF2B190FCC00486B15 /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE682AE3E2380009EC54 /* AuthStore.swift */; };
+		94EE88C02B190FE200486B15 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE6B2AE3E5D00009EC54 /* LoginService.swift */; };
+		94EE88C12B190FF800486B15 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38BA2AB07F81008CE9D1 /* Config.swift */; };
+		94EE88C42B195A7000486B15 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE88C32B195A7000486B15 /* Logger.swift */; };
+		94EE88C52B1B3F3200486B15 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38B72AB07F81008CE9D1 /* View.swift */; };
+		94EE88C72B1B3FFF00486B15 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE88C62B1B3FFF00486B15 /* LoginButton.swift */; };
+		94EE88C82B1B3FFF00486B15 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE88C62B1B3FFF00486B15 /* LoginButton.swift */; };
 		94FAA18A2ACB319600EF97CE /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1892ACB319600EF97CE /* UserListView.swift */; };
 		94FAA18C2ACB3B4200EF97CE /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */; };
-		94FAA1D02ACC273600EF97CE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1CF2ACC273600EF97CE /* UserView.swift */; };
+		94FAA1D02ACC273600EF97CE /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAA1CF2ACC273600EF97CE /* UserDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		94474B5A2AF2723E00BEA5F0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 946F388A2AB079C9008CE9D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 946F38952AB079C9008CE9D1;
-			remoteInfo = "WatchCloud Watch App";
-		};
-		946F38982AB079C9008CE9D1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 946F388A2AB079C9008CE9D1 /* Project object */;
 			proxyType = 1;
@@ -114,20 +128,16 @@
 			remoteGlobalIDString = 94B634392ABDFAF900E6FCDA;
 			remoteInfo = ComplicationExtension;
 		};
+		94EE889E2B18EADC00486B15 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 946F388A2AB079C9008CE9D1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 946F38952AB079C9008CE9D1;
+			remoteInfo = "WatchCloud Watch App";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		946F38A92AB079CA008CE9D1 /* Embed Watch Content */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
-			dstSubfolderSpec = 16;
-			files = (
-				946F38972AB079C9008CE9D1 /* WatchCloud Watch App.app in Embed Watch Content */,
-			);
-			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		946F38F72AB08471008CE9D1 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -139,9 +149,22 @@
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		94EE88A02B18EADC00486B15 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				94EE889D2B18EADC00486B15 /* WatchCloud Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		941687182B1CBD6100A62407 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		9416871A2B1CD13300A62407 /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		941A00EA2AC304B6000F4693 /* NewPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlayerView.swift; sourceTree = "<group>"; };
 		941A00ED2AC44793000F4693 /* Player - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player - S945.png"; sourceTree = "<group>"; };
 		941A00EE2AC44793000F4693 /* Player Options - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player Options - S945.png"; sourceTree = "<group>"; };
@@ -150,6 +173,8 @@
 		941A00F12AC44793000F4693 /* Playlist Summary - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Playlist Summary - S945.png"; sourceTree = "<group>"; };
 		941A00F22AC44793000F4693 /* Playlist Tracks - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Playlist Tracks - S945.png"; sourceTree = "<group>"; };
 		941A00F72AC70CEE000F4693 /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
+		941F792F2B239A4B0009DF8C /* iOS AboutView - 15Pro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iOS AboutView - 15Pro.png"; sourceTree = "<group>"; };
+		941F79302B239A4B0009DF8C /* iOS RootView - 15Pro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iOS RootView - 15Pro.png"; sourceTree = "<group>"; };
 		9421D29E2ACE2A90005FE857 /* PlaylistListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistListView.swift; sourceTree = "<group>"; };
 		9421D2A02ACED420005FE857 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		9421D2A22ACED4FE005FE857 /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
@@ -187,15 +212,12 @@
 		945C22682B010F33008A5E39 /* AudioStore_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStore_Tests.swift; sourceTree = "<group>"; };
 		945C226A2B025F49008A5E39 /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
 		945CCB5E2AB383D500C47E55 /* SwiftUI Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI Preview.swift"; sourceTree = "<group>"; };
-		946F38902AB079C9008CE9D1 /* WatchCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchCloud Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		946F389F2AB079CA008CE9D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		946F38A22AB079CA008CE9D1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		946F38AE2AB079FE008CE9D1 /* SoundCloud */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SoundCloud; path = ../SoundCloud; sourceTree = "<group>"; };
 		946F38B22AB07A78008CE9D1 /* WatchCloud-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "WatchCloud-Watch-App-Info.plist"; path = "WatchCloud Watch App/Config/WatchCloud-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
-		946F38B42AB07D74008CE9D1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		946F38B72AB07F81008CE9D1 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		946F38B92AB07F81008CE9D1 /* Delete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delete.swift; sourceTree = "<group>"; };
 		946F38BA2AB07F81008CE9D1 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		946F38BB2AB07F81008CE9D1 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		946F38BC2AB07F81008CE9D1 /* Haptics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
@@ -216,6 +238,7 @@
 		946F38CC2AB07F81008CE9D1 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		946F38E72AB08470008CE9D1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		946F38E92AB08470008CE9D1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		947400C12B1DF89A00C5BF64 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		947F59982B0A80E900741C53 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		947F599A2B0A838500741C53 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		9488EE602AE013D40009EC54 /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
@@ -253,15 +276,29 @@
 		94B634532ABE5B7700E6FCDA /* Library - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Library - S945.png"; sourceTree = "<group>"; };
 		94B634542ABE5B7700E6FCDA /* Player Options - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player Options - S945.png"; sourceTree = "<group>"; };
 		94B634552ABE5B7700E6FCDA /* Player - S945.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player - S945.png"; sourceTree = "<group>"; };
+		94B8BB0F2B18CA7800BEB53B /* WatchCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		94B8BB112B18CA7800BEB53B /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		94B8BB132B18CA7800BEB53B /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		94B8BB152B18CA7900BEB53B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		94B8BB182B18CA7900BEB53B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		94B8BB1D2B18D57100BEB53B /* WatchCloud-Login-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "WatchCloud-Login-Info.plist"; path = "WatchCloud Login/Config/WatchCloud-Login-Info.plist"; sourceTree = SOURCE_ROOT; };
 		94BD056D2B0B964300C3DA89 /* NowPlayingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingInfo.swift; sourceTree = "<group>"; };
 		94D4951C2B0F74720013A2D9 /* ImagePipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePipeline.swift; sourceTree = "<group>"; };
 		94D4951E2B1212280013A2D9 /* ShortAndLongTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortAndLongTapButton.swift; sourceTree = "<group>"; };
 		94D495202B1396D00013A2D9 /* PathMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathMonitor.swift; sourceTree = "<group>"; };
+		94E44C142B1BC46000ACF29B /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		94E44C182B1BDE3B00ACF29B /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		94EE88952B18E12E00486B15 /* WCPhoneSessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCPhoneSessionHandler.swift; sourceTree = "<group>"; };
+		94EE88972B18E72900486B15 /* WCWatchSessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCWatchSessionHandler.swift; sourceTree = "<group>"; };
+		94EE88A32B19018E00486B15 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		94EE88B82B190CFA00486B15 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		94EE88C32B195A7000486B15 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		94EE88C62B1B3FFF00486B15 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		94F3FCD12AB9A3B5005D03DF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		94F3FCD22AB9A3B5005D03DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		94FAA1892ACB319600EF97CE /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
 		94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellView.swift; sourceTree = "<group>"; };
-		94FAA1CF2ACC273600EF97CE /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		94FAA1CF2ACC273600EF97CE /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +330,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		94B8BB0C2B18CA7800BEB53B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94EE88A22B18F00E00486B15 /* SoundCloud in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -307,6 +352,15 @@
 				941A00F22AC44793000F4693 /* Playlist Tracks - S945.png */,
 			);
 			path = 1.0.2;
+			sourceTree = "<group>";
+		};
+		941F792E2B2399450009DF8C /* 1.3.0 */ = {
+			isa = PBXGroup;
+			children = (
+				941F79302B239A4B0009DF8C /* iOS RootView - 15Pro.png */,
+				941F792F2B239A4B0009DF8C /* iOS AboutView - 15Pro.png */,
+			);
+			path = 1.3.0;
 			sourceTree = "<group>";
 		};
 		9421D2B62AD34C0E005FE857 /* Analytics */ = {
@@ -374,10 +428,20 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		9450555D2B1B908D005B4445 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				94E44C142B1BC46000ACF29B /* AboutView.swift */,
+				94B8BB132B18CA7800BEB53B /* RootView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		946F38892AB079C9008CE9D1 = {
 			isa = PBXGroup;
 			children = (
 				946F389A2AB079C9008CE9D1 /* WatchCloud Watch App */,
+				94B8BB102B18CA7800BEB53B /* WatchCloud Login */,
 				94B6343D2ABDFAF900E6FCDA /* Complication */,
 				94474B572AF2723E00BEA5F0 /* Unit Tests */,
 				946F38912AB079C9008CE9D1 /* Products */,
@@ -393,10 +457,10 @@
 		946F38912AB079C9008CE9D1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				946F38902AB079C9008CE9D1 /* WatchCloud.app */,
 				946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */,
 				94B6343A2ABDFAF900E6FCDA /* ComplicationExtension.appex */,
 				94474B562AF2723E00BEA5F0 /* Unit Tests.xctest */,
+				94B8BB0F2B18CA7800BEB53B /* WatchCloud.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -407,6 +471,7 @@
 				946F38CC2AB07F81008CE9D1 /* App.swift */,
 				946F38CB2AB07F81008CE9D1 /* AudioPlayer.swift */,
 				9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */,
+				94EE88972B18E72900486B15 /* WCWatchSessionHandler.swift */,
 				9446C5FA2ABDA57E00BCE5DF /* Localizable.xcstrings */,
 				9421D2B62AD34C0E005FE857 /* Analytics */,
 				946F38B32AB07CB1008CE9D1 /* Config */,
@@ -448,10 +513,10 @@
 		946F38B32AB07CB1008CE9D1 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				946F389F2AB079CA008CE9D1 /* Assets.xcassets */,
 				945C226A2B025F49008A5E39 /* AppLauncher.swift */,
+				946F389F2AB079CA008CE9D1 /* Assets.xcassets */,
 				946F38BA2AB07F81008CE9D1 /* Config.swift */,
-				946F38B42AB07D74008CE9D1 /* Config.xcconfig */,
+				94EE88B82B190CFA00486B15 /* Config.xcconfig */,
 				946F38A12AB079CA008CE9D1 /* Preview Content */,
 				946F38B22AB07A78008CE9D1 /* WatchCloud-Watch-App-Info.plist */,
 			);
@@ -464,7 +529,6 @@
 				94A31B342AB517410052A922 /* CaseIterable.swift */,
 				9421D2A22ACED4FE005FE857 /* CGRect.swift */,
 				947F599A2B0A838500741C53 /* Color.swift */,
-				946F38B92AB07F81008CE9D1 /* Delete.swift */,
 				9421D2A02ACED420005FE857 /* Device.swift */,
 				946F38BC2AB07F81008CE9D1 /* Haptics.swift */,
 				946F38BB2AB07F81008CE9D1 /* Image.swift */,
@@ -493,6 +557,7 @@
 				946F38C22AB07F81008CE9D1 /* CurrentUserView.swift */,
 				946F38C12AB07F81008CE9D1 /* DownloadsView.swift */,
 				946F38C92AB07F81008CE9D1 /* LibraryView.swift */,
+				94EE88C62B1B3FFF00486B15 /* LoginButton.swift */,
 				946F38C62AB07F81008CE9D1 /* LoginView.swift */,
 				941A00EA2AC304B6000F4693 /* NewPlayerView.swift */,
 				946F38C32AB07F81008CE9D1 /* PlayerOptionsView.swift */,
@@ -508,7 +573,7 @@
 				946F38C52AB07F81008CE9D1 /* SettingsView.swift */,
 				946F38C72AB07F81008CE9D1 /* TrackCellView.swift */,
 				94FAA18B2ACB3B4200EF97CE /* UserCellView.swift */,
-				94FAA1CF2ACC273600EF97CE /* UserView.swift */,
+				94FAA1CF2ACC273600EF97CE /* UserDetailView.swift */,
 				94FAA1892ACB319600EF97CE /* UserListView.swift */,
 				9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */,
 			);
@@ -601,6 +666,49 @@
 			path = 1.0.1;
 			sourceTree = "<group>";
 		};
+		94B8BB102B18CA7800BEB53B /* WatchCloud Login */ = {
+			isa = PBXGroup;
+			children = (
+				94B8BB112B18CA7800BEB53B /* App.swift */,
+				94EE88952B18E12E00486B15 /* WCPhoneSessionHandler.swift */,
+				94EE88A32B19018E00486B15 /* Localizable.xcstrings */,
+				94EE88A52B19035F00486B15 /* Config */,
+				94EE88C22B195A5300486B15 /* Extension */,
+				9450555D2B1B908D005B4445 /* UI */,
+			);
+			path = "WatchCloud Login";
+			sourceTree = "<group>";
+		};
+		94B8BB172B18CA7900BEB53B /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				94B8BB182B18CA7900BEB53B /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		94EE88A52B19035F00486B15 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				94B8BB152B18CA7900BEB53B /* Assets.xcassets */,
+				94B8BB172B18CA7900BEB53B /* Preview Content */,
+				94B8BB1D2B18D57100BEB53B /* WatchCloud-Login-Info.plist */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		94EE88C22B195A5300486B15 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				9416871A2B1CD13300A62407 /* ColorScheme.swift */,
+				94E44C182B1BDE3B00ACF29B /* List.swift */,
+				94EE88C32B195A7000486B15 /* Logger.swift */,
+				941687182B1CBD6100A62407 /* Text.swift */,
+				947400C12B1DF89A00C5BF64 /* Device.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		94F3FCD02AB9A3B5005D03DF /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
@@ -610,6 +718,7 @@
 				943477C12AD5FC5700A6DED6 /* 1.1.0 */,
 				9488EE802AE70DDD0009EC54 /* 1.1.2 */,
 				94B3EDAF2B08E4BA00C04BC5 /* 1.1.5 */,
+				941F792E2B2399450009DF8C /* 1.3.0 */,
 			);
 			path = Screenshots;
 			sourceTree = "<group>";
@@ -634,23 +743,6 @@
 			productName = "Unit Tests";
 			productReference = 94474B562AF2723E00BEA5F0 /* Unit Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		946F388F2AB079C9008CE9D1 /* WatchCloud */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 946F38AA2AB079CA008CE9D1 /* Build configuration list for PBXNativeTarget "WatchCloud" */;
-			buildPhases = (
-				946F388E2AB079C9008CE9D1 /* Resources */,
-				946F38A92AB079CA008CE9D1 /* Embed Watch Content */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				946F38992AB079C9008CE9D1 /* PBXTargetDependency */,
-			);
-			name = WatchCloud;
-			productName = WatchCloud;
-			productReference = 946F38902AB079C9008CE9D1 /* WatchCloud.app */;
-			productType = "com.apple.product-type.application.watchapp2-container";
 		};
 		946F38952AB079C9008CE9D1 /* WatchCloud Watch App */ = {
 			isa = PBXNativeTarget;
@@ -695,6 +787,28 @@
 			productReference = 94B6343A2ABDFAF900E6FCDA /* ComplicationExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		94B8BB0E2B18CA7800BEB53B /* WatchCloud */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 94B8BB1C2B18CA7900BEB53B /* Build configuration list for PBXNativeTarget "WatchCloud" */;
+			buildPhases = (
+				94B8BB0B2B18CA7800BEB53B /* Sources */,
+				94B8BB0C2B18CA7800BEB53B /* Frameworks */,
+				94B8BB0D2B18CA7800BEB53B /* Resources */,
+				94EE88A02B18EADC00486B15 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				94EE889F2B18EADC00486B15 /* PBXTargetDependency */,
+			);
+			name = WatchCloud;
+			packageProductDependencies = (
+				94EE88A12B18F00E00486B15 /* SoundCloud */,
+			);
+			productName = "WatchCloud Login";
+			productReference = 94B8BB0F2B18CA7800BEB53B /* WatchCloud.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -709,13 +823,13 @@
 						CreatedOnToolsVersion = 15.0;
 						TestTargetID = 946F38952AB079C9008CE9D1;
 					};
-					946F388F2AB079C9008CE9D1 = {
-						CreatedOnToolsVersion = 14.3.1;
-					};
 					946F38952AB079C9008CE9D1 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
 					94B634392ABDFAF900E6FCDA = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					94B8BB0E2B18CA7800BEB53B = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
@@ -747,8 +861,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				946F388F2AB079C9008CE9D1 /* WatchCloud */,
 				946F38952AB079C9008CE9D1 /* WatchCloud Watch App */,
+				94B8BB0E2B18CA7800BEB53B /* WatchCloud */,
 				94B634392ABDFAF900E6FCDA /* ComplicationExtension */,
 				94474B552AF2723E00BEA5F0 /* Unit Tests */,
 			);
@@ -763,19 +877,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		946F388E2AB079C9008CE9D1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				943477C02AD5AAA800A6DED6 /* Localizable.xcstrings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		946F38942AB079C9008CE9D1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				946F38A32AB079CA008CE9D1 /* Preview Assets.xcassets in Resources */,
+				94EE88B92B190CFA00486B15 /* Config.xcconfig in Resources */,
 				943477CC2AD5FF0500A6DED6 /* LoginView - S945.png in Resources */,
 				9446C5FB2ABDA57E00BCE5DF /* Localizable.xcstrings in Resources */,
 				946F38A02AB079CA008CE9D1 /* Assets.xcassets in Resources */,
@@ -787,6 +894,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				94B634412ABDFAFA00E6FCDA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94B8BB0D2B18CA7800BEB53B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94B8BB192B18CA7900BEB53B /* Preview Assets.xcassets in Resources */,
+				94B8BB162B18CA7900BEB53B /* Assets.xcassets in Resources */,
+				94EE88A42B19018E00486B15 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -814,7 +931,7 @@
 				946F38D52AB07F81008CE9D1 /* LinearGradientProgressViewStyle.swift in Sources */,
 				941A00EB2AC304B6000F4693 /* NewPlayerView.swift in Sources */,
 				946F38D72AB07F81008CE9D1 /* CurrentUserView.swift in Sources */,
-				94FAA1D02ACC273600EF97CE /* UserView.swift in Sources */,
+				94FAA1D02ACC273600EF97CE /* UserDetailView.swift in Sources */,
 				94FAA18C2ACB3B4200EF97CE /* UserCellView.swift in Sources */,
 				943477BF2AD421E200A6DED6 /* CaptchaNotAppearingTip.swift in Sources */,
 				94FAA18A2ACB319600EF97CE /* UserListView.swift in Sources */,
@@ -824,7 +941,6 @@
 				94923C6F2ABDBBD500A67EBE /* Numbers.swift in Sources */,
 				9488EE7F2AE43C970009EC54 /* SearchEntry.swift in Sources */,
 				946F38D12AB07F81008CE9D1 /* Image.swift in Sources */,
-				946F38CF2AB07F81008CE9D1 /* Delete.swift in Sources */,
 				945C226B2B025F49008A5E39 /* AppLauncher.swift in Sources */,
 				9421D29F2ACE2A90005FE857 /* PlaylistListView.swift in Sources */,
 				947F599B2B0A838500741C53 /* Color.swift in Sources */,
@@ -833,6 +949,7 @@
 				9421D2BC2AD34E88005FE857 /* AnalyticsEvent.swift in Sources */,
 				9488EE6E2AE40EA80009EC54 /* QRCodeImageView.swift in Sources */,
 				9421D2BA2AD34CC9005FE857 /* MixpanelAnalyticsService.swift in Sources */,
+				94EE88982B18E72900486B15 /* WCWatchSessionHandler.swift in Sources */,
 				94A31B352AB517410052A922 /* CaseIterable.swift in Sources */,
 				9421D2A92ACF5B59005FE857 /* PlaylistCellView.swift in Sources */,
 				946F38DD2AB07F81008CE9D1 /* RootView.swift in Sources */,
@@ -846,6 +963,7 @@
 				9488EE672AE33C260009EC54 /* Logger.swift in Sources */,
 				946F38DF2AB07F81008CE9D1 /* PlayerView.swift in Sources */,
 				9448FF4D2AB343D7003D63F1 /* WatchKit.swift in Sources */,
+				94EE88C72B1B3FFF00486B15 /* LoginButton.swift in Sources */,
 				946F38D22AB07F81008CE9D1 /* Haptics.swift in Sources */,
 				946F38D82AB07F81008CE9D1 /* PlayerOptionsView.swift in Sources */,
 				9421D2BE2AD34FFC005FE857 /* AnalyticsManager.swift in Sources */,
@@ -882,6 +1000,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		94B8BB0B2B18CA7800BEB53B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94EE88C52B1B3F3200486B15 /* View.swift in Sources */,
+				94EE88C82B1B3FFF00486B15 /* LoginButton.swift in Sources */,
+				947400C32B1E0FA200C5BF64 /* PoweredBySCView.swift in Sources */,
+				94E44C162B1BCC8400ACF29B /* Color.swift in Sources */,
+				94B8BB142B18CA7800BEB53B /* RootView.swift in Sources */,
+				94E44C152B1BC46000ACF29B /* AboutView.swift in Sources */,
+				94E44C192B1BDE3B00ACF29B /* List.swift in Sources */,
+				94EE88BF2B190FCC00486B15 /* AuthStore.swift in Sources */,
+				94EE88C02B190FE200486B15 /* LoginService.swift in Sources */,
+				941687192B1CBD6100A62407 /* Text.swift in Sources */,
+				947400C22B1DF89A00C5BF64 /* Device.swift in Sources */,
+				94B8BB122B18CA7800BEB53B /* App.swift in Sources */,
+				9416871B2B1CD13300A62407 /* ColorScheme.swift in Sources */,
+				94EE88C42B195A7000486B15 /* Logger.swift in Sources */,
+				94EE88962B18E12E00486B15 /* WCPhoneSessionHandler.swift in Sources */,
+				94EE88C12B190FF800486B15 /* Config.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -890,15 +1031,15 @@
 			target = 946F38952AB079C9008CE9D1 /* WatchCloud Watch App */;
 			targetProxy = 94474B5A2AF2723E00BEA5F0 /* PBXContainerItemProxy */;
 		};
-		946F38992AB079C9008CE9D1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 946F38952AB079C9008CE9D1 /* WatchCloud Watch App */;
-			targetProxy = 946F38982AB079C9008CE9D1 /* PBXContainerItemProxy */;
-		};
 		94B634442ABDFAFA00E6FCDA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 94B634392ABDFAF900E6FCDA /* ComplicationExtension */;
 			targetProxy = 94B634432ABDFAFA00E6FCDA /* PBXContainerItemProxy */;
+		};
+		94EE889F2B18EADC00486B15 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 946F38952AB079C9008CE9D1 /* WatchCloud Watch App */;
+			targetProxy = 94EE889E2B18EADC00486B15 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -955,7 +1096,7 @@
 		};
 		946F38A42AB079CA008CE9D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 946F38B42AB07D74008CE9D1 /* Config.xcconfig */;
+			baseConfigurationReference = 94EE88B82B190CFA00486B15 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -1017,7 +1158,7 @@
 		};
 		946F38A52AB079CA008CE9D1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 946F38B42AB07D74008CE9D1 /* Config.xcconfig */;
+			baseConfigurationReference = 94EE88B82B190CFA00486B15 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -1077,7 +1218,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Watch App/Config/Preview Content\"";
 				DEVELOPMENT_TEAM = T6MXF72738;
 				ENABLE_PREVIEWS = YES;
@@ -1085,12 +1226,14 @@
 				INFOPLIST_FILE = "WatchCloud Watch App/Config/WatchCloud-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = WatchCloud;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKWatchOnly = YES;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.RyanDF.WatchCloud;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				INFOPLIST_KEY_WKWatchOnly = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1109,7 +1252,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Watch App/Config/Preview Content\"";
 				DEVELOPMENT_TEAM = T6MXF72738;
 				ENABLE_PREVIEWS = YES;
@@ -1117,12 +1260,14 @@
 				INFOPLIST_FILE = "WatchCloud Watch App/Config/WatchCloud-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = WatchCloud;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKWatchOnly = YES;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.RyanDF.WatchCloud;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				INFOPLIST_KEY_WKWatchOnly = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1135,39 +1280,6 @@
 			};
 			name = Release;
 		};
-		946F38AB2AB079CA008CE9D1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T6MXF72738;
-				INFOPLIST_KEY_CFBundleDisplayName = WatchCloud;
-				MARKETING_VERSION = 1.2.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		946F38AC2AB079CA008CE9D1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T6MXF72738;
-				INFOPLIST_KEY_CFBundleDisplayName = WatchCloud;
-				MARKETING_VERSION = 1.2.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		94B634472ABDFAFA00E6FCDA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1175,7 +1287,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = T6MXF72738;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -1190,7 +1302,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp.Comp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1210,7 +1322,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = T6MXF72738;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -1225,7 +1337,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud.watchkitapp.Comp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1235,6 +1347,84 @@
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Release;
+		};
+		94B8BB1A2B18CA7900BEB53B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Login/Config/Preview Content\"";
+				DEVELOPMENT_TEAM = T6MXF72738;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WatchCloud Login/Config/WatchCloud-Login-Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		94B8BB1B2B18CA7900BEB53B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchCloud Login/Config/Preview Content\"";
+				DEVELOPMENT_TEAM = T6MXF72738;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WatchCloud Login/Config/WatchCloud-Login-Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RyanDF.WatchCloud;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -1268,20 +1458,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		946F38AA2AB079CA008CE9D1 /* Build configuration list for PBXNativeTarget "WatchCloud" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				946F38AB2AB079CA008CE9D1 /* Debug */,
-				946F38AC2AB079CA008CE9D1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		94B634462ABDFAFA00E6FCDA /* Build configuration list for PBXNativeTarget "ComplicationExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				94B634472ABDFAFA00E6FCDA /* Debug */,
 				94B634482ABDFAFA00E6FCDA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		94B8BB1C2B18CA7900BEB53B /* Build configuration list for PBXNativeTarget "WatchCloud" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				94B8BB1A2B18CA7900BEB53B /* Debug */,
+				94B8BB1B2B18CA7900BEB53B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1339,6 +1529,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 94C1699E2AB474EE00570B4F /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = NukeUI;
+		};
+		94EE88A12B18F00E00486B15 /* SoundCloud */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SoundCloud;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

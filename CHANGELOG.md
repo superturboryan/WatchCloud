@@ -1,5 +1,21 @@
+# 1.3.0
+🌎 Published 8 December  
+🔨 Xcode 15.0  
+⌚️ watchOS 10.0  
+📦 **SoundCloud Swift Package 1.0.5 ⭐️**  
+
+### ✨ Features
+- **iOS companion app** for connecting to SC account
+- AboutView with FAQ, legal links, app version (iOS)
+- SettingsView displays app version and "powered by SC" logo
+
+### 🐞 Bug fixes
+- `List` instead of `(Lazy)VStack` throughout app (better scrolling)
+- Adjust LibraryView cell padding
+
+
 # 1.2.1
-🌎 Published _ November  
+🌎 Published 30 November  
 🔨 Xcode 15.0  
 ⌚️ watchOS 10.0  
 📦 SoundCloud Swift Package 1.0.4  
@@ -13,6 +29,7 @@
     - Downloads were failing immediately when app left foreground
 - AudioStore uses URLSession.downloadTask with delegate methods instead of async URLSession.data
 - AudioStore.load doesn't throw error if loadDownloadedTracks fails
+
 
 # 1.2.0
 🌎 Published 27 November  

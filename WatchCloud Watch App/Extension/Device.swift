@@ -7,8 +7,6 @@
 
 import WatchKit
 
-struct Device {
-    private init() {}
-    
+enum Device {
     static let screenSize: CGSize = WKInterfaceDevice.current().screenBounds.size
 }

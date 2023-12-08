@@ -27,7 +27,7 @@ extension View {
 
     @ViewBuilder
     func symbolReplaceEffect(_ speed: Double = 1.0) -> some View {
-        if #available(watchOS 10.0, *) {
+        if #available(watchOS 10.0, iOS 17.0, *) {
             self.contentTransition(.symbolEffect(.replace, options: .speed(speed)))
         } else {
             self
@@ -43,6 +43,18 @@ extension View {
     }
 }
 
+extension List {
+    
+    @ViewBuilder
+    func sectionSpacing(_ spacing: CGFloat) -> some View {
+        if #available(watchOS 10, iOS 17, *) {
+            self.listSectionSpacing(spacing)
+        } else {
+            self
+        }
+    }
+}
+
 // MARK: - LazyVStack header + footer
 func sectionHeaderView(_ title: String) -> some View {
     Text(verbatim: title.uppercased())
@@ -51,14 +63,4 @@ func sectionHeaderView(_ title: String) -> some View {
         .padding(.leading)
         .padding(.top, 6)
         .fullWidth(.leading)
-}
-
-func sectionFooterView(_ text: String) -> some View {
-    Text(verbatim: text)
-        .font(.footnote)
-        .fontWeight(.medium)
-        .foregroundColor(.secondary)
-        .multilineTextAlignment(.center)
-        .padding(.top, 6)
-        .padding(.bottom, 12)
 }
