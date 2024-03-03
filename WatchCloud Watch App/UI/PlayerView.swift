@@ -158,7 +158,7 @@ struct PlayerView: View {
             HStack {
                 Text(verbatim: Int(player.progress).timeStringFromSeconds)
                 Spacer()
-                Text(verbatim: "-\((audioStore.loadedTrack!.durationInSeconds - Int(player.progress)).timeStringFromSeconds)") // Time remaining
+                Text(verbatim: "-\(((audioStore.loadedTrack?.durationInSeconds ?? 0) - Int(player.progress)).timeStringFromSeconds)") // Time remaining
             }
             .font(.footnote)
             .padding(.horizontal, 4)
