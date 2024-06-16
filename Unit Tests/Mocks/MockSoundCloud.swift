@@ -9,6 +9,7 @@ import SoundCloud
 @testable import WatchCloud_Watch_App
 
 final class MockSoundCloud: SoundCloudAPI, AuthService {
+    
     var shouldThrowError = false
     var myUser: User = testUser()
     var loginTokenResponse = TokenResponse.test
@@ -68,6 +69,11 @@ final class MockSoundCloud: SoundCloudAPI, AuthService {
     }
     
     func getLikedTracksForUser(_ id: Int, _ limit: Int) async throws -> Page<Track> {
+        if shouldThrowError { throw MockError.mock }
+        return Page<Track>(items: tracksToReturn, nextPage: "mock")
+    }
+    
+    func getRelatedTracks(_ id: Int, _ limit: Int) async throws -> Page<Track> {
         if shouldThrowError { throw MockError.mock }
         return Page<Track>(items: tracksToReturn, nextPage: "mock")
     }
