@@ -34,7 +34,7 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        guard error == nil else {
+        guard error.isNil else {
             Logger.wcPhoneSessionHandler.error("Error occurred activating WCSession: \(error)")
             return
         }
@@ -52,14 +52,16 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
     }
     
     func send(_ authTokens: TokenResponse) {
-        guard let encodedTokens = try? encoder.encode(authTokens) else {
-            return
-        }
         do {
+            let encodedTokens = try encoder.encode(authTokens)
             let message = ["\(TokenResponse.self)" : encodedTokens]
             try session.updateApplicationContext(message)
         } catch {
-            Logger.wcPhoneSessionHandler.error("Failed to TokenResponse to watch")
+            Logger.wcPhoneSessionHandler.error("Failed to send auth tokens: \(error)")
         }
     }
+}
+
+extension Optional {
+    var isNil: Bool { self == nil }
 }
