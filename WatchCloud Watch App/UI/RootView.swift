@@ -114,15 +114,14 @@ struct RootView: View {
             searchStore.load()
             isLoaded = true
             AnalyticsManager.shared.log(.loadLibrarySuccess)
-        } catch UserStore.Error.loadingMyProfile,
-                SoundCloud.Error.userNotAuthorized {
+        } catch SoundCloud.Error.userNotAuthorized {
             Logger.rootView.info("❌ Profile doesn't exist or API denied access. Performing logout...")
             performLogout()
-        } catch SoundCloud.Error.tooManyRequests { // Can still be thrown by AudioStore
+        } catch SoundCloud.Error.tooManyRequests {
             AnalyticsManager.shared.log(.tooManyRequests)
-            isLoaded = true
+            performLogout()
         } catch {
-            Logger.rootView.info("Failed to load library but profile exists, going into offline mode...")
+            Logger.rootView.info("Failed to load library with error \(error) but profile exists, going into offline mode...")
             isLoaded = true
         }
     }
