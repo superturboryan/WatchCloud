@@ -42,24 +42,16 @@ extension UserStore {
         if let savedUser = try? myUserDAO.get() {
             myUser = savedUser
         } else {
-            do {
-                let loadedUser = try await service.getMyUser()
-                myUser = loadedUser
-                try? myUserDAO.save(loadedUser)
-            } catch {
-                throw Error.loadingMyProfile
-            }
+            let loadedUser = try await service.getMyUser()
+            myUser = loadedUser
+            try? myUserDAO.save(loadedUser)
         }
     }
     
     func loadUsersImFollowing() async throws {
         if usersImFollowing.items.isEmpty {
-            do {
-                let response = try await service.getUsersImFollowing()
-                usersImFollowing = response
-            } catch {
-                throw Error.loadingUsersImFollowing
-            }
+            let response = try await service.getUsersImFollowing()
+            usersImFollowing = response
         } else if let nextPageUrl = usersImFollowing.nextPageURL {
             let nextPage: Page<User> = try await pageOfUsers(nextPageUrl)
             usersImFollowing.update(with: nextPage)
@@ -75,7 +67,7 @@ extension UserStore {
             try await service.followUser(user)
         } catch {
             usersImFollowing.items.removeAll { $0 == user }
-            throw Error.followingUser
+            throw error
         }
     }
     
@@ -89,13 +81,12 @@ extension UserStore {
             try await service.unfollowUser(user)
         } catch {
             usersImFollowing.items.insert(user, at: indexToRemove)
-            throw Error.unfollowingUser
+            throw error
         }
     }
         
     func pageOfUsers(_ pageURL: String) async throws -> Page<User> {
-        do { return try await service.pageOfItems(for: pageURL) }
-        catch { throw Error.loadingPageOfUsers }
+        try await service.pageOfItems(for: pageURL)
     }
 }
 
@@ -103,15 +94,5 @@ extension UserStore {
 extension UserStore {
     func isUserFollowed(_ user: User) -> Bool {
         usersImFollowing.items.map(\.id).contains(user.id)
-    }
-}
-
-extension UserStore {
-    enum Error: LocalizedError {
-        case loadingMyProfile
-        case loadingUsersImFollowing
-        case followingUser
-        case unfollowingUser
-        case loadingPageOfUsers
     }
 }

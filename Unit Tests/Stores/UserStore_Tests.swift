@@ -67,7 +67,6 @@ final class UserStore_Tests: XCTestCase {
     
     func test_loadMyProfile_whenDAOIsEmpty_andServiceThrowsError() async throws {
         // Given
-        let expectedError = UserStore.Error.loadingMyProfile
         mockDAO.persistedValue = nil
         mockService.shouldThrowError = true
         sut = await UserStore(mockService, mockDAO)
@@ -75,7 +74,7 @@ final class UserStore_Tests: XCTestCase {
             try await sut.loadMyProfile()
             XCTFail("Should have thrown error")
         } catch { // Then
-            XCTAssertEqual(error as! UserStore.Error, expectedError)
+            XCTAssertEqual(error as? MockError, MockError.mock)
         }
     }
     
@@ -108,14 +107,13 @@ final class UserStore_Tests: XCTestCase {
     
     func test_loadUsersImFollowing_whenServiceThrowsError() async throws {
         // Given
-        let expectedError = UserStore.Error.loadingUsersImFollowing
         mockService.shouldThrowError = true
         sut = await UserStore(mockService)
         do {// When
             try await sut.loadUsersImFollowing()
             XCTFail("Should have thrown error")
         } catch { // Then
-            XCTAssertEqual(error as! UserStore.Error, expectedError)
+            XCTAssertEqual(error as? MockError, MockError.mock)
         }
     }
     
@@ -144,13 +142,12 @@ final class UserStore_Tests: XCTestCase {
     
     func test_followUser_throwsErrorAndRemovesLikedUser_whenServiceThrowsError() async {
         // Given
-        let expectedError = UserStore.Error.followingUser
         mockService.shouldThrowError = true
         sut = await UserStore(mockService)
         do { // When
             try await sut.followUser(testUser())
         } catch { // Then
-            XCTAssertEqual(error as! UserStore.Error, expectedError)
+            XCTAssertEqual(error as? MockError, MockError.mock)
             let followedUsers = await sut.usersImFollowing.items
             XCTAssertTrue(followedUsers.isEmpty)
         }
@@ -180,7 +177,6 @@ final class UserStore_Tests: XCTestCase {
     
     func test_unfollowUser_throwsErrorAndReinsertsLikedUser_whenServiceThrowsError() async {
         // Given
-        let expectedError = UserStore.Error.unfollowingUser
         let userToUnfollow = testUser()
         mockService.shouldThrowError = false
         sut = await UserStore(mockService)
@@ -190,7 +186,7 @@ final class UserStore_Tests: XCTestCase {
             // When
             try await sut.unfollowUser(userToUnfollow)
         } catch { // Then
-            XCTAssertEqual(error as! UserStore.Error, expectedError)
+            XCTAssertEqual(error as? MockError, MockError.mock)
             let followedUsers = await sut.usersImFollowing.items
             XCTAssertTrue(followedUsers.contains(userToUnfollow), "Followed users should still contain user if service fails to unfollow")
         }
@@ -198,14 +194,13 @@ final class UserStore_Tests: XCTestCase {
     
     func test_pageOfUsers_whenServiceThrowsError() async {
         // Given
-        let expectedError = UserStore.Error.loadingPageOfUsers
         mockService.shouldThrowError = true
         sut = await UserStore(mockService)
         do { // When
             _ = try await sut.pageOfUsers("mock")
             XCTFail("Should have thrown error")
         } catch { // Then
-            XCTAssertEqual(expectedError, error as! UserStore.Error)
+            XCTAssertEqual(error as? MockError, MockError.mock)
         }
     }
 }
