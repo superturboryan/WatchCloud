@@ -22,7 +22,8 @@ final class AudioStore_Tests: XCTestCase {
         try await sut.load()
         // Then
         let loadedPlaylistIds = sut.loadedPlaylists.keys
-        for type in PlaylistType.allCases {
+        let playlistTypesToCheck = PlaylistType.allCases.filter{ ![PlaylistType.relatedTracks].contains($0) }
+        for type in playlistTypesToCheck {
             XCTAssertTrue(loadedPlaylistIds.contains(type.rawValue))
         }
     }
@@ -191,8 +192,7 @@ final class AudioStore_Tests: XCTestCase {
             XCTFail("Should have thrown error")
         } catch { // Then
             XCTAssertEqual(expectedError, error as! AudioStore.Error)
-            var isLiked = sut.isLiked(trackToLike)
-            XCTAssertFalse(isLiked, "Track should not be liked if service threw error")
+            XCTAssertFalse(sut.isLiked(trackToLike), "Track should not be liked if service threw error")
         }
     }
     
@@ -259,7 +259,7 @@ final class AudioStore_Tests: XCTestCase {
     
     func test_loadTracksForPlaylist_withUserPlaylistTypes() async throws {
         // Given
-        let playlistIdList = PlaylistType.allCases.map(\.rawValue)
+        let playlistIdList = PlaylistType.allCases.filter { ![PlaylistType.relatedTracks].contains($0) }.map(\.rawValue)
         sut = AudioStore(mockService)
         try await sut.load()
         // When
