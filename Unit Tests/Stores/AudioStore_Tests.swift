@@ -161,13 +161,17 @@ final class AudioStore_Tests: XCTestCase {
     
     func test_toggleLikedTrack_likesAndUnlikesTrack() async throws {
         // Given
-        let trackToLike = testTrack(isLiked: false)
+        let initialState = false
+        let trackToLike = testTrack(isLiked: initialState)
         sut = AudioStore(mockService)
         try await sut.load()
+        // Initial state
+        var isLiked = sut.isLiked(trackToLike)
+        XCTAssertFalse(isLiked)
         // When
         try await sut.toggleLikedTrack(trackToLike)
         // Then
-        var isLiked = sut.isLiked(trackToLike)
+        isLiked = sut.isLiked(trackToLike)
         XCTAssertTrue(isLiked)
         // When
         try await sut.toggleLikedTrack(trackToLike)
@@ -182,14 +186,12 @@ final class AudioStore_Tests: XCTestCase {
         let expectedError = AudioStore.Error.togglingLikedTrack
         mockService.shouldThrowError = true
         sut = AudioStore(mockService)
-        var isLiked = sut.isLiked(trackToLike)
-        XCTAssertFalse(isLiked)
         do { // When
             try await sut.toggleLikedTrack(trackToLike)
             XCTFail("Should have thrown error")
         } catch { // Then
             XCTAssertEqual(expectedError, error as! AudioStore.Error)
-            isLiked = sut.isLiked(trackToLike)
+            var isLiked = sut.isLiked(trackToLike)
             XCTAssertFalse(isLiked, "Track should not be liked if service threw error")
         }
     }

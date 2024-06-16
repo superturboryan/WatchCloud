@@ -11,15 +11,19 @@ import SoundCloud
 final class MockSoundCloud: SoundCloudAPI, AuthService {
     var shouldThrowError = false
     var myUser: User = testUser()
+    var loginTokenResponse = TokenResponse.test
     var tracksToReturn: [Track] = []
     var playlistsToReturn: [Playlist] = []
     var usersToReturn: [User] = []
     
-    func login() async throws {
+    func login() async throws -> TokenResponse {
         if shouldThrowError { throw MockError.mock }
+        return loginTokenResponse
     }
     
-    func logout() { /* Not implemented */ }
+    func logout() {
+        /* Not implemented */
+    }
     
     var authenticatedHeader = ["mock" : "header"]
     
@@ -129,4 +133,8 @@ final class MockSoundCloud: SoundCloudAPI, AuthService {
 
 enum MockError: Error {
     case mock
+}
+
+extension TokenResponse {
+    static let test = TokenResponse(accessToken: "", expiresIn: 0, refreshToken: "", scope: "", tokenType: "")
 }
