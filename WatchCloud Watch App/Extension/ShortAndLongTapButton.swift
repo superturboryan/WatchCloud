@@ -52,7 +52,7 @@ struct ShortAndLongTapButton<Label: View>: View {
             shortTapGesture: { print("Short tap") },
             longTapBegan: { print("Long tap start") },
             longTapEnded: { print("Long tap end") },
-            label: { Text("Tap me")}
+            label: { Text(verbatim: "Tap me")}
         )
     }
 }
