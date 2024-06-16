@@ -129,7 +129,7 @@ extension AudioPlayer {
         
     func loadAndPlayTrack(_ track: Track) {
         showBluetoothOptionsIfBluetoothAudioOutputNotDetected()
-        Logger.audioPlayer.info("🎧 Load and play new track: \(track.title)")
+        Logger.audioPlayer.info("🎧 Load and play new track: \(track.title) (\(track.id))")
         Task { [weak self] in
             try await self?.loadTrack(track)
             await MainActor.run { [weak self] in
