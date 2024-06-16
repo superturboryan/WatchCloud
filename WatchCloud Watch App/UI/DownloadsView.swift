@@ -160,14 +160,12 @@ struct DownloadsView: View {
         DownloadsView()
             .environmentObject({ () -> AudioStore in
                 let store = AudioStore(testSC)
-                Task {
-                    await store.loadDefaultPlaylists()
-                    store.downloadedTracks = [testTrack(), testTrack(), testTrack(), ]
-                    store.downloadsInProgress = [
-                        testTrack() : 0.5,
-                        testTrack() : 0.9
-                    ]
-                }
+                store.loadDefaultPlaylists()
+                store.downloadedTracks = [testTrack(), testTrack(), testTrack(), ]
+                store.downloadsInProgress = [
+                    testTrack() : 0.5,
+                    testTrack() : 0.9
+                ]
                 return store
             }())
             .environmentObject(testAudioPlayer)
