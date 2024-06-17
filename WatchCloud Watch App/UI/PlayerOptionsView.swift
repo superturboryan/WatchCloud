@@ -92,7 +92,7 @@ struct PlayerOptionsView: View {
     
     var relatedTracksButton: some View {
         Button { tappedRelatedTracks() } label: {
-            buttonView("music.note.list", .yellow, String(localized: "Related"))
+            buttonView("music.note.list", .yellow, String(localized: "Related", comment: "Playlist title"))
         }
     }
     

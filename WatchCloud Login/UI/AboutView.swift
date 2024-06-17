@@ -85,9 +85,12 @@ struct AboutItem: Hashable {
         AboutItem(title: String(localized: "How do I install the watchOS app?"), text: [String(localized:
             """
             There are two ways to install WatchCloud on an Apple Watch:
-            1) Open the **Watch** app on iOS, scroll down to WatchCloud in the list of apps, tap install
+            
+            **1)** Open the **Watch** app on iOS, scroll down to WatchCloud in the list of apps, tap install
+            
             **OR**
-            2) Open the **App Store on the Apple Watch**, search for WatchCloud, tap install
+            
+            **2)** Open the **App Store on the Apple Watch**, search for WatchCloud, tap install
             """),
         ]),
         AboutItem(title: String(localized: "What is this app?"), text: [String(localized:
