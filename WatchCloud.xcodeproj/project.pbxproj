@@ -100,7 +100,6 @@
 		94EE889D2B18EADC00486B15 /* WatchCloud Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 946F38962AB079C9008CE9D1 /* WatchCloud Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		94EE88A22B18F00E00486B15 /* SoundCloud in Frameworks */ = {isa = PBXBuildFile; productRef = 94EE88A12B18F00E00486B15 /* SoundCloud */; };
 		94EE88A42B19018E00486B15 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 94EE88A32B19018E00486B15 /* Localizable.xcstrings */; };
-		94EE88B92B190CFA00486B15 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 94EE88B82B190CFA00486B15 /* Config.xcconfig */; };
 		94EE88BF2B190FCC00486B15 /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE682AE3E2380009EC54 /* AuthStore.swift */; };
 		94EE88C02B190FE200486B15 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488EE6B2AE3E5D00009EC54 /* LoginService.swift */; };
 		94EE88C12B190FF800486B15 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F38BA2AB07F81008CE9D1 /* Config.swift */; };
@@ -817,7 +816,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					94474B552AF2723E00BEA5F0 = {
 						CreatedOnToolsVersion = 15.0;
@@ -883,7 +882,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				946F38A32AB079CA008CE9D1 /* Preview Assets.xcassets in Resources */,
-				94EE88B92B190CFA00486B15 /* Config.xcconfig in Resources */,
 				943477CC2AD5FF0500A6DED6 /* LoginView - S945.png in Resources */,
 				9446C5FB2ABDA57E00BCE5DF /* Localizable.xcstrings in Resources */,
 				946F38A02AB079CA008CE9D1 /* Assets.xcassets in Resources */,
