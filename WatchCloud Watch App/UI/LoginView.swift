@@ -55,6 +55,7 @@ struct LoginView: View {
     private var showLoginButtonButton: some View {
         Button {
             showLoginButton = true
+            AnalyticsManager.shared.log(.tappedShowLoginButton)
         } label: {
             Text("or connect here")
                 .font(.footnote)
