@@ -34,6 +34,9 @@
 		9448FF4B2AB31308003D63F1 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */; };
 		9448FF4D2AB343D7003D63F1 /* WatchKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4C2AB343D7003D63F1 /* WatchKit.swift */; };
 		9448FF4F2AB34F0A003D63F1 /* VolumeCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */; };
+		944EFB6B2C2587D200F98487 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 944EFB6A2C2587D200F98487 /* PrivacyInfo.xcprivacy */; };
+		944EFB6C2C2587D200F98487 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 944EFB6A2C2587D200F98487 /* PrivacyInfo.xcprivacy */; };
+		944EFB6D2C2587D200F98487 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 944EFB6A2C2587D200F98487 /* PrivacyInfo.xcprivacy */; };
 		945C22662B00EBE7008A5E39 /* UserStore_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C22652B00EBE7008A5E39 /* UserStore_Tests.swift */; };
 		945C22692B010F33008A5E39 /* AudioStore_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C22682B010F33008A5E39 /* AudioStore_Tests.swift */; };
 		945C226B2B025F49008A5E39 /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945C226A2B025F49008A5E39 /* AppLauncher.swift */; };
@@ -209,6 +212,7 @@
 		9448FF4A2AB31308003D63F1 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		9448FF4C2AB343D7003D63F1 /* WatchKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchKit.swift; sourceTree = "<group>"; };
 		9448FF4E2AB34F0A003D63F1 /* VolumeCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeCircleView.swift; sourceTree = "<group>"; };
+		944EFB6A2C2587D200F98487 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		945C22652B00EBE7008A5E39 /* UserStore_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore_Tests.swift; sourceTree = "<group>"; };
 		945C22672B010198008A5E39 /* Test Plan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Test Plan.xctestplan"; sourceTree = "<group>"; };
 		945C22682B010F33008A5E39 /* AudioStore_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStore_Tests.swift; sourceTree = "<group>"; };
@@ -687,6 +691,7 @@
 				94B8BB112B18CA7800BEB53B /* App.swift */,
 				94EE88952B18E12E00486B15 /* WCPhoneSessionHandler.swift */,
 				94EE88A32B19018E00486B15 /* Localizable.xcstrings */,
+				944EFB6A2C2587D200F98487 /* PrivacyInfo.xcprivacy */,
 				94EE88A52B19035F00486B15 /* Config */,
 				94EE88C22B195A5300486B15 /* Extension */,
 				9450555D2B1B908D005B4445 /* UI */,
@@ -904,6 +909,7 @@
 				945DC3132C24A3C6006C1AE6 /* PlayerView - S945.png in Resources */,
 				9446C5FB2ABDA57E00BCE5DF /* Localizable.xcstrings in Resources */,
 				945DC3152C24A426006C1AE6 /* PlaylistView - S945.png in Resources */,
+				944EFB6B2C2587D200F98487 /* PrivacyInfo.xcprivacy in Resources */,
 				946F38A02AB079CA008CE9D1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -912,6 +918,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				944EFB6D2C2587D200F98487 /* PrivacyInfo.xcprivacy in Resources */,
 				94B634412ABDFAFA00E6FCDA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -922,6 +929,7 @@
 			files = (
 				94B8BB192B18CA7900BEB53B /* Preview Assets.xcassets in Resources */,
 				94B8BB162B18CA7900BEB53B /* Assets.xcassets in Resources */,
+				944EFB6C2C2587D200F98487 /* PrivacyInfo.xcprivacy in Resources */,
 				94EE88A42B19018E00486B15 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
