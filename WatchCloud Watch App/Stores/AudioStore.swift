@@ -578,7 +578,9 @@ fileprivate extension Track {
         public static let json = "json"
     }
     
+    /// Calculated size of track in MB
+    /// - Important: Size is calculated according to length of content, using **0.015996 MB / second**
     var fileSizeInMb: Double {
-        Double(durationInSeconds) * 0.015996 // SoundCloud mp3's are 0.015996 MB / second
+        Double(durationInSeconds) * 0.015996
     }
 }
