@@ -17,7 +17,6 @@ struct SettingsView: View {
     
     private let downloadsColor = Color.scOrange
     private let otherAppsColor = Color.blue
-    private let availableSpaceColor = Color.green
     
     var body: some View {
         List {
