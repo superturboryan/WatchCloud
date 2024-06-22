@@ -65,9 +65,9 @@ struct AboutView: View {
                         .tint(.scOrange)
                 }
                 ToolbarItem(placement: .cancellationAction) {
-                    Text(Config.appVersion)
-                        .font(.footnote)
-                        .fontWeight(.medium)
+                    Text(verbatim: "🧪 \(Config.appVersion)")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
                         .foregroundStyle(colorScheme.lessReadableText)
                 }
             }
@@ -98,6 +98,11 @@ struct AboutItem: Hashable {
             **WatchCloud is a watchOS app that makes it possible to stream SoundCloud directly to your Apple Watch.**
 
             This **iOS** app is used to connect WatchCloud to your SoundCloud account.
+            """),
+        ]),
+        AboutItem(title: String(localized: "How do I listen to music?"), text: [String(localized:
+            """
+            Connect Bluetooth headphones to your watch.
             """),
         ]),
         AboutItem(title: String(localized: "Can I delete this app from my phone?"), text: [String(localized:

@@ -642,6 +642,9 @@
         }
       }
     },
+    "Connect Bluetooth headphones to your watch." : {
+
+    },
     "Connect to SoundCloud" : {
       "localizations" : {
         "ar" : {
@@ -833,6 +836,9 @@
           }
         }
       }
+    },
+    "How do I listen to music?" : {
+
     },
     "Install WatchCloud app on Apple Watch" : {
       "localizations" : {
