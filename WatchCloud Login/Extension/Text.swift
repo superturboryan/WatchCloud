@@ -9,11 +9,11 @@ import SwiftUI
 
 extension Text {
     static func md(_ markdownText: String) -> Text {
-        var attributedString = try! AttributedString(
+        var attributedString = try? AttributedString(
             markdown: markdownText,
             options: AttributedString.MarkdownParsingOptions(interpretedSyntax: .inlineOnlyPreservingWhitespace)
         )
-        attributedString.foregroundColor = Color.primary
-        return Text(attributedString)
+        attributedString?.foregroundColor = Color.primary
+        return Text(attributedString ?? "⚠️ Failed to parse markdown")
     }
 }
