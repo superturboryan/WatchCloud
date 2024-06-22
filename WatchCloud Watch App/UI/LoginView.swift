@@ -34,7 +34,7 @@ struct LoginView: View {
         .fullWidthAndHeight()
         .background(.black)
         .alert(
-            "Failed to connect to SoundCloud, \nplease try again",
+            String(localized: "Failed to connect to SoundCloud, \nplease try again", comment: "Error message"),
             isPresented: $showErrorAlert
         ) {
             Button("Ok") {}
@@ -55,6 +55,7 @@ struct LoginView: View {
     private var showLoginButtonButton: some View {
         Button {
             showLoginButton = true
+            AnalyticsManager.shared.log(.tappedShowLoginButton)
         } label: {
             Text("or connect here")
                 .font(.footnote)

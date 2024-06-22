@@ -36,6 +36,8 @@ enum AnalyticsEvent {
     case tappedSkipToNextTrack
     case tappedSkipToPreviousTrack
     
+    case tappedShowLoginButton
+    
     // API
     case tooManyRequests
     

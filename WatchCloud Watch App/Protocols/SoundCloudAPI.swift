@@ -21,6 +21,7 @@ protocol SoundCloudAPI {
     func getTracksForPlaylist(_ id: Int) async throws -> Page<Track>
     func getTracksForUser(_ id: Int, _ limit: Int) async throws -> Page<Track>
     func getLikedTracksForUser(_ id: Int, _ limit: Int) async throws -> Page<Track>
+    func getRelatedTracks(_ id: Int, _ limit: Int) async throws -> Page<Track>
     
     func searchTracks(_ query: String, _ limit: Int) async throws -> Page<Track>
     func searchPlaylists(_ query: String, _ limit: Int) async throws -> Page<Playlist>

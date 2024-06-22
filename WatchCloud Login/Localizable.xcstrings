@@ -56,6 +56,12 @@
             "state" : "translated",
             "value" : "**[Toque aqui](https://developers.soundcloud.com/docs/api/terms-of-use)**"
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[Nhấn vào đây](https://developers.soundcloud.com/docs/api/terms-of-use)**"
+          }
         }
       }
     },
@@ -113,6 +119,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "**[Toque aqui](https://github.com/superturboryan/WatchCloud-Privacy-Policy/)**"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**[Nhấn vào đây](https://github.com/superturboryan/WatchCloud-Privacy-Policy/)**"
           }
         }
       }
@@ -172,6 +184,12 @@
             "state" : "translated",
             "value" : "**WatchCloud é um aplicativo watchOS que possibilita transmitir o SoundCloud diretamente para o seu Apple Watch.**\n\nEste aplicativo **iOS** é usado para conectar o WatchCloud à sua conta do SoundCloud."
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**WatchCloud là ứng dụng watchOS cho phép truyền trực tiếp SoundCloud tới Apple Watch của bạn.**\n\nỨng dụng **iOS** này được sử dụng để kết nối WatchCloud với tài khoản SoundCloud của bạn."
+          }
         }
       }
     },
@@ -229,6 +247,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Informação"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thông tin"
           }
         }
       }
@@ -288,6 +312,12 @@
             "state" : "translated",
             "value" : "Conta Conectada"
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đã kết nối tài khoản"
+          }
         }
       }
     },
@@ -345,6 +375,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Após concluir as instruções para conectar sua conta, verifique se o WatchCloud foi conectado ao seu Apple Watch. O aplicativo watchOS permanecerá conectado sem este aplicativo iOS.\n\nVocê pode então excluir este aplicativo do seu iPhone. Você pode baixar este aplicativo novamente na App Store se precisar reconectar sua conta do SoundCloud."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sau khi hoàn thành hướng dẫn kết nối tài khoản của bạn, hãy xác minh rằng WatchCloud đã được kết nối trên Apple Watch của bạn. Ứng dụng watchOS sẽ vẫn được kết nối mà không cần ứng dụng iOS này.\n\nSau đó, bạn có thể xóa ứng dụng này khỏi iPhone của mình. Bạn có thể tải xuống lại ứng dụng này từ App Store nếu bạn cần kết nối lại tài khoản SoundCloud của mình."
           }
         }
       }
@@ -404,6 +440,12 @@
             "state" : "translated",
             "value" : "Posso me conectar diretamente no meu relógio?"
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tôi có thể kết nối với SoundCloud trên Apple Watch không?"
+          }
         }
       }
     },
@@ -462,6 +504,12 @@
             "state" : "translated",
             "value" : "Posso excluir este aplicativo do meu telefone?"
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tôi có thể xóa ứng dụng này khỏi điện thoại của mình không?"
+          }
         }
       }
     },
@@ -519,6 +567,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fechar"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đóng"
           }
         }
       }
@@ -579,6 +633,12 @@
             "state" : "translated",
             "value" : "Conectar"
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kết nối"
+          }
         }
       }
     },
@@ -636,6 +696,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Conecte-se ao SoundCloud"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kết nối với SoundCloud"
           }
         }
       }
@@ -695,6 +761,76 @@
             "state" : "translated",
             "value" : "Perguntas Frequentes"
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Các câu hỏi thường gặp"
+          }
+        }
+      }
+    },
+    "How do I install the watchOS app?" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "كيف أقوم بتثبيت تطبيق watchOS؟"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wie installiere ich die watchOS-App?"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Cómo instalo la aplicación watchOS?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment installer l’application watchOS ?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Come installo l'app watchOS?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "watchOS アプリをインストールするにはどうすればよいですか?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "watchOS 앱은 어떻게 설치하나요?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoe installeer ik de watchOS-app?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Como faço para instalar o aplicativo watchOS?"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Làm cách nào để cài đặt ứng dụng watchOS?"
+          }
         }
       }
     },
@@ -753,6 +889,12 @@
             "state" : "translated",
             "value" : "Instale o aplicativo WatchCloud no Apple Watch"
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cài đặt ứng dụng WatchCloud trên Apple Watch"
+          }
         }
       }
     },
@@ -810,6 +952,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Legal"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hợp pháp"
           }
         }
       }
@@ -870,6 +1018,12 @@
             "state" : "translated",
             "value" : "Login"
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đăng nhập"
+          }
         }
       }
     },
@@ -924,6 +1078,12 @@
           }
         },
         "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "vi" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -986,6 +1146,12 @@
             "state" : "translated",
             "value" : "Abra o aplicativo no Apple Watch"
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mở ứng dụng trên Apple Watch"
+          }
         }
       }
     },
@@ -1044,6 +1210,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "alimentado por"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "được cung cấp bởi"
           }
         }
       }
@@ -1104,6 +1276,12 @@
             "state" : "translated",
             "value" : "Algo deu errado"
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đã xảy ra lỗi"
+          }
         }
       }
     },
@@ -1161,6 +1339,76 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Termos de uso da API SoundCloud"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Điều khoản sử dụng API SoundCloud"
+          }
+        }
+      }
+    },
+    "There are two ways to install WatchCloud on an Apple Watch:\n\n**1)** Open the **Watch** app on iOS, scroll down to WatchCloud in the list of apps, tap install\n\n**OR**\n\n**2)** Open the **App Store on the Apple Watch**, search for WatchCloud, tap install" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "هناك طريقتان لتثبيت WatchCloud على Apple Watch:\n\n**1)** افتح تطبيق **Watch** على iOS، ثم قم بالتمرير لأسفل إلى WatchCloud في قائمة التطبيقات، ثم انقر فوق تثبيت\n\n**أو**\n\n**2)** افتح **App Store على Apple Watch**، وابحث عن WatchCloud، ثم اضغط على تثبيت"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es gibt zwei Möglichkeiten, WatchCloud auf einer Apple Watch zu installieren:\n\n**1)** Öffnen Sie die **Watch**-App auf iOS, scrollen Sie in der App-Liste nach unten zu WatchCloud und tippen Sie auf Installieren\n\n**ODER**\n\n**2)** Öffnen Sie den **App Store auf der Apple Watch**, suchen Sie nach WatchCloud und tippen Sie auf Installieren"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hay dos formas de instalar WatchCloud en un Apple Watch:\n\n**1)** Abra la aplicación **Watch** en iOS, desplácese hacia abajo hasta WatchCloud en la lista de aplicaciones, toque instalar\n\n**O**\n\n**2)** Abra **App Store en el Apple Watch**, busque WatchCloud, toque instalar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il existe deux façons d'installer WatchCloud sur une Apple Watch :\n\n**1)** Ouvrez l'application **Watch** sur iOS, descendez jusqu'à WatchCloud dans la liste des applications, appuyez sur Installer.\n\n**OU**\n\n**2)** Ouvrez l'**App Store sur l'Apple Watch**, recherchez WatchCloud, appuyez sur Installer."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esistono due modi per installare WatchCloud sul Apple Watch:\n\n**1)** Apri l'app **Watch** su iOS, scorri verso il basso fino a WatchCloud nell'elenco delle app, tocca Installa\n\n**O**\n\n**2)** Apri l'**App Store sull'Apple Watch**, cerca WatchCloud, tocca Installa"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Watch に WatchCloud をインストールするには、次の 2 つの方法があります:\n\n**1)** iOS で **Watch** アプリを開き、アプリの一覧で WatchCloud までスクロールして、インストールをタップします\n\n**または**\n\n**2)** Apple Watch で **App Store** を開き、WatchCloud を検索して、インストールをタップします"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Watch에 WatchCloud를 설치하는 방법에는 두 가지가 있습니다.\n\n**1)** iOS에서 **Watch** 앱을 열고 앱 목록에서 WatchCloud로 스크롤한 후 설치를 탭합니다.\n\n**또는**\n\n**2)** **Apple Watch에서 App Store**를 열고 WatchCloud를 검색한 후 설치를 탭하세요."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er zijn twee manieren om WatchCloud op een Apple Watch te installeren:\n\n**1)** Open de app **Watch** op iOS, scrol omlaag naar WatchCloud in de lijst met apps en tik op Installeren\n\n**OF**\n\n**2)** Open de **App Store op de Apple Watch**, zoek naar WatchCloud, tik op installeren"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Existem duas maneiras de instalar o WatchCloud em um Apple Watch:\n\n**1)** Abra o aplicativo **Watch** no iOS, role para baixo até WatchCloud na lista de aplicativos e toque em instalar\n\n**OU**\n\n**2)** Abra a **App Store no Apple Watch**, procure por WatchCloud, toque em instalar"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Có hai cách để cài đặt WatchCloud trên Apple Watch:\n\n**1)** Mở ứng dụng **\"Watch\"** trên iOS, cuộn xuống WatchCloud trong danh sách ứng dụng, nhấn cài đặt\n\n**HOẶC**\n\n**2)** Mở **App Store trên Apple Watch**, tìm kiếm WatchCloud, nhấn cài đặt"
           }
         }
       }
@@ -1220,6 +1468,12 @@
             "state" : "translated",
             "value" : "Ocorreu um problema na conexão com o SoundCloud. Verifique se sua conta funciona no soundcloud.com ou tente um dos outros métodos de login"
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đã xảy ra sự cố khi kết nối với SoundCloud. Xác minh tài khoản của bạn hoạt động trên soundcloud.com hoặc thử một trong các phương thức đăng nhập khác"
+          }
         }
       }
     },
@@ -1277,6 +1531,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aplicativo watchOS instalado"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đã cài đặt ứng dụng Apple Watch"
           }
         }
       }
@@ -1336,6 +1596,12 @@
             "state" : "translated",
             "value" : "Aplicativo watchOS não instalado"
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ứng dụng Apple Watch chưa được cài đặt"
+          }
         }
       }
     },
@@ -1391,6 +1657,12 @@
           }
         },
         "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WatchCloud"
+          }
+        },
+        "vi" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "WatchCloud"
@@ -1453,6 +1725,12 @@
             "state" : "translated",
             "value" : "Política de Privacidade"
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chính sách quyền riêng tư của WatchCloud"
+          }
         }
       }
     },
@@ -1510,6 +1788,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "O que é esse aplicativo?"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ứng dụng này là gì?"
           }
         }
       }
@@ -1569,6 +1853,12 @@
             "state" : "translated",
             "value" : "Onde posso obter ajuda?"
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tôi có thể nhận trợ giúp ở đâu?"
+          }
         }
       }
     },
@@ -1627,63 +1917,75 @@
             "state" : "translated",
             "value" : "Sim, mas **pode haver problemas na exibição da página da Web para alguns dos métodos de login.**\n\nTodos os métodos de login (soundcloud.com, Apple ID, FB, Google) funcionam neste aplicativo para iPhone."
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Có, nhưng **có thể có vấn đề khi hiển thị trang web đối với một số phương thức đăng nhập.**\n\nTất cả các phương thức đăng nhập (soundcloud.com, Apple ID, FB, Google) đều hoạt động từ ứng dụng iPhone này."
+          }
         }
       }
     },
-    "You can send an email to **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nYou can also visit the **[issues page](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** to see questions from the community 👋" : {
+    "You can send an email to **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nYou can also visit the **[issues page](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** to see questions from the community, suggest a feature, or report a bug 👋🐞" : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "يمكنك إرسال بريد إلكتروني إلى **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 📨\n\nيمكنك أيضًا زيارة **[صفحة المشكلات](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** للاطلاع على أسئلة المجتمع 👋"
+            "value" : "يمكنك إرسال بريد إلكتروني إلى **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** ✉️\n\nيمكنك أيضًا زيارة **[صفحة المشكلات](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** للاطلاع على أسئلة المجتمع أو اقتراح ميزة أو الإبلاغ عن خطأ 👋🐞"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sie können eine E-Mail an **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌 senden\n\nSie können auch die **[Problemseite](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** besuchen, um Fragen aus der Community zu sehen 👋"
+            "value" : "Sie können eine E-Mail an **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** senden. 💌\n\nSie können auch die **[Problemseite](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** besuchen, um Fragen der Community zu sehen, eine Funktion vorzuschlagen oder einen Fehler zu melden. 👋🐞"
           }
         },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Puede enviar un correo electrónico a **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nTambién puedes visitar la **[página de problemas](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** para ver las preguntas de la comunidad 👋"
+            "value" : "Puede enviar un correo electrónico a **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nTambién puedes visitar la **[página de problemas](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** para ver preguntas de la comunidad, sugerir una función o informar un error 👋🐞"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vous pouvez envoyer un e-mail à **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nVous pouvez également visiter la **[page des problèmes](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** pour voir des questions déjà posées par la communauté 👋"
+            "value" : "Vous pouvez envoyer un e-mail à **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** (je parle français !) 💌\n\nVous pouvez également visiter la **[page des problèmes sur GitHub](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** pour voir des questions posées par la communauté, suggérer une fonctionnalité ou signaler un bug 👋🐞"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Puoi inviare un'e-mail a **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nPuoi anche visitare la **[pagina dei problemi](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** per vedere le domande della community 👋"
+            "value" : "Puoi inviare un'e-mail a **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nPuoi anche visitare la **[pagina dei problemi](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** per vedere le domande della community, suggerire una funzionalità o segnalare un bug 👋🐞"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** にメールを送信できます 💌\n\n**[問題ページ](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** にアクセスして、コミュニティからの質問を確認することもできます 👋"
+            "value" : "**[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** にメールを送信できます 💌\n\n**[問題ページ](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** にアクセスして、コミュニティからの質問を確認したり、機能を提案したり、バグを報告したりすることもできます 👋🐞"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)**으로 이메일을 보내실 수 있습니다 💌\n\n**[문제 페이지](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)**를 방문하여 커뮤니티의 질문을 볼 수도 있습니다 👋"
+            "value" : "**[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)**으로 이메일을 보내실 수 있습니다 💌\n\n**[문제 페이지](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)**를 방문하여 커뮤니티의 질문을 확인하고 기능을 제안하거나 버그를 신고할 수도 있습니다 👋🐞"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "U kunt een e-mail sturen naar **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nJe kunt ook de **[problemenpagina](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** bezoeken om vragen van de community te bekijken 👋"
+            "value" : "U kunt een e-mail sturen naar **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nJe kunt ook de **[problemenpagina](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** bezoeken om vragen van de community te bekijken, een functie voor te stellen of een bug te melden 👋🐞"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Você pode enviar um e-mail para **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nVocê também pode visitar a **[página de problemas](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** para ver as perguntas da comunidade 👋"
+            "value" : "Você pode enviar um e-mail para **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nVocê também pode visitar a **[página de problemas](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** para ver perguntas da comunidade, sugerir um recurso ou relatar um bug 👋🐞"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bạn có thể gửi email đến **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌\n\nBạn cũng có thể truy cập **[trang vấn đề](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** để xem câu hỏi từ cộng đồng, đề xuất tính năng hoặc báo cáo lỗi 👋🐞"
           }
         }
       }

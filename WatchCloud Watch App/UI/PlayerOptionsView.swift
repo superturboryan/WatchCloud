@@ -16,6 +16,8 @@ struct PlayerOptionsView: View {
     
     @Binding var track: Track
     @State var audioStoreError: AudioStore.Error? = nil
+    @State var showRelatedTracks = false
+    @State var relatedTracksPlaylist: Playlist? = nil
     
     private let hSpacing: CGFloat = 12
     private let buttonSize = CGSize(width: 76, height: 45)
@@ -26,33 +28,38 @@ struct PlayerOptionsView: View {
     }
     
     var body: some View {
-        VStack(spacing: 32) {
-            HStack(spacing: hSpacing) {
-                likeButton
-                downloadButton
-                    .disabled(!isDownloadingEnabled)
-                    .opacity(isDownloadingEnabled ? 1 : 0)
+        ScrollView {
+            VStack(spacing: 32) {
+                HStack(spacing: hSpacing) {
+                    likeButton
+                    relatedTracksButton
+                }
+                HStack(spacing: hSpacing) {
+                    playbackSpeedButton
+                    shareButton
+                }
+                if isDownloadingEnabled {
+                    downloadButton
+                }
             }
-            HStack(spacing: hSpacing) {
-                playbackSpeedButton
-                shareButton
+            .padding(.bottom, 10)
+            .fontDesign(.rounded)
+            .buttonStyle(.plain)
+            .fullWidthAndHeight()
+            .sheet(item: $relatedTracksPlaylist, content: { playlist in
+                PlaylistView(playlist: .constant(playlist))
+            })
+            .alert(
+                String(localized: "Something Went Wrong", comment: "Alert title"),
+                isPresented: .constant(audioStoreError != nil)
+            ) {
+                Button("Ok") {
+                    audioStoreError = nil
+                }
+            } message: {
+                Text(verbatim: audioStoreError?.localizedDescription ?? "")
             }
-        }
-        .padding(.bottom, 10)
-        .fontDesign(.rounded)
-        .buttonStyle(.plain)
-        .fullWidthAndHeight()
-        .background(.black)
-        .alert(
-            String(localized: "Something Went Wrong", comment: "Alert title"),
-            isPresented: .constant(audioStoreError != nil)
-        ) {
-            Button("Ok") {
-                audioStoreError = nil
-            }
-        } message: {
-            Text(verbatim: audioStoreError?.localizedDescription ?? "")
-        }
+        }.scrollDisabled(!isDownloadingEnabled)
     }
     
     var likeButton: some View {
@@ -83,6 +90,12 @@ struct PlayerOptionsView: View {
         }
     }
     
+    var relatedTracksButton: some View {
+        Button { tappedRelatedTracks() } label: {
+            buttonView("music.note.list", .yellow, String(localized: "Related", comment: "Playlist title"))
+        }
+    }
+    
     func tappedLike() {
         Haptics.click()
         AnalyticsManager.shared.log(.tappedLikeTrack)
@@ -108,6 +121,21 @@ struct PlayerOptionsView: View {
             } catch let error as AudioStore.Error {
                 audioStoreError = error
             }
+        }
+    }
+    
+    func tappedRelatedTracks() {
+        Haptics.click()
+        Task {
+            let relatedTracks = try await audioStore.getRelatedTracksForTrack(audioStore.loadedTrack?.id ?? 0)
+            let playlist = Playlist(
+                id: PlaylistType.relatedTracks.rawValue,
+                permalinkUrl: audioStore.loadedTrack?.permalinkUrl ?? "https://soundcloud.com",
+                user: .init(id: 123),
+                title: PlaylistType.relatedTracks.title,
+                tracks: [audioStore.loadedTrack!] + relatedTracks.items
+            )
+            self.relatedTracksPlaylist = playlist
         }
     }
     

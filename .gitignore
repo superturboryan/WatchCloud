@@ -1,5 +1,9 @@
+project.xcworkspace/
+xcuserdata/
+
 *.xcworkspacedata
 *package.resolved
 *.xcconfig
 *.xcuserdatad
 *.xcbkptlist
+*.xcsettings

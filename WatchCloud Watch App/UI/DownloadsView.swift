@@ -109,14 +109,23 @@ struct DownloadsView: View {
     var downloadedTracksEmptyView: some View {
         VStack(spacing: 4) {
             HStack(spacing: 10) {
-                Text("Tap")
+                Text(String(
+                    localized: "Tap",
+                    comment: "Imperative verb, part of sentence 'Tap [button] in the top-left corner of the the player, then tap [other button] to download tracks to watch'"
+                ))
                 Image(systemName: "ellipsis")
                     .font(.title2)
                     .foregroundStyle(LinearGradient.scOrange(.horizontal))
             }
-            Text("in the top-left corner of the player, then tap")
+            Text(String(
+                localized: "in the top-left corner of the player, then tap",
+                comment: "Part of sentence 'Tap [button] in the top-left corner of the the player, then tap [other button] to download tracks to watch'"
+            ))
             playerOptionsDownloadButton
-            Text(" to download tracks to watch")
+            Text(String(
+                localized:" to download tracks to watch",
+                comment: "Part of sentence 'Tap [button] in the top-left corner of the the player, then tap [other button] to download tracks to watch'"
+            ))
         }
         .fontWeight(.medium)
         .multilineTextAlignment(.center)
@@ -160,14 +169,12 @@ struct DownloadsView: View {
         DownloadsView()
             .environmentObject({ () -> AudioStore in
                 let store = AudioStore(testSC)
-                Task {
-                    await store.loadDefaultPlaylists()
-                    store.downloadedTracks = [testTrack(), testTrack(), testTrack(), ]
-                    store.downloadsInProgress = [
-                        testTrack() : 0.5,
-                        testTrack() : 0.9
-                    ]
-                }
+                store.loadDefaultPlaylists()
+                store.downloadedTracks = [testTrack(), testTrack(), testTrack(), ]
+                store.downloadsInProgress = [
+                    testTrack() : 0.5,
+                    testTrack() : 0.9
+                ]
                 return store
             }())
             .environmentObject(testAudioPlayer)

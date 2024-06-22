@@ -75,12 +75,14 @@ struct Complication: Widget {
     }
 }
 
+@available(watchOS 10, *)
 #Preview(as: .accessoryCorner) {
     Complication()
 } timeline: {
     SimpleEntry(date: .now, emoji: "😀")
 }
 
+@available(watchOS 10, *)
 #Preview(as: .accessoryCircular) {
     Complication()
 } timeline: {

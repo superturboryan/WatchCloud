@@ -19,6 +19,7 @@ struct AboutView: View {
             VStack(spacing: 0) {
                 List {
                     ForEach(aboutItems, id: \.self) { item in
+                        // Question
                         if !item.text.isEmpty {
                             ExpandableSection {
                                 ForEach(item.text, id: \.self) { text in
@@ -37,6 +38,7 @@ struct AboutView: View {
                             .listRowBackground(Color.clear)
                             .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 0))
                         } else {
+                            // Section Title
                             Text(item.title)
                                 .font(.title2)
                                 .fontWeight(.semibold)
@@ -60,7 +62,7 @@ struct AboutView: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button { dismiss() } label: { Text("Close") }
-                        .tint(.scOrangeLight)
+                        .tint(.scOrange)
                 }
                 ToolbarItem(placement: .cancellationAction) {
                     Text(Config.appVersion)
@@ -80,6 +82,17 @@ struct AboutItem: Hashable {
     static let all: [AboutItem] = [
         
         AboutItem(title: String(localized: "Frequently Asked Questions"), text: []),
+        AboutItem(title: String(localized: "How do I install the watchOS app?"), text: [String(localized:
+            """
+            There are two ways to install WatchCloud on an Apple Watch:
+            
+            **1)** Open the **Watch** app on iOS, scroll down to WatchCloud in the list of apps, tap install
+            
+            **OR**
+            
+            **2)** Open the **App Store on the Apple Watch**, search for WatchCloud, tap install
+            """),
+        ]),
         AboutItem(title: String(localized: "What is this app?"), text: [String(localized:
             """
             **WatchCloud is a watchOS app that makes it possible to stream SoundCloud directly to your Apple Watch.**
@@ -105,7 +118,7 @@ struct AboutItem: Hashable {
             """
             You can send an email to **[watchcloud.app@gmail.com](mailto:watchcloud.app@gmail.com)** 💌
             
-            You can also visit the **[issues page](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** to see questions from the community 👋
+            You can also visit the **[issues page](https://github.com/superturboryan/WatchCloud-Privacy-Policy/issues)** to see questions from the community, suggest a feature, or report a bug 👋🐞
             """),
         ]),
         AboutItem(title: String(localized: "Legal"), text: []),

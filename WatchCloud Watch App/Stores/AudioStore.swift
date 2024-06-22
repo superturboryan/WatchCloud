@@ -158,6 +158,11 @@ extension AudioStore {
         catch { throw Error.gettingLikedTracksForUser }
     }
     
+    func getRelatedTracksForTrack(_ id: Int, _ limit: Int = 20) async throws -> Page<Track> {
+        do { return try await service.getRelatedTracks(id, limit) }
+        catch { throw Error.gettingRelatedTracksForTrack }
+    }
+    
     func getTracksForPlaylist(_ id: Int) async throws -> Page<Track> {
         do { return try await service.getTracksForPlaylist(id) }
         catch { throw Error.gettingTracksForPlaylist }
@@ -182,7 +187,7 @@ extension AudioStore {
             case .recentlyPosted:
                 try await loadRecentlyPostedPlaylistWithTracks()
             // These playlists are not reloaded here
-            case .nowPlaying, .downloads:
+            case .nowPlaying, .downloads, .relatedTracks:
                 Logger.audioStore.warning("⚠️ Playlist type reloads automatically")
             }
         } else {
@@ -533,6 +538,7 @@ extension AudioStore {
     enum Error: LocalizedError, Equatable {
         case gettingTracksForUser
         case gettingLikedTracksForUser
+        case gettingRelatedTracksForTrack
         case gettingTracksForPlaylist
         case gettingPageOfTracks
         case gettingPageOfPlaylists
@@ -572,7 +578,9 @@ fileprivate extension Track {
         public static let json = "json"
     }
     
+    /// Calculated size of track in MB
+    /// - Important: Size is calculated according to length of content, using **0.015996 MB / second**
     var fileSizeInMb: Double {
-        Double(durationInSeconds) * 0.015996 // SoundCloud mp3's are 0.015996 MB / second
+        Double(durationInSeconds) * 0.015996
     }
 }
