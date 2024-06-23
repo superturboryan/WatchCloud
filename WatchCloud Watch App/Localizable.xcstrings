@@ -1343,66 +1343,66 @@
         }
       }
     },
-    "Display a QR code in place of artwork when watch is dimmed" : {
+    "Display a QR code in place of artwork when screen is dimmed" : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "عرض رمز الاستجابة السريعة بدلاً من العمل الفني عندما تكون الساعة خافتة"
+            "value" : "عرض رمز الاستجابة السريعة بدلاً من العمل الفني عندما تكون الشاشة خافتة"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wenn die Uhr gedimmt ist, wird anstelle des Liedbilds ein QR-Code angezeigt"
+            "value" : "Bei abgedunkeltem Bildschirm anstelle des Songbilds einen QR-Code anzeigen"
           }
         },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Muestra un código QR en lugar de la imagen de la canción cuando el reloj está atenuado"
+            "value" : "Muestra un código QR en lugar de una obra de arte cuando la pantalla está atenuada"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afficher un code QR à la place de l'illustration lorsque la montre est grisée"
+            "value" : "Afficher un code QR à la place de l'illustration lorsque l'écran est grisé"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visualizza un codice QR al posto dell'immagine della canzone quando l'orologio è oscurato"
+            "value" : "Visualizza un codice QR al posto dell'opera d'arte quando lo schermo è oscurato"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "時計が暗くなっているときに曲の画像の代わりに QR コードを表示します"
+            "value" : "画面が暗くなったときにアートワークの代わりにQRコードを表示する"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "시계가 어두워지면 작품 대신 QR 코드 표시"
+            "value" : "화면이 어두워지면 작품 대신 QR 코드 표시"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Geef een QR-code weer in plaats van een afbeelding wanneer het horloge gedimd is"
+            "value" : "Geef een QR-code weer in plaats van illustraties wanneer het scherm gedimd is"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Exiba um código QR no lugar da imagem da música quando o relógio estiver esmaecido"
+            "value" : "Exibir um código QR em vez da arte quando a tela estiver esmaecida"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hiển thị mã QR thay cho tác phẩm nghệ thuật khi đồng hồ bị mờ"
+            "value" : "Hiển thị mã QR thay cho tác phẩm nghệ thuật khi màn hình bị mờ"
           }
         }
       }

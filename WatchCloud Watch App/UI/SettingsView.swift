@@ -24,11 +24,6 @@ struct SettingsView: View {
             downloadsSection
             appInfoSection
         }
-        .alert("Are you sure you want to remove all downloads?", isPresented: $showDeleteAllAlert) {
-            Button("Remove All", role: .destructive) { try? audioStore.removeAllDownloads() }
-            Button(String(localized: "Cancel", comment: "Verb"), role: .cancel) {}
-
-        }
         .fontDesign(.rounded)
         .navigationBarTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
@@ -36,7 +31,7 @@ struct SettingsView: View {
     
     private var playbackSection: some View {
         Section(
-            footer: Text("Display a QR code in place of artwork when watch is dimmed")
+            footer: Text("Display a QR code in place of artwork when screen is dimmed")
         ) {
             Toggle(isOn: Config.$showQRWhenWatchIsDimmed) {
                 Text(String(localized: "Show QR Code", comment: "Toggle label"))
@@ -78,6 +73,11 @@ struct SettingsView: View {
                     .buttonStyle(.bordered)
                     .listItemTint(.clear)
                 }
+            }
+            .alert("Are you sure you want to remove all downloads?", isPresented: $showDeleteAllAlert) {
+                Button("Remove All", role: .destructive) { try? audioStore.removeAllDownloads() }
+                Button(String(localized: "Cancel", comment: "Verb"), role: .cancel) {}
+
             }
         }
     }
