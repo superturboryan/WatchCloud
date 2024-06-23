@@ -1,5 +1,22 @@
+# 1.3.1 
+🌎 Published 21 June 2024  
+**🔨 Xcode 15.4 ⭐️**  
+**⌚️ watchOS 10.5 ⭐️**   
+📦 SoundCloud Swift Package 1.0.5   
+
+### ✨ Features
+- Privacy report (`PrivacyInfo.xcprivacy`) 👮‍♀️
+- Related tracks playlist
+- Analytics event for tapping “login anyway” on watch
+- Vietnamese localization 🇻🇳
+
+### 🐞 Bug fixes
+- Sign out on 401 unauthorized error when loading `UserStore`
+- WatchOS 9 `PlayerView` force unwrap crash
+
+
 # 1.3.0
-🌎 Published 8 December  
+🌎 Published 8 December 2023  
 🔨 Xcode 15.0  
 ⌚️ watchOS 10.0  
 📦 **SoundCloud Swift Package 1.0.5 ⭐️**  
