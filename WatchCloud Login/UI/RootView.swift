@@ -169,7 +169,7 @@ struct RootView: View {
     }
     
     private var appIcon: some View {
-        Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())
+        Image(uiImage: UIImage(named: "Icon") ?? UIImage())
             .resizable()
             .scaledToFill()
     }
