@@ -22,7 +22,7 @@ class WCWatchSessionHandler: NSObject, WCSessionDelegate {
     
     private func setupSession() {
         guard WCSession.isSupported() else {
-            Logger.wcWatchSessionHandler.critical("WCSession is not supported")
+            Logger.wcWatchSessionHandler.critical("WCWatchSession is not supported")
             return
         }
         session.delegate = self
@@ -34,19 +34,27 @@ class WCWatchSessionHandler: NSObject, WCSessionDelegate {
         activationDidCompleteWith activationState: WCSessionActivationState,
         error: Error?
     ) {
-        if let error { Logger.wcWatchSessionHandler.error("Error occurred activating WCSession: \(error)") }
+        if let error { Logger.wcWatchSessionHandler.error("Error occurred activating WCWatchSession: \(error)") }
+    }
+    
+    func session(
+        _ session: WCSession,
+        didFinish userInfoTransfer: WCSessionUserInfoTransfer,
+        error: (any Error)?
+    ) {
+        if let error { Logger.wcWatchSessionHandler.error("Error occurred didFinish WCWatchSession: \(error)") }
     }
         
     func session(
         _ session: WCSession,
         didReceiveApplicationContext applicationContext: [String : Any]
     ) {
-        if let tokenData = applicationContext["\(TokenResponse.self)"] as? Data {
-            AnalyticsManager.shared.log(.receivedAuthTokensFromPhone)
-            NotificationCenter.default.post(name: .didReceiveAuthTokensFromPhone, object: tokenData)
-        } else {
-            Logger.wcWatchSessionHandler.error("Received unexpected applicationContext from iOS app: \(applicationContext)")
+        guard let tokenResponse = applicationContext["\(TokenResponse.self)"] as? Data else {
+            Logger.wcWatchSessionHandler.warning("Received unexpected applicationContext from iOS app: \(applicationContext)")
+            return
         }
+        AnalyticsManager.shared.log(.receivedAuthTokensFromPhone)
+        NotificationCenter.default.post(name: .didReceiveAuthTokensFromPhone, object: tokenResponse)
     }
 }
 

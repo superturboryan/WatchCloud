@@ -26,7 +26,7 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
     
     private func setupSession() {
         guard WCSession.isSupported() else {
-            Logger.wcPhoneSessionHandler.critical("WCSession is not supported")
+            Logger.wcPhoneSessionHandler.critical("WCPhoneSession is not supported")
             return
         }
         session.delegate = self
@@ -34,8 +34,8 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        guard error.isNil else {
-            Logger.wcPhoneSessionHandler.error("Error occurred activating WCSession: \(error)")
+        guard error == nil else {
+            Logger.wcPhoneSessionHandler.error("Error occurred activating WCPhoneSession: \(error)")
             return
         }
         isWatchAppInstalled = session.publisher(for: \.isWatchAppInstalled)
@@ -44,11 +44,11 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {
-        Logger.wcPhoneSessionHandler.warning("WCSession sessionDidBecomeInactive")
+        Logger.wcPhoneSessionHandler.warning("WCPhoneSession sessionDidBecomeInactive")
     }
     
     func sessionDidDeactivate(_ session: WCSession) {
-        Logger.wcPhoneSessionHandler.warning("WCSession sessionDidDeactivate")
+        Logger.wcPhoneSessionHandler.warning("WCPhoneSession sessionDidDeactivate")
     }
     
     func send(_ authTokens: TokenResponse) {
@@ -60,8 +60,4 @@ class WCPhoneSessionHandler: NSObject, WCSessionDelegate {
             Logger.wcPhoneSessionHandler.error("Failed to send auth tokens: \(error)")
         }
     }
-}
-
-extension Optional {
-    var isNil: Bool { self == nil }
 }
