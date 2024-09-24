@@ -10,8 +10,6 @@ import SwiftUI
 
 enum Config {
     
-    static let apiUrl = "https://api.soundcloud.com/"
-    
     static let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
     
     static func isDownloadingEnabled(for id: Int?) -> Bool {
@@ -27,6 +25,7 @@ enum Config {
     
     // MARK: - 🌏 Localization Helpers
     static let isObjectFirstLanguage = objectFirstLanguageCodes.contains(currentLanguageCode)
+    
     private static let currentLanguageCode = String(Locale.preferredLanguages[0].prefix(2))
     private static let objectFirstLanguageCodes = [
         Locale(identifier: "ko").language.languageCode?.identifier,
@@ -39,9 +38,13 @@ enum Config {
     static let clientId = Bundle.main.object(forInfoDictionaryKey: "SC_CLIENT_ID") as! String
     static let clientSecret = Bundle.main.object(forInfoDictionaryKey: "SC_CLIENT_SECRET") as! String
     static let redirectURI = Bundle.main.object(forInfoDictionaryKey: "SC_REDIRECT_URI") as! String
+    
     static let mpProjectToken = Bundle.main.object(forInfoDictionaryKey: "MP_PROJECT_TOKEN") as! String
     
-    // MARK: - 💾 Loaded from UserDefaults
-    @AppStorage("allowDownloadingUsingData") static var allowDownloadingUsingData = false
-    @AppStorage("showQRWhenWatchIsDimmed") static var showQRWhenWatchIsDimmed = false
+    // MARK: - 💾 Loaded from UserDefaults - DO NOT CHANGE KEYS ⚠️
+    @AppStorage("allowDownloadingUsingData")
+    static var allowDownloadingUsingData = false
+    
+    @AppStorage("showQRWhenWatchIsDimmed")
+    static var showQRWhenWatchIsDimmed = false
 }

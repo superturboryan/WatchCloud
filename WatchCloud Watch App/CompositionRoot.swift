@@ -32,7 +32,6 @@ enum CompositionRoot {
     
     // Config
     private static let config = SoundCloud.Config(
-        apiURL: Config.apiUrl,
         clientId: Config.clientId,
         clientSecret: Config.clientSecret,
         redirectURI: Config.redirectURI
