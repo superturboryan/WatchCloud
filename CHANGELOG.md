@@ -1,3 +1,17 @@
+# 1.3.2
+🌎 Published 29 September 2024  
+**🔨 Xcode 16.0 ⭐️**  
+**⌚️ watchOS 11.0 ⭐️**   
+📦 SoundCloud Swift Package 1.1.0   
+
+### ✨ Features
+- Updated for watchOS 11 + iOS 18
+- OAuth 2.1 PKCE used during authentication
+
+### 🐞 Bug fixes
+- Captcha on SoundCloud login page no longer blocks signing in on Apple Watch 
+- Use `secure.soundcloud.com` instead of `api.soundcloud.com` to avoid unnecessary redirect 
+
 # 1.3.1 
 🌎 Published 21 June 2024  
 **🔨 Xcode 15.4 ⭐️**  
