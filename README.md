@@ -15,5 +15,5 @@ We encourage you to periodically review this page for the latest information on 
 
 ## Contact 🤙
 
-Developer: Ryan Forsyth 👨‍🔬  
-Email: watchcloud.app@gmail.com 💌
+Developer: [Ryan 🧑‍💻](https://www.linkedin.com/in/ryan-david-forsyth/)  
+[Email 💌](mailto:watchcloud.app@gmail.com)
