@@ -1,9 +1,9 @@
 # WatchCloud ⌚️☁️
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/d5aae43d-945a-4fcb-b988-d66b41dfa2cb" width="320"/>
-  <img src="https://github.com/user-attachments/assets/f35876df-61aa-42fc-a9f2-569e7398ef07" width="320"/>
-  <img src="https://github.com/user-attachments/assets/8037e5df-ef1d-49a4-95a1-b89d30f52a17" width="320"/>
+  <img src="https://github.com/user-attachments/assets/d5aae43d-945a-4fcb-b988-d66b41dfa2cb" width="280"/>
+  <img src="https://github.com/user-attachments/assets/f35876df-61aa-42fc-a9f2-569e7398ef07" width="280"/>
+  <img src="https://github.com/user-attachments/assets/8037e5df-ef1d-49a4-95a1-b89d30f52a17" width="280"/>
 </p>
 
 <p align="center">
