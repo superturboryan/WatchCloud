@@ -1,4 +1,5 @@
 # WatchCloud
+**Stream your favorite SoundCloud tracks straight from your Apple Watch** – no iPhone, no subscription, no ads.
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/3c4be3ed-dbd7-482e-b9d6-367f79c9411e" width="250"/>
@@ -18,18 +19,31 @@
 
 </p>
 
-## Features
-- Stream SoundCloud on Apple Watch — no iPhone required
-- iOS *companion* app for connecting to SoundCloud (sign‑in); after setup the watch streams **standalone**
-- Search & play tracks, artists, and playlists; shuffle and adjust playback speed
-- Crown‑first controls with the Digital Crown
-- **New in 2.0.0 (watchOS 26):** Liquid Glass design
-- **Scrubber View** with ±15‑second skip
-- **Double‑tap to Like** from Player
-- Artwork‑aware Player with a **progress ring**
-- **Siri Shortcuts** for hands‑free actions
+## Why WatchCloud?
+
+- 🎧 **Pure SoundCloud on your wrist** – stream tracks over Wi‑Fi or cellular with no iPhone nearby.
+- ⌚ **Built for Apple Watch first** – a watch-only app that uses the latest watchOS 10+ features, gestures, and design so it feels truly native.
+- 🎨 **Modern Liquid Glass UI** – a clean, glanceable player that looks right at home in watchOS.
+- 🎛️ **Crown-first controls** – precise volume, scrubbing, and ±15-second skipping with the Digital Crown.
+- 🔎 **Search that actually works on a watch** – quickly find tracks, artists, and playlists, then shuffle or change playback speed.
+- ❤️ **Double-tap to Like** – quickly like tracks right from the player.
+- 🗣️ **Siri Shortcuts** – start playback with your voice.
+- 👌 **One-time purchase** – no subscriptions, no in-app purchases, no ads.
+
+## Quick Start
+
+1. **Buy WatchCloud** from the App Store on your iPhone.
+2. **Install the Watch app** on your Apple Watch from the Watch app or App Store on the watch.
+3. **Open WatchCloud on iPhone** and sign in with your SoundCloud account.
+4. **Open WatchCloud on Apple Watch** and start streaming over Wi-Fi or cellular – no iPhone nearby required.
+
+## Recent updates
+
+- **2.1.0** – Updated streaming to work with the latest SoundCloud API changes. Now supporting 160 kbps AAC encoding
+- **2.0.0** – New Liquid Glass design for watchOS 26, improved player, scrubber feature, and support for Siri shortcuts
 
 ## Report a bug or request a feature
+
 Please include the following to help me reproduce and fix things quickly:
 
 - Clear title (Bug/Feature) and a short description
@@ -41,17 +55,17 @@ Please include the following to help me reproduce and fix things quickly:
 → **[Open an issue](https://github.com/superturboryan/WatchCloud/issues/new)**
 
 ## FAQ
-**Do I need my iPhone nearby?**  
-No. After sign‑in via the iOS companion app, WatchCloud streams directly over Wi‑Fi or cellular.
-
-**Can I download for offline listening?**  
-No. WatchCloud is streaming‑only.
+**Do I need my iPhone nearby?**
+**No.** After sign-in via the iOS companion app, WatchCloud streams directly over Wi-Fi or cellular from your Apple Watch.
 
 **Do I need a subscription?**  
-No. WatchCloud is a one‑time purchase with no subscriptions or in‑app purchases.
+**No.** WatchCloud is a one-time purchase with no subscriptions or in-app purchases.
 
 **Which watches are supported?**  
-Apple Watch models running **watchOS 10** or newer.
+All Apple Watch models running **watchOS 10** or newer are fully supported.
+
+**Having trouble starting playback?**    
+Please make sure you’re running **WatchCloud 2.1.0 or later**. A recent SoundCloud API update required an app update to keep streaming working. The app's version is displayed in the Settings page of the watch app.
 
 ## Links 🔗
 - **[Open an issue](https://github.com/superturboryan/WatchCloud/issues/new)** 🆘
