@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://watchcloud.app/sitemap.xml
+Crawl-delay: 1
