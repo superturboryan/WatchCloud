@@ -82,12 +82,6 @@ function Privacy() {
       <footer className="footer">
         <div className="container">
           <div className="footer-content">
-            <p className="footer-copyright">
-              © {new Date().getFullYear()} WatchCloud
-            </p>
-            <p className="footer-tagline">
-              Made with care by an indie developer
-            </p>
             <div className="footer-links">
               <a
                 href="https://apps.apple.com/us/app/watchcloud/id6466678799"
@@ -100,10 +94,19 @@ function Privacy() {
               <a href="mailto:watchcloud.app@gmail.com" className="footer-link">
                 Support
               </a>
-              <a href="/privacy.html" className="footer-link">
+              <a href="/privacy" className="footer-link">
                 Privacy
               </a>
             </div>
+            <p className="footer-disclaimer">
+              WatchCloud is an independent app and is not affiliated with or endorsed by SoundCloud. SoundCloud is a registered trademark of its respective owners.
+            </p>
+            <p className="footer-copyright">
+              © {new Date().getFullYear()} WatchCloud
+            </p>
+            <p className="footer-tagline">
+              Made with 🧡 by <a href="https://ryanforsyth.dev" target="_blank" rel="noopener noreferrer" className="link">Ryan</a>
+            </p>
           </div>
         </div>
       </footer>

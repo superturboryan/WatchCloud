@@ -18,7 +18,7 @@
   --color-background: #ffffff;
   --color-background-alt: #f8f8f8;
   --color-border: #e5e5e5;
-  --color-focus: #007aff;
+  --color-focus: #FF8600;
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -35,17 +35,44 @@
   /* Constraints */
   --max-width: 900px;
   --max-width-narrow: 720px;
+  --nav-height: 68px;
+  --watch-mockup-width: 300px;
 
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-medium: 250ms ease;
+
+  /* Z-Index Scale */
+  --z-base: 1;
+  --z-sticky: 999;
+  --z-nav: 1000;
+  --z-behind: -1;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 100px;
+
+  /* Icon Sizes */
+  --icon-xs: 14px;
+  --icon-sm: 16px;
+  --icon-md: 18px;
+  --icon-lg: 36px;
+
+  /* Box Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-button: 0 2px 8px rgba(255, 134, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-button-hover: 0 6px 16px rgba(255, 134, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 /* Dark mode colors */
 @media (prefers-color-scheme: dark) {
   :root {
     --color-text: #ffffff;
-    --color-text-light: #a8a8a8;
+    --color-text-light: #b8b8b8;
     --color-background: #000000;
     --color-background-alt: #1a1a1a;
     --color-border: #333333;
@@ -63,6 +90,9 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
 }
 
 /* Improved focus styles for accessibility */
