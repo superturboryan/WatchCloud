@@ -454,7 +454,7 @@
 }
 
 .faq-answer p {
-  padding: 0 var(--spacing-md) var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md);
   font-size: 1rem;
   color: var(--color-text-light);
   line-height: 1.6;
@@ -514,7 +514,7 @@
 
 @media (min-width: 768px) {
   .final-cta {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
     gap: var(--spacing-lg);
   }
 
@@ -553,13 +553,24 @@
 }
 
 .link {
-  color: var(--color-primary);
+  color: #c75700;
   text-decoration: underline;
   transition: color var(--transition-fast);
 }
 
 .link:hover {
-  color: var(--color-primary-dark);
+  color: #a04700;
+}
+
+/* Dark mode: use the brand color since it has good contrast on dark backgrounds */
+@media (prefers-color-scheme: dark) {
+  .link {
+    color: var(--color-primary);
+  }
+
+  .link:hover {
+    color: var(--color-primary-light);
+  }
 }
 
 /* Sticky Bottom CTA Bar - Mobile Only */

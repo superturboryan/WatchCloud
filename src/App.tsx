@@ -54,7 +54,7 @@ function App() {
     },
     {
       question: "Which Apple Watches are supported?",
-      answer: "WatchCloud supports modern watchOS versions and works best on cellular-enabled Apple Watch models. The app is optimized for recent watchOS releases but maintains compatibility with older versions."
+      answer: "WatchCloud works on any Apple Watch running watchOS 10 or later, and is fully optimized for watchOS 26 with a refreshed, modern UI."
     },
     {
       question: "Does WatchCloud show ads?",
@@ -92,19 +92,19 @@ function App() {
   const testimonials = [
     {
       quote: "Finally I can run without my phone bouncing in my pocket. This app is a game-changer.",
-      author: "Runner from Portland"
+      author: " App Store review"
     },
     {
       quote: "My commute just got infinitely better. SoundCloud on my wrist while my phone stays in my bag.",
-      author: "App Store review"
+      author: " App Store review"
     },
     {
       quote: "Perfect for the gym. I can focus on my workout without worrying about my phone.",
-      author: "WatchCloud user in London"
+      author: " App Store review"
     },
     {
       quote: "Love the clean interface and the fact that it just works. No fuss, no subscriptions.",
-      author: "App Store review"
+      author: " App Store review"
     }
   ]
 
@@ -146,14 +146,14 @@ function App() {
                   SoundCloud on Apple Watch — no phone needed
                 </h1>
                 <p className="hero-subtitle">
-                  Stream your SoundCloud playlists and likes straight from Apple Watch. No ads, no subscriptions, no iPhone needed after setup.
+                  Stream your SoundCloud playlists and likes straight from Apple Watch. No ads, no subscriptions. Just music.
                 </p>
                 <ul className="hero-benefits">
                   <li className="hero-benefit">
                     <svg className="hero-benefit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
                     </svg>
-                    <span>No iPhone needed</span>
+                    <span>Leave your iPhone at home</span>
                   </li>
                   <li className="hero-benefit">
                     <svg className="hero-benefit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -236,7 +236,7 @@ function App() {
               {testimonials.map((testimonial, index) => (
                 <div key={index} className="card testimonial-card">
                   <p className="testimonial-quote">"{testimonial.quote}"</p>
-                  <p className="testimonial-author">— {testimonial.author}</p>
+                  <p className="testimonial-author">{testimonial.author}</p>
                 </div>
               ))}
             </div>
