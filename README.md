@@ -2,9 +2,9 @@
 **Stream your favorite SoundCloud tracks straight from your Apple Watch** – no iPhone, no subscription, no ads.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/3c4be3ed-dbd7-482e-b9d6-367f79c9411e" width="250"/>
-  <img src="https://github.com/user-attachments/assets/4818415a-47f6-4353-8872-6cba73fdb4a3" width="250"/>
-  <img src="https://github.com/user-attachments/assets/1f6d3290-8f2a-420e-951e-539d98f4b05a" width="250"/>
+  <img src="https://github.com/user-attachments/assets/666178c3-5641-4775-8833-c0a429053dec" width="250"/>&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/d939f035-4381-400b-8181-770776ccc3fd" width="250"/>&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/0e6dc8d8-e579-4f4e-ae16-6e59fde0fb19" width="250"/>
 </p>
 
 <p align="center">
