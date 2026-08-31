@@ -1,9 +1,9 @@
 .content-hero {
   padding-block: clamp(4rem, 9vw, 7rem);
-  color: #fff;
+  color: var(--color-emphasis-text);
   background:
-    radial-gradient(circle at 78% 22%, rgba(255, 134, 0, 0.17), transparent 30%),
-    #070707;
+    radial-gradient(circle at 78% 22%, var(--color-emphasis-glow), transparent 32%),
+    var(--color-emphasis-background);
 }
 
 .content-hero-inner {
@@ -15,23 +15,23 @@
   flex-wrap: wrap;
   gap: 0.4rem;
   margin-bottom: 1.5rem;
-  color: #aaa;
+  color: var(--color-emphasis-text-light);
   font-size: 0.85rem;
 }
 
 .breadcrumbs a:hover {
-  color: #fff;
+  color: var(--color-emphasis-text);
 }
 
 .content-hero .eyebrow {
   margin-bottom: 0.75rem;
-  color: #ffad2f;
+  color: var(--color-emphasis-accent);
 }
 
 .content-hero h1 {
   max-width: 780px;
   margin-bottom: 1.25rem;
-  color: #fff;
+  color: var(--color-emphasis-text);
   font-size: clamp(2.6rem, 8vw, 4.8rem);
   line-height: 1;
   letter-spacing: -0.05em;
@@ -39,7 +39,7 @@
 
 .content-hero-intro {
   max-width: 720px;
-  color: #d0d0d0;
+  color: var(--color-emphasis-text-light);
   font-size: clamp(1.1rem, 2.5vw, 1.3rem);
   line-height: 1.65;
 }
@@ -223,21 +223,23 @@
 
 .content-cta {
   padding-block: 4rem;
-  color: #fff;
-  background: #080808;
+  color: var(--color-emphasis-text);
+  background:
+    radial-gradient(circle at 50% 50%, var(--color-emphasis-glow-soft), transparent 60%),
+    var(--color-emphasis-background);
   text-align: center;
 }
 
 .content-cta h2 {
   margin-bottom: 0.75rem;
-  color: #fff;
+  color: var(--color-emphasis-text);
   font-size: clamp(2rem, 5vw, 3rem);
   letter-spacing: -0.04em;
 }
 
 .content-cta p {
   margin-bottom: 1.4rem;
-  color: #bdbdbd;
+  color: var(--color-emphasis-text-light);
 }
 
 @media (min-width: 700px) {

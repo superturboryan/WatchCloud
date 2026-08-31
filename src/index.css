@@ -8,6 +8,8 @@
 }
 
 :root {
+  color-scheme: light;
+
   /* Colors based on WatchCloud app icon gradient (#FFB327 → #FF8600) */
   --color-primary: #FF8600;
   --color-primary-dark: #e67700;
@@ -20,6 +22,17 @@
   --color-border: #e2e2e2;
   --color-border-strong: #b9b9b9;
   --color-focus: #FF8600;
+  --color-emphasis-text: #171717;
+  --color-emphasis-text-light: #625f5a;
+  --color-emphasis-background: #f5f3ef;
+  --color-emphasis-background-strong: #ebe7df;
+  --color-emphasis-border: #d5d0c8;
+  --color-emphasis-hover: #e9e5de;
+  --color-emphasis-accent: #a84c00;
+  --color-emphasis-glow: rgba(255, 134, 0, 0.16);
+  --color-emphasis-glow-soft: rgba(255, 134, 0, 0.1);
+  --emphasis-texture-opacity: 0.07;
+  --watch-image-shadow: drop-shadow(0 28px 34px rgba(58, 38, 18, 0.22));
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -72,12 +85,24 @@
 /* Dark mode colors */
 @media (prefers-color-scheme: dark) {
   :root {
+    color-scheme: dark;
     --color-text: #ffffff;
     --color-text-light: #b8b8b8;
     --color-background: #000000;
     --color-background-alt: #131313;
     --color-border: #303030;
     --color-border-strong: #5e5e5e;
+    --color-emphasis-text: #ffffff;
+    --color-emphasis-text-light: #bdbdbd;
+    --color-emphasis-background: #080808;
+    --color-emphasis-background-strong: #000000;
+    --color-emphasis-border: #323232;
+    --color-emphasis-hover: #171717;
+    --color-emphasis-accent: #ffad2f;
+    --color-emphasis-glow: rgba(255, 134, 0, 0.16);
+    --color-emphasis-glow-soft: rgba(255, 134, 0, 0.13);
+    --emphasis-texture-opacity: 0.24;
+    --watch-image-shadow: drop-shadow(0 28px 34px rgba(0, 0, 0, 0.55));
   }
 }
 

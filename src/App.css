@@ -144,10 +144,10 @@
 .hero {
   position: relative;
   overflow: hidden;
-  color: #fff;
+  color: var(--color-emphasis-text);
   background:
-    radial-gradient(circle at 76% 36%, rgba(255, 134, 0, 0.15), transparent 30%),
-    linear-gradient(180deg, #0b0b0b 0%, #000 100%);
+    radial-gradient(circle at 76% 36%, var(--color-emphasis-glow), transparent 32%),
+    linear-gradient(180deg, var(--color-emphasis-background) 0%, var(--color-emphasis-background-strong) 100%);
 }
 
 .hero::after {
@@ -155,7 +155,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.24;
+  opacity: var(--emphasis-texture-opacity);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
 }
 
@@ -177,14 +177,14 @@
 }
 
 .hero .eyebrow {
-  color: #ffad2f;
+  color: var(--color-emphasis-accent);
   margin-bottom: 0.85rem;
 }
 
 .hero-title {
   max-width: 720px;
   margin-bottom: 1.25rem;
-  color: #fff;
+  color: var(--color-emphasis-text);
   font-size: clamp(2.65rem, 8vw, 5rem);
   font-weight: 760;
   letter-spacing: -0.055em;
@@ -194,7 +194,7 @@
 .hero-subtitle {
   max-width: 660px;
   margin-bottom: 1.65rem;
-  color: #d1d1d1;
+  color: var(--color-emphasis-text-light);
   font-size: clamp(1.075rem, 2.2vw, 1.3rem);
   line-height: 1.62;
 }
@@ -207,19 +207,19 @@
 }
 
 .hero .button-secondary {
-  color: #fff;
-  border-color: #4a4a4a;
+  color: var(--color-emphasis-text);
+  border-color: var(--color-emphasis-border);
 }
 
 .hero .button-secondary:hover {
-  background: #171717;
+  background: var(--color-emphasis-hover);
 }
 
 .proof-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem 1.2rem;
-  color: #c5c5c5;
+  color: var(--color-emphasis-text-light);
   font-size: 0.875rem;
 }
 
@@ -263,7 +263,7 @@
 .showcase-screenshot {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 28px 34px rgba(0, 0, 0, 0.55));
+  filter: var(--watch-image-shadow);
 }
 
 .section {
@@ -411,8 +411,8 @@
 }
 
 .comparison {
-  color: #fff;
-  background: #080808;
+  color: var(--color-emphasis-text);
+  background: var(--color-emphasis-background);
 }
 
 .comparison-layout {
@@ -426,26 +426,26 @@
 }
 
 .comparison-copy .eyebrow {
-  color: #ffad2f;
+  color: var(--color-emphasis-accent);
   margin-bottom: 0.65rem;
 }
 
 .comparison-copy h2 {
-  color: #fff;
+  color: var(--color-emphasis-text);
 }
 
 .comparison-copy > p {
   margin-bottom: 1.25rem;
-  color: #bdbdbd;
+  color: var(--color-emphasis-text-light);
 }
 
 .comparison .text-link {
-  color: #ffad2f;
+  color: var(--color-emphasis-accent);
 }
 
 .comparison-table-wrap {
   overflow-x: auto;
-  border: 1px solid #323232;
+  border: 1px solid var(--color-emphasis-border);
   border-radius: 1.25rem;
 }
 
@@ -459,19 +459,19 @@
 .comparison th,
 .comparison td {
   padding: 1rem;
-  border-bottom: 1px solid #292929;
+  border-bottom: 1px solid var(--color-emphasis-border);
   text-align: left;
 }
 
 .comparison thead th {
-  color: #a9a9a9;
+  color: var(--color-emphasis-text-light);
   font-size: 0.75rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .comparison tbody th {
-  color: #c8c8c8;
+  color: var(--color-emphasis-text-light);
   font-weight: 550;
 }
 
@@ -481,7 +481,7 @@
 }
 
 .comparison .yes {
-  color: #ffad2f;
+  color: var(--color-emphasis-accent);
   font-weight: 800;
 }
 
@@ -528,11 +528,11 @@
 }
 
 .final-cta-section {
-  color: #fff;
+  color: var(--color-emphasis-text);
   background:
-    linear-gradient(180deg, #000 0%, transparent 28%, transparent 100%),
-    radial-gradient(circle at 50% 48%, rgba(255, 134, 0, 0.16), transparent 58%),
-    #050505;
+    linear-gradient(180deg, var(--color-background) 0%, transparent 28%, transparent 100%),
+    radial-gradient(circle at 50% 48%, var(--color-emphasis-glow), transparent 58%),
+    var(--color-emphasis-background);
 }
 
 .final-cta {
@@ -541,16 +541,16 @@
 
 .final-cta .eyebrow {
   margin-bottom: 0.65rem;
-  color: #ffad2f;
+  color: var(--color-emphasis-accent);
 }
 
 .final-cta h2 {
-  color: #fff;
+  color: var(--color-emphasis-text);
 }
 
 .final-cta > p:not(.eyebrow) {
   margin-bottom: 1.5rem;
-  color: #bdbdbd;
+  color: var(--color-emphasis-text-light);
 }
 
 .sticky-cta-bar {
