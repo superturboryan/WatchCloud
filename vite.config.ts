@@ -10,6 +10,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         privacy: resolve(__dirname, 'privacy.html'),
+        support: resolve(__dirname, 'support.html'),
+        guide: resolve(__dirname, 'how-to-listen-to-soundcloud-on-apple-watch.html'),
       },
     },
   },

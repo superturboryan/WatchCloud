@@ -16,8 +16,9 @@
   --color-text: #1a1a1a;
   --color-text-light: #666666;
   --color-background: #ffffff;
-  --color-background-alt: #f8f8f8;
-  --color-border: #e5e5e5;
+  --color-background-alt: #f6f6f6;
+  --color-border: #e2e2e2;
+  --color-border-strong: #b9b9b9;
   --color-focus: #FF8600;
 
   /* Spacing */
@@ -33,9 +34,9 @@
     sans-serif;
 
   /* Constraints */
-  --max-width: 900px;
-  --max-width-narrow: 720px;
-  --nav-height: 68px;
+  --max-width: 1160px;
+  --max-width-narrow: 780px;
+  --nav-height: 72px;
   --watch-mockup-width: 300px;
 
   /* Transitions */
@@ -51,7 +52,7 @@
   /* Border Radius */
   --radius-sm: 8px;
   --radius-md: 12px;
-  --radius-lg: 16px;
+  --radius-lg: 20px;
   --radius-full: 100px;
 
   /* Icon Sizes */
@@ -74,8 +75,9 @@
     --color-text: #ffffff;
     --color-text-light: #b8b8b8;
     --color-background: #000000;
-    --color-background-alt: #1a1a1a;
-    --color-border: #333333;
+    --color-background-alt: #131313;
+    --color-border: #303030;
+    --color-border-strong: #5e5e5e;
   }
 }
 
@@ -97,8 +99,8 @@ body {
 
 /* Improved focus styles for accessibility */
 *:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
 }
 
 /* Typography */

@@ -1,208 +1,144 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
+import { AppStoreLink, Footer, Header } from './SiteChrome'
+
+const faqs = [
+  {
+    question: 'Can I stream without my iPhone nearby?',
+    answer: 'Yes. After signing in with the iPhone companion app, WatchCloud streams directly from your Apple Watch over Wi-Fi or cellular. Your iPhone does not need to stay nearby during playback.',
+  },
+  {
+    question: 'Do I need a paid SoundCloud subscription?',
+    answer: 'No. You need a SoundCloud account, but WatchCloud does not require a paid SoundCloud subscription. WatchCloud is a $3.99 one-time purchase with no recurring fee.',
+  },
+  {
+    question: 'What do I need to listen?',
+    answer: 'You need an Apple Watch running watchOS 10 or later, an internet connection through Wi-Fi or cellular, a SoundCloud account, and a compatible audio output such as Bluetooth headphones.',
+  },
+  {
+    question: 'Is WatchCloud the official SoundCloud app?',
+    answer: 'No. WatchCloud is an independent app created by a solo developer. It uses the official SoundCloud API and is not affiliated with or endorsed by SoundCloud.',
+  },
+  {
+    question: 'Where can I get help?',
+    answer: 'The WatchCloud support page covers installation, sign-in, connectivity, playlists, and playback. You can also contact the developer directly if the guides do not solve the problem.',
+  },
+]
+
+const features = [
+  {
+    title: 'Crown-first playback',
+    description: 'Scrub through long mixes, skip tracks, shuffle, repeat, and adjust playback speed from your wrist.',
+  },
+  {
+    title: 'Your SoundCloud library',
+    description: 'Open your likes and playlists, search for music, and discover tracks without reaching for your phone.',
+  },
+  {
+    title: 'Quick actions',
+    description: 'Use Siri Shortcuts and Apple Watch double-tap gestures for fast, hands-free control.',
+  },
+  {
+    title: 'Made for movement',
+    description: 'Stream over Wi-Fi or cellular while running, training, commuting, or working phone-free.',
+  },
+]
+
+function WatchImage({
+  name,
+  alt,
+  className,
+  loading = 'lazy',
+}: {
+  name: 'now-playing' | 'library' | 'player-options'
+  alt: string
+  className: string
+  loading?: 'eager' | 'lazy'
+}) {
+  return (
+    <picture>
+      <source
+        type="image/webp"
+        srcSet={`/${name}-420.webp 420w, /${name}-845.webp 845w`}
+        sizes="(max-width: 767px) 300px, 360px"
+      />
+      <img
+        src={`/${name}.png`}
+        alt={alt}
+        className={className}
+        width="845"
+        height="1448"
+        loading={loading}
+        decoding="async"
+        fetchPriority={loading === 'eager' ? 'high' : 'auto'}
+      />
+    </picture>
+  )
+}
 
 function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [showStickyBar, setShowStickyBar] = useState(false)
-  const appStoreUrl = 'https://apps.apple.com/us/app/watchcloud/id6466678799'
 
-  const toggleFaq = (index: number) => {
-    setOpenFaq(openFaq === index ? null : index)
-  }
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
-  // Show sticky CTA bar when user scrolls past hero section
   useEffect(() => {
-    let lastScrollY = 0
-    let ticking = false
+    const targetId = window.location.hash.slice(1)
+    if (!targetId) return
 
-    const handleScroll = () => {
-      lastScrollY = window.scrollY
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(targetId)?.scrollIntoView()
+    })
 
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          // Simple threshold: show after scrolling down 600px
-          setShowStickyBar(lastScrollY > 600)
-          ticking = false
-        })
-        ticking = true
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => window.cancelAnimationFrame(frame)
   }, [])
 
-  const faqs = [
-    {
-      question: "Do I need to bring my iPhone with me?",
-      answer: "Nope! After the initial setup with your iPhone, you can stream SoundCloud directly on your Apple Watch over Wi-Fi or cellular. Perfect for runs, gym sessions, or commutes when you want to leave your phone behind."
-    },
-    {
-      question: "Do I need a SoundCloud subscription?",
-      answer: "You'll need a SoundCloud account to use WatchCloud, but you don't need a SoundCloud subscription. WatchCloud itself is a one-time purchase with no recurring fees or in-app purchases."
-    },
-    {
-      question: "Is WatchCloud an official SoundCloud app?",
-      answer: "WatchCloud is an independent app built by a solo developer and is not affiliated with or endorsed by SoundCloud. It uses the official SoundCloud API in compliance with their API Terms of Use to bring SoundCloud streaming to your Apple Watch."
-    },
-    {
-      question: "Which Apple Watches are supported?",
-      answer: "WatchCloud works on any Apple Watch running watchOS 10 or later, and is fully optimized for watchOS 26 with a refreshed, modern UI."
-    },
-    {
-      question: "Does WatchCloud show ads?",
-      answer: "No ads, ever. WatchCloud is a one-time purchase with no ads, no subscriptions, and no in-app purchases. Pay once, enjoy forever."
-    }
-  ]
+  useEffect(() => {
+    const hero = document.querySelector('.hero')
+    if (!hero) return
 
-  const features = [
-    {
-      title: "Standalone SoundCloud Streaming",
-      description: "Play your playlists, likes, and favourite tracks directly from your wrist, no phone needed."
-    },
-    {
-      title: "Designed for Apple Watch",
-      description: "Modern watchOS-style UI with a liquid glass feel, built specifically for smaller screens."
-    },
-    {
-      title: "Full Playback Control",
-      description: "Scrub with the Digital Crown, skip tracks, shuffle, repeat, adjust playback speed, and double-tap to like."
-    },
-    {
-      title: "Perfect for Workouts",
-      description: "Leave your phone in the locker and stream over Wi-Fi or cellular while you move."
-    },
-    {
-      title: "Siri Shortcuts & Quick Actions",
-      description: "Trigger playback and actions hands-free with Siri or Apple Watch double-tap gestures."
-    },
-    {
-      title: "One-Time Purchase",
-      description: "No ads, no subscriptions, no in-app purchases. Just pay once and stream forever."
-    }
-  ]
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowStickyBar(!entry.isIntersecting),
+      { threshold: 0.05 },
+    )
 
-  const testimonials = [
-    {
-      quote: "Finally I can run without my phone bouncing in my pocket. This app is a game-changer.",
-      author: " App Store review"
-    },
-    {
-      quote: "My commute just got infinitely better. SoundCloud on my wrist while my phone stays in my bag.",
-      author: " App Store review"
-    },
-    {
-      quote: "Perfect for the gym. I can focus on my workout without worrying about my phone.",
-      author: " App Store review"
-    },
-    {
-      quote: "Love the clean interface and the fact that it just works. No fuss, no subscriptions.",
-      author: " App Store review"
-    }
-  ]
+    observer.observe(hero)
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <>
-      <header className="nav">
-        <div className="nav-container">
-          <div className="nav-logo">
-            <img src="/navbar-icon.png" alt="WatchCloud" className="nav-logo-icon" />
-            <span className="nav-logo-text">WatchCloud</span>
-          </div>
-          <nav className="nav-links">
-            <button onClick={() => scrollToSection('features')} className="nav-link">
-              Features
-            </button>
-            <button onClick={() => scrollToSection('faq')} className="nav-link">
-              FAQ
-            </button>
-            <a
-              href={appStoreUrl}
-              className="button button-primary button-small"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Download
-            </a>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
-      <main>
-        {/* Hero Section */}
+      <main id="main-content">
         <section className="hero">
-          <div className="container">
+          <div className="container hero-container">
             <div className="hero-content">
               <div className="hero-text">
-                <p className="hero-label">WatchCloud</p>
-                <h1 className="hero-title">
-                  SoundCloud on Apple Watch — no phone needed
-                </h1>
+                <p className="eyebrow">SoundCloud on Apple Watch</p>
+                <h1 className="hero-title">Leave your iPhone behind. Keep your SoundCloud.</h1>
                 <p className="hero-subtitle">
-                  Stream your SoundCloud playlists and likes straight from Apple Watch. No ads, no subscriptions. Just music.
+                  Stream likes, playlists, and tracks directly from Apple Watch over Wi-Fi or cellular.
+                  No SoundCloud subscription required.
                 </p>
-                <ul className="hero-benefits">
-                  <li className="hero-benefit">
-                    <svg className="hero-benefit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                    </svg>
-                    <span>Leave your iPhone at home</span>
-                  </li>
-                  <li className="hero-benefit">
-                    <svg className="hero-benefit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                    </svg>
-                    <span>Stream playlists & likes</span>
-                  </li>
-                  <li className="hero-benefit">
-                    <svg className="hero-benefit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                    </svg>
-                    <span>One-time purchase, no ads</span>
-                  </li>
-                </ul>
-                <div className="hero-social-proof">
-                  <div className="hero-rating">
-                    <div className="hero-stars">
-                      {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="hero-star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
-                        </svg>
-                      ))}
-                    </div>
-                    <span className="hero-rating-text">4.8/5 from 2,000+ users</span>
-                  </div>
-                </div>
                 <div className="hero-buttons">
-                  <a
-                    href={appStoreUrl}
-                    className="button button-primary"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Download on the App Store
-                  </a>
-                  <button
-                    onClick={() => scrollToSection('features')}
-                    className="button button-secondary"
-                  >
-                    Learn more
-                  </button>
+                  <AppStoreLink placement="hero" className="button button-primary button-large">
+                    Download for $3.99
+                  </AppStoreLink>
+                  <a href="#how-it-works" className="button button-secondary">See how it works</a>
                 </div>
+                <ul className="proof-list" aria-label="WatchCloud requirements and pricing">
+                  <li>One-time purchase</li>
+                  <li>watchOS 10+</li>
+                  <li>Wi-Fi or cellular</li>
+                  <li>No ads</li>
+                </ul>
               </div>
-              <div className="hero-visual">
+              <div className="hero-visual" aria-label="WatchCloud player preview">
                 <div className="watch-mockup">
-                  <img
-                    src="/now-playing.png"
-                    alt="WatchCloud app running on Apple Watch showing SoundCloud playback interface"
+                  <WatchImage
+                    name="now-playing"
+                    alt="WatchCloud playing a SoundCloud track on Apple Watch"
                     className="watch-screenshot"
+                    loading="eager"
                   />
                 </div>
               </div>
@@ -210,138 +146,142 @@ function App() {
           </div>
         </section>
 
-        {/* Features Section */}
-        <section id="features" className="features">
+        <section id="how-it-works" className="section how-it-works">
           <div className="container">
-            <h2 className="section-title">Why you'll love WatchCloud</h2>
-            <p className="section-intro">
-              Everything you need to enjoy SoundCloud on your Apple Watch, designed for life on the go.
-            </p>
+            <div className="section-heading">
+              <p className="eyebrow">Quick start</p>
+              <h2>From download to phone-free listening</h2>
+              <p>Sign in once, then take your music with you.</p>
+            </div>
+            <ol className="steps-grid">
+              <li className="step-card"><span>1</span><h3>Install WatchCloud</h3><p>Buy the app on your iPhone and install its Apple Watch app.</p></li>
+              <li className="step-card"><span>2</span><h3>Connect SoundCloud</h3><p>Open the iPhone companion and sign in securely through SoundCloud.</p></li>
+              <li className="step-card"><span>3</span><h3>Listen from your wrist</h3><p>Connect headphones, choose Wi-Fi or cellular, and leave your phone behind.</p></li>
+            </ol>
+            <p className="section-link"><a href="/how-to-listen-to-soundcloud-on-apple-watch">Read the complete setup guide →</a></p>
+          </div>
+        </section>
+
+        <section className="section showcase">
+          <div className="container">
+            <div className="section-heading">
+              <p className="eyebrow">See it in action</p>
+              <h2>Your SoundCloud library, designed for a smaller screen</h2>
+              <p>Browse, play, and control music without squeezing an iPhone interface onto your watch.</p>
+            </div>
+            <div className="showcase-grid">
+              <article className="showcase-card">
+                <div className="showcase-image"><WatchImage name="library" alt="WatchCloud SoundCloud library on Apple Watch" className="showcase-screenshot" /></div>
+                <div><p className="showcase-kicker">Find your music</p><h3>Likes, playlists, and search</h3><p>Open the music you already love and discover what to play next.</p></div>
+              </article>
+              <article className="showcase-card showcase-card-reverse">
+                <div className="showcase-image"><WatchImage name="player-options" alt="WatchCloud playback controls on Apple Watch" className="showcase-screenshot" /></div>
+                <div><p className="showcase-kicker">Stay in control</p><h3>Built around the Digital Crown</h3><p>Scrub precisely, change speed, repeat, shuffle, and like tracks from the player.</p></div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="features" className="section features">
+          <div className="container">
+            <div className="section-heading">
+              <p className="eyebrow">Watch-native features</p>
+              <h2>More than a remote control</h2>
+              <p>WatchCloud is built for direct playback on Apple Watch, not just controlling an iPhone.</p>
+            </div>
             <div className="features-grid">
-              {features.map((feature, index) => (
-                <div key={index} className="card feature-card">
-                  <h3 className="feature-title">{feature.title}</h3>
-                  <p className="feature-description">{feature.description}</p>
-                </div>
+              {features.map((feature) => (
+                <article key={feature.title} className="feature-card">
+                  <h3>{feature.title}</h3>
+                  <p>{feature.description}</p>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <section className="testimonials">
+        <section className="section comparison">
           <div className="container">
-            <h2 className="section-title">Loved by runners, commuters, and focus-workers</h2>
-            <div className="testimonials-grid">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="card testimonial-card">
-                  <p className="testimonial-quote">"{testimonial.quote}"</p>
-                  <p className="testimonial-author">{testimonial.author}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section id="faq" className="faq">
-          <div className="container-narrow">
-            <h2 className="section-title">Frequently Asked Questions</h2>
-            <div className="faq-list">
-              {faqs.map((faq, index) => (
-                <div key={index} className="faq-item">
-                  <button
-                    className="faq-question"
-                    onClick={() => toggleFaq(index)}
-                    aria-expanded={openFaq === index}
-                  >
-                    <span>{faq.question}</span>
-                    <span className={`faq-icon ${openFaq === index ? 'open' : ''}`}>
-                      {openFaq === index ? '−' : '+'}
-                    </span>
-                  </button>
-                  <div className={`faq-answer ${openFaq === index ? 'open' : ''}`}>
-                    <p>{faq.answer}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Support & Final CTA Section */}
-        <section id="support" className="support">
-          <div className="container-narrow">
-            <div className="final-cta">
-              <div className="final-cta-content">
-                <h2 className="section-title">Ready to leave your iPhone behind?</h2>
-                <p className="final-cta-text">
-                  Download WatchCloud and start streaming SoundCloud directly from your Apple Watch.
+            <div className="comparison-layout">
+              <div className="comparison-copy">
+                <p className="eyebrow">Why WatchCloud</p>
+                <h2>SoundCloud that works when your iPhone stays home</h2>
+                <p>
+                  The official SoundCloud watch experience controls playback on a connected iPhone.
+                  WatchCloud streams directly from the watch instead.
                 </p>
-                <a
-                  href={appStoreUrl}
-                  className="button button-primary final-cta-button"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Download on the App Store
+                <a href="https://help.soundcloud.com/hc/en-us/articles/28529652794523-Apple-Watch" target="_blank" rel="noopener noreferrer" className="text-link">
+                  Read SoundCloud’s Apple Watch requirements →
                 </a>
               </div>
-              <div className="final-cta-image">
-                <img
-                  src="/player-options.png"
-                  alt="WatchCloud player options on Apple Watch"
-                  className="player-options-screenshot"
-                />
+              <div className="comparison-table-wrap">
+                <table>
+                  <caption className="sr-only">WatchCloud compared with the official SoundCloud Apple Watch app</caption>
+                  <thead><tr><th>Capability</th><th>WatchCloud</th><th>Official app</th></tr></thead>
+                  <tbody>
+                    <tr><th>Direct watch streaming</th><td className="yes">Yes</td><td>No</td></tr>
+                    <tr><th>Works away from iPhone</th><td className="yes">Yes</td><td>No</td></tr>
+                    <tr><th>Paid SoundCloud plan</th><td>Not required</td><td>Required</td></tr>
+                    <tr><th>Payment</th><td>$3.99 once</td><td>Subscription</td></tr>
+                  </tbody>
+                </table>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section id="faq" className="section faq">
+          <div className="container-narrow">
+            <div className="section-heading">
+              <p className="eyebrow">Before you download</p>
+              <h2>Frequently asked questions</h2>
+            </div>
+            <div className="faq-list">
+              {faqs.map((faq, index) => {
+                const panelId = `faq-panel-${index}`
+                const buttonId = `faq-button-${index}`
+                const isOpen = openFaq === index
+                return (
+                  <div key={faq.question} className="faq-item">
+                    <h3>
+                      <button
+                        id={buttonId}
+                        className="faq-question"
+                        onClick={() => setOpenFaq(isOpen ? null : index)}
+                        aria-expanded={isOpen}
+                        aria-controls={panelId}
+                      >
+                        <span>{faq.question}</span><span className="faq-icon" aria-hidden="true">{isOpen ? '−' : '+'}</span>
+                      </button>
+                    </h3>
+                    <div id={panelId} role="region" aria-labelledby={buttonId} className="faq-answer" hidden={!isOpen}>
+                      <p>{faq.answer}</p>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+            <p className="section-link"><a href="/support">Visit WatchCloud Support →</a></p>
+          </div>
+        </section>
+
+        <section className="section final-cta-section">
+          <div className="container-narrow final-cta">
+            <p className="eyebrow">Ready when you are</p>
+            <h2>Take SoundCloud out for a run.</h2>
+            <p>Get WatchCloud for $3.99. No subscription, ads, or in-app purchases.</p>
+            <AppStoreLink placement="final" className="button button-primary button-large">Download on the App Store</AppStoreLink>
           </div>
         </section>
       </main>
 
-      {/* Sticky Bottom CTA Bar - Mobile Only */}
-      <div className={`sticky-cta-bar ${showStickyBar ? 'visible' : ''}`}>
-        <a
-          href={appStoreUrl}
-          className="button button-primary sticky-cta-button"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Download on the App Store
-        </a>
-      </div>
-
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-content">
-            <div className="footer-links">
-              <a
-                href={appStoreUrl}
-                className="footer-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Download
-              </a>
-              <a href="mailto:watchcloud.app@gmail.com" className="footer-link">
-                Support
-              </a>
-              <a href="/privacy" className="footer-link">
-                Privacy
-              </a>
-            </div>
-            <p className="footer-disclaimer">
-              WatchCloud is an independent app and is not affiliated with or endorsed by SoundCloud. SoundCloud is a registered trademark of its respective owners.
-            </p>
-            <p className="footer-copyright">
-              © {new Date().getFullYear()} WatchCloud
-            </p>
-            <p className="footer-tagline">
-              Made with 🧡 by <a href="https://ryanforsyth.dev" target="_blank" rel="noopener noreferrer" className="link">Ryan</a>
-            </p>
-          </div>
+      {showStickyBar && (
+        <div className="sticky-cta-bar" role="region" aria-label="Download WatchCloud">
+          <AppStoreLink placement="sticky" className="button button-primary sticky-cta-button">Download for $3.99</AppStoreLink>
         </div>
-      </footer>
+      )}
+
+      <Footer />
     </>
   )
 }
