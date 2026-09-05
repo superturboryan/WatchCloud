@@ -132,6 +132,61 @@
   padding: 0.95rem 1.8rem;
 }
 
+.header-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  flex-shrink: 0;
+  white-space: nowrap;
+  color: #241300;
+  border-color: rgba(255, 193, 100, 0.65);
+  background: linear-gradient(165deg, #ffd17a 0%, #ffb12f 40%, #ff950a 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -1px 0 rgba(166, 77, 0, 0.16), 0 4px 16px rgba(255, 134, 0, 0.16);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.header-cta::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 22%, rgba(255, 255, 255, 0.32) 48%, transparent 72%);
+  transform: translateX(-120%);
+}
+
+.header-cta:hover,
+.header-cta:focus-visible {
+  border-color: #ffd28d;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 8px 24px rgba(255, 134, 0, 0.26);
+}
+
+@keyframes nav-flash {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(120%); }
+}
+
+@keyframes hero-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-text,
+  .hero-visual {
+    animation: hero-enter 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .header-cta:focus-visible::after {
+    animation: nav-flash 520ms ease both;
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .header-cta:hover::after {
+    animation: nav-flash 520ms ease both;
+  }
+}
+
 .eyebrow,
 .showcase-kicker {
   color: #a84c00;
@@ -165,7 +220,7 @@
 }
 
 .hero-content {
-  min-height: min(760px, calc(100svh - var(--nav-height)));
+  min-height: calc(100svh - var(--nav-height));
   display: grid;
   align-items: center;
   gap: 2.25rem;
@@ -187,7 +242,7 @@
   color: var(--color-emphasis-text);
   font-size: clamp(2.65rem, 8vw, 5rem);
   font-weight: 760;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.02em;
   line-height: 0.98;
 }
 
@@ -287,7 +342,7 @@
   margin-bottom: 1rem;
   font-size: clamp(2rem, 5vw, 3.25rem);
   line-height: 1.05;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.015em;
 }
 
 .section-heading > p:last-child,
@@ -391,7 +446,7 @@
 
 .showcase-card h3 {
   font-size: clamp(1.55rem, 3vw, 2.2rem);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
 }
 
 .features-grid {
@@ -515,6 +570,12 @@
   background: color-mix(in srgb, var(--color-background-alt) 70%, var(--color-border));
 }
 
+.faq-question:focus-visible {
+  outline: 2px solid var(--color-text-light);
+  outline-offset: -6px;
+  border-radius: 0.85rem;
+}
+
 .faq-icon {
   color: #a84c00;
   font-size: 1.45rem;
@@ -522,7 +583,7 @@
 }
 
 .faq-answer p {
-  padding: 0 1.25rem 1.25rem;
+  padding: 1.25rem;
   color: var(--color-text-light);
   line-height: 1.7;
 }
@@ -530,13 +591,18 @@
 .final-cta-section {
   color: var(--color-emphasis-text);
   background:
-    linear-gradient(180deg, var(--color-background) 0%, transparent 28%, transparent 100%),
+    linear-gradient(180deg, var(--color-background) 0%, transparent 28%, transparent 52%, var(--color-background) 100%),
     radial-gradient(circle at 50% 48%, var(--color-emphasis-glow), transparent 58%),
     var(--color-emphasis-background);
 }
 
 .final-cta {
   text-align: center;
+}
+
+/* The homepage CTA fades into the footer without a hard dividing line. */
+main:has(.final-cta-section) ~ .footer {
+  border-top-color: transparent;
 }
 
 .final-cta .eyebrow {
@@ -659,6 +725,38 @@
 }
 
 @media (min-width: 960px) {
+  :root {
+    --nav-height: 84px;
+  }
+
+  .nav-logo {
+    gap: 0.8rem;
+  }
+
+  .nav-logo-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  .nav-logo-text {
+    font-size: 1.25rem;
+  }
+
+  .nav-links {
+    gap: 1.85rem;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+  }
+
+  .header-cta {
+    min-height: 48px;
+    padding: 0.8rem 1.35rem;
+    font-size: 0.95rem;
+  }
+
   .hero-content {
     grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
     gap: clamp(2rem, 6vw, 6rem);

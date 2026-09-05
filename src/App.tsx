@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { AppStoreLink, Footer, Header } from './SiteChrome'
+import SpotlightCard from './components/SpotlightCard'
 
 const faqs = [
   {
@@ -191,10 +192,10 @@ function App() {
             </div>
             <div className="features-grid">
               {features.map((feature) => (
-                <article key={feature.title} className="feature-card">
+                <SpotlightCard key={feature.title} className="feature-card">
                   <h3>{feature.title}</h3>
                   <p>{feature.description}</p>
-                </article>
+                </SpotlightCard>
               ))}
             </div>
           </div>

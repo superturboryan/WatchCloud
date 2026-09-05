@@ -59,8 +59,8 @@ export function Header() {
           <a href="/#how-it-works" className="nav-link nav-secondary-link">How it works</a>
           <a href="/#features" className="nav-link nav-secondary-link">Features</a>
           <a href="/support" className="nav-link nav-secondary-link">Support</a>
-          <AppStoreLink placement="header" className="button button-primary button-small">
-            App Store
+          <AppStoreLink placement="header" className="button button-small header-cta">
+            Get the app
           </AppStoreLink>
         </nav>
         </div>

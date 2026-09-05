@@ -1,0 +1,25 @@
+/* React Bits SpotlightCard, adapted to retain WatchCloud's card styling. */
+.card-spotlight {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+.card-spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(280px circle at var(--mouse-x) var(--mouse-y), rgba(255, 151, 34, 0.1), transparent 80%);
+  opacity: 0;
+  transition: opacity 350ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .card-spotlight:hover::before {
+    opacity: 1;
+  }
+}
